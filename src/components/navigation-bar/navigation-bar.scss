@@ -1,0 +1,76 @@
+.nav {
+  padding: 2rem 0 3rem 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #000080;
+
+  &__logo {
+    margin: 0 8rem 0 4rem;
+    display: flex;
+    align-items: center;
+
+    &-img {
+      height: 4rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+  }
+
+  &__menu {
+    margin-right: auto;
+
+    &-list {
+      display: flex;
+      list-style: none;
+      font-weight: 600;
+      font-size: 2rem;
+
+      &-item:first-of-type {
+        margin-right: 3rem;
+      }
+    }
+  }
+
+  &__user-menu {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    &-item {
+      height: 22px;
+      margin-right: 3rem;
+    }
+  }
+}
+
+.announcement {
+  background: #006b54;
+  color: #fff;
+  padding: 0.6rem;
+  display: flex;
+  justify-content: space-around;
+
+  & > * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.2rem;
+
+    h4 {
+      font-family: Helvetica, sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      font-weight: 800;
+    }
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      border-bottom: 1px solid #fff;
+    }
+  }
+}
