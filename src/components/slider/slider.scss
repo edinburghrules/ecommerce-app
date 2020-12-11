@@ -1,20 +1,18 @@
 @import '../../sass/colors';
 @import '../../sass/fonts';
 
-.menu-item {
-  font-family: $Poppins;
-  letter-spacing: 2px;
+.slider {
   background: red;
+  height: 75vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid $light-text;
-  &__title {
-    color: $light-text;
-    font-size: $XL;
+
+  h1 {
+    font-family: $Poppins;
     font-weight: $bold;
+    color: $light-text;
+    letter-spacing: 2px;
+    font-size: $XL;
   }
-
 }
-
-

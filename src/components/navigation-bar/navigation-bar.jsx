@@ -6,8 +6,11 @@ const NavigationBar = () => {
     <React.Fragment>
       <nav className='nav'>
         <div className='nav__logo'>
-          <img className='nav__logo-img' src='/assets/logo2.png' alt='oceanic'/>
-          <h1>OCEANIC</h1>
+          <img src='/assets/logo2.png' />
+          <div className='nav__logo-text'>
+           <p>Union</p>
+           <p>Apparel</p>
+          </div>
         </div>
         <div className='nav__menu'>
           <ul className='nav__menu-list'>
@@ -41,7 +44,9 @@ const NavigationBar = () => {
       <div className='announcement'>
         <div className='announcement__returns'>
           <h4>FREE RETURNS & EXCHANGES</h4>
-          <p>Extended to 60 days for the holidays <span role='img'>🎅🏼</span></p>
+          <p>
+            Extended to 60 days for the holidays <span role='img'>🎅🏼</span>
+          </p>
         </div>
         <div className='announcement__deliveries'>
           <h4>FREE SHIPPING</h4>

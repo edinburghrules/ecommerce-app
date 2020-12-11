@@ -1,34 +1,54 @@
+@import '../../sass/colors';
+@import '../../sass/fonts';
+
 .nav {
+  font-family: $Poppins;
   padding: 2rem 0 3rem 0;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  color: #000080;
+  align-items: baseline;
+  color: $primary;
 
   &__logo {
     margin: 0 8rem 0 4rem;
     display: flex;
+    justify-content: center;
     align-items: center;
 
-    &-img {
-      height: 4rem;
+    img {
+      height: 6rem;
     }
 
-    h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: 3px;
+    &-text {
+      display: flex;
+      flex-direction: column;
+
+      p:first-of-type {
+        transform: translateY(10px);
+        font-weight: $black;
+        letter-spacing: 1px;
+        font-size: $medium;
+      }
+
+      p:nth-of-type(2) {
+        letter-spacing: 1px;
+        font-size: $small;
+        color: lighten($color: $primary, $amount: 30)
+      }
     }
   }
 
   &__menu {
     margin-right: auto;
+    margin-left: 6rem;
+    height: 100%;
 
     &-list {
+      height: 100%;
       display: flex;
       list-style: none;
-      font-weight: 600;
-      font-size: 2rem;
+      font-weight: $bold;
+      font-size: $medium;
 
       &-item:first-of-type {
         margin-right: 3rem;
@@ -40,6 +60,7 @@
     display: flex;
     justify-content: center;
     width: 25%;
+    height: 100%;
     &-item {
       height: 22px;
       margin-right: 3rem;
@@ -48,8 +69,9 @@
 }
 
 .announcement {
-  background: #006b54;
-  color: #fff;
+  font-family: $Josefin;
+  background: $secondary;
+  color: $light-text;
   padding: 0.6rem;
   display: flex;
   justify-content: space-around;
@@ -61,16 +83,15 @@
     padding: 0.2rem;
 
     h4 {
-      font-family: Helvetica, sans-serif;
       font-size: 1.3rem;
       letter-spacing: 1px;
-      font-weight: 800;
+      font-weight: $bold;
     }
 
     p {
-      font-size: 1.2rem;
-      font-weight: 500;
-      border-bottom: 1px solid #fff;
+      font-size: $small;
+      font-weight: $medium;
+      border-bottom: 1px solid $light-text;
     }
   }
 }
