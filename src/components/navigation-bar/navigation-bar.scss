@@ -5,15 +5,23 @@
   font-family: $Poppins;
   padding: 2rem 0 3rem 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: baseline;
   color: $primary;
+
+  @media (max-width: 915px) {
+    padding: 2rem 2rem 3rem 2rem;
+  }
 
   &__logo {
     margin: 0 8rem 0 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 800px) {
+      margin: 0 0 0 0;
+    }
 
     img {
       height: 6rem;
@@ -33,15 +41,19 @@
       p:nth-of-type(2) {
         letter-spacing: 1px;
         font-size: $small;
-        color: lighten($color: $primary, $amount: 30)
+        color: lighten($color: $primary, $amount: 30);
       }
     }
   }
 
   &__menu {
-    margin-right: auto;
-    margin-left: 6rem;
-    height: 100%;
+    @media (max-width: 930px) {
+      margin-right: auto;
+    }
+
+    @media (max-width: 915px) {
+      display: none;
+    }
 
     &-list {
       height: 100%;
@@ -50,20 +62,42 @@
       font-weight: $bold;
       font-size: $medium;
 
-      &-item:first-of-type {
-        margin-right: 3rem;
+      &-item:not(:first-of-type){
+        margin-left: 6rem;
+
+        @media(max-width: 1010px) {
+          margin-left: 4rem;
+        }
+
       }
     }
   }
 
   &__user-menu {
+    @media (max-width: 915px) {
+      display: none;
+    }
+
     display: flex;
     justify-content: center;
     width: 25%;
     height: 100%;
+
     &-item {
       height: 22px;
       margin-right: 3rem;
+    }
+  }
+
+  &__mobile-menu {
+    display: none;
+
+    @media (max-width: 915px) {
+      display: inline-block;
+
+      img {
+        height: 40px;
+      }
     }
   }
 }
@@ -75,6 +109,18 @@
   padding: 0.6rem;
   display: flex;
   justify-content: space-around;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+
+    & div {
+      margin-bottom: 1rem;
+    }
+
+    & div:first-child {
+      margin-top: 1rem;
+    }
+  }
 
   & > * {
     display: flex;

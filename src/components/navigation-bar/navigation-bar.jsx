@@ -8,14 +8,16 @@ const NavigationBar = () => {
         <div className='nav__logo'>
           <img src='/assets/logo2.png' />
           <div className='nav__logo-text'>
-           <p>Union</p>
+           <p>Faith</p>
            <p>Apparel</p>
           </div>
         </div>
         <div className='nav__menu'>
           <ul className='nav__menu-list'>
             <li className='nav__menu-list-item'>HOME</li>
-            <li className='nav-menu-list-item'>SHOP</li>
+            <li className='nav__menu-list-item'>MEN</li>
+            <li className='nav__menu-list-item'>WOMEN</li>
+            <li className='nav__menu-list-item'>KIDS</li>
           </ul>
         </div>
         <div className='nav__user-menu'>
@@ -39,6 +41,9 @@ const NavigationBar = () => {
             src='/assets/002-shopping-bag.png'
             alt='shopping bag'
           />
+        </div>
+        <div className='nav__mobile-menu'>
+          <img src='/assets/menu.png' />
         </div>
       </nav>
       <div className='announcement'>
