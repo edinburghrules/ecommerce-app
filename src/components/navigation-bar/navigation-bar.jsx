@@ -1,12 +1,18 @@
 import React from 'react';
 import './navigation-bar.scss';
+import logo from '../../assets/logo2.png'
+import user from '../../assets/001-user.png';
+import favourites from '../../assets/004-heart-shape-outline.png';
+import search from '../../assets/003-loupe.png';
+import shopping from '../../assets/002-shopping-bag.png';
+import mobile from '../../assets/menu.png';
 
 const NavigationBar = () => {
   return (
     <React.Fragment>
       <nav className='nav'>
         <div className='nav__logo'>
-          <img src='/assets/logo2.png' />
+          <img src={logo} />
           <div className='nav__logo-text'>
            <p>Faith</p>
            <p>Apparel</p>
@@ -23,27 +29,27 @@ const NavigationBar = () => {
         <div className='nav__user-menu'>
           <img
             className='nav__user-menu-item'
-            src='/assets/001-user.png'
+            src={user}
             alt='user login'
           />
           <img
             className='nav__user-menu-item'
-            src='/assets/004-heart-shape-outline.png'
+            src={favourites}
             alt='favourites'
           />
           <img
             className='nav__user-menu-item'
-            src='/assets/003-loupe.png'
+            src={search}
             alt='search'
           />
           <img
             className='nav__user-menu-item'
-            src='/assets/002-shopping-bag.png'
+            src={shopping}
             alt='shopping bag'
           />
         </div>
         <div className='nav__mobile-menu'>
-          <img src='/assets/menu.png' />
+          <img src={mobile} />
         </div>
       </nav>
       <div className='announcement'>

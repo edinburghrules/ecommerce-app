@@ -8,8 +8,8 @@ class MainMenu extends React.Component {
   render() {
     return (
       <div className='main-menu'>
-        {categories.map(({ type }) => (
-          <MenuItem title={type} />
+        {categories.map(({ type }, i) => (
+          <MenuItem key={i} title={type} />
         ))}
       </div>
     );
