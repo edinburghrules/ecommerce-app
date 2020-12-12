@@ -40,6 +40,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  box-shadow: 0px 2px 20px -4px lighten($dark-bg, 5);
 }
 
 .slider__btn--prev {

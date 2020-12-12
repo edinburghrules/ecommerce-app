@@ -20,10 +20,10 @@ const NavigationBar = () => {
         </div>
         <div className='nav__menu'>
           <ul className='nav__menu-list'>
-            <li className='nav__menu-list-item'>HOME</li>
-            <li className='nav__menu-list-item'>MEN</li>
-            <li className='nav__menu-list-item'>WOMEN</li>
-            <li className='nav__menu-list-item'>KIDS</li>
+            <li className='nav__menu-list-item'>Home</li>
+            <li className='nav__menu-list-item'>Men</li>
+            <li className='nav__menu-list-item'>Women</li>
+            <li className='nav__menu-list-item'>Kids</li>
           </ul>
         </div>
         <div className='nav__user-menu'>
