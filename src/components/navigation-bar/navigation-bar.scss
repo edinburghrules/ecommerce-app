@@ -3,57 +3,83 @@
 
 .nav {
   font-family: $Poppins;
-  padding: 1rem 0 1rem 0;
+  padding: 0 8rem 1rem 8rem;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   color: $primary;
 
   @media (max-width: 915px) {
-    padding: 2rem 4rem 3rem 2rem;
+    padding: 4rem 4rem 3rem 2rem;
+  }
+
+  @media (max-width: 615px) {
+    padding: 2rem 2rem 1rem 2rem;
   }
 
   &__logo {
-    margin: 0 8rem 0 4rem;
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-right: 10rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 915px) {
+      margin: 0 0 0 0;
+      padding: 0;
+    }
 
     @media (max-width: 800px) {
       margin: 0 0 0 0;
     }
 
+    @media (max-width: 615px) {
+      padding: 0;
+    }
+
     img {
-      height: 6rem;
+      height: 5rem;
+      @media (max-width: 915px) {
+        margin: 0 0 0 0;
+        padding: 0;
+      }
+
+      @media (max-width: 615px) {
+        height: 4rem;
+      }
     }
 
     &-text {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      margin-top: -0.5rem;
 
       p:first-of-type {
-        transform: translateY(10px);
+        margin-right: 5px;
         font-weight: $black;
         letter-spacing: 1px;
         font-size: $medium;
+
+        @media (max-width: 615px) {
+          font-size: $xsmall;
+        }
       }
 
       p:nth-of-type(2) {
         letter-spacing: 1px;
         font-size: $small;
         color: lighten($color: $primary, $amount: 30);
+
+        @media (max-width: 615px) {
+          font-size: $xsmall;
+        }
       }
     }
   }
 
   &__menu {
-
-    margin-left: auto;
-
-    @media (max-width: 930px) {
-      margin-right: auto;
-    }
-
     @media (max-width: 915px) {
       display: none;
     }
@@ -62,8 +88,9 @@
       height: 100%;
       display: flex;
       list-style: none;
-      font-weight: $semiBold;
-      font-size: $medium;
+      font-family: $Raleway;
+      font-weight: $black;
+      font-size: $small;
       color: lighten($dark-text, 1);
 
       &-item:not(:first-of-type) {
@@ -73,14 +100,12 @@
   }
 
   &__user-menu {
-    margin-right: -8rem;
     @media (max-width: 915px) {
       display: none;
     }
 
     display: flex;
     justify-content: center;
-    width: 25%;
     height: 100%;
 
     &-item {
@@ -96,48 +121,16 @@
       display: inline-block;
 
       img {
-        height: 40px;
+        transform: translateY(1rem);
+        height: 3.5rem;
       }
     }
-  }
-}
 
-.announcement {
-  font-family: $Josefin;
-  background: $secondary;
-  color: $light-text;
-  padding: 0.6rem;
-  display: flex;
-  justify-content: space-around;
-
-  @media (max-width: 1000px) {
-    flex-direction: column;
-
-    & div {
-      margin-bottom: 1rem;
-    }
-
-    & div:first-child {
-      margin-top: 1rem;
-    }
-  }
-
-  & > * {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0.2rem;
-
-    h4 {
-      font-size: 1.3rem;
-      letter-spacing: 1px;
-      font-weight: $bold;
-    }
-
-    p {
-      font-size: $small;
-      font-weight: $medium;
-      border-bottom: 1px solid $light-text;
+    @media (max-width: 615px) {
+      img {
+        transform: translateY(1rem);
+        height: 3rem;
+      }
     }
   }
 }

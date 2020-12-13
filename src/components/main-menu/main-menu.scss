@@ -1,9 +1,41 @@
 @import '../../sass/colors';
+@import '../../sass/fonts';
 
 .main-menu {
-  width: 100%;
-  background: $primary;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 50vh;
+  width: 90%;
+  margin: 6rem auto;
+
+  @media(max-width: 530px) {
+    margin: 4rem auto;
+  }
+
+  &__heading {
+    font-family: $Poppins;
+    font-weight: $bold;
+    font-size: $large;
+
+    @media(max-width: 530px ) {
+      font-size: $medium;
+    }
+  }
+
+  &__grid {
+    width: 100%;
+    margin: 4rem auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    column-gap: 4rem;
+    row-gap: 2rem;
+
+    @media (max-width: 1100px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+  }
 }
