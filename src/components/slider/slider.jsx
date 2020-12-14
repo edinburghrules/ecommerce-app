@@ -75,14 +75,18 @@ class Slider extends React.Component {
             className='slider__btn slider__btn--prev'
             disabled={this.state.x === 0}
           >
-            <img className='slider__btn-img' src={leftArrow} />
+            <img className='slider__btn-img' src={leftArrow} alt='left arrow' />
           </button>
           <button
             onClick={this.next}
             className='slider__btn slider__btn--next'
             disabled={this.state.x === -200}
           >
-            <img className='slider__btn-img' src={rightArrow} />
+            <img
+              className='slider__btn-img'
+              src={rightArrow}
+              alt='right arrow'
+            />
           </button>
         </div>
       </div>
