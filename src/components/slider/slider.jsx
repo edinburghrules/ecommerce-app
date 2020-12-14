@@ -2,7 +2,7 @@ import React from 'react';
 import './slider.scss';
 import { SliderImage } from './slider-image';
 import img1 from '../../assets/hero1.jpg';
-import img2 from '../../assets/hero2.jpg';
+import img5 from '../../assets/hero5.jpg';
 import img3 from '../../assets/hero3.jpg';
 import leftArrow from '../../assets/001-arrow.png';
 import rightArrow from '../../assets/002-right-1.png';
@@ -15,10 +15,19 @@ class Slider extends React.Component {
       x: 0,
     };
 
-    this.sliderImgs = [
-      img1, 
-      img2,
-      img3
+    this.sliderCategories = [
+      {
+        id: 'Autumn Collection',
+        src: img1,
+      },
+      {
+        id: "Women's Knitwear",
+        src: img5,
+      },
+      {
+        id: "Men's Minimal Essentials",
+        src: img3,
+      },
     ];
   }
 
@@ -35,7 +44,7 @@ class Slider extends React.Component {
   };
 
   next = () => {
-    if (this.state.x === -100 * (this.sliderImgs.length - 1)) {
+    if (this.state.x === -100 * (this.sliderCategories.length - 1)) {
       this.setState({
         x: -200,
       });
@@ -51,9 +60,13 @@ class Slider extends React.Component {
 
     return (
       <div className='slider'>
-        {this.sliderImgs.map((slide, i) => (
-          <div src={slide} className='slider__page' key={i} style={{ transform: `translateX(${x}%)` }}>
-            <SliderImage src={slide} />
+        {this.sliderCategories.map((slide, i) => (
+          <div
+            className='slider__page'
+            key={i}
+            style={{ transform: `translateX(${x}%)` }}
+          >
+            <SliderImage details={slide} />
           </div>
         ))}
         <div className='slider__btns'>
