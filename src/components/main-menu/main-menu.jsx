@@ -8,24 +8,24 @@ import WomensShoes from '../../assets/womens-shoes.png';
 
 const categories = [
   {
-    type: "Men's Apparel",
+    category: "Men's Apparel",
     src: MensApparel,
-    link: 'mens-apparel'
+    link: 'mens-apparel',
   },
   {
-    type: "Women's Apparel",
+    category: "Women's Apparel",
     src: WomenApparel,
-    link: 'womens-apparel'
+    link: 'womens-apparel',
   },
   {
-    type: 'Mens Shoes',
+    category: 'Mens Shoes',
     src: MensShoes,
-    link: 'mens-shoes'
+    link: 'mens-shoes',
   },
   {
-    type: 'Womens Shoes',
+    category: 'Womens Shoes',
     src: WomensShoes,
-    link: 'womens-shoes'
+    link: 'womens-shoes',
   },
 ];
 
@@ -35,7 +35,7 @@ class MainMenu extends React.Component {
       <div className='main-menu'>
         <h1 className='main-menu__heading'>Shop by category</h1>
         <div className='main-menu__grid'>
-          {categories.map(({ ...catProps}, i) => (
+          {categories.map(({ ...catProps }, i) => (
             <MenuItem key={i} {...catProps} />
           ))}
         </div>
