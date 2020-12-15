@@ -9,17 +9,27 @@
   cursor: pointer;
 }
 
+.menu-item__img-wrapper {
+  overflow: hidden;
+  height: 100%;
+}
+
 .menu-item__content {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
+  overflow: hidden;
 }
 
 .menu-item img {
   height: 100%;
   width: 100%;
-  object-fit: contain;
+  object-fit: fill;
+  transition: all .2s;
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .menu-item__title {
