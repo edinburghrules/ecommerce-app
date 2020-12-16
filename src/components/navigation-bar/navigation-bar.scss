@@ -2,7 +2,6 @@
 @import '../../sass/fonts';
 
 .nav {
-  font-family: $Poppins;
   padding: 0 8rem 1rem 8rem;
   display: flex;
   justify-content: space-between;
@@ -14,7 +13,7 @@
   }
 
   @media (max-width: 615px) {
-    padding: 2rem 4rem 1rem 4rem;
+    padding: 2rem 4rem 1rem 4zrem;
   }
 }
 
@@ -26,6 +25,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   @media (max-width: 915px) {
     margin: 0 0 0 0;
@@ -60,7 +60,7 @@
 
   p:first-of-type {
     margin-right: 5px;
-    font-weight: $black;
+    font-weight: $bold;
     letter-spacing: 1px;
     font-size: $medium;
 
@@ -89,10 +89,17 @@
     height: 100%;
     display: flex;
     list-style: none;
-    font-family: $Raleway;
-    font-weight: $black;
+    font-weight: $bold;
     font-size: $small;
     color: lighten($dark-text, 1);
+    cursor: pointer;
+
+    &-item {
+      &.active,
+      &:hover {
+        border-bottom: 2px solid #333;
+      }
+    }
 
     &-item:not(:first-of-type) {
       margin-left: 4rem;
@@ -112,6 +119,7 @@
   &-item {
     height: 22px;
     margin-right: 3rem;
+    cursor: pointer;
   }
 }
 
@@ -133,4 +141,75 @@
       height: 3rem;
     }
   }
+}
+
+.dropdown {
+  width: 100%;
+  position: relative;
+}
+
+.dropdown__menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  transition: all 0.2s;
+}
+
+.dropdown__menu.open {
+  height: 35vh;
+  display: flex;
+  background: $light-bg;
+  width: 100%;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown__menu-content {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+.dropdown__menu-content.open {
+  width: 40%;
+  margin: 4rem auto;
+  display: flex;
+  justify-content: space-around;
+  opacity: 1;
+  transform: translateY(5px);
+  transition: all 0.6s;
+}
+
+.dropdown__column {
+  display: flex;
+  flex-direction: column;
+  color: $dark-text;
+}
+
+.dropdown__column :first-child {
+  color: inherit;
+  font-size: $small;
+  font-weight: $bold;
+  margin-bottom: 4rem;
+  text-decoration: none;
+}
+
+.dropdown__column :not(:first-child) {
+  color: inherit;
+  font-size: $xsmall;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+.overlay.open {
+  height: 200vh;
+  position: absolute;
+  width: 100%;
+  top: 12rem;
+  left: 0;
+  background-color: rgba($color: $primary, $alpha: 0.5);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  z-index: 999;
 }
