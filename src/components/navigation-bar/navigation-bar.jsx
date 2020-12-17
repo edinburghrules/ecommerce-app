@@ -1,6 +1,6 @@
 import React from 'react';
 import './navigation-bar.scss';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import logo from '../../assets/logo2.png';
 import user from '../../assets/001-user.png';
 import favourites from '../../assets/004-heart-shape-outline.png';
@@ -13,18 +13,45 @@ class NavigationBar extends React.Component {
     womensOpen: false,
   };
   handleOpen = (e) => {
-    this.setState((prevState) => ({
-      [`${e.target.id}Open`]: !prevState[`${e.target.id}Open`],
-    }));
+    if (e.target.id === 'womens') {
+      this.setState({
+        womensOpen: true,
+        mensOpen: false,
+      });
+    }
+
+    if (e.target.id === 'mens') {
+      this.setState({
+        mensOpen: true,
+        womensOpen: false,
+      });
+    }
+  };
+  handleClose = () => {
+    this.setState({
+      mensOpen: false,
+      womensOpen: false,
+    });
+  };
+  renderLinks = () => {
+    if (this.state.mensOpen) {
+      return {
+        apparelLinks: this.props.mensApparelLinks,
+        shoeLinks: this.props.mensShoeLinks,
+        collectionLinks: this.props.mensCollectionLinks,
+      };
+    } else if (this.state.womensOpen) {
+      return {
+        apparelLinks: this.props.womensApparelLinks,
+        shoeLinks: this.props.womensShoeLinks,
+        collectionLinks: this.props.womensCollectionLinks,
+      };
+    }
   };
   render() {
-    const { mensOpen } = this.state;
-    const {
-      history,
-      mensApparelLinks,
-      mensShoeLinks,
-      mensCollectionLinks,
-    } = this.props;
+    const { mensOpen, womensOpen } = this.state;
+    const linksToRender = this.renderLinks();
+    const { history } = this.props;
     return (
       <React.Fragment>
         <nav className='nav'>
@@ -44,7 +71,11 @@ class NavigationBar extends React.Component {
               <li
                 id='womens'
                 onClick={this.handleOpen}
-                className='nav__menu-list-item'
+                className={
+                  womensOpen
+                    ? `nav__menu-list-item active`
+                    : `nav__menu-list-item`
+                }
               >
                 Women
               </li>
@@ -80,34 +111,47 @@ class NavigationBar extends React.Component {
             <img src={mobile} alt='mobile menu' />
           </div>
         </nav>
-        <div className='dropdown'>
-          <div className={mensOpen ? `dropdown__menu open` : `dropdown__menu`}>
+        <div className='dropdown' onClick={this.handleClose}>
+          <div
+            className={
+              mensOpen || womensOpen ? `dropdown__menu open` : `dropdown__menu`
+            }
+          >
             <div
               className={
                 mensOpen
                   ? 'dropdown__menu-content open'
-                  : 'dropdown__menu-content'
+                  : womensOpen ? 'dropdown__menu-content open' : 'dropdown__menu-content'
               }
             >
               <div className='dropdown__column'>
-                {mensApparelLinks.map(({ path, category }) => (
-                  <Link to={path}>{category}</Link>
-                ))}
+                {linksToRender &&
+                  linksToRender.apparelLinks.map(({ path, category }) => (
+                    <p onClick={() => history.push(path)} key={path}>
+                      {category}
+                    </p>
+                  ))}
               </div>
               <div className='dropdown__column'>
-                {mensShoeLinks.map(({ path, category }) => (
-                  <Link to={path}>{category}</Link>
-                ))}
+                {linksToRender &&
+                  linksToRender.shoeLinks.map(({ path, category }) => (
+                    <p onClick={() => history.push(path)} key={path}>
+                      {category}
+                    </p>
+                  ))}
               </div>
               <div className='dropdown__column'>
-                {mensCollectionLinks.map(({ path, category }) => (
-                  <Link to={path}>{category}</Link>
-                ))}
+                {linksToRender &&
+                  linksToRender.collectionLinks.map(({ path, category }) => (
+                    <p onClick={() => history.push(path)} key={path}>
+                      {category}
+                    </p>
+                  ))}
               </div>
             </div>
           </div>
         </div>
-        <div className={mensOpen ? 'overlay open' : ''}></div>
+        <div className={mensOpen || womensOpen ? 'overlay open' : ''}></div>
       </React.Fragment>
     );
   }
