@@ -90,22 +90,23 @@ class NavigationBar extends React.Component {
             </div>
           </div>
           <div className='nav__user-menu'>
-            <img
-              onClick={() => history.push('/signin')}
-              className='nav__user-menu-item'
-              src={user}
-              alt='user login'
-            />
-            <img
-              className='nav__user-menu-item'
-              src={favourites}
-              alt='favourites'
-            />
-            <img
-              className='nav__user-menu-item'
-              src={shopping}
-              alt='shopping bag'
-            />
+            <div className='nav__user-menu-item'>
+              <img
+                onClick={() => history.push('/signin')}
+                src={user}
+                alt='user login'
+              />
+              <div className='account__menu'>
+                <button onClick={() => alert(1)}>SIGN IN</button>
+                <p onClick={() => alert(3)}>Not registered? Sign up!</p>
+              </div>
+            </div>
+            <div className='nav__user-menu-item'>
+              <img src={favourites} alt='favourites' />
+            </div>
+            <div className='nav__user-menu-item'>
+              <img src={shopping} alt='shopping bag' />
+            </div>
           </div>
           <div className='nav__mobile-menu'>
             <img src={mobile} alt='mobile menu' />
@@ -121,7 +122,9 @@ class NavigationBar extends React.Component {
               className={
                 mensOpen
                   ? 'dropdown__menu-content open'
-                  : womensOpen ? 'dropdown__menu-content open' : 'dropdown__menu-content'
+                  : womensOpen
+                  ? 'dropdown__menu-content open'
+                  : 'dropdown__menu-content'
               }
             >
               <div className='dropdown__column'>

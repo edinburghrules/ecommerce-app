@@ -1,18 +1,27 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: 'AIzaSyD7esNZPhHbhhW3KQQH7dXey70vsv2iyvw',
-  authDomain: 'e-commerce-app-9b649.firebaseapp.com',
-  projectId: 'e-commerce-app-9b649',
-  storageBucket: 'e-commerce-app-9b649.appspot.com',
-  messagingSenderId: '42157930373',
-  appId: '1:42157930373:web:ec37b28e1209ba863b36ec',
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE,
+  messagingSenderId: process.env.REACT_APP_MESSENGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Initialize database
-const db = firebase.firestore();
-const storage = firebase.storage();
-const auth = firebase.auth();
+// Firestore
+export const firestore = firebase.firestore();
 
-export { auth, storage, db };
+// Auth
+export const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({prompt: 'select_account'});
+
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export default firebase;

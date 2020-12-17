@@ -115,13 +115,67 @@
 
   display: flex;
   justify-content: center;
-  height: 100%;
+}
 
-  &-item {
-    height: 22px;
-    margin-right: 3rem;
-    cursor: pointer;
-  }
+.nav__user-menu-item {
+  margin-right: 3rem;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.nav__user-menu-item img {
+  height: 22px;
+}
+
+.account__menu {
+  position: absolute;
+  height: 20rem;
+  width: 22rem;
+  top: 2.5rem;
+  right: -3rem;
+  background-color: $light-bg;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  z-index: 999;
+  padding: 3rem 2rem 1rem 2rem;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.account__menu button {
+  all: unset;
+  display: block;
+  height: 5rem;
+  width: 100%;
+  font-size: $xsmall;
+  background-color: $dark-bg;
+  color: $light-text;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.account__menu button:hover {
+  transform: translateY(-1px);
+}
+
+.account__menu button:active {
+  transform: translateY(1px);
+}
+
+.account__menu p:first-of-type {
+  font-size: $xxsmall;
+  font-weight: $normal;
+}
+
+.account__menu p:last-of-type {
+  text-decoration: underline;
+}
+
+.nav__user-menu-item:first-of-type:hover .account__menu {
+  visibility: visible;
 }
 
 .nav__mobile-menu {
