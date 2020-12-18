@@ -66,7 +66,11 @@ class NavigationBar extends React.Component {
         <div style={{ width: `${width}vw` }} className='mobile-menu'>
           <div className='mobile-menu__content-container'>
             <div className='mobile-menu__top-buttons'>
-              <img src={closebutton} onClick={this.handleClose} />
+              <img
+                src={closebutton}
+                onClick={this.handleClose}
+                alt='close button'
+              />
               <div onClick={() => history.push('/')} className='nav__logo'>
                 <img src={logo} alt='logo' />
                 <div className='nav__logo-text'>
@@ -74,9 +78,20 @@ class NavigationBar extends React.Component {
                   <p>Apparel</p>
                 </div>
               </div>
-              <img src={shopping} alt='shopping bag' />
+              <div className='mobile-menu__user-btns'>
+                <img src={user} alt='user login' />
+                <img src={shopping} alt='shopping bag' />
+              </div>
             </div>
-            <div className='mobile-menu__content'></div>
+            <div className='mobile-menu__content'>
+              <div className='mobile-menu__links-container'>
+                <ul className='mobile-menu__links'>
+                  <li className='mobile-menu__link'>Mens</li>
+                  <li className='mobile-menu__link'>Womens</li>
+                  <li className='mobile-menu__link'>Collections</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
         <nav className='nav'>
@@ -178,7 +193,7 @@ class NavigationBar extends React.Component {
                   linksToRender.collectionLinks.map(
                     ({ path, category, img }) => (
                       <div onClick={() => history.push(path)} key={path}>
-                        {img && <img src={img} />}
+                        {img && <img src={img} alt='collection' />}
                         <p>{category}</p>
                       </div>
                     )
