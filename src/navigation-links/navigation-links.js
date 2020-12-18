@@ -1,3 +1,6 @@
+import denim from '../assets/denim.jpg';
+import knits from '../assets/knitwear.jpg';
+
 // Mens Links
 
 export const mensApparelLinks = [
@@ -20,10 +23,15 @@ export const mensShoeLinks = [
 export const mensCollectionLinks = [
   { category: 'Featured Collections', path: '/collections/mens/collections' },
   {
-    category: 'The Denim Collection',
+    category: 'Denim Collection',
     path: '/collections/mens/denim-collection',
+    img: denim,
   },
-  { category: 'Premium Knitwear', path: '/collections/mens/premium-knitwear' },
+  {
+    category: 'Premium Knitwear',
+    path: '/collections/mens/premium-knitwear',
+    img: knits,
+  },
 ];
 
 // Womens Links
@@ -48,11 +56,13 @@ export const womensShoeLinks = [
 export const womensCollectionLinks = [
   { category: 'Featured Collections', path: '/collections/womens/collections' },
   {
-    category: 'The Denim Collection',
+    category: 'Denim Collection',
     path: '/collections/womens/denim-collection',
+    img: denim,
   },
   {
     category: 'Premium Knitwear',
     path: '/collections/womens/premium-knitwear',
+    img: knits,
   },
 ];
