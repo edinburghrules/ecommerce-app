@@ -7,6 +7,7 @@ import favourites from '../../assets/004-heart-shape-outline.png';
 import shopping from '../../assets/002-shopping-bag.png';
 import closebutton from '../../assets/close-button.png';
 import mobile from '../../assets/menu.png';
+import leftArrow from '../../assets/002-right-1.png';
 
 class NavigationBar extends React.Component {
   state = {
@@ -86,9 +87,18 @@ class NavigationBar extends React.Component {
             <div className='mobile-menu__content'>
               <div className='mobile-menu__links-container'>
                 <ul className='mobile-menu__links'>
-                  <li className='mobile-menu__link'>Mens</li>
-                  <li className='mobile-menu__link'>Womens</li>
-                  <li className='mobile-menu__link'>Collections</li>
+                  <div>
+                    <li className='mobile-menu__link'>Mens</li>
+                    <img src={leftArrow} alt='left arrow' />
+                  </div>
+                  <div>
+                    <li className='mobile-menu__link'>Womens</li>
+                    <img src={leftArrow} alt='left arrow' />
+                  </div>
+                  <div>
+                    <li className='mobile-menu__link'>Collections</li>
+                    <img src={leftArrow} alt='left arrow' />
+                  </div>
                 </ul>
               </div>
             </div>

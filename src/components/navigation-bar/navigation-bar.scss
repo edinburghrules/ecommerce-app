@@ -354,3 +354,27 @@
 .mobile-menu__links-container {
   width: 100%;
 }
+
+.mobile-menu__links {
+  font-size: $large;
+  font-weight: $semiBold;
+  letter-spacing: 1px;
+  list-style: none;
+}
+
+.mobile-menu__links div {
+  background: $light-bg;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 3rem 3rem 4rem;
+  border-top: 1px solid #ccc;
+}
+
+.mobile-menu__links:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.mobile-menu__links img {
+  height: 2rem;
+}
