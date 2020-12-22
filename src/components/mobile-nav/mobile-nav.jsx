@@ -12,12 +12,15 @@ const MobileNav = ({
   mobileMenuWidth,
   linksToRender,
   mensMobileOpen,
+  womensMobileOpen,
   handleClose,
   goBack,
   handleMensMenu,
   handleWomensMenu,
   handleProductDropdown,
-  showProductDropdown,
+  apparelDropdown,
+  shoesDropdown,
+  collectionsDropdown,
   x,
   history,
 }) => {
@@ -57,7 +60,7 @@ const MobileNav = ({
               </div>
             </div>
             {/* DYNAMIC MENU CONTENT */}
-            <ul
+            <div
               className='mobile-menu__links'
               style={{ transform: `translateX(-${x}%)` }}
             >
@@ -67,22 +70,25 @@ const MobileNav = ({
                   src={leftArrow}
                   alt='left arrow'
                 />
-                <li className='mobile-menu__link'>
-                  {mensMobileOpen ? 'Men' : 'Women'}
-                </li>
+                <p className='mobile-menu__link'>
+                  {mensMobileOpen && 'Mens'}
+                  {womensMobileOpen && 'Womens'}
+                </p>
               </div>
               {linksToRender &&
                 linksToRender.apparelLinks.map((link, i) => {
                   if (i === 0) {
                     return (
                       <div
-                        onClick={handleProductDropdown}
+                        onClick={() => {
+                          handleProductDropdown(link);
+                        }}
                         className='mobile-menu__dropdown-header'
                       >
-                        <li className='mobile-menu__link'>{link.category}</li>
+                        <p className='mobile-menu__link'>{link.category}</p>
                         <img
                           style={{
-                            transform: showProductDropdown
+                            transform: apparelDropdown
                               ? 'rotate(90deg)'
                               : 'rotate(0deg)',
                             transition: 'transform 0.1s ease-in',
@@ -96,17 +102,93 @@ const MobileNav = ({
                     return (
                       <div
                         className={
-                          showProductDropdown
+                          apparelDropdown
                             ? 'mobile-menu__dropdown-link'
                             : 'mobile-menu__dropdown-link hide'
                         }
                       >
-                        <li className='mobile-menu__link'>{link.category}</li>
+                        <p className='mobile-menu__link hide'>
+                          {link.category}
+                        </p>
                       </div>
                     );
                   }
                 })}
-            </ul>
+              {linksToRender &&
+                linksToRender.shoeLinks.map((link, i) => {
+                  if (i === 0) {
+                    return (
+                      <div
+                        onClick={() => {
+                          handleProductDropdown(link);
+                        }}
+                        className='mobile-menu__dropdown-header'
+                      >
+                        <p className='mobile-menu__link'>{link.category}</p>
+                        <img
+                          style={{
+                            transform: shoesDropdown
+                              ? 'rotate(90deg)'
+                              : 'rotate(0deg)',
+                            transition: 'transform 0.1s ease-in',
+                          }}
+                          src={rightArrow}
+                          alt='right arrow'
+                        />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        className={
+                          shoesDropdown
+                            ? 'mobile-menu__dropdown-link'
+                            : 'mobile-menu__dropdown-link hide'
+                        }
+                      >
+                        <p className='mobile-menu__link'>{link.category}</p>
+                      </div>
+                    );
+                  }
+                })}
+              {linksToRender &&
+                linksToRender.collectionLinks.map((link, i) => {
+                  if (i === 0) {
+                    return (
+                      <div
+                        onClick={() => {
+                          handleProductDropdown(link);
+                        }}
+                        className='mobile-menu__dropdown-header'
+                      >
+                        <p className='mobile-menu__link'>{link.category}</p>
+                        <img
+                          style={{
+                            transform: collectionsDropdown
+                              ? 'rotate(90deg)'
+                              : 'rotate(0deg)',
+                            transition: 'transform 0.1s ease-in',
+                          }}
+                          src={rightArrow}
+                          alt='right arrow'
+                        />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        className={
+                          collectionsDropdown
+                            ? 'mobile-menu__dropdown-link'
+                            : 'mobile-menu__dropdown-link hide'
+                        }
+                      >
+                        <p className='mobile-menu__link'>{link.category}</p>
+                      </div>
+                    );
+                  }
+                })}
+            </div>
             {/* DYNAMIC MENU CONTENT */}
           </div>
         </div>

@@ -93,17 +93,11 @@
 }
 
 .mobile-menu__dropdown-link.hide {
-  z-index: -100;
-  opacity: 0;
-  transform: translateY(-1000%);
+  display: none;
 }
 
 div.mobile-menu__dropdown-link {
-  position: relative;
-  z-index: -100;
-  opacity: 1;
   padding-left: 13rem;
-  transition: all 0.1s ease-in;
 
   @media (max-width: 768px) {
     padding-left: 7rem;

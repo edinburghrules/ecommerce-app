@@ -15,7 +15,9 @@ class NavigationBar extends React.Component {
     womensDesktopOpen: false,
     mensMobileOpen: false,
     womensMobileOpen: false,
-    showProductDropdown: false,
+    apparelDropdown: false,
+    shoesDropdown: false,
+    collectionsDropddown: false,
     mobileMenuWidth: 0,
     x: 0,
   };
@@ -46,8 +48,13 @@ class NavigationBar extends React.Component {
     this.setState({
       mensDesktopOpen: false,
       womensDesktopOpen: false,
-      showProductDropdown: false,
+      mensMobileOpen: false,
+      womensMobileOpen: false,
+      apparelDropdown: false,
+      shoesDropdown: false,
+      collectionsDropdown: false,
       mobileMenuWidth: 0,
+      x: 0,
     });
   };
 
@@ -91,10 +98,18 @@ class NavigationBar extends React.Component {
     }));
   };
 
-  handleProductDropdown = () => {
-    console.log('product dropdown');
+  handleProductDropdown = (link) => {
+    console.log(link.category);
+    let productType;
+    if (link.category.includes('Apparel')) {
+      productType = 'apparelDropdown';
+    } else if (link.category.includes('Shoes')) {
+      productType = 'shoesDropdown';
+    } else if (link.category.includes('Collection')) {
+      productType = 'collectionsDropdown';
+    }
     this.setState((prevState) => ({
-      showProductDropdown: !prevState.showProductDropdown,
+      [productType]: !prevState[productType],
     }));
   };
 
@@ -103,7 +118,10 @@ class NavigationBar extends React.Component {
       mensDesktopOpen,
       womensDesktopOpen,
       mensMobileOpen,
-      showProductDropdown,
+      womensMobileOpen,
+      apparelDropdown,
+      shoesDropdown,
+      collectionsDropdown,
       mobileMenuWidth,
       x,
     } = this.state;
@@ -115,12 +133,15 @@ class NavigationBar extends React.Component {
           mobileMenuWidth={mobileMenuWidth}
           linksToRender={linksToRender}
           mensMobileOpen={mensMobileOpen}
+          womensMobileOpen={womensMobileOpen}
           handleClose={this.handleClose}
           goBack={this.goBack}
           handleMensMenu={this.handleMensMenu}
           handleWomensMenu={this.handleWomensMenu}
           handleProductDropdown={this.handleProductDropdown}
-          showProductDropdown={showProductDropdown}
+          apparelDropdown={apparelDropdown}
+          shoesDropdown={shoesDropdown}
+          collectionsDropdown={collectionsDropdown}
           x={x}
         />
         <nav className='nav'>
