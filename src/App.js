@@ -4,6 +4,7 @@ import {
   mensApparelLinks,
   mensShoeLinks,
   mensCollectionLinks,
+  mensMobileLinks,
   womensApparelLinks,
   womensShoeLinks,
   womensCollectionLinks,
@@ -11,7 +12,7 @@ import {
 import NavigationBar from './components/navigation-bar/navigation-bar';
 import Home from './pages/home/home';
 
-function App() {
+const App = () => {
   return (
     <div className='App'>
       <NavigationBar
@@ -27,6 +28,6 @@ function App() {
       </Switch>
     </div>
   );
-}
+};
 
 export default App;
