@@ -80,6 +80,7 @@ const MobileNav = ({
                   if (i === 0) {
                     return (
                       <div
+                        key={i}
                         onClick={() => {
                           handleProductDropdown(link);
                         }}
@@ -91,7 +92,6 @@ const MobileNav = ({
                             transform: apparelDropdown
                               ? 'rotate(90deg)'
                               : 'rotate(0deg)',
-                            transition: 'transform 0.1s ease-in',
                           }}
                           src={rightArrow}
                           alt='right arrow'
@@ -101,6 +101,7 @@ const MobileNav = ({
                   } else {
                     return (
                       <div
+                        key={i}
                         className={
                           apparelDropdown
                             ? 'mobile-menu__dropdown-link'
@@ -119,6 +120,7 @@ const MobileNav = ({
                   if (i === 0) {
                     return (
                       <div
+                        key={i}
                         onClick={() => {
                           handleProductDropdown(link);
                         }}
@@ -130,7 +132,6 @@ const MobileNav = ({
                             transform: shoesDropdown
                               ? 'rotate(90deg)'
                               : 'rotate(0deg)',
-                            transition: 'transform 0.1s ease-in',
                           }}
                           src={rightArrow}
                           alt='right arrow'
@@ -140,6 +141,7 @@ const MobileNav = ({
                   } else {
                     return (
                       <div
+                        key={i}
                         className={
                           shoesDropdown
                             ? 'mobile-menu__dropdown-link'
@@ -156,6 +158,7 @@ const MobileNav = ({
                   if (i === 0) {
                     return (
                       <div
+                        key={i}
                         onClick={() => {
                           handleProductDropdown(link);
                         }}
@@ -167,7 +170,6 @@ const MobileNav = ({
                             transform: collectionsDropdown
                               ? 'rotate(90deg)'
                               : 'rotate(0deg)',
-                            transition: 'transform 0.1s ease-in',
                           }}
                           src={rightArrow}
                           alt='right arrow'
@@ -177,6 +179,7 @@ const MobileNav = ({
                   } else {
                     return (
                       <div
+                        key={i}
                         className={
                           collectionsDropdown
                             ? 'mobile-menu__dropdown-link'

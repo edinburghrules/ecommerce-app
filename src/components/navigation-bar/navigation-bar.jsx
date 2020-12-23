@@ -2,6 +2,7 @@ import React from 'react';
 import './navigation-bar.scss';
 import { withRouter } from 'react-router-dom';
 import NavDropdown from '../nav-dropdown/nav-dropdown';
+import Cart from '../cart/cart';
 import MobileNav from '../mobile-nav/mobile-nav';
 import logo from '../../assets/logo2.png';
 import user from '../../assets/001-user.png';
@@ -19,6 +20,8 @@ class NavigationBar extends React.Component {
     shoesDropdown: false,
     collectionsDropddown: false,
     mobileMenuWidth: 0,
+    cartMenuWidth: 0,
+    cartOpen: false,
     x: 0,
   };
 
@@ -42,6 +45,13 @@ class NavigationBar extends React.Component {
         mobileMenuWidth: 100,
       });
     }
+
+    if (e.target.id === 'cart') {
+      this.setState({
+        cartMenuWidth: 40,
+        cartOpen: true,
+      });
+    }
   };
 
   handleClose = () => {
@@ -53,6 +63,8 @@ class NavigationBar extends React.Component {
       apparelDropdown: false,
       shoesDropdown: false,
       collectionsDropdown: false,
+      cartOpen: false,
+      cartMenuWidth: 0,
       mobileMenuWidth: 0,
       x: 0,
     });
@@ -99,7 +111,6 @@ class NavigationBar extends React.Component {
   };
 
   handleProductDropdown = (link) => {
-    console.log(link.category);
     let productType;
     if (link.category.includes('Apparel')) {
       productType = 'apparelDropdown';
@@ -122,6 +133,8 @@ class NavigationBar extends React.Component {
       apparelDropdown,
       shoesDropdown,
       collectionsDropdown,
+      cartMenuWidth,
+      cartOpen,
       mobileMenuWidth,
       x,
     } = this.state;
@@ -145,6 +158,7 @@ class NavigationBar extends React.Component {
           x={x}
         />
         <nav className='nav'>
+          <Cart handleClose={this.handleClose} cartMenuWidth={cartMenuWidth} />
           <div className='nav__menu'>
             <ul className='nav__menu-list'>
               <li
@@ -195,7 +209,12 @@ class NavigationBar extends React.Component {
               <img src={favourites} alt='favourites' />
             </div>
             <div className='nav__user-menu-item'>
-              <img src={shopping} alt='shopping bag' />
+              <img
+                onClick={this.handleOpen}
+                id='cart'
+                src={shopping}
+                alt='shopping bag'
+              />
             </div>
           </div>
           <div className='nav__mobile-menu'>
@@ -214,7 +233,11 @@ class NavigationBar extends React.Component {
           linksToRender={linksToRender}
         />
         <div
-          className={mensDesktopOpen || womensDesktopOpen ? 'overlay open' : ''}
+          className={
+            mensDesktopOpen || womensDesktopOpen || cartOpen
+              ? 'overlay open'
+              : ''
+          }
         ></div>
       </React.Fragment>
     );

@@ -4,7 +4,6 @@ import {
   mensApparelLinks,
   mensShoeLinks,
   mensCollectionLinks,
-  mensMobileLinks,
   womensApparelLinks,
   womensShoeLinks,
   womensCollectionLinks,

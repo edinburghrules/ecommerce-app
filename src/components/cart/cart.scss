@@ -1,0 +1,57 @@
+@import '../../sass/colors';
+@import '../../sass/fonts';
+@import '../../sass/utils';
+
+.cart {
+  display: block;
+  visibility: visible;
+  overflow: hidden;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  background: $light-bg;
+  z-index: 4;
+  transition: 0.1s;
+}
+
+.cart__top {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  margin-bottom: 4rem;
+}
+
+.cart__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart__close-btn {
+  height: 2.6rem;
+  cursor: pointer;
+}
+
+.cart__icon {
+  height: 3rem;
+}
+
+.cart__product-categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 20rem;
+  width: 90%;
+  margin: 2rem auto;
+}
+
+.cart__product-btn {
+  all: unset;
+  padding: 1rem;
+  font-size: $small;
+  font-weight: $semiBold;
+  border: 2px solid $dark-bg;
+  text-align: center;
+  cursor: pointer;
+}
