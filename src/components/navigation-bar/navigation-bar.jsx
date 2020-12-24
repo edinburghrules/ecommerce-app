@@ -12,6 +12,7 @@ import mobile from '../../assets/menu.png';
 
 class NavigationBar extends React.Component {
   state = {
+    windowWidth: '',
     mensDesktopOpen: false,
     womensDesktopOpen: false,
     mensMobileOpen: false,
@@ -23,6 +24,17 @@ class NavigationBar extends React.Component {
     cartMenuWidth: 0,
     cartOpen: false,
     x: 0,
+  };
+
+  componentDidMount = () => {
+    this.updateWindowSize();
+    window.addEventListener('resize', this.updateWindowSize);
+  };
+
+  updateWindowSize = () => {
+    this.setState({
+      windowWidth: window.innerWidth,
+    });
   };
 
   handleOpen = (e) => {
@@ -47,27 +59,44 @@ class NavigationBar extends React.Component {
     }
 
     if (e.target.id === 'cart') {
-      this.setState({
-        cartMenuWidth: 40,
+      this.setState((prevState) => ({
+        cartMenuWidth:
+          prevState.windowWidth > 950
+            ? 40
+            : prevState.windowWidth > 768
+            ? 50
+            : 100,
         cartOpen: true,
-      });
+      }));
     }
   };
 
-  handleClose = () => {
-    this.setState({
-      mensDesktopOpen: false,
-      womensDesktopOpen: false,
-      mensMobileOpen: false,
-      womensMobileOpen: false,
-      apparelDropdown: false,
-      shoesDropdown: false,
-      collectionsDropdown: false,
-      cartOpen: false,
-      cartMenuWidth: 0,
-      mobileMenuWidth: 0,
-      x: 0,
-    });
+  handleClose = (e) => {
+    if (e.currentTarget.id === 'close-cart') {
+      this.setState({
+        cartMenuWidth: 0,
+        cartOpen: false,
+      });
+    }
+
+    if (e.currentTarget.id === 'close-mobile') {
+      this.setState({
+        mobileMenuWidth: 0,
+        x: 0,
+        mensMobileOpen: false,
+        womensMobileOpen: false,
+        apparelDropdown: false,
+        shoesDropdown: false,
+        collectionsDropdown: false,
+      });
+    }
+
+    if (e.currentTarget.id === 'close-dropdown') {
+      this.setState({
+        mensDesktopOpen: false,
+        womensDesktopOpen: false,
+      });
+    }
   };
 
   renderLinks = () => {
@@ -147,6 +176,7 @@ class NavigationBar extends React.Component {
           linksToRender={linksToRender}
           mensMobileOpen={mensMobileOpen}
           womensMobileOpen={womensMobileOpen}
+          handleOpen={this.handleOpen}
           handleClose={this.handleClose}
           goBack={this.goBack}
           handleMensMenu={this.handleMensMenu}

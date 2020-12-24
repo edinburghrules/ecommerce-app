@@ -13,6 +13,7 @@ const MobileNav = ({
   linksToRender,
   mensMobileOpen,
   womensMobileOpen,
+  handleOpen,
   handleClose,
   goBack,
   handleMensMenu,
@@ -28,7 +29,7 @@ const MobileNav = ({
     <div style={{ width: `${mobileMenuWidth}vw` }} className='mobile-menu'>
       <div className='mobile-menu__content-container'>
         <div className='mobile-menu__top-buttons'>
-          <img src={closebutton} onClick={handleClose} alt='close button' />
+          <img id='close-mobile' src={closebutton} onClick={handleClose} alt='close button' />
           <div
             onClick={() => history.push('/')}
             className='mobile-menu__nav-logo'
@@ -37,7 +38,12 @@ const MobileNav = ({
           </div>
           <div className='mobile-menu__user-btns'>
             <img src={user} alt='user login' />
-            <img src={shopping} alt='shopping bag' />
+            <img
+              id='cart'
+              onClick={handleOpen}
+              src={shopping}
+              alt='shopping bag'
+            />
           </div>
         </div>
         <div className='mobile-menu__content'>

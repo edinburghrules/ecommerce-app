@@ -14,12 +14,24 @@ class Cart extends Component {
       <div className='cart' style={{ width: `${cartMenuWidth}vw` }}>
         <div className='cart__top'>
           <img
+            id='close-cart'
             onClick={handleClose}
             className='cart__close-btn'
             src={closeButton}
             alt='close'
           />
-          <img className='cart__icon' src={shopping} alt='cart' />
+          <div className='cart__delivery-container'>
+            <div className='cart__total-container'>
+              <div className='cart__total'>
+                <p>1</p>
+              </div>
+              <img className='cart__icon' src={shopping} alt='cart' />
+            </div>
+            <div class='cart__progress-bar'></div>
+            <p className='cart__free-delivery'>
+              You're £50 away from free delivery
+            </p>
+          </div>
         </div>
         <div className='cart__content'>
           {isEmpty && <h1>Your Cart is Empty</h1>}

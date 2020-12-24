@@ -8,8 +8,7 @@
   justify-content: space-between;
   align-items: flex-end;
   color: $primary;
-  z-index: 6;
-  overflow: hidden;
+  position: relative;
 
   @media (max-width: 915px) {
     padding: 1rem 6rem 1rem 6rem;
@@ -217,9 +216,9 @@
   height: 200vh;
   position: absolute;
   width: 100%;
-  top: 0;
+  top: 11rem;
   left: 0;
-  background-color: rgba($color: $primary, $alpha: 0.9);
+  background-color: rgba($color: $dark-bg, $alpha: 0.9);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   z-index: 1;

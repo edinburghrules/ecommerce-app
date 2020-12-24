@@ -10,7 +10,7 @@ const NavDropdown = ({
   history,
 }) => {
   return (
-    <div className='dropdown' onClick={handleClose}>
+    <div id='close-dropdown' className='dropdown' onClick={handleClose}>
       <div
         className={
           mensDesktopOpen || womensDesktopOpen
