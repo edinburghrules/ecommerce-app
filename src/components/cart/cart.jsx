@@ -27,7 +27,7 @@ class Cart extends Component {
               </div>
               <img className='cart__icon' src={shopping} alt='cart' />
             </div>
-            <div class='cart__progress-bar'></div>
+            <div className='cart__progress-bar'></div>
             <p className='cart__free-delivery'>
               You're £50 away from free delivery
             </p>

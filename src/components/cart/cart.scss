@@ -3,12 +3,11 @@
 @import '../../sass/utils';
 
 .cart {
-  font-family: $Nunito;
   display: block;
   visibility: visible;
   overflow: hidden;
   position: fixed;
-  height: 100vh;
+  height: 50vh;
   top: 0;
   right: 0;
   background: $light-bg;

@@ -225,14 +225,12 @@ class NavigationBar extends React.Component {
           </div>
           <div className='nav__user-menu'>
             <div className='nav__user-menu-item'>
-              <img
-                onClick={() => history.push('/signin')}
-                src={user}
-                alt='user login'
-              />
+              <img src={user} alt='user login' />
               <div className='account__menu'>
-                <button onClick={() => alert(1)}>SIGN IN</button>
-                <p onClick={() => alert(3)}>Not registered? Sign up!</p>
+                <button onClick={() => history.push('/signin')}>SIGN IN</button>
+                <p onClick={() => history.push('/register')}>
+                  Not registered? Sign up!
+                </p>
               </div>
             </div>
             <div className='nav__user-menu-item'>
