@@ -12,10 +12,20 @@
   margin-top: 4rem;
   margin-bottom: 2rem;
   padding: 6rem 6rem;
-  width: 40vw;
+  width: 80vw;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  @media (max-width: 416px) {
+    width: 100vw;
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 1200px) {
+    width: 90vw;
+    padding: 0 1rem;
+  }
 }
 
 .register__signin {
