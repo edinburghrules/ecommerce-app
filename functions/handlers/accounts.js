@@ -9,7 +9,7 @@ const {
 } = require('../util/validators');
 
 const register = async (req, res) => {
-  const newUser = {
+  const newAccount = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -17,27 +17,27 @@ const register = async (req, res) => {
     confirmPassword: req.body.confirmPassword,
   };
 
-  const { valid, errors } = validateRegisterData(newUser);
+  const { valid, errors } = validateRegisterData(newAccount);
 
   if (!valid) return res.status(400).json(errors);
 
   try {
-    const createdUser = await firebase
+    const createdAccount = await firebase
       .auth()
-      .createUserWithEmailAndPassword(newUser.email, newUser.password);
-    const token = await createdUser.user.getIdToken();
-    const userCredentials = {
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      email: newUser.email,
+      .createUserWithEmailAndPassword(newAccount.email, newAccount.password);
+    const token = await createdAccount.user.getIdToken();
+    const accountCredentials = {
+      firstName: newAccount.firstName,
+      lastName: newAccount.lastName,
+      email: newAccount.email,
       joined: new Date().toISOString(),
-      userId: createdUser.user.uid,
+      accountId: createdAccount.user.uid,
     };
     await db
       .collection('accounts')
-      .doc(createdUser.user.uid)
+      .doc(newAccount.email)
       .set({
-        ...userCredentials,
+        ...accountCredentials,
       });
     return res.status(201).json({ token });
   } catch (err) {
@@ -53,33 +53,52 @@ const register = async (req, res) => {
 };
 
 const signIn = async (req, res) => {
-  const user = {
+  const account = {
     email: req.body.email,
     password: req.body.password,
   };
 
-  const { valid, errors } = validateSignInData(user);
+  const { valid, errors } = validateSignInData(account);
 
   if (!valid) return res.status(400).json(errors);
 
   try {
-    const signedInUser = await firebase
+    const signedInAccount = await firebase
       .auth()
-      .signInWithEmailAndPassword(user.email, user.password);
+      .signInWithEmailAndPassword(account.email, account.password);
 
-    const token = await signedInUser.user.getIdToken();
+    const token = await signedInAccount.user.getIdToken();
 
     return res.status(201).json(token);
+
   } catch (err) {
     console.error(err);
+
     if (err.code === 'auth/wrong-password') {
       return res.status(400).json({ password: 'Incorrect password' });
-    } else if(err.code === 'auth/user-not-found') {
-        return res.status(400).json({email: 'Email not recognized'})
+    } else if (err.code === 'auth/user-not-found') {
+      return res.status(400).json({ email: 'Email not recognized' });
     } else {
       return res.status(500).json({ error: err.code });
     }
   }
 };
 
-module.exports = { register, signIn };
+const getAuthenticatedAccount = async (req, res) => {
+  try {
+    let accountData = {};
+    const accountDataFromDb = await db
+      .collection('accounts')
+      .doc(req.account.email)
+      .get();
+    if (accountDataFromDb.exists) {
+      accountData.credentials = accountDataFromDb.data();
+      return res.json(accountData);
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.code });
+  }
+};
+
+module.exports = { register, signIn, getAuthenticatedAccount };

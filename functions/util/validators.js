@@ -9,26 +9,26 @@ const isEmail = (email) => {
   else return false;
 };
 
-exports.validateRegisterData = (newUserData) => {
+exports.validateRegisterData = (newAccountData) => {
   let errors = {};
 
-  if (isEmpty(newUserData.email))
+  if (isEmpty(newAccountData.email))
     errors.email = 'Please provide an email address';
-  else if (!isEmail(newUserData.email))
+  else if (!isEmail(newAccountData.email))
     errors.email = 'Please provide valid email address';
 
-  if (isEmpty(newUserData.firstName))
+  if (isEmpty(newAccountData.firstName))
     errors.firstName = 'Please provide your first name';
 
-  if (isEmpty(newUserData.lastName))
+  if (isEmpty(newAccountData.lastName))
     errors.lastName = 'Please provide your last name';
 
-  if (isEmpty(newUserData.password))
+  if (isEmpty(newAccountData.password))
     errors.password = 'Please provide a password';
 
-  if (isEmpty(newUserData.confirmPassword))
+  if (isEmpty(newAccountData.confirmPassword))
     errors.confirmPassword = 'Please confirm your password';
-  else if (newUserData.password !== newUserData.confirmPassword)
+  else if (newAccountData.password !== newAccountData.confirmPassword)
     errors.confirmPassword = 'Passwords do not match';
 
   return {
@@ -37,14 +37,15 @@ exports.validateRegisterData = (newUserData) => {
   };
 };
 
-exports.validateSignInData = (userData) => {
+exports.validateSignInData = (accountData) => {
   let errors = {};
 
-  if (isEmpty(userData.email)) errors.email = 'Please provide your email';
-  else if (!isEmail(userData.email))
+  if (isEmpty(accountData.email)) errors.email = 'Please provide your email';
+  else if (!isEmail(accountData.email))
     errors.email = 'Please provide valid email';
 
-  if (isEmpty(userData.password)) errors.password = 'Please provide your password';
+  if (isEmpty(accountData.password))
+    errors.password = 'Please provide your password';
 
   return {
     valid: Object.keys(errors).length === 0 ? true : false,

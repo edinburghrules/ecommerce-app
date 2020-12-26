@@ -1,4 +1,4 @@
-const { admin } = require('./admin');
+const { admin, db } = require('./admin');
 
 module.exports = async (req, res, next) => {
   let idToken;
@@ -12,15 +12,10 @@ module.exports = async (req, res, next) => {
     return res.status(403).json({ error: 'Unauthorized' });
   }
   try {
+    // Verifies account token
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    req.user = decodedToken;
-    console.log(decodedToken);
-    const result = await db
-      .collection('accounts')
-      .where('userId', '==', req.user.uid)
-      .limit(1)
-      .get();
-    req.user.email = result.docs[0].data().email;
+    console.log("DECODEDTOKEN", decodedToken);
+    req.account = decodedToken;
     return next();
   } catch (err) {
     console.error(err);
