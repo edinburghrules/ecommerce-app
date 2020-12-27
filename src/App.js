@@ -1,5 +1,8 @@
 import './App.scss';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import PrivateRoute from './utils/private-route/PrivateRoute';
 // import jwtDecode from 'jwt-decode';
 import {
@@ -30,25 +33,31 @@ import Register from './pages/auth/register';
 
 const App = () => {
   return (
-    <div className='App'>
-      <NavigationBar
-        mensApparelLinks={mensApparelLinks}
-        mensShoeLinks={mensShoeLinks}
-        mensCollectionLinks={mensCollectionLinks}
-        womensApparelLinks={womensApparelLinks}
-        womensShoeLinks={womensShoeLinks}
-        womensCollectionLinks={womensCollectionLinks}
-      />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <PrivateRoute path='/signIn' component={Signin} authenticated={true} />
-        <PrivateRoute
-          path='/register'
-          component={Register}
-          authenticated={true}
+    <Provider store={store}>
+      <div className='App'>
+        <NavigationBar
+          mensApparelLinks={mensApparelLinks}
+          mensShoeLinks={mensShoeLinks}
+          mensCollectionLinks={mensCollectionLinks}
+          womensApparelLinks={womensApparelLinks}
+          womensShoeLinks={womensShoeLinks}
+          womensCollectionLinks={womensCollectionLinks}
         />
-      </Switch>
-    </div>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <PrivateRoute
+            path='/signIn'
+            component={Signin}
+            authenticated={false}
+          />
+          <PrivateRoute
+            path='/register'
+            component={Register}
+            authenticated={false}
+          />
+        </Switch>
+      </div>
+    </Provider>
   );
 };
 

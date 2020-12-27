@@ -1,4 +1,4 @@
-const { admin, db } = require('./admin');
+const { admin } = require('./admin');
 
 module.exports = async (req, res, next) => {
   let idToken;
@@ -14,7 +14,6 @@ module.exports = async (req, res, next) => {
   try {
     // Verifies account token
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    console.log("DECODEDTOKEN", decodedToken);
     req.account = decodedToken;
     return next();
   } catch (err) {
