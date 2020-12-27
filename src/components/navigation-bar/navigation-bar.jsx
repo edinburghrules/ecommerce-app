@@ -187,17 +187,17 @@ class NavigationBar extends React.Component {
           collectionsDropdown={collectionsDropdown}
           x={x}
         />
-        <nav className='nav'>
+        <nav className='navigation'>
           <Cart handleClose={this.handleClose} cartMenuWidth={cartMenuWidth} />
-          <div className='nav__menu'>
-            <ul className='nav__menu-list'>
+          <div className='navigation__menu'>
+            <ul className='navigation__menu-list'>
               <li
                 id='mens'
                 onClick={this.handleOpen}
                 className={
                   mensDesktopOpen
-                    ? `nav__menu-list-item active`
-                    : `nav__menu-list-item`
+                    ? `navigation__menu-list-item active`
+                    : `navigation__menu-list-item`
                 }
               >
                 Men
@@ -207,24 +207,24 @@ class NavigationBar extends React.Component {
                 onClick={this.handleOpen}
                 className={
                   womensDesktopOpen
-                    ? `nav__menu-list-item active`
-                    : `nav__menu-list-item`
+                    ? `navigation__menu-list-item active`
+                    : `navigation__menu-list-item`
                 }
               >
                 Women
               </li>
-              <li className='nav__menu-list-item'>Collections</li>
+              <li className='navigation__menu-list-item'>Collections</li>
             </ul>
           </div>
-          <div onClick={() => history.push('/')} className='nav__logo'>
+          <div onClick={() => history.push('/')} className='navigation__logo'>
             <img src={logo} alt='logo' />
-            <div className='nav__logo-text'>
+            <div className='navigation__logo-text'>
               <p>Faith</p>
               <p>Apparel</p>
             </div>
           </div>
-          <div className='nav__user-menu'>
-            <div className='nav__user-menu-item'>
+          <div className='navigation__user-menu'>
+            <div className='navigation__user-menu-item'>
               <img src={user} alt='user login' />
               <div className='account__menu'>
                 <button onClick={() => history.push('/signin')}>SIGN IN</button>
@@ -233,10 +233,10 @@ class NavigationBar extends React.Component {
                 </p>
               </div>
             </div>
-            <div className='nav__user-menu-item'>
+            <div className='navigation__user-menu-item'>
               <img src={favourites} alt='favourites' />
             </div>
-            <div className='nav__user-menu-item'>
+            <div className='navigation__user-menu-item'>
               <img
                 onClick={this.handleOpen}
                 id='cart'
@@ -245,7 +245,7 @@ class NavigationBar extends React.Component {
               />
             </div>
           </div>
-          <div className='nav__mobile-menu'>
+          <div className='navigation__mobile-menu'>
             <img
               id='mobile'
               onClick={this.handleOpen}

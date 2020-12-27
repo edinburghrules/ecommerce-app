@@ -79,19 +79,23 @@
 }
 
 .signin__submit-btn {
-  all: unset;
+  border: none;
   box-sizing: border-box;
   align-self: flex-start;
   margin-top: 3rem;
   width: 100%;
   background: $dark-bg;
   color: $light-text;
+  height: 5rem;
   text-align: center;
-  padding: 1.4rem;
   font-weight: $semiBold;
   font-size: $xsmall;
   letter-spacing: 1px;
   cursor: pointer;
+}
+
+.signin__submit-btn img {
+  height: 3rem;
 }
 
 .signin__forgot-password {
@@ -107,7 +111,7 @@
 }
 
 .signin__withGoogle {
-  padding: 1.5rem;
+  height: 5rem;
   font-size: $xsmall;
   font-weight: $semiBold;
   background: #1769ff;

@@ -72,8 +72,6 @@ const signIn = async (req, res) => {
     return res.status(201).json(token);
 
   } catch (err) {
-    console.error(err);
-
     if (err.code === 'auth/wrong-password') {
       return res.status(400).json({ password: 'Incorrect password' });
     } else if (err.code === 'auth/user-not-found') {

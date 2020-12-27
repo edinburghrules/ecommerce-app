@@ -3,12 +3,22 @@ import './sign-in.scss';
 import { Link } from 'react-router-dom';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 import googleIcon from '../../assets/search.png';
+import { Spinner } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class SignIn extends React.Component {
   render() {
-    const { handleSubmit, handleChange, values, errors, touched } = this.props;
-    console.log(values);
+    const {
+      handleSubmit,
+      handleChange,
+      values,
+      errors,
+      touched,
+      isSubmitting,
+    } = this.props;
+    console.log(isSubmitting);
     return (
       <div className='signin'>
         <div className='signin__container'>
@@ -53,7 +63,11 @@ class SignIn extends React.Component {
               </div>
             </div>
             <button className='signin__submit-btn' type='submit'>
-              SIGN IN
+              {isSubmitting ? (
+                <Spinner animation='border' variant='light' />
+              ) : (
+                'SIGN IN'
+              )}
             </button>
             <div className='signin__forgot-password'>
               <Link to='/password-reset'>Forgot password?</Link>
@@ -81,8 +95,18 @@ const SignInFormik = withFormik({
     email: Yup.string().email('Invalid email').required('Required'),
     password: Yup.string().required('Required'),
   }),
-  handleSubmit: () => {
-    console.log('submitting!');
+  handleSubmit: async (values, { setErrors, props: { history } }) => {
+    const signInData = {
+      email: values.email,
+      password: values.password,
+    };
+    try {
+      const signInResponse = await axios.post('/signin', signInData);
+      console.log(signInResponse.data);
+      history.push('/');
+    } catch (err) {
+      setErrors(err.response.data);
+    }
   },
 })(SignIn);
 
