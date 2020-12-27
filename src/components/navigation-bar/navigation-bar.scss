@@ -98,6 +98,7 @@
 .navigation__menu-list {
   height: 100%;
   display: flex;
+  transform: translateY(4px);
   list-style: none;
   font-weight: $bold;
   font-size: $small;
@@ -150,8 +151,7 @@
   align-items: flex-start;
   z-index: 3;
   padding: 2rem 2rem 1rem 2rem;
-  overflow: hidden;
-  visibility: hidden;
+  opacity: 0;
 }
 
 .account__menu button {
@@ -182,7 +182,7 @@
 }
 
 .navigation__user-menu-item:first-of-type:hover .account__menu {
-  visibility: visible;
+  opacity: 1;
 }
 
 .navigation__mobile-menu {

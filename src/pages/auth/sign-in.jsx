@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import googleIcon from '../../assets/search.png';
 import { Spinner } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 class SignIn extends React.Component {
   render() {
@@ -18,7 +17,6 @@ class SignIn extends React.Component {
       touched,
       isSubmitting,
     } = this.props;
-    console.log(isSubmitting);
     return (
       <div className='signin'>
         <div className='signin__container'>
@@ -102,8 +100,7 @@ const SignInFormik = withFormik({
     };
     try {
       const signInResponse = await axios.post('/signin', signInData);
-      console.log(signInResponse.data);
-      localStorage.setItem('FirebaseToken', `Bearer ${signInResponse.data}`);
+      localStorage.setItem('firebaseToken', `Bearer ${signInResponse.data}`);
       history.push('/');
     } catch (err) {
       setErrors(err.response.data);

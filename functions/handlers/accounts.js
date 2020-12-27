@@ -39,7 +39,7 @@ const register = async (req, res) => {
       .set({
         ...accountCredentials,
       });
-    return res.status(201).json({ token });
+    return res.status(201).json(token);
   } catch (err) {
     console.error(err);
     if (err.code === 'auth/email-already-in-use') {
@@ -70,7 +70,6 @@ const signIn = async (req, res) => {
     const token = await signedInAccount.user.getIdToken();
 
     return res.status(201).json(token);
-
   } catch (err) {
     if (err.code === 'auth/wrong-password') {
       return res.status(400).json({ password: 'Incorrect password' });

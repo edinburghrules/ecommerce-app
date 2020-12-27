@@ -5,6 +5,7 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import googleIcon from '../../assets/search.png';
+import { Spinner } from 'react-bootstrap';
 
 class Register extends React.Component {
   render() {
@@ -110,7 +111,7 @@ class Register extends React.Component {
               </div>
             </div>
             <button className='register__submit-btn' type='submit'>
-              REGISTER
+              {isSubmitting ? (<Spinner animation='border' variant='light' />) : 'REGISTER'}
             </button>
             <div className='register__forgot-password'>
               <Link to='/password-reset'>Forgot password?</Link>
@@ -151,7 +152,7 @@ const RegisterFormik = withFormik({
     try {
       const registerResponse = await axios.post('/register', registerData);
       console.log(registerResponse.data);
-      localStorage.setItem('FirebaseToken', `Bearer ${registerResponse.data}`);
+      localStorage.setItem('firebaseToken', `Bearer ${registerResponse.data}`);
       history.push('/');
     } catch (err) {
       setErrors(err.response.data);
