@@ -3,12 +3,19 @@ import './register.scss';
 import { Link } from 'react-router-dom';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 import googleIcon from '../../assets/search.png';
 
 class Register extends React.Component {
   render() {
-    const { handleSubmit, handleChange, values, errors, touched } = this.props;
-    console.log(values);
+    const {
+      handleSubmit,
+      handleChange,
+      values,
+      errors,
+      touched,
+      isSubmitting,
+    } = this.props;
     return (
       <div className='register'>
         <div className='register__container'>
@@ -137,8 +144,18 @@ const RegisterFormik = withFormik({
     password: Yup.string().required('Required'),
     confirmPassword: Yup.string().required('Required'),
   }),
-  handleSubmit: () => {
-    console.log('submitting!');
+  handleSubmit: async (values, { setErrors, props: { history } }) => {
+    const registerData = {
+      ...values,
+    };
+    try {
+      const registerResponse = await axios.post('/register', registerData);
+      console.log(registerResponse.data);
+      localStorage.setItem('FirebaseToken', `Bearer ${registerResponse.data}`);
+      history.push('/');
+    } catch (err) {
+      setErrors(err.response.data);
+    }
   },
 })(Register);
 

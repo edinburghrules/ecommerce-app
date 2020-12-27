@@ -103,6 +103,7 @@ const SignInFormik = withFormik({
     try {
       const signInResponse = await axios.post('/signin', signInData);
       console.log(signInResponse.data);
+      localStorage.setItem('FirebaseToken', `Bearer ${signInResponse.data}`);
       history.push('/');
     } catch (err) {
       setErrors(err.response.data);
