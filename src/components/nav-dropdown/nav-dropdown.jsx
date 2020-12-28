@@ -1,6 +1,6 @@
 import React from 'react';
 import './nav-dropdown.scss';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const NavDropdown = ({
   handleClose,
@@ -30,17 +30,17 @@ const NavDropdown = ({
           <div className='dropdown__column'>
             {linksToRender &&
               linksToRender.apparelLinks.map(({ path, category }, i) => (
-                <p onClick={() => history.push(path)} key={i}>
+                <Link to={path} key={i}>
                   {category}
-                </p>
+                </Link>
               ))}
           </div>
           <div className='dropdown__column'>
             {linksToRender &&
               linksToRender.shoeLinks.map(({ path, category }, i) => (
-                <p onClick={() => history.push(path)} key={i}>
+                <Link to={path} key={i}>
                   {category}
-                </p>
+                </Link>
               ))}
           </div>
           <div className='categories'>

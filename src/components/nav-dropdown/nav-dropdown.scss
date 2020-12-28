@@ -58,6 +58,10 @@
   color: $dark-text;
 }
 
+.dropdown__column-link {
+  margin-top: 1rem !important;
+}
+
 .categories div:first-child {
   color: inherit;
   font-size: $small;
