@@ -3,9 +3,10 @@ import './register.scss';
 import { Link } from 'react-router-dom';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 import googleIcon from '../../assets/search.png';
 import { Spinner } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { register } from '../../redux/actions/accountActions';
 
 class Register extends React.Component {
   render() {
@@ -111,7 +112,11 @@ class Register extends React.Component {
               </div>
             </div>
             <button className='register__submit-btn' type='submit'>
-              {isSubmitting ? (<Spinner animation='border' variant='light' />) : 'REGISTER'}
+              {isSubmitting ? (
+                <Spinner animation='border' variant='light' />
+              ) : (
+                'REGISTER'
+              )}
             </button>
             <div className='register__forgot-password'>
               <Link to='/password-reset'>Forgot password?</Link>
@@ -145,19 +150,24 @@ const RegisterFormik = withFormik({
     password: Yup.string().required('Required'),
     confirmPassword: Yup.string().required('Required'),
   }),
-  handleSubmit: async (values, { setErrors, props: { history } }) => {
+  handleSubmit: async (values, { setErrors, props: { register, history } }) => {
     const registerData = {
       ...values,
     };
-    try {
-      const registerResponse = await axios.post('/register', registerData);
-      console.log(registerResponse.data);
-      localStorage.setItem('firebaseToken', `Bearer ${registerResponse.data}`);
-      history.push('/');
-    } catch (err) {
-      setErrors(err.response.data);
-    }
+
+    const error = await register(registerData, history);
+    setErrors(error);
   },
 })(Register);
 
-export default RegisterFormik;
+const mapStateToProps = (state) => {
+  return {
+    authenticated: state.account,
+  };
+};
+
+const mapActionsToProps = {
+  register,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(RegisterFormik);

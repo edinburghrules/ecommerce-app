@@ -25,7 +25,9 @@ const register = async (req, res) => {
     const createdAccount = await firebase
       .auth()
       .createUserWithEmailAndPassword(newAccount.email, newAccount.password);
+
     const token = await createdAccount.user.getIdToken();
+
     const accountCredentials = {
       firstName: newAccount.firstName,
       lastName: newAccount.lastName,
@@ -33,15 +35,18 @@ const register = async (req, res) => {
       joined: new Date().toISOString(),
       accountId: createdAccount.user.uid,
     };
+
     await db
       .collection('accounts')
       .doc(newAccount.email)
       .set({
         ...accountCredentials,
       });
+
     return res.status(201).json(token);
   } catch (err) {
     console.error(err);
+
     if (err.code === 'auth/email-already-in-use') {
       return res
         .status(400)

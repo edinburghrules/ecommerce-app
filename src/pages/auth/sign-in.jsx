@@ -103,7 +103,11 @@ const SignInFormik = withFormik({
       email: values.email,
       password: values.password,
     };
-    await signIn(signInData, history, setErrors);
+
+    // Returns error if unsuccessful signin
+    const error = await signIn(signInData, history);
+    setErrors(error);
+
     setSubmitting(false);
   },
 })(SignIn);
@@ -114,8 +118,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
+const mapActionsToProps = {
   signIn,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignInFormik);
+export default connect(mapStateToProps, mapActionsToProps)(SignInFormik);
