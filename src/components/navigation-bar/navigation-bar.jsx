@@ -242,12 +242,12 @@ class NavigationBar extends React.Component {
                     <button onClick={() => history.push('/signin')}>
                       SIGN IN
                     </button>
-                    <p
+                    <Link
                       className='account__menu-register'
-                      onClick={() => history.push('/register')}
+                      to='/register'
                     >
                       Not registered? Sign up!
-                    </p>
+                    </Link>
                   </React.Fragment>
                 )}
               </div>

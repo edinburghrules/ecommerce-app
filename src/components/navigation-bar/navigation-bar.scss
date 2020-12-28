@@ -162,7 +162,6 @@
 
 .account__menu a {
   margin-bottom: 2rem;
-  color: $dark-text;
 }
 
 .account__menu button {
@@ -181,10 +180,8 @@
 }
 
 .account__menu-register {
-  text-decoration: underline;
-  font-weight: $semiBold;
-  color: lighten($dark-text, 20);
   align-self: center;
+  color: inherit;
   margin-top: 1rem !important;
 }
 
