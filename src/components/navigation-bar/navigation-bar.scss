@@ -64,7 +64,7 @@
   }
 
   p:first-of-type {
-    margin-right: 5px;
+    margin-right: 5px !important;
     font-weight: $bold;
     letter-spacing: 1px;
     font-size: $small;
@@ -139,8 +139,8 @@
 }
 
 .account__menu {
+  cursor: default;
   position: absolute;
-  height: auto;
   width: 22rem;
   top: 2.2rem;
   right: -3rem;
@@ -154,6 +154,17 @@
   opacity: 0;
 }
 
+.account__menu-welcome {
+  font-weight: $normal;
+  font-size: $xsmall;
+  margin-bottom: 1rem !important;
+}
+
+.account__menu a {
+  margin-bottom: 2rem;
+  color: $dark-text;
+}
+
 .account__menu button {
   all: unset;
   display: block;
@@ -164,21 +175,17 @@
   background-color: $dark-bg;
   color: $light-text;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   letter-spacing: 1px;
   transition: transform 0.2s;
 }
 
-.account__menu p:first-of-type {
-  font-size: $xxsmall;
-  font-weight: $normal;
-}
-
-.account__menu p:last-of-type {
+.account__menu-register {
   text-decoration: underline;
   font-weight: $semiBold;
   color: lighten($dark-text, 20);
   align-self: center;
+  margin-top: 1rem !important;
 }
 
 .navigation__user-menu-item:first-of-type:hover .account__menu {

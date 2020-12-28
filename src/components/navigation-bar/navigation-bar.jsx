@@ -2,6 +2,7 @@ import React from 'react';
 import './navigation-bar.scss';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { signOut } from '../../redux/actions/accountActions';
 import NavDropdown from '../nav-dropdown/nav-dropdown';
 import Cart from '../cart/cart';
 import MobileNav from '../mobile-nav/mobile-nav';
@@ -169,7 +170,7 @@ class NavigationBar extends React.Component {
       x,
     } = this.state;
     const linksToRender = this.renderLinks();
-    const { authenticated, accountName, history } = this.props;
+    const { authenticated, accountName, signOut, history } = this.props;
     return (
       <React.Fragment>
         <MobileNav
@@ -222,7 +223,7 @@ class NavigationBar extends React.Component {
             <div className='navigation__logo-text'>
               <p>Faith</p>
               <p>Apparel</p>
-            </div>
+          </div>
           </div>
           <div className='navigation__user-menu'>
             <div className='navigation__user-menu-item'>
@@ -230,16 +231,21 @@ class NavigationBar extends React.Component {
               <div className='account__menu'>
                 {authenticated ? (
                   <React.Fragment>
-                    <p>Welcome {accountName}</p>
+                    <p className='account__menu-welcome'>
+                      Welcome {accountName}!
+                    </p>
                     <Link to='/account'>My Account</Link>
-                    <button>Sign Out</button>
+                    <button onClick={signOut}>SIGN OUT</button>
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
                     <button onClick={() => history.push('/signin')}>
                       SIGN IN
                     </button>
-                    <p onClick={() => history.push('/register')}>
+                    <p
+                      className='account__menu-register'
+                      onClick={() => history.push('/register')}
+                    >
                       Not registered? Sign up!
                     </p>
                   </React.Fragment>
@@ -292,4 +298,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(NavigationBar));
+const mapActionsToProps = {
+  signOut,
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapActionsToProps)(NavigationBar)
+);
