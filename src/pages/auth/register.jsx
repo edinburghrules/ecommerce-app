@@ -3,7 +3,6 @@ import './register.scss';
 import { Link } from 'react-router-dom';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
-import googleIcon from '../../assets/search.png';
 import { Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { register } from '../../redux/actions/accountActions';
@@ -123,10 +122,6 @@ class Register extends React.Component {
             </div>
           </form>
           <hr className='register__divider' />
-          <button className='register__withGoogle'>
-            <img src={googleIcon} alt='google logo' />
-            Register with Google
-          </button>
         </div>
       </div>
     );

@@ -106,22 +106,3 @@
   background: #ddd;
   margin: 4rem 0;
 }
-
-.register__withGoogle {
-  padding: 1.5rem;
-  font-size: $xsmall;
-  font-weight: $semiBold;
-  background: #1769ff;
-  color: $light-text;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  width: 100%;
-  cursor: pointer;
-}
-
-.register__withGoogle img {
-  height: 2rem;
-  padding: 0 5px;
-}

@@ -3,7 +3,6 @@ import './sign-in.scss';
 import { Link } from 'react-router-dom';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
-import googleIcon from '../../assets/search.png';
 import { Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { signIn } from '../../redux/actions/accountActions';
@@ -74,10 +73,6 @@ class SignIn extends React.Component {
             </div>
           </form>
           <hr className='signin__divider' />
-          <button className='signin__withGoogle'>
-            <img src={googleIcon} alt='google logo' />
-            Sign in with Google
-          </button>
         </div>
       </div>
     );
