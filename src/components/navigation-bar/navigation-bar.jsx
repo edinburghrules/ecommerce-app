@@ -223,7 +223,7 @@ class NavigationBar extends React.Component {
             <div className='navigation__logo-text'>
               <p>Faith</p>
               <p>Apparel</p>
-          </div>
+            </div>
           </div>
           <div className='navigation__user-menu'>
             <div className='navigation__user-menu-item'>
@@ -242,11 +242,8 @@ class NavigationBar extends React.Component {
                     <button onClick={() => history.push('/signin')}>
                       SIGN IN
                     </button>
-                    <Link
-                      className='account__menu-register'
-                      to='/register'
-                    >
-                      Not registered? Sign up!
+                    <Link className='account__menu-register' to='/register'>
+                      No acccount? Register here!
                     </Link>
                   </React.Fragment>
                 )}
