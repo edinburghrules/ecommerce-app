@@ -6,6 +6,7 @@ firebase.initializeApp(config);
 const {
   validateRegisterData,
   validateSignInData,
+  validateResetEmail,
 } = require('../util/validators');
 
 const register = async (req, res) => {
@@ -103,4 +104,25 @@ const getAuthenticatedAccount = async (req, res) => {
   }
 };
 
-module.exports = { register, signIn, getAuthenticatedAccount };
+const resetPassword = async (req, res) => {
+  let email = req.body.email;
+  const { valid, errors } = validateResetEmail(email);
+
+  if (!valid) return res.status(400).json(errors);
+
+  try {
+    await firebase.auth().sendPasswordResetEmail(email);
+    return res
+      .status(201)
+      .json({ success: 'A reset email link has been sent' });
+  } catch (err) {
+    console.log(err);
+    if (err.code === 'auth/user-not-found') {
+      return res.status(400).json({ email: 'This email is not recognized' });
+    } else {
+      return res.status(500).json({ error: err.code });
+    }
+  }
+};
+
+module.exports = { register, signIn, resetPassword, getAuthenticatedAccount };

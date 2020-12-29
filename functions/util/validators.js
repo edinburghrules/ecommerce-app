@@ -52,3 +52,15 @@ exports.validateSignInData = (accountData) => {
     errors,
   };
 };
+
+exports.validateResetEmail = (email) => {
+  let errors = {};
+
+  if (isEmpty(email)) errors.email = 'Please provide your email';
+  else if (!isEmail(email)) errors.email = 'Please provide valid email';
+
+  return {
+    valid: Object.keys(errors).length === 0 ? true : false,
+    errors,
+  };
+};
