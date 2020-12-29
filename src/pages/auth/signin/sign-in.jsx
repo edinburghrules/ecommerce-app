@@ -5,7 +5,7 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import { Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { signIn } from '../../redux/actions/accountActions';
+import { signIn } from '../../../redux/actions/accountActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class SignIn extends React.Component {
@@ -69,7 +69,7 @@ class SignIn extends React.Component {
               )}
             </button>
             <div className='signin__forgot-password'>
-              <Link to='/password-reset'>Forgot password?</Link>
+              <Link to='/reset-password'>Forgot password?</Link>
             </div>
           </form>
           <hr className='signin__divider' />

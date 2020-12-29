@@ -5,7 +5,7 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import { Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { register } from '../../redux/actions/accountActions';
+import { register } from '../../../redux/actions/accountActions';
 
 class Register extends React.Component {
   render() {
@@ -117,9 +117,6 @@ class Register extends React.Component {
                 'REGISTER'
               )}
             </button>
-            <div className='register__forgot-password'>
-              <Link to='/password-reset'>Forgot password?</Link>
-            </div>
           </form>
           <hr className='register__divider' />
         </div>
