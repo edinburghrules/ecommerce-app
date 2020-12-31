@@ -4,6 +4,8 @@ const app = require('express')();
 app.use(cors());
 
 const firebaseAuth = require('./util/firebaseAuth');
+
+// Accounts routes
 const {
   register,
   signIn,
@@ -11,10 +13,15 @@ const {
   getAuthenticatedAccount,
 } = require('./handlers/accounts');
 
-// Accounts routes
 app.post('/register', register);
 app.post('/signin', signIn);
 app.post('/reset-password', resetPassword);
 app.get('/account', firebaseAuth, getAuthenticatedAccount);
+
+// Products routes
+const { getMensShoes, getMensShoesByCategory } = require('./handlers/products');
+
+app.get('/mens-shoes', getMensShoes);
+app.get('/mens-shoes/category', getMensShoesByCategory);
 
 exports.api = functions.https.onRequest(app);
