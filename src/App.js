@@ -50,7 +50,10 @@ const App = () => {
           <PrivateRoute path='/signIn' component={Signin} />
           <PrivateRoute path='/register' component={Register} />
           <PrivateRoute path='/reset-password' component={ResetPassword} />
-          <Route path='/collection/:products' component={ProductListPage} />
+          <Route
+            path='/collection/:collection/:category?'
+            component={ProductListPage}
+          />
         </Switch>
       </div>
     </Provider>

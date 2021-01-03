@@ -6,3 +6,4 @@ export const LOADING_ACCOUNT = 'LOADING_ACCOUNT';
 
 // Products reducer action types
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
+export const GET_CATEGORY_PRODUCTS = 'GET_CATEGORY_PRODUCTS';

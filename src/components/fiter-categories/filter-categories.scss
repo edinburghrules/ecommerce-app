@@ -1,0 +1,12 @@
+.filter-categories {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-categories__path {
+  display: flex;
+}
+
+.filter-categories__path h5:first-of-type {
+  margin-right: 1rem;
+}

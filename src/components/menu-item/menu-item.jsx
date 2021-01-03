@@ -7,7 +7,6 @@ import { getAllProducts } from '../../redux/actions/productActions';
 const MenuItem = ({ category, src, link, history, getAllProducts }) => {
   const getProducts = (e) => {
     e.preventDefault();
-    console.log(link)
     getAllProducts(link, history);
   };
   return (

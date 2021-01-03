@@ -15,9 +15,25 @@ export const mensApparelLinks = [
 ];
 
 export const mensShoeLinks = [
-  { category: "Men's Shoes", path: '/collections/mens/shoes' },
-  { category: 'Casual', path: '/collections/mens/shoes/casual' },
-  { category: 'Boots', path: '/collections/mens/shoes/boots' },
+  {
+    title: "Men's Shoes",
+    path: '/collection/mens-shoes/',
+    collection: 'mens-shoes',
+    category: null
+  },
+  {
+    title: 'Everyday Sneakers',
+    path: '/collection/mens-shoes/everyday-sneakers',
+    collection: 'mens-shoes',
+    category: 'everyday-sneakers'
+
+  },
+  {
+    title: 'Hi Tops',
+    path: '/collection/mens-shoes/hi-tops',
+    collection: 'mens-shoes',
+    category: 'hi-tops'
+  },
 ];
 
 export const mensCollectionLinks = [
