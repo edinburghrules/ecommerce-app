@@ -1,7 +1,8 @@
 const { admin, db } = require('../util/admin');
 
-const getMensShoes = async (req, res) => {
-  const productsRef = db.collection('mens-shoes');
+const getAllShoes = async (req, res) => {
+  const collection = req.query.collection;
+  const productsRef = db.collection(collection);
   const products = [];
 
   try {
@@ -16,9 +17,10 @@ const getMensShoes = async (req, res) => {
   }
 };
 
-const getMensShoesByCategory = async (req, res) => {
+const getShoesByCategory = async (req, res) => {
+  const collection = req.query.collection;
   const category = req.query.category;
-  const productsRef = db.collection('mens-shoes');
+  const productsRef = db.collection(collection);
   const products = [];
 
   try {
@@ -35,9 +37,4 @@ const getMensShoesByCategory = async (req, res) => {
   }
 };
 
-
-//black https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/7b8k7jAF4b2Lzz42YpBYQO/1
-// grey https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/1asfoA8T96201A3ODn2r4f/2
-// navy https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/1bRf7x3NByrcpXwAMRReII/1
-
-module.exports = { getMensShoes, getMensShoesByCategory };
+module.exports = { getAllShoes, getShoesByCategory };

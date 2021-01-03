@@ -1,0 +1,11 @@
+.product-list-page {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.filters {
+  border: 2px solid black;
+  width: 100%;
+}

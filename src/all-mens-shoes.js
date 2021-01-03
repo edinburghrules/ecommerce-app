@@ -213,3 +213,49 @@ const SHOP_DATA = [
 ];
 
 export default SHOP_DATA;
+
+[
+  {
+    color: black,
+    image:
+      'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/7b8k7jAF4b2Lzz42YpBYQO/1',
+    sizes: [
+      { size: 6, stockQty: 10 },
+      { size: 7, stockQty: 10 },
+      { size: 8, stockQty: 7 },
+      { size: 9, stockQty: 4 },
+      { size: 10, stockQty: 0 },
+      { size: 11, stockQty: 0 },
+      { size: 12, stockQty: 9 }
+    ],
+  },
+  {
+    color: grey,
+    image:
+      'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/1asfoA8T96201A3ODn2r4f/2',
+    sizes: [
+      { size: 6, stockQty: 10 },
+      { size: 7, stockQty: 10 },
+      { size: 8, stockQty: 7 },
+      { size: 9, stockQty: 4 },
+      { size: 10, stockQty: 0 },
+      { size: 11, stockQty: 0 },
+      { size: 12, stockQty: 9 }
+    ],
+  },
+  {
+    color: navy,
+    image:
+      'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/1bRf7x3NByrcpXwAMRReII/1',
+    sizes: [
+      { size: 6, stockQty: 10 },
+      { size: 7, stockQty: 10 },
+      { size: 8, stockQty: 7 },
+      { size: 9, stockQty: 4 },
+      { size: 10, stockQty: 0 },
+      { size: 11, stockQty: 0 },
+      { size: 12, stockQty: 9 }
+    ],
+  },
+
+];

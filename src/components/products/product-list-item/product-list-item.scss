@@ -1,0 +1,127 @@
+@import '../../../sass/colors';
+@import '../../../sass/fonts';
+@import '../../../sass/utils';
+
+.product-list-item {
+  height: 68rem;
+  font-family: $Poppins;
+  border: 2px solid $light-text;
+  cursor: pointer;
+  padding: 1rem;
+  &:hover {
+    box-shadow: $boxShadow;
+  }
+  &:hover .product-list-item__variant-sizes {
+    visibility: visible;
+  }
+}
+
+.product-list-item__img-wrapper {
+  overflow: hidden;
+}
+
+.product-list-item__img-wrapper img {
+  width: 40%;
+}
+
+.product-list-item__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.product-list-item__main-img {
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+
+.product-list-item__content-header {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.product-list-item__title {
+  font-weight: $bold;
+  font-size: $small;
+}
+
+.product-list-item__variant {
+  font-size: $xsmall;
+  text-transform: capitalize;
+  display: block;
+  margin-top: 1rem;
+}
+
+img.product-list-item__favourite {
+  height: 1.5rem;
+  width: 1.5rem;
+  transform: translateY(-3px);
+}
+
+.product-list-item__price {
+  font-size: $xsmall;
+  display: block;
+  margin-top: 6rem;
+}
+
+.product-list-item__variants {
+  display: flex;
+  margin-top: 1rem;
+  width: 100%;
+  position: relative;
+}
+
+.product-list-item__variant-img {
+  width: 6rem;
+  height: auto;
+  margin-right: 1rem;
+  border: 1px solid transparent;
+
+  &:hover {
+    border: 1px solid #ccc;
+  }
+}
+
+.product-list-item__variant-img--active {
+  width: 6rem;
+  height: auto;
+  margin-right: 1rem;
+  border: 1px solid #ccc;
+}
+
+.product-list-item__variant-sizes {
+  position: absolute;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  bottom: -13rem;
+  left: -1rem;
+  visibility: hidden;
+  padding-left: 1rem;
+}
+
+h5 {
+  margin-bottom: 1rem;
+}
+
+.product-list-item__variant-size-list {
+  display: flex;
+}
+
+.product-list-item__variant-size {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  width: 5rem;
+  border: 1px solid $dark-text;
+  margin-right: 1rem;
+}

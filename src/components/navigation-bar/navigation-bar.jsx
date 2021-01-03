@@ -8,7 +8,7 @@ import Cart from '../cart/cart';
 import MobileNav from '../mobile-nav/mobile-nav';
 import logo from '../../assets/logo2.png';
 import user from '../../assets/001-user.png';
-import favourites from '../../assets/004-heart-shape-outline.png';
+import favourites from '../../assets/heart-outline.png';
 import shopping from '../../assets/002-shopping-bag.png';
 import mobile from '../../assets/menu.png';
 

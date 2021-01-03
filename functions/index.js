@@ -19,9 +19,9 @@ app.post('/reset-password', resetPassword);
 app.get('/account', firebaseAuth, getAuthenticatedAccount);
 
 // Products routes
-const { getMensShoes, getMensShoesByCategory } = require('./handlers/products');
+const { getAllShoes, getShoesByCategory } = require('./handlers/products');
 
-app.get('/mens-shoes', getMensShoes);
-app.get('/mens-shoes/category', getMensShoesByCategory);
+app.get('/products', getAllShoes);
+app.get('/products-category', getShoesByCategory);
 
 exports.api = functions.https.onRequest(app);

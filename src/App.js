@@ -18,6 +18,7 @@ import Home from './pages/home/home';
 import Signin from './pages/auth/signin/sign-in';
 import Register from './pages/auth/register/register';
 import ResetPassword from './pages/auth/reset-password/reset-password';
+import ProductListPage from './pages/products/product-list/product-list-page';
 import { signOut, getAccountData } from './redux/actions/accountActions';
 
 const token = localStorage.firebaseToken;
@@ -49,6 +50,7 @@ const App = () => {
           <PrivateRoute path='/signIn' component={Signin} />
           <PrivateRoute path='/register' component={Register} />
           <PrivateRoute path='/reset-password' component={ResetPassword} />
+          <Route path='/collection/:products' component={ProductListPage} />
         </Switch>
       </div>
     </Provider>

@@ -1,18 +1,29 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import './menu-item.scss';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getAllProducts } from '../../redux/actions/productActions';
 
-const MenuItem = ({ category, src, link, history }) => {
+const MenuItem = ({ category, src, link, history, getAllProducts }) => {
+  const getProducts = (e) => {
+    e.preventDefault();
+    console.log(link)
+    getAllProducts(link, history);
+  };
   return (
-    <div onClick={() => history.push(`/category/${link}`)} className='menu-item'>
+    <div onClick={getProducts} className='menu-item'>
       <div className='menu-item__content'>
-      <div className='menu-item__img-wrapper'>
-        <img src={src} alt={`${link}`} />
-      </div>  
+        <div className='menu-item__img-wrapper'>
+          <img src={src} alt={`${link}`} />
+        </div>
         <h1 className='menu-item__title'>{category}</h1>
       </div>
     </div>
   );
 };
 
-export default withRouter(MenuItem);
+const mapActionsToProps = {
+  getAllProducts,
+};
+
+export default withRouter(connect(null, mapActionsToProps)(MenuItem));
