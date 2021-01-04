@@ -1,14 +1,9 @@
 import React from 'react';
 import './filter-categories.scss';
-import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { getCategoryProducts } from '../../redux/actions/productActions';
+import { Link, withRouter } from 'react-router-dom';
 
 const FilterCategories = (props) => {
-  const { options, getCategoryProducts } = props;
-  const getProducts = (collection, category) => {
-    getCategoryProducts(collection, category);
-  };
+  const { options } = props;
   return (
     <div className='filter-categories'>
       {options &&
@@ -17,18 +12,15 @@ const FilterCategories = (props) => {
             return (
               <div key={index} className='filter-categories__path'>
                 <h5>Home / </h5>
-                <h5> {option.title} /</h5>
+                <Link to={`${option.path}`}> {option.title}</Link>{' '}
+                <span> /</span>
               </div>
             );
           else {
             return (
-              <NavLink
-                onClick={() => getProducts(option.collection, option.category)}
-                key={index}
-                to={`${option.path}`}
-              >
+              <Link key={index} to={`${option.path}`}>
                 {option.title}
-              </NavLink>
+              </Link>
             );
           }
         })}
@@ -36,8 +28,4 @@ const FilterCategories = (props) => {
   );
 };
 
-const mapActionsToProps = {
-  getCategoryProducts,
-};
-
-export default connect(null, mapActionsToProps)(FilterCategories);
+export default withRouter(FilterCategories);

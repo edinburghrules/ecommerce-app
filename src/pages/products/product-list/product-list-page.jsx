@@ -1,6 +1,6 @@
 import React from 'react';
 import './product-list-page.scss';
-import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 import FilterCategories from '../../../components/fiter-categories/filter-categories';
 import Filters from '../../../components/filters/filters.jsx';
 import ProductList from '../../../components/products/product-list/product-list';
@@ -9,8 +9,8 @@ import { mensShoeLinks } from '../../../navigation-links/navigation-links';
 class ProductListPage extends React.Component {
   render() {
     const {
-      products,
-      match: { params },
+      match: { params, path },
+      location,
     } = this.props;
     let options;
     if (params.collection === 'mens-shoes') {
@@ -22,14 +22,22 @@ class ProductListPage extends React.Component {
           <FilterCategories options={options} />
           <Filters />
         </div>
-        <ProductList products={products} />
+        <Switch>
+          <Route
+            key={location.key}
+            exact
+            path={`${path}`}
+            component={ProductList}
+          />
+          <Route
+            key={location.key}
+            path={`${path}/:category`}
+            component={ProductList}
+          />
+        </Switch>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  products: state.products.productsList,
-});
-
-export default connect(mapStateToProps)(ProductListPage);
+export default ProductListPage;
