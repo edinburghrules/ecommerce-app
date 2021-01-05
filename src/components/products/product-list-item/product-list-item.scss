@@ -4,10 +4,10 @@
 
 .product-list-item {
   height: 68rem;
-  font-family: $Poppins;
+  font-family: $Montserrat;
   border: 2px solid $light-text;
   cursor: pointer;
-  padding: 1rem;
+  padding: 0 1rem 1rem 1rem;
   &:hover {
     box-shadow: $boxShadow;
   }

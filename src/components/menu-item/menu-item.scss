@@ -3,10 +3,16 @@
 @import '../../sass/utils';
 
 .menu-item {
-  font-family: $Poppins;
+  font-family: $Montserrat;
   border: 2px solid $light-text;
   box-shadow: $boxShadow;
   cursor: pointer;
+  color: $dark-text;
+}
+
+.menu-item:hover {
+  text-decoration: none;
+  color: $dark-text;
 }
 
 .menu-item__img-wrapper {
@@ -31,7 +37,7 @@
 }
 
 .menu-item__title {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   font-weight: $bold;
   font-size: $medium;
 }

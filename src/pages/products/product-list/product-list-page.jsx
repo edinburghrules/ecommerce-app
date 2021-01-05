@@ -2,9 +2,12 @@ import React from 'react';
 import './product-list-page.scss';
 import { Route, Switch } from 'react-router-dom';
 import FilterCategories from '../../../components/fiter-categories/filter-categories';
-import Filters from '../../../components/filters/filters.jsx';
+// import Filters from '../../../components/filters/filters.jsx';
 import ProductList from '../../../components/products/product-list/product-list';
-import { mensShoeLinks } from '../../../navigation-links/navigation-links';
+import {
+  mensShoeLinks,
+  womensShoeLinks,
+} from '../../../navigation-links/navigation-links';
 
 class ProductListPage extends React.Component {
   render() {
@@ -15,12 +18,14 @@ class ProductListPage extends React.Component {
     let options;
     if (params.collection === 'mens-shoes') {
       options = mensShoeLinks;
+    } else if (params.collection === 'womens-shoes') {
+      options = womensShoeLinks;
     }
     return (
       <div className='product-list-page'>
         <div className='product-list-page__filters'>
           <FilterCategories options={options} />
-          <Filters />
+          {/* <Filters /> */}
         </div>
         <Switch>
           <Route

@@ -1,12 +1,59 @@
+@import '../../sass/colors';
+@import '../../sass/fonts';
+
 .filter-categories {
   display: flex;
   flex-direction: column;
+  padding-left: 2rem;
+  font-family: $Montserrat;
 }
 
 .filter-categories__path {
+  position: relative;
   display: flex;
+  color: $dark-text;
+  font-size: $xsmall;
+  margin-bottom: 4rem;
+  font-weight: $semiNormal;
 }
 
-.filter-categories__path h5:first-of-type {
+.filter-categories__home {
+  height: 3rem;
+  width: 4rem;
+  transform: translateY(-7px);
+  margin-right: 0.5rem;
+}
+
+.filter-categories__path h3 {
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  font-weight: $black;
+}
+
+.filter-categories__path a {
+  color: inherit;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-weight: $bold;
+}
+
+.filter-categories__path p:first-of-type {
   margin-right: 1rem;
+}
+
+.filter-categories__link {
+  margin-top: 1.2rem;
+  font-size: $xsmall;
+  color: $dark-text;
+  font-weight: $semiNormal;
+}
+
+.filter-categories__link:hover {
+  text-decoration: none;
+}
+
+.filter-categories__link.active {
+  color: $primary;
+  font-weight: $bold;
 }

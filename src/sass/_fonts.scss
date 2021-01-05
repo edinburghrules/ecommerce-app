@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
 
 // font sizes
 $XXXL: 7rem;
@@ -11,12 +11,14 @@ $xsmall: 1.4rem;
 $xxsmall: 1.2rem;
 
 // font families
-$Poppins: 'Poppins', sans-serif;
+$Montserrat: 'Montserrat', sans-serif;
 
 // font weights
+$xblack: 900;
 $black: 800;
 $bold: 700;
 $semiBold: 600;
+$semiNormal: 500;
 $normal: 400;
 $light: 300;
 $xlight: 200;

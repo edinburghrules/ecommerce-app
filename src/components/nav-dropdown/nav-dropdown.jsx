@@ -29,27 +29,27 @@ const NavDropdown = ({
         >
           <div className='dropdown__column'>
             {linksToRender &&
-              linksToRender.apparelLinks.map(({ path, category }, i) => (
+              linksToRender.apparelLinks.map(({ path, title }, i) => (
                 <Link to={path} key={i}>
-                  {category}
+                  {title}
                 </Link>
               ))}
           </div>
           <div className='dropdown__column'>
             {linksToRender &&
-              linksToRender.shoeLinks.map(({ path, category }, i) => (
+              linksToRender.shoeLinks.map(({ path, title }, i) => (
                 <Link to={path} key={i}>
-                  {category}
+                  {title}
                 </Link>
               ))}
           </div>
           <div className='categories'>
             {linksToRender &&
               linksToRender.collectionLinks.map(
-                ({ path, category, img }, i) => (
+                ({ path, title, img }, i) => (
                   <div onClick={() => history.push(path)} key={i}>
                     {img && <img src={img} alt='collection' />}
-                    <p>{category}</p>
+                    <p>{title}</p>
                   </div>
                 )
               )}

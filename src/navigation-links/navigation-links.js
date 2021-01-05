@@ -4,14 +4,30 @@ import knits from '../assets/knitwear.jpg';
 // Mens Links
 
 export const mensApparelLinks = [
-  { category: "Men's Apparel", path: '/collections/mens/apparel' },
-  { category: 'T-Shirts', path: '/collections/mens/apparel/t-shirts' },
-  { category: 'Sweaters', path: '/collections/mens/apparel/sweaters' },
   {
-    category: 'Coats & Jackets',
-    path: '/collections/mens/apparel/coats&jackets',
+    title: "Men's Apparel",
+    path: '/collections/mens/apparel',
+    collection: 'mens-apparel',
+    category: 'null',
   },
-  { category: 'Trousers', path: '/collections/mens/apparel/trousers' },
+  {
+    title: 'T-Shirts',
+    path: '/collections/mens/apparel/t-shirts',
+    collection: 'mens-apparel',
+    category: 't-shirts',
+  },
+  {
+    title: 'Sweaters',
+    path: '/collections/mens/apparel/sweaters',
+    collection: 'mens-apparel',
+    category: 'sweaters',
+  },
+  {
+    title: 'Coats & Jackets',
+    path: '/collections/mens/apparel/coats&jackets',
+    collection: 'mens-apparel',
+    category: 'coats&jackets',
+  },
 ];
 
 export const mensShoeLinks = [
@@ -19,32 +35,31 @@ export const mensShoeLinks = [
     title: "Men's Shoes",
     path: '/collection/mens-shoes/',
     collection: 'mens-shoes',
-    category: null
+    category: null,
   },
   {
     title: 'Everyday Sneakers',
     path: '/collection/mens-shoes/everyday-sneakers',
     collection: 'mens-shoes',
-    category: 'everyday-sneakers'
-
+    category: 'everyday-sneakers',
   },
   {
     title: 'Hi Tops',
     path: '/collection/mens-shoes/hi-tops',
     collection: 'mens-shoes',
-    category: 'hi-tops'
+    category: 'hi-tops',
   },
 ];
 
 export const mensCollectionLinks = [
-  { category: 'Featured Collections', path: '/collections/mens/collections' },
+  { title: 'Featured Collections', path: '/collections/mens/collections' },
   {
-    category: 'Denim Collection',
+    title: 'Denim Collection',
     path: '/collections/mens/denim-collection',
     img: denim,
   },
   {
-    category: 'Premium Knitwear',
+    title: 'Premium Knitwear',
     path: '/collections/mens/premium-knitwear',
     img: knits,
   },
@@ -53,31 +68,62 @@ export const mensCollectionLinks = [
 // Womens Links
 
 export const womensApparelLinks = [
-  { category: "Women's Apparel", path: '/collections/womens/apparel' },
-  { category: 'T-Shirts', path: '/collections/womens/apparel/t-shirts' },
-  { category: 'Sweaters', path: '/collections/womens/apparel/sweaters' },
   {
-    category: 'Coats & Jackets',
-    path: '/collections/womens/apparel/coats&jackets',
+    title: "Women's Apparel",
+    path: '/collections/womens/apparel',
+    collection: 'womens-apparel',
+    category: null,
   },
-  { category: 'Trousers', path: '/collections/womens/apparel/trousers' },
+  {
+    title: 'T-Shirts',
+    path: '/collections/womens/apparel/t-shirts',
+    collection: 'womens-apparel',
+    category: 't-shirts',
+  },
+  {
+    title: 'Sweaters',
+    path: '/collections/womens/apparel/sweaters',
+    collection: 'womens-apparel',
+    category: 'sweaters',
+  },
+  {
+    title: 'Coats & Jackets',
+    path: '/collections/womens/apparel/coats&jackets',
+    collection: 'womens-apparel',
+    category: 'coats&jackets',
+  },
 ];
 
 export const womensShoeLinks = [
-  { category: "Women's Shoes", path: '/collections/womens/shoes' },
-  { category: 'Casual', path: '/collections/womens/shoes/casual' },
-  { category: 'Boots', path: '/collections/womens/shoes/boots' },
+  {
+    title: "Women's Shoes",
+    path: '/collections/womens-shoes',
+    collection: 'womens-shoes',
+    category: null,
+  },
+  {
+    title: 'Everyday Sneakers',
+    path: '/collections/womens-shoes/everyday-sneakers',
+    collection: 'womens-shoes',
+    category: 'everyday-sneakers',
+  },
+  {
+    title: 'Hi Tops',
+    path: '/collections/womens-shoes/hi-tops',
+    collection: 'womens-shoes',
+    category: 'hi-tops',
+  },
 ];
 
 export const womensCollectionLinks = [
-  { category: 'Featured Collections', path: '/collections/womens/collections' },
+  { title: 'Featured Collections', path: '/collections/womens/collections' },
   {
-    category: 'Denim Collection',
+    title: 'Denim Collection',
     path: '/collections/womens/denim-collection',
     img: denim,
   },
   {
-    category: 'Premium Knitwear',
+    title: 'Premium Knitwear',
     path: '/collections/womens/premium-knitwear',
     img: knits,
   },
