@@ -19,9 +19,16 @@ app.post('/reset-password', resetPassword);
 app.get('/account', firebaseAuth, getAuthenticatedAccount);
 
 // Products routes
-const { getAllShoes, getShoesByCategory } = require('./handlers/products');
+const {
+  getAllShoes,
+  getShoesByCategory,
+  getShoesByColor,
+} = require('./handlers/products');
 
 app.get('/products', getAllShoes);
 app.get('/products-category', getShoesByCategory);
+
+//api/products-color/?collection=mens-shoes&category=hi-tops&colors=black&colors=white
+app.get('/products-color', getShoesByColor);
 
 exports.api = functions.https.onRequest(app);

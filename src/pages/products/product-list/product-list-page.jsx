@@ -10,6 +10,7 @@ import {
 } from '../../../navigation-links/navigation-links';
 
 class ProductListPage extends React.Component {
+  state = {};
   render() {
     const {
       match: { params, path },
@@ -32,12 +33,12 @@ class ProductListPage extends React.Component {
             key={location.key}
             exact
             path={`${path}`}
-            component={ProductList}
+            render={(routeProps) => <ProductList {...routeProps} />}
           />
           <Route
             key={location.key}
             path={`${path}/:category`}
-            component={ProductList}
+            render={(routeProps) => <ProductList {...routeProps} />}
           />
         </Switch>
       </div>

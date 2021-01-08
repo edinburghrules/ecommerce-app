@@ -1,4 +1,8 @@
-import { GET_ALL_PRODUCTS, GET_CATEGORY_PRODUCTS } from '../types';
+import {
+  GET_ALL_PRODUCTS,
+  GET_COLOR_PRODUCTS,
+  GET_CATEGORY_PRODUCTS,
+} from '../types';
 
 const initState = {
   productsList: [],
@@ -11,6 +15,10 @@ const productsReducer = (state = initState, action) => {
         productsList: action.payload,
       };
     case GET_CATEGORY_PRODUCTS:
+      return {
+        productsList: action.payload,
+      };
+    case GET_COLOR_PRODUCTS:
       return {
         productsList: action.payload,
       };

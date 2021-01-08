@@ -1,14 +1,30 @@
 import React from 'react';
 import './filters.scss';
+import { withRouter } from 'react-router-dom';
 
 class Filters extends React.Component {
   state = {
     black: false,
-  };git adc
+  };
+
   handleSelect = (e) => {
-    this.setState((prevState) => ({
-      [e.target.id]: !prevState[e.target.id],
-    }));
+    this.setState(
+      (prevState) => ({
+        [e.target.id]: !prevState[e.target.id],
+      }),
+      () => {
+        if (this.state[e.target.id]) {
+          this.props.history.push({
+            pathname: this.props.location.pathname,
+            search: '?' + new URLSearchParams({ color: e.target.id }),
+          });
+        } else {
+          this.props.history.push({
+            pathname: this.props.match.url,
+          });
+        }
+      }
+    );
   };
   render() {
     return (
@@ -20,9 +36,7 @@ class Filters extends React.Component {
           <div className='filters__color-options'>
             <ul>
               <li>
-                <label
-                  className={this.state.black ? 'active' : ''}
-                >
+                <label className={this.state.black ? 'active' : ''}>
                   <button
                     id='black'
                     onClick={this.handleSelect}
@@ -33,6 +47,20 @@ class Filters extends React.Component {
                     }
                   ></button>
                   Black
+                </label>
+              </li>
+              <li>
+                <label className={this.state.grey ? 'active' : ''}>
+                  <button
+                    id='grey'
+                    onClick={this.handleSelect}
+                    className={
+                      this.state.grey
+                        ? 'filters__color-btn filters__color-btn--grey active'
+                        : 'filters__color-btn filters__color-btn--grey'
+                    }
+                  ></button>
+                  Grey
                 </label>
               </li>
             </ul>
@@ -47,4 +75,4 @@ class Filters extends React.Component {
   }
 }
 
-export default Filters;
+export default withRouter(Filters);

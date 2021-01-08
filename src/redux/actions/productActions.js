@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { GET_ALL_PRODUCTS, GET_CATEGORY_PRODUCTS } from '../types';
+import {
+  GET_ALL_PRODUCTS,
+  GET_CATEGORY_PRODUCTS,
+  GET_COLOR_PRODUCTS,
+} from '../types';
 import {
   startLoadingProducts,
   stopLoadingProducts,
@@ -37,6 +41,27 @@ export const getCategoryProducts = (collection, category) => {
       dispatch(stopLoadingProducts());
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const getColorProducts = (collection, colors, category) => {
+  return async (dispatch) => {
+    try {
+      dispatch(startLoadingProducts());
+      console.log(collection, colors, category);
+      const getColorProductsResponse = await axios.get(
+        category
+          ? `/products-color/?collection=${collection}&category=${category}&colors=${colors}`
+          : `/products-color/?collection=${collection}&colors=${colors}`
+      );
+      dispatch({
+        type: GET_COLOR_PRODUCTS,
+        payload: getColorProductsResponse.data,
+      });
+      dispatch(stopLoadingProducts());
+    } catch (err) {
+      console.errors(err);
     }
   };
 };
