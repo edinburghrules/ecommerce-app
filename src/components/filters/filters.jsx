@@ -1,27 +1,52 @@
 import React from 'react';
 import './filters.scss';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 class Filters extends React.Component {
-  state = {
-    black: false,
-  };
+  state = {};
 
   handleSelect = (e) => {
+    // save color to either true or false
     this.setState(
       (prevState) => ({
         [e.target.id]: !prevState[e.target.id],
       }),
       () => {
+        // if the color we have clicked on is true add or remove search params
+        var paramsArr = [];
+
         if (this.state[e.target.id]) {
+          for (var i in this.state) {
+            if (this.state[i]) {
+              paramsArr = [...paramsArr, i];
+            }
+          }
+          console.log(paramsArr);
           this.props.history.push({
             pathname: this.props.location.pathname,
-            search: '?' + new URLSearchParams({ color: e.target.id }),
+            search: '?' + new URLSearchParams({ colors: paramsArr }),
           });
         } else {
-          this.props.history.push({
-            pathname: this.props.match.url,
-          });
+          const params =
+            this.props.location.search.length > 0
+              ? queryString.parse(this.props.location.search)
+              : false;
+
+          const filteredParamsArr =
+            params &&
+            params.colors.split(',').filter((param) => param !== e.target.id);
+
+          if (filteredParamsArr.length > 0) {
+            this.props.history.push({
+              pathname: this.props.location.pathname,
+              search: '?' + new URLSearchParams({ colors: filteredParamsArr }),
+            });
+          } else {
+            this.props.history.push({
+              pathname: this.props.location.pathname,
+            });
+          }
         }
       }
     );

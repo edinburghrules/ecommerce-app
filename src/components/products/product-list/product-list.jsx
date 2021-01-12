@@ -17,6 +17,7 @@ class ProductList extends React.Component {
       ? this.props.match.params.category
       : false,
     colors: this.props.location.search,
+    parsedColors: [],
   };
 
   componentDidMount = () => {
@@ -28,7 +29,10 @@ class ProductList extends React.Component {
     } = this.props;
     if (colors) {
       const parsedColors = queryString.parse(colors);
-      getColorProducts(collection, parsedColors.color, category);
+      this.setState({
+        parsedColors: parsedColors.colors.split(','),
+      });
+      getColorProducts(collection, parsedColors.colors, category);
     } else {
       if (collection && category) {
         getCategoryProducts(collection, category);
@@ -39,20 +43,18 @@ class ProductList extends React.Component {
   };
 
   render() {
-    const { colors } = this.state;
+    const { parsedColors } = this.state;
     const { products, loading } = this.props;
-
-    const colorOptions = queryString.parse(colors);
 
     if (loading) return <Loading />;
 
     return (
       <div className='product-list'>
         {products &&
-          products.map((product) => (
+          products.map((product, index) => (
             <ProductListItem
-              colorOptions={colorOptions}
-              key={product.id}
+              colorOptions={parsedColors}
+              key={index}
               product={product}
             />
           ))}

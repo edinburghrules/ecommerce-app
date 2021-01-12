@@ -5,16 +5,16 @@ import heartOutline from '../../../assets/heart-outline.png';
 class ProductListItem extends React.Component {
   state = {
     variantIndex: 0,
-    colors: this.props.colorOptions.color
-      ? this.props.colorOptions.color
-      : false,
+    colors: this.props.colorOptions ? this.props.colorOptions : false,
     colorIndex: 0,
   };
 
   componentDidMount = () => {
-    if (this.state.colors) {
+    if (this.state.colors.length > 0) {
       const colorIndex = this.props.product.variants.findIndex((variant) => {
-        return variant.color === this.state.colors;
+        return (
+          variant.color === this.state.colors[this.state.colors.length - 1]
+        );
       });
       this.setState({
         colorIndex,
@@ -28,8 +28,10 @@ class ProductListItem extends React.Component {
       variantIndex: index,
     });
   };
+
   render() {
     const { variantIndex, colorIndex, colors } = this.state;
+
     const {
       product: { name, price, variants },
     } = this.props;

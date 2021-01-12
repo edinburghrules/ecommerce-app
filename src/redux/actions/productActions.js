@@ -49,7 +49,7 @@ export const getColorProducts = (collection, colors, category) => {
   return async (dispatch) => {
     try {
       dispatch(startLoadingProducts());
-      console.log(collection, colors, category);
+      // console.log(colors);
       const getColorProductsResponse = await axios.get(
         category
           ? `/products-color/?collection=${collection}&category=${category}&colors=${colors}`
@@ -61,7 +61,7 @@ export const getColorProducts = (collection, colors, category) => {
       });
       dispatch(stopLoadingProducts());
     } catch (err) {
-      console.errors(err);
+      console.log(err);
     }
   };
 };

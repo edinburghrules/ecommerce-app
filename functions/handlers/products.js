@@ -45,10 +45,14 @@ const getShoesByCategory = async (req, res) => {
 
 const getShoesByColor = async (req, res) => {
   const collection = req.query.collection;
-  let category = req.query.category !== 'false' ? req.query.category : false;
-  let colors = Array.isArray(req.query.colors)
-    ? req.query.colors
-    : [req.query.colors];
+  let category = req.query.category === undefined ? false : req.query.category;
+  let colors = req.query.colors;
+
+  console.log(category);
+
+  colors = colors.split(',');
+
+  // colors= ['a color', 'a color'] etc.
 
   const productsRef = db.collection(collection);
   const products = [];
