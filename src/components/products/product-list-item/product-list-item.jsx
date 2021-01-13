@@ -11,7 +11,7 @@ class ProductListItem extends React.Component {
 
   componentDidMount = () => {
     if (this.state.colors.length > 0) {
-      // Create color index to use to show selected color image and details
+      // Create color index to show selected color image and details
       const colorIndex = this.props.product.variants.findIndex((variant) => {
         return (
           variant.color === this.state.colors[this.state.colors.length - 1]
@@ -23,10 +23,17 @@ class ProductListItem extends React.Component {
     }
   };
 
+  // Select variant if color filter applied or not  
   handleVariantSelect = (index) => {
-    this.setState({
-      variantIndex: index,
-    });
+    if (this.state.colors.length > 0) {
+      this.setState({
+        colorIndex: index,
+      });
+    } else {
+      this.setState({
+        variantIndex: index,
+      });
+    }
   };
 
   render() {
@@ -36,6 +43,7 @@ class ProductListItem extends React.Component {
       product: { name, price, variants },
     } = this.props;
     const renderVariants = (variant, index) => {
+      console.log(colors);
       const renderBy = colors.length > 0 ? colorIndex : variantIndex;
       if (renderBy === index) {
         return (
@@ -123,6 +131,8 @@ class ProductListItem extends React.Component {
                       {renderVariants(variant, index)}
                     </React.Fragment>
                   );
+                } else {
+                  return null;
                 }
               })}
           </div>
