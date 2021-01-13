@@ -7,36 +7,28 @@ class Filters extends React.Component {
   state = { colors: [] };
 
   handleSelect = (e) => {
-    // save color to either true or false
-    if (this.state.colors.includes(e.target.id)) {
+    const { history, location } = this.props;
+    const selectedColor = e.target.id;
+    // If color has been previously selected
+    if (this.state.colors.includes(selectedColor)) {
       this.setState(
         (prevState) => ({
           colors: [
-            ...prevState.colors.filter((color) => color !== e.target.id),
+            ...prevState.colors.filter((color) => color !== selectedColor),
           ],
         }),
         () => {
-          paramsHandler(
-            this.state.colors,
-            this.props.history,
-            this.props.location,
-            e.target.id
-          );
+          paramsHandler(this.state.colors, history, location, selectedColor);
         }
       );
     } else {
+      // If colr has NOT been previously selected
       this.setState(
         (prevState) => ({
-          colors: [...prevState.colors, e.target.id],
+          colors: [...prevState.colors, selectedColor],
         }),
         () => {
-          // if the color we have clicked on is true add or remove search params
-          paramsHandler(
-            this.state.colors,
-            this.props.history,
-            this.props.location,
-            e.target.id
-          );
+          paramsHandler(this.state.colors, history, location, selectedColor);
         }
       );
     }
