@@ -11,6 +11,7 @@ class ProductListItem extends React.Component {
 
   componentDidMount = () => {
     if (this.state.colors.length > 0) {
+      // Create color index to use to show selected color image and details
       const colorIndex = this.props.product.variants.findIndex((variant) => {
         return (
           variant.color === this.state.colors[this.state.colors.length - 1]
@@ -24,7 +25,6 @@ class ProductListItem extends React.Component {
 
   handleVariantSelect = (index) => {
     this.setState({
-      colors: false,
       variantIndex: index,
     });
   };
@@ -36,7 +36,7 @@ class ProductListItem extends React.Component {
       product: { name, price, variants },
     } = this.props;
     const renderVariants = (variant, index) => {
-      const renderBy = colors ? colorIndex : variantIndex;
+      const renderBy = colors.length > 0 ? colorIndex : variantIndex;
       if (renderBy === index) {
         return (
           <div className='product-list-item__variant-sizes'>
@@ -86,25 +86,45 @@ class ProductListItem extends React.Component {
           <p className='product-list-item__price'>£{price}</p>
           <div className='product-list-item__variants'>
             {variants &&
-              variants.map((variant, index) => (
-                <React.Fragment key={index}>
-                  <img
-                    className={
-                      colors
-                        ? colorIndex === index
-                          ? 'product-list-item__variant-img--active'
-                          : 'product-list-item__variant-img'
-                        : variantIndex === index
-                        ? 'product-list-item__variant-img--active'
-                        : 'product-list-item__variant-img'
-                    }
-                    onClick={() => this.handleVariantSelect(index)}
-                    src={variant.image}
-                    alt={`${variant.name}-${variant.color}`}
-                  />
-                  {renderVariants(variant, index)}
-                </React.Fragment>
-              ))}
+              variants.map((variant, index) => {
+                if (colors && colors.includes(variant.color)) {
+                  return (
+                    <React.Fragment key={index}>
+                      <img
+                        className={
+                          colors
+                            ? colorIndex === index
+                              ? 'product-list-item__variant-img--active'
+                              : 'product-list-item__variant-img'
+                            : variantIndex === index
+                            ? 'product-list-item__variant-img--active'
+                            : 'product-list-item__variant-img'
+                        }
+                        onClick={() => this.handleVariantSelect(index)}
+                        src={variant.image}
+                        alt={`${variant.name}-${variant.color}`}
+                      />
+                      {renderVariants(variant, index)}
+                    </React.Fragment>
+                  );
+                } else if (colors.length === 0) {
+                  return (
+                    <React.Fragment key={index}>
+                      <img
+                        className={
+                          variantIndex === index
+                            ? 'product-list-item__variant-img--active'
+                            : 'product-list-item__variant-img'
+                        }
+                        onClick={() => this.handleVariantSelect(index)}
+                        src={variant.image}
+                        alt={`${variant.name}-${variant.color}`}
+                      />
+                      {renderVariants(variant, index)}
+                    </React.Fragment>
+                  );
+                }
+              })}
           </div>
         </div>
       </div>

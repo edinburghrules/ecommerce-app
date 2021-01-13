@@ -1,55 +1,45 @@
 import React from 'react';
 import './filters.scss';
 import { withRouter } from 'react-router-dom';
-import queryString from 'query-string';
+import { paramsHandler } from './filtersUtils';
 
 class Filters extends React.Component {
-  state = {};
+  state = { colors: [] };
 
   handleSelect = (e) => {
     // save color to either true or false
-    this.setState(
-      (prevState) => ({
-        [e.target.id]: !prevState[e.target.id],
-      }),
-      () => {
-        // if the color we have clicked on is true add or remove search params
-        var paramsArr = [];
-
-        if (this.state[e.target.id]) {
-          for (var i in this.state) {
-            if (this.state[i]) {
-              paramsArr = [...paramsArr, i];
-            }
-          }
-          console.log(paramsArr);
-          this.props.history.push({
-            pathname: this.props.location.pathname,
-            search: '?' + new URLSearchParams({ colors: paramsArr }),
-          });
-        } else {
-          const params =
-            this.props.location.search.length > 0
-              ? queryString.parse(this.props.location.search)
-              : false;
-
-          const filteredParamsArr =
-            params &&
-            params.colors.split(',').filter((param) => param !== e.target.id);
-
-          if (filteredParamsArr.length > 0) {
-            this.props.history.push({
-              pathname: this.props.location.pathname,
-              search: '?' + new URLSearchParams({ colors: filteredParamsArr }),
-            });
-          } else {
-            this.props.history.push({
-              pathname: this.props.location.pathname,
-            });
-          }
+    if (this.state.colors.includes(e.target.id)) {
+      this.setState(
+        (prevState) => ({
+          colors: [
+            ...prevState.colors.filter((color) => color !== e.target.id),
+          ],
+        }),
+        () => {
+          paramsHandler(
+            this.state.colors,
+            this.props.history,
+            this.props.location,
+            e.target.id
+          );
         }
-      }
-    );
+      );
+    } else {
+      this.setState(
+        (prevState) => ({
+          colors: [...prevState.colors, e.target.id],
+        }),
+        () => {
+          // if the color we have clicked on is true add or remove search params
+          paramsHandler(
+            this.state.colors,
+            this.props.history,
+            this.props.location,
+            e.target.id
+          );
+        }
+      );
+    }
   };
   render() {
     return (
@@ -61,12 +51,16 @@ class Filters extends React.Component {
           <div className='filters__color-options'>
             <ul>
               <li>
-                <label className={this.state.black ? 'active' : ''}>
+                <label
+                  className={
+                    this.state.colors.includes('black') ? 'active' : ''
+                  }
+                >
                   <button
                     id='black'
                     onClick={this.handleSelect}
                     className={
-                      this.state.black
+                      this.state.colors.includes('black')
                         ? 'filters__color-btn filters__color-btn--black active'
                         : 'filters__color-btn filters__color-btn--black'
                     }
@@ -75,12 +69,14 @@ class Filters extends React.Component {
                 </label>
               </li>
               <li>
-                <label className={this.state.grey ? 'active' : ''}>
+                <label
+                  className={this.state.colors.includes('grey') ? 'active' : ''}
+                >
                   <button
                     id='grey'
                     onClick={this.handleSelect}
                     className={
-                      this.state.grey
+                      this.state.colors.includes('grey')
                         ? 'filters__color-btn filters__color-btn--grey active'
                         : 'filters__color-btn filters__color-btn--grey'
                     }

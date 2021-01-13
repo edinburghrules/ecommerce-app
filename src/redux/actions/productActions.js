@@ -49,7 +49,6 @@ export const getColorProducts = (collection, colors, category) => {
   return async (dispatch) => {
     try {
       dispatch(startLoadingProducts());
-      // console.log(colors);
       const getColorProductsResponse = await axios.get(
         category
           ? `/products-color/?collection=${collection}&category=${category}&colors=${colors}`
