@@ -8,6 +8,7 @@ class FilterCategories extends React.Component {
     currentCategory: this.props.options[0].title,
   };
   setPathHeader = (currentCategory) => {
+    this.props.clearFilters();
     this.setState({ currentCategory });
   };
   render() {

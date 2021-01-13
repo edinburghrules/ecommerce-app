@@ -1,7 +1,6 @@
 import React from 'react';
 import './product-list-page.scss';
 import { Route, Switch } from 'react-router-dom';
-import FilterCategories from '../../../components/fiter-categories/filter-categories';
 import Filters from '../../../components/filters/filters.jsx';
 import ProductList from '../../../components/products/product-list/product-list';
 import {
@@ -10,7 +9,6 @@ import {
 } from '../../../navigation-links/navigation-links';
 
 class ProductListPage extends React.Component {
-  state = {};
   render() {
     const {
       match: { params, path },
@@ -25,8 +23,7 @@ class ProductListPage extends React.Component {
     return (
       <div className='product-list-page'>
         <div className='product-list-page__filters'>
-          <FilterCategories options={options} />
-          <Filters />
+          <Filters options={options} />
         </div>
         <Switch>
           <Route
