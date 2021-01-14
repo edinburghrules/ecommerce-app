@@ -23,7 +23,7 @@ class ProductListItem extends React.Component {
     }
   };
 
-  // Select variant if color filter applied or not  
+  // Select variant if color filter applied or not
   handleVariantSelect = (index) => {
     if (this.state.colors.length > 0) {
       this.setState({
@@ -43,7 +43,6 @@ class ProductListItem extends React.Component {
       product: { name, price, variants },
     } = this.props;
     const renderVariants = (variant, index) => {
-      console.log(colors);
       const renderBy = colors.length > 0 ? colorIndex : variantIndex;
       if (renderBy === index) {
         return (

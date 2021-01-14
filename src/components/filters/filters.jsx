@@ -1,16 +1,55 @@
 import React from 'react';
 import './filters.scss';
 import { withRouter } from 'react-router-dom';
-import { urlParamsHandler } from './filtersUtils';
+import {
+  colorsUrlParamsHandler,
+  bestForUrlParamsHandler,
+} from './filtersUtils';
 import FilterCategories from '../fiter-categories/filter-categories';
+import ColorFilters from './colors';
+import BestForFilters from './bestfor';
 
 class Filters extends React.Component {
-  state = { colors: [] };
+  state = { colors: [], bestFors: [] };
 
   clearFilters = () => {
     this.setState({
       colors: [],
+      bestFors: [],
     });
+  };
+
+  handleCheck = (e) => {
+    const { history, location } = this.props;
+    const selectedBestFor = e.target.id;
+    const checked = e.target.checked;
+    if (checked) {
+      this.setState(
+        (prevState) => ({
+          ...prevState,
+          bestFors: [selectedBestFor, ...prevState.bestFors],
+        }),
+        () => {
+          // ADD FILTERS TO URL
+          bestForUrlParamsHandler(this.state.bestFors, history, location);
+        }
+      );
+    } else {
+      this.setState(
+        (prevState) => ({
+          prevState,
+          bestFors: [
+            ...prevState.bestFors.filter(
+              (bestFor) => bestFor !== selectedBestFor
+            ),
+          ],
+        }),
+        () => {
+          // ADD FILTERS TO URL
+          bestForUrlParamsHandler(this.state.bestFors, history, location);
+        }
+      );
+    }
   };
 
   handleSelect = (e) => {
@@ -25,7 +64,11 @@ class Filters extends React.Component {
           ],
         }),
         () => {
-          urlParamsHandler(this.state.colors, history, location, selectedColor);
+          colorsUrlParamsHandler(
+            { colors: this.state.colors, selectedColor },
+            history,
+            location
+          );
         }
       );
     } else {
@@ -35,7 +78,11 @@ class Filters extends React.Component {
           colors: [...prevState.colors, selectedColor],
         }),
         () => {
-          urlParamsHandler(this.state.colors, history, location, selectedColor);
+          colorsUrlParamsHandler(
+            { colors: this.state.colors, selectedColor },
+            history,
+            location
+          );
         }
       );
     }
@@ -54,49 +101,18 @@ class Filters extends React.Component {
             <hr />
             <p>COLOURS</p>
             <div className='filters__color-options'>
-              <ul>
-                <li>
-                  <label
-                    className={
-                      this.state.colors.includes('black') ? 'active' : ''
-                    }
-                  >
-                    <button
-                      id='black'
-                      onClick={this.handleSelect}
-                      className={
-                        this.state.colors.includes('black')
-                          ? 'filters__color-btn filters__color-btn--black active'
-                          : 'filters__color-btn filters__color-btn--black'
-                      }
-                    ></button>
-                    Black
-                  </label>
-                </li>
-                <li>
-                  <label
-                    className={
-                      this.state.colors.includes('grey') ? 'active' : ''
-                    }
-                  >
-                    <button
-                      id='grey'
-                      onClick={this.handleSelect}
-                      className={
-                        this.state.colors.includes('grey')
-                          ? 'filters__color-btn filters__color-btn--grey active'
-                          : 'filters__color-btn filters__color-btn--grey'
-                      }
-                    ></button>
-                    Grey
-                  </label>
-                </li>
-              </ul>
+              <ColorFilters
+                handleSelect={this.handleSelect}
+                selectedColors={this.state.colors}
+              />
             </div>
           </div>
-          <div className='filters__sizes'>
+          <div className='filters__bestfor'>
             <hr />
             <p>BEST FOR</p>
+            <div className='filters__best-for-options'>
+              <BestForFilters handleCheck={this.handleCheck} />
+            </div>
           </div>
         </div>
       </React.Fragment>
