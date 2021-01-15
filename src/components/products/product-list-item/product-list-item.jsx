@@ -99,11 +99,7 @@ class ProductListItem extends React.Component {
                     <React.Fragment key={index}>
                       <img
                         className={
-                          colors
-                            ? colorIndex === index
-                              ? 'product-list-item__variant-img--active'
-                              : 'product-list-item__variant-img'
-                            : variantIndex === index
+                          colors && colorIndex === index
                             ? 'product-list-item__variant-img--active'
                             : 'product-list-item__variant-img'
                         }
@@ -114,7 +110,7 @@ class ProductListItem extends React.Component {
                       {renderVariants(variant, index)}
                     </React.Fragment>
                   );
-                } else if (colors.length === 0) {
+                } else if (!colors) {
                   return (
                     <React.Fragment key={index}>
                       <img
