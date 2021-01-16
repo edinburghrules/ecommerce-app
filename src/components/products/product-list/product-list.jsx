@@ -7,7 +7,7 @@ import Loading from '../../loading/loading';
 import {
   getAllProducts,
   getCategoryProducts,
-  getColorProducts,
+  getFilteredProducts,
 } from '../../../redux/actions/productActions';
 
 class ProductList extends React.Component {
@@ -20,19 +20,19 @@ class ProductList extends React.Component {
       ? queryString.parse(this.props.location.search).colors
       : '',
     bestFor: this.props.location.search
-      ? queryString.parse(this.props.location.search).bestFor
+      ? queryString.parse(this.props.location.search).bestfor
       : '',
   };
 
   componentDidMount = () => {
-    const { collection, category, colors } = this.state;
+    const { collection, category, colors, bestFor } = this.state;
     const {
       getAllProducts,
       getCategoryProducts,
-      getColorProducts,
+      getFilteredProducts,
     } = this.props;
-    if (colors) {
-      getColorProducts(collection, colors, category);
+    if (colors || bestFor) {
+      getFilteredProducts(collection, colors, bestFor, category);
     } else {
       if (collection && category) {
         getCategoryProducts(collection, category);
@@ -73,7 +73,7 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = {
   getAllProducts,
   getCategoryProducts,
-  getColorProducts,
+  getFilteredProducts,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(ProductList);

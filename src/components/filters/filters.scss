@@ -3,7 +3,6 @@
 
 .filters {
   font-family: $Montserrat;
-  width: 100%;
   margin-top: 10rem;
   padding-left: 2rem;
 }
@@ -16,23 +15,26 @@
   display: block;
   font-size: $xsmall;
   font-weight: $black;
-  margin: 2rem 0 !important;
+  margin: 4rem 0 1rem 0 !important;
 }
 
 .filters__color-options ul {
   list-style: none;
 }
 
-.filters__color-options label {
-  display: flex;
+.filters__color-options label,
+.filters__bestfor label {
+  display: inline-flex;
   align-items: center;
+  justify-content: flex-start;
   font-weight: $semiNormal;
   font-size: $xxsmall;
   margin-top: 2rem;
   cursor: pointer;
 }
 
-.filters__color-options label.active {
+.filters__color-options label.active,
+.filters__bestfor label.active {
   font-weight: $black;
 }
 
@@ -79,4 +81,50 @@
 
 .filters__color-btn:focus {
   outline: none;
+}
+
+.filters__bestfor hr {
+  margin-top: 4rem;
+}
+
+.filters__best-for-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filters__bestfor input[type='checkbox'] {
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+}
+
+.filters__bestfor input[type='checkbox']:checked + span .checked {
+  opacity: 1;
+}
+
+.filters__bestfor span {
+  display: flex;
+}
+
+.filters__bestfor span::after {
+  content: '';
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid #ccc;
+  margin-right: 1rem;
+}
+
+.filters__bestfor .hover-checked,
+.filters__bestfor .checked {
+  position: absolute;
+  height: 2rem;
+  width: 2rem;
+  opacity: 0;
+}
+
+.filters__bestfor label:hover {
+  & .hover-checked {
+    opacity: 1;
+  }
 }

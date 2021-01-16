@@ -37,60 +37,111 @@ const getShoesByCategory = async (req, res) => {
   }
 };
 
-// 1. get collection e.g. mens-shoes with all shoes that match color  .../api/products-category/?collection=mens-shoes&color=white&color=black
-// 2. get collection e.g. mens-shoes with category e.g. hi-tops that match color .../api/products-category/?collection=mens-shoes&category=hi-tops&color=white
-// collection parameter is needed, category is optional, colors is an object
-
-// `/products-color/?collection=${collection}&colors=${colors}`
-
-const getShoesByColor = async (req, res) => {
+const getShoesByFilter = async (req, res) => {
   const collection = req.query.collection;
-  let category = req.query.category === undefined ? false : req.query.category;
-  let colors = req.query.colors;
+  let category = req.query.category ? req.query.category : false;
+  let colors = req.query.colors ? req.query.colors : false;
+  let bestFor = req.query.bestfor ? req.query.bestfor : false;
 
-  console.log(category);
+  console.log('COLORS:', colors);
+  console.log('BESTFOR:', bestFor);
 
-  colors = colors.split(',');
+  colors = colors && colors.split(',');
+  bestFor = bestFor && bestFor.split(',');
 
-  // colors= ['a color', 'a color'] etc.
+  console.log('COLORS:', colors);
+  console.log('BESTFOR:', bestFor);
 
   const productsRef = db.collection(collection);
-  const products = [];
+  let products = [];
 
-  // if we have category and colors
-  if (category && colors) {
-    try {
-      const querySnapshot = await productsRef
-        .where('category', '==', category)
-        .where('colors', 'array-contains-any', colors)
-        .get();
+  // Queries
+  const categoryWithColors = productsRef
+    .where('category', '==', category)
+    .where('colors', 'array-contains-any', colors);
 
-      querySnapshot.forEach((doc) => {
-        products.push(doc.data());
-      });
+  const categoryWithBestFor = productsRef
+    .where('category', '==', category)
+    .where('bestfor', 'array-contains-any', bestFor);
 
-      return res.json(products);
-    } catch (err) {
-      console.error(err);
-      return res.status(400).json(err);
+  const withColors = productsRef.where('colors', 'array-contains-any', colors);
+
+  const withBestFor = productsRef.where(
+    'bestfor',
+    'array-contains-any',
+    bestFor
+  );
+
+  // Return products
+  let querySnapshot;
+
+  if (category) {
+    if (colors && bestFor) {
+      try {
+        querySnapshot = await categoryWithColors.get();
+      } catch (err) {
+        console.log(err);
+        return res.status(400).json(err);
+      }
+    } else if (bestFor) {
+      try {
+        querySnapshot = await categoryWithBestFor.get();
+      } catch (err) {
+        console.error(err);
+        return res.status(400).json(err);
+      }
+    } else if (colors) {
+      try {
+        querySnapshot = await categoryWithColors.get();
+      } catch (err) {
+        console.error(err);
+        return res.status(400).json(err);
+      }
     }
-  } else if (colors) {
-    try {
-      const querySnapshot = await productsRef
-        .where('colors', 'array-contains-any', colors)
-        .get();
-
-      querySnapshot.forEach((doc) => {
-        products.push(doc.data());
-      });
-
-      return res.json(products);
-    } catch (err) {
-      console.error(err);
-      return res.status(400).json(err);
+  } else {
+    if (colors && bestFor) {
+      try {
+        querySnapshot = await withColors.get();
+      } catch (err) {
+        console.log(err);
+        return res.status(400).json(err);
+      }
+    } else if (bestFor) {
+      try {
+        querySnapshot = await withBestFor.get();
+      } catch (err) {
+        console.error(err);
+        return res.status(400).json(err);
+      }
+    } else if (colors) {
+      try {
+        querySnapshot = await withColors.get();
+      } catch (err) {
+        console.error(err);
+        return res.status(400).json(err);
+      }
     }
   }
-  return res.status(400).json(products);
+
+  if (colors && bestFor) {
+    querySnapshot.forEach((doc) => {
+      products.push(doc.data());
+    });
+
+    products = products.filter((product) => {
+      return product.bestfor.some((bestfor) => bestFor.includes(bestfor));
+    });
+
+    return res.json(products);
+  }
+
+  querySnapshot.forEach((doc) => {
+    products.push(doc.data());
+  });
+
+  console.log(products);
+
+  return res.json(products);
 };
 
-module.exports = { getAllShoes, getShoesByCategory, getShoesByColor };
+module.exports = { getAllShoes, getShoesByCategory, getShoesByFilter };

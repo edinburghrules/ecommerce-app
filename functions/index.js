@@ -22,13 +22,13 @@ app.get('/account', firebaseAuth, getAuthenticatedAccount);
 const {
   getAllShoes,
   getShoesByCategory,
-  getShoesByColor,
+  getShoesByFilter,
 } = require('./handlers/products');
 
 app.get('/products', getAllShoes);
 app.get('/products-category', getShoesByCategory);
 
 //api/products-color/?collection=mens-shoes&category=hi-tops&colors=black&colors=white
-app.get('/products-color', getShoesByColor);
+app.get('/filtered-products', getShoesByFilter);
 
 exports.api = functions.https.onRequest(app);

@@ -7,7 +7,7 @@ export const LOADING_ACCOUNT = 'LOADING_ACCOUNT';
 // Products reducer action types
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 export const GET_CATEGORY_PRODUCTS = 'GET_CATEGORY_PRODUCTS';
-export const GET_COLOR_PRODUCTS = 'GET_COLOR_PRODUCTS';
+export const GET_FILTERED_PRODUCTS = 'GET_FILTERED_PRODUCTS';
 
 // Async reducer action types
 export const START_LOADING_PRODUCTS = 'START_LOADING_PRODUCTS';

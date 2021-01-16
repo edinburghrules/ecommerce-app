@@ -3,7 +3,7 @@ import queryString from 'query-string';
 export const colorsUrlParamsHandler = (colorFilters, history, location) => {
   const colorParamsArr = [...colorFilters.colors];
   const bestForQueryString = location.search
-    ? queryString.parse(location.search).bestFor
+    ? queryString.parse(location.search).bestfor
     : '';
 
   // If the colorParamsArr includes the selected color, add the colorParamsArr as url query
@@ -14,7 +14,7 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
         '?' +
         new URLSearchParams({
           colors: colorParamsArr,
-          ...(bestForQueryString && { bestFor: bestForQueryString.split(',') }),
+          ...(bestForQueryString && { bestfor: bestForQueryString.split(',') }),
         }),
     });
   } else {
@@ -38,13 +38,21 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
           new URLSearchParams({
             colors: filteredParamsArr,
             ...(bestForQueryString && {
-              bestFor: bestForQueryString.split(','),
+              bestfor: bestForQueryString.split(','),
             }),
           }),
       });
     } else {
       history.push({
         pathname: location.pathname,
+        search: bestForQueryString
+          ? '?' +
+            new URLSearchParams({
+              ...(bestForQueryString && {
+                bestfor: bestForQueryString.split(','),
+              }),
+            })
+          : '',
       });
     }
   }
@@ -55,15 +63,27 @@ export const bestForUrlParamsHandler = (bestForFilters, history, location) => {
   const colorQueryString = location.search
     ? queryString.parse(location.search).colors
     : '';
-  history.push({
-    pathname: location.pathname,
-    search:
-      '?' +
-      new URLSearchParams({
-        bestFor: bestForParamsArr,
-        ...(colorQueryString && { colors: colorQueryString.split(',') }),
-      }),
-  });
+  if (bestForFilters.length > 0) {
+    history.push({
+      pathname: location.pathname,
+      search:
+        '?' +
+        new URLSearchParams({
+          bestfor: bestForParamsArr,
+          ...(colorQueryString && { colors: colorQueryString.split(',') }),
+        }),
+    });
+  } else {
+    history.push({
+      pathname: location.pathname,
+      search: colorQueryString
+        ? '?' +
+          new URLSearchParams({
+            ...(colorQueryString && { colors: colorQueryString.split(',') }),
+          })
+        : '',
+    });
+  }
 };
 
 export const captialiseFirstLetter = (string) => {

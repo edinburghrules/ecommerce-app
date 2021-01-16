@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORY_PRODUCTS,
-  GET_COLOR_PRODUCTS,
+  GET_FILTERED_PRODUCTS,
 } from '../types';
 import {
   startLoadingProducts,
@@ -45,18 +45,22 @@ export const getCategoryProducts = (collection, category) => {
   };
 };
 
-export const getColorProducts = (collection, colors, category) => {
+export const getFilteredProducts = (collection, colors, bestFor, category) => {
   return async (dispatch) => {
     try {
       dispatch(startLoadingProducts());
-      const getColorProductsResponse = await axios.get(
-        category
-          ? `/products-color/?collection=${collection}&category=${category}&colors=${colors}`
-          : `/products-color/?collection=${collection}&colors=${colors}`
+
+      const getFilteredProductsResponse = await axios.get(
+        `/filtered-products/?collection=${collection}${
+          category ? `&category=${category}` : ''
+        }${colors ? `&colors=${colors}` : ''}${
+          bestFor ? `&bestfor=${bestFor}` : ''
+        }`
       );
+
       dispatch({
-        type: GET_COLOR_PRODUCTS,
-        payload: getColorProductsResponse.data,
+        type: GET_FILTERED_PRODUCTS,
+        payload: getFilteredProductsResponse.data,
       });
       dispatch(stopLoadingProducts());
     } catch (err) {
