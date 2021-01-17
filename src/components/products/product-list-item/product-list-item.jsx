@@ -36,6 +36,11 @@ class ProductListItem extends React.Component {
     }
   };
 
+  handleAddFavourite = () => {
+    // if color filter is applied use colorIndex but use variantIndex otherwise
+    console.log(this.props.product);
+  };
+
   render() {
     const { variantIndex, colorIndex, colors } = this.state;
 
@@ -81,11 +86,16 @@ class ProductListItem extends React.Component {
           />
           <div className='product-list-item__content-header'>
             <h1 className='product-list-item__title'>{name}</h1>
-            <img
-              className='product-list-item__favourite'
-              src={heartOutline}
-              alt='favourite'
-            />
+            <button
+              onClick={this.handleAddFavourite}
+              className='product-list-item__add-favourite-btn'
+            >
+              <img
+                className='product-list-item__favourite'
+                src={heartOutline}
+                alt='favourite'
+              />
+            </button>
           </div>
           <p className='product-list-item__variant'>
             {colors ? variants[colorIndex].color : variants[variantIndex].color}

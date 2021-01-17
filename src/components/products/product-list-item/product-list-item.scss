@@ -42,6 +42,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .product-list-item__title {
@@ -57,10 +58,14 @@
   margin-top: 1rem;
 }
 
+.product-list-item__add-favourite-btn {
+  all: unset;
+  margin-right: 0.5rem;
+}
+
 img.product-list-item__favourite {
-  height: 1.5rem;
-  width: 1.5rem;
-  transform: translateY(-4px);
+  height: 2rem;
+  width: 2rem;
 }
 
 .product-list-item__price {
