@@ -125,7 +125,7 @@ const getShoesByFilter = async (req, res) => {
 
   if (colors && bestFor) {
     querySnapshot.forEach((doc) => {
-      products.push(doc.data());
+      products.push({ id: doc.id, ...doc.data() });
     });
 
     products = products.filter((product) => {
@@ -136,7 +136,7 @@ const getShoesByFilter = async (req, res) => {
   }
 
   querySnapshot.forEach((doc) => {
-    products.push(doc.data());
+    products.push({ id: doc.id, ...doc.data() });
   });
 
   console.log(products);

@@ -4,6 +4,10 @@ export const SET_UNAUTHENTICATED = 'SET_UNAUTHENTICATED';
 export const SET_ACCOUNT = 'SET_ACCOUNT';
 export const LOADING_ACCOUNT = 'LOADING_ACCOUNT';
 
+// Favourites reducer action types
+export const SET_FAVOURITES = 'SET_FAVOURITES';
+export const UNSET_FAVOURITES = 'UNSET_FAVOURITES';
+
 // Products reducer action types
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 export const GET_CATEGORY_PRODUCTS = 'GET_CATEGORY_PRODUCTS';

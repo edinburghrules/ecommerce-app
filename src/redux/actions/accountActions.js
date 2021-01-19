@@ -1,5 +1,6 @@
 import { SET_AUTHENTICATED, SET_UNAUTHENTICATED } from '../types';
 import axios from 'axios';
+import { getFavouriteProducts } from './favouriteActions';
 
 const setAuthorizationHeader = (token) => {
   const firebaseToken = `Bearer ${token}`;
@@ -13,6 +14,7 @@ export const signIn = (signInData, history) => {
       const signInResponse = await axios.post('/signin', signInData);
       setAuthorizationHeader(signInResponse.data);
       dispatch(getAccountData());
+      dispatch(getFavouriteProducts());
       history.push('/');
     } catch (err) {
       return err.response.data;
@@ -34,6 +36,7 @@ export const register = (registerData, history) => {
       const registerResponse = await axios.post('/register', registerData);
       setAuthorizationHeader(registerResponse.data);
       dispatch(getAccountData());
+      dispatch(getFavouriteProducts());
       history.push('/');
     } catch (err) {
       return err.response.data;

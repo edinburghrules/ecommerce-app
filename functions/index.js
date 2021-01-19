@@ -18,6 +18,12 @@ app.post('/signin', signIn);
 app.post('/reset-password', resetPassword);
 app.get('/account', firebaseAuth, getAuthenticatedAccount);
 
+// Favourite routes
+const { getFavourites, addFavourite } = require('./handlers/favourites');
+
+app.get('/get-favourites', firebaseAuth, getFavourites);
+app.post('/add-favourite', firebaseAuth, addFavourite);
+
 // Products routes
 const {
   getAllShoes,
@@ -27,8 +33,6 @@ const {
 
 app.get('/products', getAllShoes);
 app.get('/products-category', getShoesByCategory);
-
-//api/products-color/?collection=mens-shoes&category=hi-tops&colors=black&colors=white
 app.get('/filtered-products', getShoesByFilter);
 
 exports.api = functions.https.onRequest(app);
