@@ -1,4 +1,5 @@
 import React from 'react';
+import './favourite.scss';
 import heartOutline from '../../../assets/heart-outline.png';
 import heartFilled from '../../../assets/heart-filled.png';
 import { connect } from 'react-redux';
@@ -67,13 +68,14 @@ class Favourite extends React.Component {
 
   render() {
     const { isFavourited } = this.state;
+    const { isSelected } = this.props;
     return (
       <button
         onClick={this.handleAddFavourite}
-        className='product-list-item__add-favourite-btn'
+        className={isSelected ? 'favourite__btn favourite__btn--active' : 'favourite__btn'}
       >
         <img
-          className='product-list-item__favourite'
+          className='favourite__img'
           src={isFavourited ? heartFilled : heartOutline}
           alt='favourite'
         />

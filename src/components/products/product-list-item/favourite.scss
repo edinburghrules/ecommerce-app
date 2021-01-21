@@ -1,0 +1,21 @@
+.favourite__btn {
+  all: unset;
+  margin-right: 0.5rem;
+  display: none;
+  position: absolute;
+  top: -8rem;
+  right: 0;
+}
+
+.favourite__btn:focus {
+  outline: none;
+}
+
+.favourite__btn--active {
+  display: block;
+}
+
+.favourite__img {
+  height: 2rem;
+  width: 2rem;
+}

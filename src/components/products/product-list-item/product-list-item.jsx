@@ -94,6 +94,7 @@ class ProductListItem extends React.Component {
                       <Favourite
                         product={{ id, name, price }}
                         variant={variant}
+                        isSelected={colorIndex === index}
                       />
                       <img
                         className={
@@ -114,6 +115,7 @@ class ProductListItem extends React.Component {
                       <Favourite
                         product={{ id, name, price }}
                         variant={variant}
+                        isSelected={variantIndex === index}
                       />
                       <img
                         className={
