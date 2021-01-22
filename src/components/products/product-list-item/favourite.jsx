@@ -44,7 +44,6 @@ class Favourite extends React.Component {
       }
     } else {
       if (prevProps.authenticated !== this.props.authenticated) {
-        console.log('signed out');
         this.setState({
           isFavourited: getFavouritesFromLocalStorage(
             'favourites',
