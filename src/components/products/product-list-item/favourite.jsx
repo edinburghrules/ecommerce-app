@@ -36,10 +36,25 @@ class Favourite extends React.Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.isFavourite !== this.props.isFavourite) {
-      this.setState({
-        isFavourited: this.props.isFavourite,
-      });
+    if (this.props.authenticated) {
+      if (prevProps.isFavourite !== this.props.isFavourite) {
+        this.setState({
+          isFavourited: this.props.isFavourite,
+        });
+      }
+    } else {
+      if (prevProps.authenticated !== this.props.authenticated) {
+        console.log('signed out');
+        this.setState({
+          isFavourited: getFavouritesFromLocalStorage(
+            'favourites',
+            this.props.product.id,
+            this.props.variant.color
+          )
+            ? true
+            : false,
+        });
+      }
     }
   };
 

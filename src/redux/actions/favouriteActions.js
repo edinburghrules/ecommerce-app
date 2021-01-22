@@ -2,7 +2,6 @@ import axios from 'axios';
 import { SET_FAVOURITES } from '../types';
 
 export const getFavouriteProducts = () => {
-  console.log('getting faves');
   return async (dispatch) => {
     try {
       const getFavouriteProductsResponse = await axios.get('/get-favourites');
