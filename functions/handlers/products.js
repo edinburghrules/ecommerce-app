@@ -43,14 +43,8 @@ const getShoesByFilter = async (req, res) => {
   let colors = req.query.colors ? req.query.colors : false;
   let bestFor = req.query.bestfor ? req.query.bestfor : false;
 
-  console.log('COLORS:', colors);
-  console.log('BESTFOR:', bestFor);
-
   colors = colors && colors.split(',');
   bestFor = bestFor && bestFor.split(',');
-
-  console.log('COLORS:', colors);
-  console.log('BESTFOR:', bestFor);
 
   const productsRef = db.collection(collection);
   let products = [];
@@ -138,8 +132,6 @@ const getShoesByFilter = async (req, res) => {
   querySnapshot.forEach((doc) => {
     products.push({ id: doc.id, ...doc.data() });
   });
-
-  console.log(products);
 
   return res.json(products);
 };

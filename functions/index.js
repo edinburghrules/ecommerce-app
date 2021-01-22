@@ -25,7 +25,7 @@ const {
   removeFavourite,
 } = require('./handlers/favourites');
 
-app.get('/get-favourites', firebaseAuth, getFavourites);
+app.post('/get-favourites', firebaseAuth, getFavourites);
 app.post('/add-favourite', firebaseAuth, addFavourite);
 app.post('/remove-favourite', firebaseAuth, removeFavourite);
 

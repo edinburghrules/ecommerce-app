@@ -1,5 +1,5 @@
 // Parse local storage favourites
-const parseFavouritesFromLocalStorage = (favourites) => {
+export const parseFavouritesFromLocalStorage = (favourites) => {
   let favouritesFromLocalStorage = localStorage.getItem(favourites);
   favouritesFromLocalStorage = JSON.parse(favouritesFromLocalStorage);
 

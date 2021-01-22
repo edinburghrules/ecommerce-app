@@ -2,21 +2,54 @@ const { db } = require('../util/admin');
 
 const getFavourites = async (req, res) => {
   const email = req.account.email;
-  try {
-    const favourites = [];
+  const favouritesFromLocalStorage = req.body.favouritesFromLocalStorage
+    ? req.body.favouritesFromLocalStorage
+    : false;
 
-    const querySnapshot = await db
-      .collection('accounts')
-      .doc(email)
-      .collection('favourites')
-      .get();
+  if (favouritesFromLocalStorage) {
+    try {
+      const batch = db.batch();
+      const dbRef = db
+        .collection('accounts')
+        .doc(email)
+        .collection('favourites');
+      favouritesFromLocalStorage.forEach((product) => {
+        batch.set(dbRef.doc(`${product.id}_${product.color}`), product);
+      });
+      await batch.commit();
 
-    querySnapshot.forEach((doc) => favourites.push({ ...doc.data() }));
+      const favourites = [];
 
-    return res.status(200).json(favourites);
-  } catch (err) {
-    console.error(err);
-    return res.status(400).json(err);
+      const querySnapshot = await db
+        .collection('accounts')
+        .doc(email)
+        .collection('favourites')
+        .get();
+
+      querySnapshot.forEach((doc) => favourites.push({ ...doc.data() }));
+
+      return res.status(200).json(favourites);
+    } catch (err) {
+      console.error(err);
+      return res.status(400).json({ error: err.code });
+    }
+  } else {
+    try {
+      const favourites = [];
+
+      const querySnapshot = await db
+        .collection('accounts')
+        .doc(email)
+        .collection('favourites')
+        .get();
+
+      querySnapshot.forEach((doc) => favourites.push({ ...doc.data() }));
+
+      return res.status(200).json(favourites);
+    } catch (err) {
+      console.error(err);
+      return res.status(400).json(err);
+    }
   }
 };
 
