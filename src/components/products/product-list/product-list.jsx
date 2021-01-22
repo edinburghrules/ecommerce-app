@@ -9,6 +9,7 @@ import {
   getCategoryProducts,
   getFilteredProducts,
 } from '../../../redux/actions/productActions';
+import { getFavouriteProducts } from '../../../redux/actions/favouriteActions';
 
 class ProductList extends React.Component {
   state = {
@@ -31,6 +32,11 @@ class ProductList extends React.Component {
       getCategoryProducts,
       getFilteredProducts,
     } = this.props;
+
+    if (this.props.authenticated) {
+      this.props.getFavouriteProducts();
+    }
+
     if (colors || bestFor) {
       getFilteredProducts(collection, colors, bestFor, category);
     } else {
@@ -39,6 +45,13 @@ class ProductList extends React.Component {
       } else {
         getAllProducts(collection);
       }
+    }
+  };
+
+    // Only run when authenticated is still false after page refresh
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.authenticated !== this.props.authenticated) {
+      this.props.getFavouriteProducts();
     }
   };
 
@@ -63,17 +76,17 @@ class ProductList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.products.productsList,
-    loading: state.async.loadingProducts,
-  };
-};
+const mapStateToProps = (state) => ({
+  authenticated: state.account.authenticated,
+  products: state.products.productsList,
+  loading: state.async.loadingProducts,
+});
 
 const mapActionsToProps = {
   getAllProducts,
   getCategoryProducts,
   getFilteredProducts,
+  getFavouriteProducts,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(ProductList);

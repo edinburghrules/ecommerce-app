@@ -17,8 +17,8 @@ const BestForFilters = (props) => {
         >
           <input id={bestForOption} type='checkbox' />
           <span>
-            <img className='hover-checked' src={hovercheck} />
-            <img className='checked' src={checked} />
+            <img className='hover-checked' src={hovercheck} alt='hover check' />
+            <img className='checked' src={checked} alt='check' />
           </span>
           {captialiseFirstLetter(bestForOption)}
         </label>

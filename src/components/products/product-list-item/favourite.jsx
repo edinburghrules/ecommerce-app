@@ -15,18 +15,32 @@ class Favourite extends React.Component {
     isFavourited: false,
   };
 
-  /* Get the favourite from local storage by
-   passing in the product Id and the variant color */
   componentDidMount = () => {
-    this.setState({
-      isFavourited: getFavouritesFromLocalStorage(
-        'favourites',
-        this.props.product.id,
-        this.props.variant.color
-      )
-        ? true
-        : false,
-    });
+    if (this.props.authenticated) {
+      this.setState({
+        isFavourited: this.props.isFavourite,
+      });
+    } else {
+      /* Get the favourite from local storage by
+      passing in the product Id and the variant color */
+      this.setState({
+        isFavourited: getFavouritesFromLocalStorage(
+          'favourites',
+          this.props.product.id,
+          this.props.variant.color
+        )
+          ? true
+          : false,
+      });
+    }
+  };
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.isFavourite !== this.props.isFavourite) {
+      this.setState({
+        isFavourited: this.props.isFavourite,
+      });
+    }
   };
 
   handleAddFavourite = () => {
@@ -69,10 +83,15 @@ class Favourite extends React.Component {
   render() {
     const { isFavourited } = this.state;
     const { isSelected } = this.props;
+
     return (
       <button
         onClick={this.handleAddFavourite}
-        className={isSelected ? 'favourite__btn favourite__btn--active' : 'favourite__btn'}
+        className={
+          isSelected
+            ? 'favourite__btn favourite__btn--active'
+            : 'favourite__btn'
+        }
       >
         <img
           className='favourite__img'
@@ -84,8 +103,21 @@ class Favourite extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+/* Check favourites from backend to match this particular product
+id and variant color*/
+const favouriteSelector = (state, ownProps) => {
+  return state.favourites.favouritesList.some((favourite) => {
+    if (favourite.id === ownProps.product.id) {
+      return favourite.color === ownProps.variant.color;
+    } else {
+      return false;
+    }
+  });
+};
+
+const mapStateToProps = (state, ownProps) => ({
   authenticated: state.account.authenticated,
+  isFavourite: favouriteSelector(state, ownProps),
 });
 
 const mapActionsToProps = {

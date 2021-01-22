@@ -2,10 +2,34 @@ import { SET_AUTHENTICATED, SET_UNAUTHENTICATED } from '../types';
 import axios from 'axios';
 import { getFavouriteProducts } from './favouriteActions';
 
+export const register = (registerData, history) => {
+  return async (dispatch) => {
+    try {
+      const registerResponse = await axios.post('/register', registerData);
+      setAuthorizationHeader(registerResponse.data);
+      dispatch(getAccountData());
+      history.push('/');
+    } catch (err) {
+      return err.response.data;
+    }
+  };
+};
+
 const setAuthorizationHeader = (token) => {
   const firebaseToken = `Bearer ${token}`;
   localStorage.setItem('firebaseToken', firebaseToken);
   axios.defaults.headers.common['Authorization'] = firebaseToken;
+};
+
+export const getAccountData = () => {
+  return async (dispatch) => {
+    try {
+      const accountDataResponse = await axios.get('/account');
+      dispatch({ type: SET_AUTHENTICATED, payload: accountDataResponse.data });
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  };
 };
 
 export const signIn = (signInData, history) => {
@@ -27,30 +51,5 @@ export const signOut = () => {
     localStorage.removeItem('firebaseToken');
     delete axios.defaults.headers.common['Authorization'];
     dispatch({ type: SET_UNAUTHENTICATED });
-  };
-};
-
-export const register = (registerData, history) => {
-  return async (dispatch) => {
-    try {
-      const registerResponse = await axios.post('/register', registerData);
-      setAuthorizationHeader(registerResponse.data);
-      dispatch(getAccountData());
-      dispatch(getFavouriteProducts());
-      history.push('/');
-    } catch (err) {
-      return err.response.data;
-    }
-  };
-};
-
-export const getAccountData = () => {
-  return async (dispatch) => {
-    try {
-      const accountDataResponse = await axios.get('/account');
-      dispatch({ type: SET_AUTHENTICATED, payload: accountDataResponse.data });
-    } catch (err) {
-      console.log(err.response.data);
-    }
   };
 };

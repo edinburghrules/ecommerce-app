@@ -2,6 +2,7 @@ const { db } = require('../util/admin');
 
 const getFavourites = async (req, res) => {
   let email = req.account.email;
+  console.log(email);
   try {
     const favourites = [];
 
@@ -26,7 +27,7 @@ const addFavourite = async (req, res) => {
   try {
     await db
       .collection(`accounts/${email}/favourites`)
-      .doc(`${product.id}_${product.variant.color}`)
+      .doc(`${product.id}_${product.color}`)
       .set({ ...product });
 
     return res.status(201).json({ success: 'Favourite added' });

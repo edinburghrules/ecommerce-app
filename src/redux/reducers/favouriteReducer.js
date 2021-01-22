@@ -1,18 +1,18 @@
 import { SET_FAVOURITES, UNSET_FAVOURITES } from '../types';
 
 const initState = {
-  favourites: [],
+  favouritesList: [],
 };
 
 const favouriteReducer = (state = initState, action) => {
   switch (action.type) {
     case SET_FAVOURITES:
       return {
-        favourites: [...action.payload],
+        favouritesList: [...action.payload],
       };
     case UNSET_FAVOURITES:
       return {
-        favourites: [],
+        favouritesList: [],
       };
     default:
       return state;

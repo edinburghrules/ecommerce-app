@@ -2,10 +2,10 @@ import axios from 'axios';
 import { SET_FAVOURITES } from '../types';
 
 export const getFavouriteProducts = () => {
+  console.log('getting faves');
   return async (dispatch) => {
     try {
-      const getFavouriteProductsResponse = await axios.get('get-favourites');
-      console.log(getFavouriteProductsResponse.data);
+      const getFavouriteProductsResponse = await axios.get('/get-favourites');
       dispatch({
         type: SET_FAVOURITES,
         payload: getFavouriteProductsResponse.data,
@@ -17,6 +17,7 @@ export const getFavouriteProducts = () => {
 };
 
 export const addFavouriteProduct = (product) => {
+  console.log(product);
   const addFavouriteData = {
     product,
   };

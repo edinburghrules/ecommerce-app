@@ -62,6 +62,8 @@ export const removeFavouriteFromLocalStorage = (
     const filteredFavourites = parsedFavourites.filter((favourite) => {
       if (productId === favourite.id) {
         return productVariantColor !== favourite.color;
+      } else {
+        return null;
       }
     });
 
