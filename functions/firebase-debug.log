@@ -12559,3 +12559,20 @@ SyntaxError: Unexpected token ')'
 [info] i  functions: Finished "api" in ~1s {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"Finished \"api\" in ~1s"}}
 [debug] [2021-01-22T19:31:33.129Z] [worker-api-7ed22ca4-0fbe-48b2-afd0-2e7f2cd82434]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-api-7ed22ca4-0fbe-48b2-afd0-2e7f2cd82434]: IDLE"}}
 [debug] [2021-01-22T19:31:33.129Z] [work-queue] {"queueLength":0,"workRunningCount":0}
+[debug] [2021-01-22T19:33:19.709Z] [work-queue] {"queueLength":1,"workRunningCount":0}
+[debug] [2021-01-22T19:33:19.709Z] [work-queue] {"queueLength":0,"workRunningCount":1}
+[debug] [2021-01-22T19:33:19.709Z] Accepted request GET /e-commerce-app-9b649/us-central1/api/products/?collection=mens-shoes --> api
+[debug] [2021-01-22T19:33:19.710Z] [worker-pool] submitWork(triggerId=api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=api)"}}
+[debug] [2021-01-22T19:33:19.710Z] [worker-api-7ed22ca4-0fbe-48b2-afd0-2e7f2cd82434]: Assigning socketPath: /var/folders/4w/nyks513x089_sj2pm1_c9xhm0000gn/T/fire_emu_8312.sock {"metadata":{"emulator":{"name":"functions"},"message":"[worker-api-7ed22ca4-0fbe-48b2-afd0-2e7f2cd82434]: Assigning socketPath: /var/folders/4w/nyks513x089_sj2pm1_c9xhm0000gn/T/fire_emu_8312.sock"}}
+[debug] [2021-01-22T19:33:19.710Z] [worker-api-7ed22ca4-0fbe-48b2-afd0-2e7f2cd82434]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-api-7ed22ca4-0fbe-48b2-afd0-2e7f2cd82434]: BUSY"}}
+[debug] [2021-01-22T19:33:19.710Z] [runtime-status] [8312] Trigger "api" has been found, beginning invocation! {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"[runtime-status] [8312] Trigger \"api\" has been found, beginning invocation!"}}
+[info] i  functions: Beginning execution of "api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"Beginning execution of \"api\""}}
+[debug] [2021-01-22T19:33:19.710Z] [runtime-status] [8312] triggerDefinition {"httpsTrigger":{},"name":"api","entryPoint":"api"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"[runtime-status] [8312] triggerDefinition {\"httpsTrigger\":{},\"name\":\"api\",\"entryPoint\":\"api\"}"}}
+[debug] [2021-01-22T19:33:19.710Z] [runtime-status] [8312] Running api in mode HTTPS {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"[runtime-status] [8312] Running api in mode HTTPS"}}
+[debug] [2021-01-22T19:33:19.712Z] [runtime-status] [8312] Attempting to listen to socketPath: /var/folders/4w/nyks513x089_sj2pm1_c9xhm0000gn/T/fire_emu_8312.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"[runtime-status] [8312] Attempting to listen to socketPath: /var/folders/4w/nyks513x089_sj2pm1_c9xhm0000gn/T/fire_emu_8312.sock"}}
+[debug] [2021-01-22T19:33:19.714Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2021-01-22T19:33:19.717Z] [runtime-status] [8312] Ephemeral server handling GET request {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"[runtime-status] [8312] Ephemeral server handling GET request"}}
+[debug] [2021-01-22T19:33:19.718Z] [runtime-status] [8312] Ephemeral server survived. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"[runtime-status] [8312] Ephemeral server survived."}}
+[info] i  functions: Finished "api" in ~1s {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"Finished \"api\" in ~1s"}}
+[debug] [2021-01-22T19:33:19.889Z] [worker-api-7ed22ca4-0fbe-48b2-afd0-2e7f2cd82434]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-api-7ed22ca4-0fbe-48b2-afd0-2e7f2cd82434]: IDLE"}}
+[debug] [2021-01-22T19:33:19.889Z] [work-queue] {"queueLength":0,"workRunningCount":0}

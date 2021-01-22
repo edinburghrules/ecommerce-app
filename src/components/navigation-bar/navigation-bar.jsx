@@ -243,7 +243,7 @@ class NavigationBar extends React.Component {
                       SIGN IN
                     </button>
                     <Link className='account__menu-register' to='/register'>
-                      No acccount? Register here!
+                      No account? Register here!
                     </Link>
                   </React.Fragment>
                 )}
