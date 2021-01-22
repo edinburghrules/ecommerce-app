@@ -44,6 +44,7 @@ const removeFavourite = async (req, res) => {
       .collection(`accounts/${email}/favourites`)
       .doc(`${product.id}_${product.color}`)
       .delete();
+    return res.status(201).json({ success: 'Favourite removed' });
   } catch (err) {
     console.error(err);
     return res.status(400).json({ error: err.code });

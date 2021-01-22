@@ -19,9 +19,10 @@ export const addFavouriteProduct = (product) => {
   const addFavouriteData = {
     product,
   };
-  return async () => {
+  return async (dispatch) => {
     try {
       await axios.post('/add-favourite', addFavouriteData);
+      dispatch(getFavouriteProducts());
     } catch (err) {
       console.log(err);
     }
@@ -32,9 +33,10 @@ export const removeFavouriteProduct = (product) => {
   const removeFavouriteData = {
     product,
   };
-  return async () => {
+  return async (dispatch) => {
     try {
       await axios.post('/remove-favourite', removeFavouriteData);
+      dispatch(getFavouriteProducts());
     } catch (err) {
       console.log(err);
     }
