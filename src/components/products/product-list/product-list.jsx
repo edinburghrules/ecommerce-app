@@ -34,7 +34,6 @@ class ProductList extends React.Component {
     } = this.props;
 
     if (this.props.authenticated) {
-      console.log('it is running in componentdidmount');
       this.props.getFavouriteProducts();
     }
 
@@ -52,7 +51,6 @@ class ProductList extends React.Component {
   // Only run when authenticated is still false after page refresh
   componentDidUpdate = (prevProps) => {
     if (prevProps.authenticated === false && this.props.authenticated) {
-      console.log('it is running in componentdidupdate');
       this.props.getFavouriteProducts();
     }
   };
