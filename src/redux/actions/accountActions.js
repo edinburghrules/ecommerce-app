@@ -1,4 +1,8 @@
-import { SET_AUTHENTICATED, SET_UNAUTHENTICATED } from '../types';
+import {
+  SET_AUTHENTICATED,
+  SET_UNAUTHENTICATED,
+  UNSET_FAVOURITES,
+} from '../types';
 import axios from 'axios';
 import { getFavouriteProducts } from './favouriteActions';
 
@@ -51,5 +55,6 @@ export const signOut = () => {
     localStorage.removeItem('firebaseToken');
     delete axios.defaults.headers.common['Authorization'];
     dispatch({ type: SET_UNAUTHENTICATED });
+    dispatch({ type: UNSET_FAVOURITES });
   };
 };

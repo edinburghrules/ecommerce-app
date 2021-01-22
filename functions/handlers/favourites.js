@@ -1,8 +1,7 @@
 const { db } = require('../util/admin');
 
 const getFavourites = async (req, res) => {
-  let email = req.account.email;
-  console.log(email);
+  const email = req.account.email;
   try {
     const favourites = [];
 
@@ -22,8 +21,8 @@ const getFavourites = async (req, res) => {
 };
 
 const addFavourite = async (req, res) => {
-  let email = req.account.email;
-  let product = req.body.product;
+  const email = req.account.email;
+  const product = req.body.product;
   try {
     await db
       .collection(`accounts/${email}/favourites`)
@@ -37,7 +36,22 @@ const addFavourite = async (req, res) => {
   }
 };
 
+const removeFavourite = async (req, res) => {
+  const email = req.account.email;
+  const product = req.body.product;
+  try {
+    await db
+      .collection(`accounts/${email}/favourites`)
+      .doc(`${product.id}_${product.color}`)
+      .delete();
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({ error: err.code });
+  }
+};
+
 module.exports = {
   getFavourites,
   addFavourite,
+  removeFavourite,
 };

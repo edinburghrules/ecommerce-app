@@ -16,13 +16,25 @@ export const getFavouriteProducts = () => {
 };
 
 export const addFavouriteProduct = (product) => {
-  console.log(product);
   const addFavouriteData = {
     product,
   };
   return async () => {
     try {
       await axios.post('/add-favourite', addFavouriteData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const removeFavouriteProduct = (product) => {
+  const removeFavouriteData = {
+    product,
+  };
+  return async () => {
+    try {
+      await axios.post('/remove-favourite', removeFavouriteData);
     } catch (err) {
       console.log(err);
     }

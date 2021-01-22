@@ -27,14 +27,15 @@ class ProductList extends React.Component {
 
   componentDidMount = () => {
     const { collection, category, colors, bestFor } = this.state;
+    const { authenticated, getFavouriteProducts } = this.props;
     const {
       getAllProducts,
       getCategoryProducts,
       getFilteredProducts,
     } = this.props;
 
-    if (this.props.authenticated) {
-      this.props.getFavouriteProducts();
+    if (authenticated) {
+      getFavouriteProducts();
     }
 
     if (colors || bestFor) {
@@ -50,8 +51,9 @@ class ProductList extends React.Component {
 
   // Only run when authenticated is still false after page refresh
   componentDidUpdate = (prevProps) => {
-    if (prevProps.authenticated === false && this.props.authenticated) {
-      this.props.getFavouriteProducts();
+    const { authenticated, getFavouriteProducts } = this.props;
+    if (prevProps.authenticated === false && authenticated) {
+      getFavouriteProducts();
     }
   };
 

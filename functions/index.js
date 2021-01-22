@@ -19,10 +19,15 @@ app.post('/reset-password', resetPassword);
 app.get('/account', firebaseAuth, getAuthenticatedAccount);
 
 // Favourite routes
-const { getFavourites, addFavourite } = require('./handlers/favourites');
+const {
+  getFavourites,
+  addFavourite,
+  removeFavourite,
+} = require('./handlers/favourites');
 
 app.get('/get-favourites', firebaseAuth, getFavourites);
 app.post('/add-favourite', firebaseAuth, addFavourite);
+app.post('/remove-favourite', firebaseAuth, removeFavourite);
 
 // Products routes
 const {

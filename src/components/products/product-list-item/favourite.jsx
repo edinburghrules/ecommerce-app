@@ -3,12 +3,15 @@ import './favourite.scss';
 import heartOutline from '../../../assets/heart-outline.png';
 import heartFilled from '../../../assets/heart-filled.png';
 import { connect } from 'react-redux';
-import { addFavouriteProduct } from '../../../redux/actions/favouriteActions';
 import {
   getFavouritesFromLocalStorage,
   addFavouriteToLocalStorage,
   removeFavouriteFromLocalStorage,
 } from './utils/favourites-handler';
+import {
+  addFavouriteProduct,
+  removeFavouriteProduct,
+} from '../../../redux/actions/favouriteActions';
 
 class Favourite extends React.Component {
   state = {
@@ -16,9 +19,11 @@ class Favourite extends React.Component {
   };
 
   componentDidMount = () => {
-    if (this.props.authenticated) {
+    const { authenticated, isFavourite, product, variant } = this.props;
+    /* If authenticated get favourite from redux */
+    if (authenticated) {
       this.setState({
-        isFavourited: this.props.isFavourite,
+        isFavourited: isFavourite,
       });
     } else {
       /* Get the favourite from local storage by
@@ -26,8 +31,8 @@ class Favourite extends React.Component {
       this.setState({
         isFavourited: getFavouritesFromLocalStorage(
           'favourites',
-          this.props.product.id,
-          this.props.variant.color
+          product.id,
+          variant.color
         )
           ? true
           : false,
@@ -36,19 +41,22 @@ class Favourite extends React.Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    if (this.props.authenticated) {
-      if (prevProps.isFavourite !== this.props.isFavourite) {
+    const { authenticated, isFavourite, product, variant } = this.props;
+    // If signed in and isFavourite changes on update
+    if (authenticated) {
+      if (prevProps.isFavourite !== isFavourite) {
         this.setState({
-          isFavourited: this.props.isFavourite,
+          isFavourited: isFavourite,
         });
       }
     } else {
-      if (prevProps.authenticated !== this.props.authenticated) {
+      // When signing out use local storage favourites instead of database
+      if (prevProps.authenticated !== authenticated) {
         this.setState({
           isFavourited: getFavouritesFromLocalStorage(
             'favourites',
-            this.props.product.id,
-            this.props.variant.color
+            product.id,
+            variant.color
           )
             ? true
             : false,
@@ -58,29 +66,36 @@ class Favourite extends React.Component {
   };
 
   handleAddFavourite = () => {
-    const { authenticated, product, variant } = this.props;
+    const {
+      authenticated,
+      product,
+      variant,
+      addFavouriteProduct,
+      removeFavouriteProduct,
+    } = this.props;
 
     this.setState(
       (prevState) => ({
         isFavourited: prevState.isFavourited ? false : true,
       }),
       () => {
+        const favouritedProduct = {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          color: variant.color,
+          img: variant.image,
+        };
         if (this.state.isFavourited) {
-          const favouritedProduct = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            color: variant.color,
-            img: variant.image,
-          };
           if (authenticated) {
-            this.props.addFavouriteProduct(favouritedProduct);
+            addFavouriteProduct(favouritedProduct);
           } else {
             addFavouriteToLocalStorage('favourites', favouritedProduct);
           }
         } else {
           if (authenticated) {
             console.log('remove favourite from firestore');
+            removeFavouriteProduct(favouritedProduct);
           } else {
             console.log('Remove from local storage');
             removeFavouriteFromLocalStorage(
@@ -136,6 +151,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapActionsToProps = {
   addFavouriteProduct,
+  removeFavouriteProduct,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Favourite);
