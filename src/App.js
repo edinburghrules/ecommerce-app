@@ -14,11 +14,12 @@ import {
   womensCollectionLinks,
 } from './navigation-links/navigation-links';
 import NavigationBar from './components/navigation-bar/navigation-bar';
-import Home from './pages/home/home';
+import Home from './pages/home/home-page';
 import Signin from './pages/auth/signin/sign-in';
 import Register from './pages/auth/register/register';
 import ResetPassword from './pages/auth/reset-password/reset-password';
 import ProductListPage from './pages/products/product-list/product-list-page';
+import FavouritesPage from './pages/favourites/favourites-page';
 import { signOut, getAccountData } from './redux/actions/accountActions';
 
 const token = localStorage.firebaseToken;
@@ -51,6 +52,7 @@ const App = () => {
           <PrivateRoute path='/register' component={Register} />
           <PrivateRoute path='/reset-password' component={ResetPassword} />
           <Route path='/collection/:collection' component={ProductListPage} />
+          <Route path='/favourites/:accountId?' component={FavouritesPage} />
         </Switch>
       </div>
     </Provider>

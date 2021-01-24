@@ -250,7 +250,9 @@ class NavigationBar extends React.Component {
               </div>
             </div>
             <div className='navigation__user-menu-item'>
-              <img src={favourites} alt='favourites' />
+              <Link to={`/favourites`}>
+                <img src={favourites} alt='favourites' />
+              </Link>
             </div>
             <div className='navigation__user-menu-item'>
               <img
