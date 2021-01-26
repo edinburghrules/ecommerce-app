@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { SET_FAVOURITES } from '../types';
-import { parseFavouritesFromLocalStorage } from '../../components/products/product-list-item/utils/favourites-handler';
+import { parseFavouritesFromLocalStorage } from '../../utils/local-storage/favourites-handler';
 
 export const getFavouriteProducts = () => {
   const favouritesFromLocalStorage = parseFavouritesFromLocalStorage(

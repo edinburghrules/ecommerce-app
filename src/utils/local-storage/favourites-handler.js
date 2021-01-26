@@ -68,5 +68,7 @@ export const removeFavouriteFromLocalStorage = (
     });
 
     localStorage.setItem(favourites, JSON.stringify(filteredFavourites));
+
+    getFavouritesFromLocalStorage(favourites, productId, productVariantColor);
   }
 };

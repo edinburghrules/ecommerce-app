@@ -7,7 +7,7 @@ import {
   getFavouritesFromLocalStorage,
   addFavouriteToLocalStorage,
   removeFavouriteFromLocalStorage,
-} from './utils/favourites-handler';
+} from '../../../utils/local-storage/favourites-handler';
 import {
   addFavouriteProduct,
   removeFavouriteProduct,
@@ -85,6 +85,7 @@ class Favourite extends React.Component {
           price: product.price,
           color: variant.color,
           img: variant.image,
+          sizes: variant.sizes,
         };
         if (this.state.isFavourited) {
           if (authenticated) {
@@ -95,6 +96,11 @@ class Favourite extends React.Component {
         } else {
           if (authenticated) {
             console.log('remove favourite from firestore');
+            removeFavouriteFromLocalStorage(
+              'favourites',
+              this.props.product.id,
+              variant.color
+            );
             removeFavouriteProduct(favouritedProduct);
           } else {
             console.log('Remove from local storage');

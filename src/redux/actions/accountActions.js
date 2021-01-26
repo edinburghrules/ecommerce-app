@@ -4,7 +4,6 @@ import {
   UNSET_FAVOURITES,
 } from '../types';
 import axios from 'axios';
-import { getFavouriteProducts } from './favouriteActions';
 
 export const register = (registerData, history) => {
   return async (dispatch) => {
@@ -42,7 +41,6 @@ export const signIn = (signInData, history) => {
       const signInResponse = await axios.post('/signin', signInData);
       setAuthorizationHeader(signInResponse.data);
       dispatch(getAccountData());
-      dispatch(getFavouriteProducts());
       history.push('/');
     } catch (err) {
       return err.response.data;

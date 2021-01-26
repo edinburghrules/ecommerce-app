@@ -8,6 +8,9 @@ export const LOADING_ACCOUNT = 'LOADING_ACCOUNT';
 export const SET_FAVOURITES = 'SET_FAVOURITES';
 export const UNSET_FAVOURITES = 'UNSET_FAVOURITES';
 
+// Cart reducer action types
+export const ADD_TO_CART = 'ADD_TO_CART';
+
 // Products reducer action types
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 export const GET_CATEGORY_PRODUCTS = 'GET_CATEGORY_PRODUCTS';

@@ -170,7 +170,7 @@ class NavigationBar extends React.Component {
       x,
     } = this.state;
     const linksToRender = this.renderLinks();
-    const { authenticated, accountName, signOut, history } = this.props;
+    const { authenticated, account, signOut, history } = this.props;
     return (
       <React.Fragment>
         <MobileNav
@@ -232,7 +232,7 @@ class NavigationBar extends React.Component {
                 {authenticated ? (
                   <React.Fragment>
                     <p className='account__menu-welcome'>
-                      Welcome {accountName}!
+                      Welcome {account.firstName}!
                     </p>
                     <Link to='/account'>My Account</Link>
                     <button onClick={signOut}>SIGN OUT</button>
@@ -293,7 +293,7 @@ class NavigationBar extends React.Component {
 const mapStateToProps = (state) => {
   return {
     authenticated: state.account.authenticated,
-    accountName: state.account.credentials.firstName,
+    account: state.account.credentials,
   };
 };
 
