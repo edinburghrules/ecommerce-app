@@ -1,20 +1,20 @@
-import React from 'react';
-import './navigation-bar.scss';
-import { withRouter, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { signOut } from '../../redux/actions/accountActions';
-import NavDropdown from '../nav-dropdown/nav-dropdown';
-import Cart from '../cart/cart';
-import MobileNav from '../mobile-nav/mobile-nav';
-import logo from '../../assets/logo2.png';
-import user from '../../assets/001-user.png';
-import favourites from '../../assets/heart-outline.png';
-import shopping from '../../assets/002-shopping-bag.png';
-import mobile from '../../assets/menu.png';
+import React from "react";
+import "./navigation-bar.scss";
+import { withRouter, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { signOut } from "../../redux/actions/accountActions";
+import NavDropdown from "../nav-dropdown/nav-dropdown";
+import Cart from "../cart/cart";
+import MobileNav from "../mobile-nav/mobile-nav";
+import logo from "../../assets/logo2.png";
+import user from "../../assets/001-user.png";
+import favourites from "../../assets/heart-outline.png";
+import shopping from "../../assets/002-shopping-bag.png";
+import mobile from "../../assets/menu.png";
 
 class NavigationBar extends React.Component {
   state = {
-    windowWidth: '',
+    windowWidth: "",
     mensDesktopOpen: false,
     womensDesktopOpen: false,
     mensMobileOpen: false,
@@ -30,7 +30,7 @@ class NavigationBar extends React.Component {
 
   componentDidMount = () => {
     this.updateWindowSize();
-    window.addEventListener('resize', this.updateWindowSize);
+    window.addEventListener("resize", this.updateWindowSize);
   };
 
   updateWindowSize = () => {
@@ -40,27 +40,27 @@ class NavigationBar extends React.Component {
   };
 
   handleOpen = (e) => {
-    if (e.target.id === 'womens') {
+    if (e.target.id === "womens") {
       this.setState({
         womensDesktopOpen: true,
         mensDesktopOpen: false,
       });
     }
 
-    if (e.target.id === 'mens') {
+    if (e.target.id === "mens") {
       this.setState({
         mensDesktopOpen: true,
         womensDesktopOpen: false,
       });
     }
 
-    if (e.target.id === 'mobile') {
+    if (e.target.id === "mobile") {
       this.setState({
         mobileMenuWidth: 100,
       });
     }
 
-    if (e.target.id === 'cart') {
+    if (e.target.id === "cart") {
       this.setState((prevState) => ({
         cartMenuWidth:
           prevState.windowWidth > 950
@@ -74,14 +74,14 @@ class NavigationBar extends React.Component {
   };
 
   handleClose = (e) => {
-    if (e.currentTarget.id === 'close-cart') {
+    if (e.currentTarget.id === "close-cart") {
       this.setState({
         cartMenuWidth: 0,
         cartOpen: false,
       });
     }
 
-    if (e.currentTarget.id === 'close-mobile') {
+    if (e.currentTarget.id === "close-mobile") {
       this.setState({
         mobileMenuWidth: 0,
         x: 0,
@@ -93,7 +93,7 @@ class NavigationBar extends React.Component {
       });
     }
 
-    if (e.currentTarget.id === 'close-dropdown') {
+    if (e.currentTarget.id === "close-dropdown") {
       this.setState({
         mensDesktopOpen: false,
         womensDesktopOpen: false,
@@ -143,12 +143,12 @@ class NavigationBar extends React.Component {
 
   handleProductDropdown = (link) => {
     let productType;
-    if (link.category.includes('Apparel')) {
-      productType = 'apparelDropdown';
-    } else if (link.category.includes('Shoes')) {
-      productType = 'shoesDropdown';
-    } else if (link.category.includes('Collection')) {
-      productType = 'collectionsDropdown';
+    if (link.category.includes("Apparel")) {
+      productType = "apparelDropdown";
+    } else if (link.category.includes("Shoes")) {
+      productType = "shoesDropdown";
+    } else if (link.category.includes("Collection")) {
+      productType = "collectionsDropdown";
     }
     this.setState((prevState) => ({
       [productType]: !prevState[productType],
@@ -189,12 +189,12 @@ class NavigationBar extends React.Component {
           collectionsDropdown={collectionsDropdown}
           x={x}
         />
-        <nav className='navigation'>
+        <nav className="navigation">
           <Cart handleClose={this.handleClose} cartMenuWidth={cartMenuWidth} />
-          <div className='navigation__menu'>
-            <ul className='navigation__menu-list'>
+          <div className="navigation__menu">
+            <ul className="navigation__menu-list">
               <li
-                id='mens'
+                id="mens"
                 onClick={this.handleOpen}
                 className={
                   mensDesktopOpen
@@ -205,7 +205,7 @@ class NavigationBar extends React.Component {
                 Men
               </li>
               <li
-                id='womens'
+                id="womens"
                 onClick={this.handleOpen}
                 className={
                   womensDesktopOpen
@@ -215,60 +215,60 @@ class NavigationBar extends React.Component {
               >
                 Women
               </li>
-              <li className='navigation__menu-list-item'>Collections</li>
+              <li className="navigation__menu-list-item">Collections</li>
             </ul>
           </div>
-          <div onClick={() => history.push('/')} className='navigation__logo'>
-            <img src={logo} alt='logo' />
-            <div className='navigation__logo-text'>
+          <div onClick={() => history.push("/")} className="navigation__logo">
+            <img src={logo} alt="logo" />
+            <div className="navigation__logo-text">
               <p>Faith</p>
               <p>Apparel</p>
             </div>
           </div>
-          <div className='navigation__user-menu'>
-            <div className='navigation__user-menu-item'>
-              <img src={user} alt='user login' />
-              <div className='account__menu'>
+          <div className="navigation__user-menu">
+            <div className="navigation__user-menu-item">
+              <img src={user} alt="user login" />
+              <div className="account__menu">
                 {authenticated ? (
                   <React.Fragment>
-                    <p className='account__menu-welcome'>
+                    <p className="account__menu-welcome">
                       Welcome {account.firstName}!
                     </p>
-                    <Link to='/account'>My Account</Link>
-                    <button onClick={signOut}>SIGN OUT</button>
+                    <Link to="/account">My Account</Link>
+                    <button onClick={() => signOut(history)}>SIGN OUT</button>
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
-                    <button onClick={() => history.push('/signin')}>
+                    <button onClick={() => history.push("/signin")}>
                       SIGN IN
                     </button>
-                    <Link className='account__menu-register' to='/register'>
+                    <Link className="account__menu-register" to="/register">
                       No account? Register here!
                     </Link>
                   </React.Fragment>
                 )}
               </div>
             </div>
-            <div className='navigation__user-menu-item'>
+            <div className="navigation__user-menu-item">
               <Link to={`/favourites`}>
-                <img src={favourites} alt='favourites' />
+                <img src={favourites} alt="favourites" />
               </Link>
             </div>
-            <div className='navigation__user-menu-item'>
+            <div className="navigation__user-menu-item">
               <img
                 onClick={this.handleOpen}
-                id='cart'
+                id="cart"
                 src={shopping}
-                alt='shopping bag'
+                alt="shopping bag"
               />
             </div>
           </div>
-          <div className='navigation__mobile-menu'>
+          <div className="navigation__mobile-menu">
             <img
-              id='mobile'
+              id="mobile"
               onClick={this.handleOpen}
               src={mobile}
-              alt='mobile menu'
+              alt="mobile menu"
             />
           </div>
         </nav>
@@ -281,8 +281,8 @@ class NavigationBar extends React.Component {
         <div
           className={
             mensDesktopOpen || womensDesktopOpen || cartOpen
-              ? 'overlay open'
-              : ''
+              ? "overlay open"
+              : ""
           }
         ></div>
       </React.Fragment>

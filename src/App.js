@@ -34,7 +34,7 @@ if (token) {
   }
 }
 
-const App = () => {
+const App = (props) => {
   return (
     <Provider store={store}>
       <div className='App'>

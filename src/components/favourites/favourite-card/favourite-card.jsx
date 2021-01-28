@@ -2,7 +2,7 @@ import React from 'react';
 import './favourite-card.scss';
 import { connect } from 'react-redux';
 import { addToCartLocalStorage } from '../../../utils/local-storage/cart-handler';
-import { removeFavouriteFromLocalStorage } from '../../../utils/local-storage/favourites-handler';
+import { parseFavouritesFromLocalStorage, removeFavouriteFromLocalStorage } from '../../../utils/local-storage/favourites-handler';
 import { addToCart } from '../../../redux/actions/cartActions';
 
 class FavouriteCard extends React.Component {
@@ -35,7 +35,7 @@ class FavouriteCard extends React.Component {
     }
   };
 
-  removeFromcart = () => {
+  removeFromFavourites = () => {
     if (this.props.authenticated) {
       console.log('IF AUTHENTICATED REMOVE FROM FIRESTORE');
     } else {
@@ -45,6 +45,7 @@ class FavouriteCard extends React.Component {
         this.props.favourite.id,
         this.props.favourite.color
       );
+      this.props.handleDelete(parseFavouritesFromLocalStorage('favourites'));
     }
   };
 
@@ -77,7 +78,7 @@ class FavouriteCard extends React.Component {
           <button onClick={this.addToCart} disabled={!selectedSize}>
             ADD
           </button>
-          <button onClick={this.removeFromcart}>DELETE</button>
+          <button onClick={this.removeFromFavourites}>DELETE</button>
         </div>
       </React.Fragment>
     );

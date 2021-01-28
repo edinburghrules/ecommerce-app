@@ -1,17 +1,17 @@
-import React from 'react';
-import './favourite.scss';
-import heartOutline from '../../../assets/heart-outline.png';
-import heartFilled from '../../../assets/heart-filled.png';
-import { connect } from 'react-redux';
+import React from "react";
+import "./favourite.scss";
+import heartOutline from "../../../assets/heart-outline.png";
+import heartFilled from "../../../assets/heart-filled.png";
+import { connect } from "react-redux";
 import {
   getFavouritesFromLocalStorage,
   addFavouriteToLocalStorage,
   removeFavouriteFromLocalStorage,
-} from '../../../utils/local-storage/favourites-handler';
+} from "../../../utils/local-storage/favourites-handler";
 import {
   addFavouriteProduct,
   removeFavouriteProduct,
-} from '../../../redux/actions/favouriteActions';
+} from "../../../redux/actions/favouriteActions";
 
 class Favourite extends React.Component {
   state = {
@@ -30,7 +30,7 @@ class Favourite extends React.Component {
       passing in the product Id and the variant color */
       this.setState({
         isFavourited: getFavouritesFromLocalStorage(
-          'favourites',
+          "favourites",
           product.id,
           variant.color
         )
@@ -54,7 +54,7 @@ class Favourite extends React.Component {
       if (prevProps.authenticated !== authenticated) {
         this.setState({
           isFavourited: getFavouritesFromLocalStorage(
-            'favourites',
+            "favourites",
             product.id,
             variant.color
           )
@@ -91,21 +91,21 @@ class Favourite extends React.Component {
           if (authenticated) {
             addFavouriteProduct(favouritedProduct);
           } else {
-            addFavouriteToLocalStorage('favourites', favouritedProduct);
+            addFavouriteToLocalStorage("favourites", favouritedProduct);
           }
         } else {
           if (authenticated) {
-            console.log('remove favourite from firestore');
+            console.log("remove favourite from firestore");
             removeFavouriteFromLocalStorage(
-              'favourites',
+              "favourites",
               this.props.product.id,
               variant.color
             );
             removeFavouriteProduct(favouritedProduct);
           } else {
-            console.log('Remove from local storage');
+            console.log("Remove from local storage");
             removeFavouriteFromLocalStorage(
-              'favourites',
+              "favourites",
               this.props.product.id,
               variant.color
             );
@@ -124,14 +124,14 @@ class Favourite extends React.Component {
         onClick={this.handleAddFavourite}
         className={
           isSelected
-            ? 'favourite__btn favourite__btn--active'
-            : 'favourite__btn'
+            ? "favourite__btn favourite__btn--active"
+            : "favourite__btn"
         }
       >
         <img
-          className='favourite__img'
+          className="favourite__img"
           src={isFavourited ? heartFilled : heartOutline}
-          alt='favourite'
+          alt="favourite"
         />
       </button>
     );
