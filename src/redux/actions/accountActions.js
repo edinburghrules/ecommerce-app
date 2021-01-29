@@ -28,7 +28,10 @@ export const getAccountData = () => {
   return async (dispatch) => {
     try {
       const accountDataResponse = await axios.get("/account");
-      dispatch({ type: SET_AUTHENTICATED, payload: accountDataResponse.data });
+      dispatch({
+        type: SET_AUTHENTICATED,
+        payload: accountDataResponse.data,
+      });
     } catch (err) {
       console.log(err.response.data);
     }

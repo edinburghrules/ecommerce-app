@@ -6,28 +6,30 @@ import { parseFavouritesFromLocalStorage } from "../../utils/local-storage/favou
 import { getFavouriteProducts } from "../../redux/actions/favouriteActions";
 
 class FavouritesPage extends React.Component {
+  /* set favourites depending on signed in or not */
   state = {
-    favourites:
-      this.props.authenticated === false
-        ? parseFavouritesFromLocalStorage("favourites")
-        : [],
+    favourites: [],
   };
 
+  /* When authenticated get favourites from firestore */
   componentDidMount = async () => {
     if (this.props.authenticated) {
       await this.props.getFavouriteProducts();
       this.setState({
         favourites: this.props.favourites,
       });
-    } else {
+    }
+    if (!this.props.authenticated && !this.props.match.params.accountId) {
       this.setState({
         favourites: parseFavouritesFromLocalStorage("favourites"),
       });
     }
   };
 
+  /* When refresh browser and signed in, authenticated is false momentarily, wait for it
+  to turn true */
   componentDidUpdate = async (prevProps) => {
-    if (this.props.authenticated && prevProps.authenticated === false) {
+    if (this.props.authenticated && !prevProps.authenticated) {
       await this.props.getFavouriteProducts();
       this.setState({
         favourites: this.props.favourites,
@@ -42,24 +44,29 @@ class FavouritesPage extends React.Component {
   };
 
   render() {
-    return (
-      <React.Fragment>
-        <h1>Favourites</h1>
-        <div className="favourites-list">
-          <FavouritesList
-            favourites={this.state.favourites}
-            authenticated={this.props.authenticated}
-            handleDelete={this.handleDelete}
-          />
-        </div>
-      </React.Fragment>
-    );
+    if (this.props.favouritesLoading) {
+      return <h1>LOADING...</h1>;
+    } else {
+      return (
+        <React.Fragment>
+          <h1>Favourites</h1>
+          <div className="favourites-list">
+            <FavouritesList
+              favourites={this.state.favourites}
+              authenticated={this.props.authenticated}
+              handleDelete={this.handleDelete}
+            />
+          </div>
+        </React.Fragment>
+      );
+    }
   }
 }
 
 const mapStateToProps = (state) => ({
   authenticated: state.account.authenticated,
   favourites: state.favourites.favouritesList,
+  favouritesLoading: state.async.loadingProducts,
 });
 
 const mapActionsToProps = {

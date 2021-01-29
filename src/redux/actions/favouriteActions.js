@@ -1,6 +1,10 @@
 import axios from "axios";
 import { SET_FAVOURITES } from "../types";
 import { parseFavouritesFromLocalStorage } from "../../utils/local-storage/favourites-handler";
+import {
+  startLoadingProducts,
+  stopLoadingProducts,
+} from "../actions/asyncActions";
 
 export const getFavouriteProducts = () => {
   const favouritesFromLocalStorage = parseFavouritesFromLocalStorage(
@@ -13,14 +17,16 @@ export const getFavouriteProducts = () => {
 
   return async (dispatch) => {
     try {
+      dispatch(startLoadingProducts());
       const getFavouriteProductsResponse = await axios.post(
         "/get-favourites",
-        favouritesFromLocalStorage
+        favouritesFromLocalStorageData
       );
       dispatch({
         type: SET_FAVOURITES,
         payload: getFavouriteProductsResponse.data,
       });
+      dispatch(stopLoadingProducts());
       return true;
     } catch (err) {
       console.log(err);

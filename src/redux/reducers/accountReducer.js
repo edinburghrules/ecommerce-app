@@ -1,4 +1,4 @@
-import { SET_AUTHENTICATED, SET_UNAUTHENTICATED } from '../types';
+import { SET_AUTHENTICATED, SET_UNAUTHENTICATED } from "../types";
 
 const initState = {
   authenticated: false,

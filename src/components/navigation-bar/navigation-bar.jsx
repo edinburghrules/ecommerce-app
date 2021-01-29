@@ -250,7 +250,11 @@ class NavigationBar extends React.Component {
               </div>
             </div>
             <div className="navigation__user-menu-item">
-              <Link to={`/favourites`}>
+              <Link
+                to={
+                  authenticated ? `/favourites/${account.email}` : `/favourites`
+                }
+              >
                 <img src={favourites} alt="favourites" />
               </Link>
             </div>

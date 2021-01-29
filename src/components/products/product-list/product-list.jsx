@@ -1,15 +1,15 @@
-import React from 'react';
-import './product-list.scss';
-import { connect } from 'react-redux';
-import queryString from 'query-string';
-import ProductListItem from '../product-list-item/product-list-item';
-import Loading from '../../loading/loading';
+import React from "react";
+import "./product-list.scss";
+import { connect } from "react-redux";
+import queryString from "query-string";
+import ProductListItem from "../product-list-item/product-list-item";
+import Loading from "../../loading/loading";
 import {
   getAllProducts,
   getCategoryProducts,
   getFilteredProducts,
-} from '../../../redux/actions/productActions';
-import { getFavouriteProducts } from '../../../redux/actions/favouriteActions';
+} from "../../../redux/actions/productActions";
+import { getFavouriteProducts } from "../../../redux/actions/favouriteActions";
 
 class ProductList extends React.Component {
   state = {
@@ -19,10 +19,10 @@ class ProductList extends React.Component {
       : false,
     colors: this.props.location.search
       ? queryString.parse(this.props.location.search).colors
-      : '',
+      : "",
     bestFor: this.props.location.search
       ? queryString.parse(this.props.location.search).bestfor
-      : '',
+      : "",
   };
 
   componentDidMount = () => {
@@ -52,7 +52,7 @@ class ProductList extends React.Component {
   // Only run when authenticated is still false after page refresh
   componentDidUpdate = (prevProps) => {
     const { authenticated, getFavouriteProducts } = this.props;
-    if (prevProps.authenticated === false && authenticated) {
+    if (!prevProps.authenticated && authenticated) {
       getFavouriteProducts();
     }
   };
@@ -64,11 +64,11 @@ class ProductList extends React.Component {
     if (loading) return <Loading />;
 
     return (
-      <div className='product-list'>
+      <div className="product-list">
         {products &&
           products.map((product, index) => (
             <ProductListItem
-              colorOptions={colors && colors.split(',')}
+              colorOptions={colors && colors.split(",")}
               key={index}
               product={product}
             />
