@@ -26,9 +26,16 @@ class FavouritesPage extends React.Component {
     }
   };
 
-  /* When refresh browser and signed in, authenticated is false momentarily, wait for it
-  to turn true */
-  componentDidUpdate = async (prevProps) => {
+  componentDidUpdate = async (prevProps, prevState) => {
+    /* When favourites change e.g deleted then update favourites 
+    in state with new favourites from props */
+    if (this.props.favourites !== prevProps.favourites) {
+      this.setState({
+        favourites: this.props.favourites,
+      });
+    }
+    /* When refresh browser and signed in, authenticated is false momentarily, wait for it
+    to turn true and then get favourites */
     if (this.props.authenticated && !prevProps.authenticated) {
       await this.props.getFavouriteProducts();
       this.setState({
@@ -44,12 +51,12 @@ class FavouritesPage extends React.Component {
   };
 
   render() {
-    if (this.props.favouritesLoading) {
-      return <h1>LOADING...</h1>;
-    } else {
-      return (
-        <React.Fragment>
-          <h1>Favourites</h1>
+    return (
+      <React.Fragment>
+        <h1>Favourites</h1>
+        {this.props.favouritesLoading ? (
+          <h1>LOADING...</h1>
+        ) : this.state.favourites.length > 0 ? (
           <div className="favourites-list">
             <FavouritesList
               favourites={this.state.favourites}
@@ -57,9 +64,11 @@ class FavouritesPage extends React.Component {
               handleDelete={this.handleDelete}
             />
           </div>
-        </React.Fragment>
-      );
-    }
+        ) : (
+          <h1>No favourites here!</h1>
+        )}
+      </React.Fragment>
+    );
   }
 }
 

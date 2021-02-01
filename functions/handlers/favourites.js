@@ -1,4 +1,4 @@
-const { db } = require('../util/admin');
+const { db } = require("../util/admin");
 
 const getFavourites = async (req, res) => {
   const email = req.account.email;
@@ -10,9 +10,9 @@ const getFavourites = async (req, res) => {
     try {
       const batch = db.batch();
       const dbRef = db
-        .collection('accounts')
+        .collection("accounts")
         .doc(email)
-        .collection('favourites');
+        .collection("favourites");
       favouritesFromLocalStorage.forEach((product) => {
         batch.set(dbRef.doc(`${product.id}_${product.color}`), product);
       });
@@ -21,9 +21,9 @@ const getFavourites = async (req, res) => {
       const favourites = [];
 
       const querySnapshot = await db
-        .collection('accounts')
+        .collection("accounts")
         .doc(email)
-        .collection('favourites')
+        .collection("favourites")
         .get();
 
       querySnapshot.forEach((doc) => favourites.push({ ...doc.data() }));
@@ -38,9 +38,9 @@ const getFavourites = async (req, res) => {
       const favourites = [];
 
       const querySnapshot = await db
-        .collection('accounts')
+        .collection("accounts")
         .doc(email)
-        .collection('favourites')
+        .collection("favourites")
         .get();
 
       querySnapshot.forEach((doc) => favourites.push({ ...doc.data() }));
@@ -62,7 +62,7 @@ const addFavourite = async (req, res) => {
       .doc(`${product.id}_${product.color}`)
       .set({ ...product });
 
-    return res.status(201).json({ success: 'Favourite added' });
+    return res.status(201).json({ success: "Favourite added" });
   } catch (err) {
     console.error(err);
     return res.status(400).json({ error: err.code });
@@ -77,7 +77,7 @@ const removeFavourite = async (req, res) => {
       .collection(`accounts/${email}/favourites`)
       .doc(`${product.id}_${product.color}`)
       .delete();
-    return res.status(201).json({ success: 'Favourite removed' });
+    return res.status(201).json({ success: "Favourite removed" });
   } catch (err) {
     console.error(err);
     return res.status(400).json({ error: err.code });

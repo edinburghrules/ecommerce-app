@@ -1,9 +1,13 @@
-import React from 'react';
-import './favourite-card.scss';
-import { connect } from 'react-redux';
-import { addToCartLocalStorage } from '../../../utils/local-storage/cart-handler';
-import { parseFavouritesFromLocalStorage, removeFavouriteFromLocalStorage } from '../../../utils/local-storage/favourites-handler';
-import { addToCart } from '../../../redux/actions/cartActions';
+import React from "react";
+import "./favourite-card.scss";
+import { connect } from "react-redux";
+import { addToCartLocalStorage } from "../../../utils/local-storage/cart-handler";
+import {
+  parseFavouritesFromLocalStorage,
+  removeFavouriteFromLocalStorage,
+} from "../../../utils/local-storage/favourites-handler";
+import { removeFavouriteProduct } from "../../../redux/actions/favouriteActions";
+import { addToCart } from "../../../redux/actions/cartActions";
 
 class FavouriteCard extends React.Component {
   state = {
@@ -27,25 +31,26 @@ class FavouriteCard extends React.Component {
       size: this.state.selectedSize,
     };
     if (this.props.authenticated) {
-      console.log('IF AUTHENTICATED SAVE TO FIRESTORE');
+      console.log("IF AUTHENTICATED SAVE TO FIRESTORE");
       this.props.addToCart(productToAdd);
     } else {
-      console.log('SAVE TO LOCAL STORAGE');
-      addToCartLocalStorage('cart', productToAdd);
+      console.log("SAVE TO LOCAL STORAGE");
+      addToCartLocalStorage("cart", productToAdd);
     }
   };
 
   removeFromFavourites = () => {
     if (this.props.authenticated) {
-      console.log('IF AUTHENTICATED REMOVE FROM FIRESTORE');
+      console.log("IF AUTHENTICATED REMOVE FROM FIRESTORE");
+      this.props.removeFavouriteProduct(this.props.favourite);
     } else {
-      console.log('REMOVE FROM LOCAL STORAGE');
+      console.log("REMOVE FROM LOCAL STORAGE");
       removeFavouriteFromLocalStorage(
-        'favourites',
+        "favourites",
         this.props.favourite.id,
         this.props.favourite.color
       );
-      this.props.handleDelete(parseFavouritesFromLocalStorage('favourites'));
+      this.props.handleDelete(parseFavouritesFromLocalStorage("favourites"));
     }
   };
 
@@ -55,13 +60,13 @@ class FavouriteCard extends React.Component {
 
     return (
       <React.Fragment>
-        <div className='favourite-card'>
-          <img src={img && img} alt='product' />
+        <div className="favourite-card">
+          <img src={img && img} alt="product" />
           <h3>{name && name}</h3>
           <p>£{price && price}</p>
           <p>{color && color}</p>
           <select onChange={this.handleChange}>
-            <option defaultValue disabled hidden>
+            <option defaultValue hidden>
               Select size
             </option>
             {sizes &&
@@ -91,6 +96,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionsToProps = {
   addToCart,
+  removeFavouriteProduct,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(FavouriteCard);
