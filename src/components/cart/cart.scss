@@ -1,19 +1,6 @@
-@import '../../sass/colors';
-@import '../../sass/fonts';
-@import '../../sass/utils';
-
-.cart {
-  display: block;
-  visibility: visible;
-  overflow: hidden;
-  position: fixed;
-  height: 100vh;
-  top: 0;
-  right: 0;
-  background: $light-bg;
-  z-index: 4;
-  transition: 0.1s;
-}
+@import "../../sass/colors";
+@import "../../sass/fonts";
+@import "../../sass/utils";
 
 .cart h1 {
   font-size: $small;
@@ -36,11 +23,16 @@
 
 .cart__close-btn {
   position: absolute;
-  top: 2.8rem;
+  top: 3.6rem;
   left: 2.8rem;
   height: 2.2rem;
   cursor: pointer;
   z-index: 7;
+  transition: transform 0.2s;
+}
+
+.cart__close-btn:hover {
+  transform: translateX(0.5rem);
 }
 
 .cart__delivery-container {

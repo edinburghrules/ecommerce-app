@@ -23,8 +23,8 @@ class NavigationBar extends React.Component {
     shoesDropdown: false,
     collectionsDropddown: false,
     mobileMenuWidth: 0,
-    cartMenuWidth: 0,
     cartOpen: false,
+    cartClosing: false,
     x: 0,
   };
 
@@ -62,12 +62,6 @@ class NavigationBar extends React.Component {
 
     if (e.target.id === "cart") {
       this.setState((prevState) => ({
-        cartMenuWidth:
-          prevState.windowWidth > 950
-            ? 40
-            : prevState.windowWidth > 768
-            ? 50
-            : 100,
         cartOpen: true,
       }));
     }
@@ -76,9 +70,15 @@ class NavigationBar extends React.Component {
   handleClose = (e) => {
     if (e.currentTarget.id === "close-cart") {
       this.setState({
-        cartMenuWidth: 0,
-        cartOpen: false,
+        cartClosing: true,
       });
+
+      setTimeout(() => {
+        this.setState({
+          cartClosing: false,
+          cartOpen: false,
+        });
+      }, 200);
     }
 
     if (e.currentTarget.id === "close-mobile") {
@@ -164,7 +164,7 @@ class NavigationBar extends React.Component {
       apparelDropdown,
       shoesDropdown,
       collectionsDropdown,
-      cartMenuWidth,
+      cartClosing,
       cartOpen,
       mobileMenuWidth,
       x,
@@ -190,7 +190,13 @@ class NavigationBar extends React.Component {
           x={x}
         />
         <nav className="navigation">
-          <Cart handleClose={this.handleClose} cartMenuWidth={cartMenuWidth} />
+          {cartOpen && (
+            <div
+              className={cartClosing === false ? "cart__open" : "cart__closed"}
+            >
+              <Cart handleClose={this.handleClose} />
+            </div>
+          )}
           <div className="navigation__menu">
             <ul className="navigation__menu-list">
               <li
@@ -283,11 +289,7 @@ class NavigationBar extends React.Component {
           linksToRender={linksToRender}
         />
         <div
-          className={
-            mensDesktopOpen || womensDesktopOpen || cartOpen
-              ? "overlay open"
-              : ""
-          }
+          className={mensDesktopOpen || womensDesktopOpen ? "overlay open" : ""}
         ></div>
       </React.Fragment>
     );

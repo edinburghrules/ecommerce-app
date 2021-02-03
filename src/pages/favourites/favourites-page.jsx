@@ -22,7 +22,6 @@ class FavouritesPage extends React.Component {
       });
     }
     if (!this.props.authenticated && !this.props.match.params.accountId) {
-      console.log("yeah");
       this.setState({
         favourites: parseFavouritesFromLocalStorage("favourites"),
       });
