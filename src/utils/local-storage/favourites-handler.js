@@ -3,7 +3,7 @@ export const parseFavouritesFromLocalStorage = (favourites) => {
   let favouritesFromLocalStorage = localStorage.getItem(favourites);
   favouritesFromLocalStorage = JSON.parse(favouritesFromLocalStorage);
 
-  return favouritesFromLocalStorage;
+  return favouritesFromLocalStorage ? favouritesFromLocalStorage : [];
 };
 
 // Get favourites from local storage
@@ -71,4 +71,9 @@ export const removeFavouriteFromLocalStorage = (
 
     getFavouritesFromLocalStorage(favourites, productId, productVariantColor);
   }
+};
+
+// Remove all favourites from local storage
+export const removeAllFavouritesFromLocalStorage = (favourites) => {
+  localStorage.removeItem(favourites);
 };

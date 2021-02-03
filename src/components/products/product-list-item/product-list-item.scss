@@ -1,6 +1,6 @@
-@import '../../../sass/colors';
-@import '../../../sass/fonts';
-@import '../../../sass/utils';
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/utils";
 
 .product-list-item {
   height: 68rem;
@@ -56,6 +56,15 @@
   text-transform: capitalize;
   display: block;
   margin-top: 1rem;
+}
+
+.product-list-item__variant-size:hover {
+  background: #f5f5f5;
+}
+
+.product-list-item__variant-size:active {
+  background: $dark-bg;
+  color: $light-text;
 }
 
 .product-list-item__price {

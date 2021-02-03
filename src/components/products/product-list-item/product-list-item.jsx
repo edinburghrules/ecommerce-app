@@ -1,6 +1,6 @@
-import React from 'react';
-import './product-list-item.scss';
-import Favourite from './favourite';
+import React from "react";
+import "./product-list-item.scss";
+import Favourite from "./favourite";
 
 class ProductListItem extends React.Component {
   state = {
@@ -9,6 +9,7 @@ class ProductListItem extends React.Component {
     colorIndex: 0,
   };
 
+  
   componentDidMount = () => {
     if (this.state.colors.length > 0) {
       // Create color index to show selected color image and details
@@ -41,20 +42,21 @@ class ProductListItem extends React.Component {
     const {
       product: { name, price, variants, id },
     } = this.props;
+
     const renderVariants = (variant, index) => {
       const renderBy = colors.length > 0 ? colorIndex : variantIndex;
       if (renderBy === index) {
         return (
-          <div className='product-list-item__variant-sizes'>
+          <div className="product-list-item__variant-sizes">
             <h5>Quick Add</h5>
-            <div className='product-list-item__variant-size-list'>
+            <div className="product-list-item__variant-size-list">
               {variant.sizes &&
                 variant.sizes.map(({ size, stockQty }, index) => {
                   if (stockQty > 0) {
                     return (
                       <div
                         key={index}
-                        className='product-list-item__variant-size'
+                        className="product-list-item__variant-size"
                       >
                         <p>UK</p>
                         <p>{size}</p>
@@ -69,23 +71,23 @@ class ProductListItem extends React.Component {
       }
     };
     return (
-      <div className='product-list-item'>
-        <div className='product-list-item__content'>
+      <div className="product-list-item">
+        <div className="product-list-item__content">
           <img
-            className='product-list-item__main-img'
+            className="product-list-item__main-img"
             src={
               colors ? variants[colorIndex].image : variants[variantIndex].image
             }
-            alt='shoe'
+            alt="shoe"
           />
-          <div className='product-list-item__content-header'>
-            <h1 className='product-list-item__title'>{name}</h1>
+          <div className="product-list-item__content-header">
+            <h1 className="product-list-item__title">{name}</h1>
           </div>
-          <p className='product-list-item__variant'>
+          <p className="product-list-item__variant">
             {colors ? variants[colorIndex].color : variants[variantIndex].color}
           </p>
-          <p className='product-list-item__price'>£{price}</p>
-          <div className='product-list-item__variants'>
+          <p className="product-list-item__price">£{price}</p>
+          <div className="product-list-item__variants">
             {variants &&
               variants.map((variant, index) => {
                 if (colors && colors.includes(variant.color)) {
@@ -99,8 +101,8 @@ class ProductListItem extends React.Component {
                       <img
                         className={
                           colors && colorIndex === index
-                            ? 'product-list-item__variant-img--active'
-                            : 'product-list-item__variant-img'
+                            ? "product-list-item__variant-img--active"
+                            : "product-list-item__variant-img"
                         }
                         onClick={() => this.handleVariantSelect(index)}
                         src={variant.image}
@@ -120,8 +122,8 @@ class ProductListItem extends React.Component {
                       <img
                         className={
                           variantIndex === index
-                            ? 'product-list-item__variant-img--active'
-                            : 'product-list-item__variant-img'
+                            ? "product-list-item__variant-img--active"
+                            : "product-list-item__variant-img"
                         }
                         onClick={() => this.handleVariantSelect(index)}
                         src={variant.image}
