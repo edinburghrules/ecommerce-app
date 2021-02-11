@@ -11,7 +11,7 @@ export const getFavouritesList = () => {
     "favourites"
   );
 
-  const favouritesFromLocalStorageData = {
+  const productData = {
     favouritesFromLocalStorage,
   };
 
@@ -20,7 +20,7 @@ export const getFavouritesList = () => {
       dispatch(startLoadingProducts());
       const getFavouriteProductsResponse = await axios.post(
         "/get-favourites",
-        favouritesFromLocalStorageData
+        productData
       );
       dispatch({
         type: SET_FAVOURITES,
@@ -33,30 +33,28 @@ export const getFavouritesList = () => {
       console.log(err);
     }
   };
-}
+};
 
 export const getFavouriteProducts = () => {
   const favouritesFromLocalStorage = parseFavouritesFromLocalStorage(
     "favourites"
   );
 
-  const favouritesFromLocalStorageData = {
+  const productData = {
     favouritesFromLocalStorage,
   };
 
   return async (dispatch) => {
     try {
-      // dispatch(startLoadingProducts());
       const getFavouriteProductsResponse = await axios.post(
         "/get-favourites",
-        favouritesFromLocalStorageData
+        productData
       );
       dispatch({
         type: SET_FAVOURITES,
         payload: getFavouriteProductsResponse.data,
       });
       removeAllFavouritesFromLocalStorage("favourites");
-      // dispatch(stopLoadingProducts());
       return true;
     } catch (err) {
       console.log(err);
@@ -65,12 +63,13 @@ export const getFavouriteProducts = () => {
 };
 
 export const addFavouriteProduct = (product) => {
-  const addFavouriteData = {
+  const productData = {
     product,
   };
+  console.log(product);
   return async (dispatch) => {
     try {
-      await axios.post("/add-favourite", addFavouriteData);
+      await axios.post("/add-favourite", productData);
       dispatch(getFavouriteProducts());
     } catch (err) {
       console.log(err);
@@ -79,12 +78,12 @@ export const addFavouriteProduct = (product) => {
 };
 
 export const removeFavouriteProduct = (product) => {
-  const removeFavouriteData = {
+  const productData = {
     product,
   };
   return async (dispatch) => {
     try {
-      await axios.post("/remove-favourite", removeFavouriteData);
+      await axios.post("/remove-favourite", productData);
       dispatch(getFavouritesList());
     } catch (err) {
       console.log(err);

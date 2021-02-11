@@ -27,12 +27,14 @@ const token = localStorage.firebaseToken;
 function load() {
   if (token) {
     const decodedToken = jwtDecode(token);
-    if (decodedToken.exp * 1000 < Date.now()) {
+    if (decodedToken.exp * 10000 < Date.now()) {
       store.dispatch(signOut());
     } else {
       axios.defaults.headers.common["Authorization"] = token;
       store.dispatch(getAccountData());
     }
+  } else {
+    return null;
   }
 }
 

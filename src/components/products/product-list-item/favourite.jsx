@@ -86,6 +86,7 @@ class Favourite extends React.Component {
           color: variant.color,
           img: variant.image,
           sizes: variant.sizes,
+          category: product.category,
         };
         if (this.state.isFavourited) {
           if (authenticated) {

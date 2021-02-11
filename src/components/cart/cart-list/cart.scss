@@ -1,0 +1,158 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/utils";
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 14rem;
+}
+
+.cart h1 {
+  font-size: $small;
+  font-weight: $bold;
+}
+
+.cart__top {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.cart__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart__close-btn {
+  position: absolute;
+  top: 3.6rem;
+  left: 2.8rem;
+  height: 2.2rem;
+  cursor: pointer;
+  z-index: 7;
+  transition: transform 0.2s;
+}
+
+.cart__close-btn:hover {
+  transform: translateX(0.5rem);
+}
+
+.cart__delivery-container {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.cart__total-container {
+  position: relative;
+}
+
+.cart__total {
+  position: absolute;
+  font-size: 1.4rem;
+  font-weight: $bold;
+}
+
+.cart__total--sm {
+  top: 1.6rem;
+  left: 1.4rem;
+}
+
+.cart__total--lg {
+  top: 1.6rem;
+  left: 1.1rem;
+}
+
+.cart__icon {
+  height: 3.6rem;
+  margin-bottom: 5rem;
+}
+
+.cart__free-delivery {
+  display: block;
+  font-size: $xxsmall;
+  font-weight: $bold;
+}
+
+.cart__progress-bar {
+  height: 5px;
+  width: 100%;
+  background: #eee;
+  border-radius: 4px;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.cart__product-categories {
+  font-family: $Montserrat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 20rem;
+  width: 80%;
+  margin: 2rem auto;
+  text-transform: uppercase;
+}
+
+.cart__product-btn {
+  all: unset;
+  padding: 1rem;
+  font-size: $small;
+  font-weight: $semiBold;
+  border: 2px solid #ddd;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cart__content {
+  width: 100%;
+  padding: 0 4rem;
+  flex-grow: 1;
+}
+
+.cart__bottom {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  justify-content: space-between;
+}
+
+.cart__total-price {
+  display: flex;
+  justify-content: space-between;
+  font-size: $xsmall;
+  margin-bottom: 2rem;
+  font-weight: $semiBold;
+}
+
+.cart__shipping-cost {
+  display: flex;
+  justify-content: space-between;
+  font-size: $xsmall;
+  font-weight: $semiBold;
+}
+
+.cart__checkout-btn {
+  background: $dark-bg;
+  color: $light-text;
+  text-transform: uppercase;
+  font-size: $small;
+  letter-spacing: 2px;
+  padding: 1.5rem;
+  font-weight: $semiBold;
+  border: none;
+  margin-top: 4rem;
+}
+
+.cart__checkout-btn:focus {
+  outline: none !important;
+}

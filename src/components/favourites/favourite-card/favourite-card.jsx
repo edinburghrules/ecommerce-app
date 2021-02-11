@@ -23,12 +23,15 @@ class FavouriteCard extends React.Component {
     }
   };
 
-  addToCart = () => {
+  addToCart = async () => {
     const productToAdd = {
       id: this.props.favourite.id,
       name: this.props.favourite.name,
+      price: this.props.favourite.price,
+      image: this.props.favourite.img,
       color: this.props.favourite.color,
       size: this.state.selectedSize,
+      category: this.props.favourite.category,
     };
     if (this.props.authenticated) {
       console.log("IF AUTHENTICATED SAVE TO FIRESTORE");

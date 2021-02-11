@@ -3,8 +3,9 @@ import "./navigation-bar.scss";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/accountActions";
+import { closeCart } from "../../redux/actions/cartActions";
 import NavDropdown from "../nav-dropdown/nav-dropdown";
-import Cart from "../cart/cart";
+import Cart from "../cart/cart-list/cart";
 import MobileNav from "../mobile-nav/mobile-nav";
 import logo from "../../assets/logo2.png";
 import user from "../../assets/001-user.png";
@@ -39,6 +40,14 @@ class NavigationBar extends React.Component {
     });
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (!prevState.cartOpen && this.props.cartOpen) {
+      this.setState({
+        cartOpen: true,
+      });
+    }
+  };
+
   handleOpen = (e) => {
     if (e.target.id === "womens") {
       this.setState({
@@ -69,6 +78,8 @@ class NavigationBar extends React.Component {
 
   handleClose = (e) => {
     if (e.currentTarget.id === "close-cart") {
+      this.props.closeCart();
+
       this.setState({
         cartClosing: true,
       });
@@ -300,11 +311,13 @@ const mapStateToProps = (state) => {
   return {
     authenticated: state.account.authenticated,
     account: state.account.credentials,
+    cartOpen: state.cart.cartOpen,
   };
 };
 
 const mapActionsToProps = {
   signOut,
+  closeCart,
 };
 
 export default withRouter(

@@ -1,18 +1,18 @@
-import React from 'react';
-import './loading.scss';
-import { Spinner } from 'react-bootstrap';
+import React from "react";
+import "./loading.scss";
+import { Spinner } from "react-bootstrap";
 
 const Loading = () => {
   return (
-    <div className='loading'>
+    <div className="loading">
       <Spinner
         style={{
-          height: '3rem',
-          width: '3rem',
-          borderWidth: '.4rem',
-          color: '#666',
+          height: "3rem",
+          width: "3rem",
+          borderWidth: ".4rem",
         }}
-        animation='border'
+        animation="border"
+        variant="primary"
       />
     </div>
   );

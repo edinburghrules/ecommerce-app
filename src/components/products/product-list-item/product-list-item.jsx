@@ -9,7 +9,6 @@ class ProductListItem extends React.Component {
     colorIndex: 0,
   };
 
-  
   componentDidMount = () => {
     if (this.state.colors.length > 0) {
       // Create color index to show selected color image and details
@@ -40,7 +39,7 @@ class ProductListItem extends React.Component {
   render() {
     const { variantIndex, colorIndex, colors } = this.state;
     const {
-      product: { name, price, variants, id },
+      product: { name, price, variants, id, category },
     } = this.props;
 
     const renderVariants = (variant, index) => {
@@ -115,7 +114,7 @@ class ProductListItem extends React.Component {
                   return (
                     <React.Fragment key={index}>
                       <Favourite
-                        product={{ id, name, price }}
+                        product={{ id, name, price, category }}
                         variant={variant}
                         isSelected={variantIndex === index}
                       />
