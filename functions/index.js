@@ -25,6 +25,7 @@ const {
   deleteFromCart,
   increaseQty,
   decreaseQty,
+  getStockQty,
 } = require("./handlers/cart");
 
 app.post("/add-to-cart", firebaseAuth, addToCart);
@@ -32,6 +33,7 @@ app.get("/get-cart", firebaseAuth, getCart);
 app.post("/delete-from-cart", firebaseAuth, deleteFromCart);
 app.post("/increase-qty", firebaseAuth, increaseQty);
 app.post("/decrease-qty", firebaseAuth, decreaseQty);
+app.post("/get-stock-qty", getStockQty);
 
 // Favourite routes
 const {

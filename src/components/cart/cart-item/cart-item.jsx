@@ -16,7 +16,7 @@ class CartItem extends React.Component {
       color: this.props.cartItem.color,
       size: this.props.cartItem.size,
     };
-    this.props.deleteFromCart(product);
+    this.props.deleteFromCart(product, this.props.authenticated);
   };
 
   handleQtyChange = async (e) => {
@@ -27,9 +27,9 @@ class CartItem extends React.Component {
       category: this.props.cartItem.category,
     };
     if (e.currentTarget.id === "increase") {
-      this.props.increaseQty(product);
+      this.props.increaseQty(product, this.props.authenticated);
     } else if (e.currentTarget.id === "decrease") {
-      this.props.decreaseQty(product);
+      this.props.decreaseQty(product, this.props.authenticated);
     }
   };
 
@@ -58,7 +58,9 @@ class CartItem extends React.Component {
               />
             </button>
           </div>
-          <p className="cart-item__color">{capitaliseFirstLetter(color)}</p>
+          <p className="cart-item__color">
+            {color && capitaliseFirstLetter(color)}
+          </p>
           <p className="cart-item__size">{`Size: UK ${size}`}</p>
           <div className="cart-item__qty-container">
             <div className="cart-item__qty">
@@ -83,6 +85,7 @@ class CartItem extends React.Component {
 
 const mapStateToProps = (state) => ({
   lowStockMsg: state.cart.lowStockMsg,
+  authenticated: state.account.authenticated,
 });
 
 const mapActionsToProps = {

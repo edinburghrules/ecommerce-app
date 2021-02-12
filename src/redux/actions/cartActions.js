@@ -7,6 +7,14 @@ import {
 } from "../types";
 import axios from "axios";
 import { startLoadingCart, stopLoadingCart } from "./asyncActions";
+import {
+  deleteFromCartLocalStorage,
+  parseCartFromLocalStorage,
+  addToCartLocalStorage,
+  increaseQtyLocalStorage,
+  decreaseQtyLocalStorage,
+  getCurrentQtyLocalStorage,
+} from "../../utils/local-storage/cart-handler";
 
 export const openCart = () => {
   return { type: OPEN_CART };
@@ -16,75 +24,115 @@ export const closeCart = () => {
   return { type: CLOSE_CART };
 };
 
-export const getCart = () => {
+export const getCart = (authenticated) => {
   return async (dispatch) => {
-    try {
+    if (authenticated) {
+      try {
+        dispatch(startLoadingCart());
+        const getCartResponse = await axios.get("/get-cart");
+        dispatch({ type: SET_CART, payload: getCartResponse.data });
+        dispatch(stopLoadingCart());
+        return;
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
       dispatch(startLoadingCart());
-      const getCartResponse = await axios.get("/get-cart");
-      dispatch({ type: SET_CART, payload: getCartResponse.data });
+      const cartFromLocalStorage = parseCartFromLocalStorage("cart");
+      dispatch({ type: SET_CART, payload: cartFromLocalStorage });
       dispatch(stopLoadingCart());
-      return;
-    } catch (err) {
-      console.log(err);
     }
   };
 };
 
-export const addToCart = (product) => {
+export const addToCart = (product, authenticated) => {
   const productData = {
     product,
   };
   return async (dispatch) => {
-    try {
-      await axios.post("/add-to-cart", productData);
+    if (authenticated) {
+      try {
+        await axios.post("/add-to-cart", productData);
+        dispatch(openCart());
+      } catch (err) {
+        dispatch({ type: LOW_STOCK, payload: err.response.data.fail });
+        dispatch(openCart());
+      }
+    } else {
+      addToCartLocalStorage(product);
       dispatch(openCart());
-    } catch (err) {
-      dispatch({ type: LOW_STOCK, payload: err.response.data.fail });
-      dispatch(openCart());
     }
   };
 };
 
-export const increaseQty = (product) => {
+export const increaseQty = (product, authenticated) => {
   const productData = {
     product,
   };
   return async (dispatch) => {
-    try {
-      await axios.post("/increase-qty", productData);
-      dispatch(getCart());
-    } catch (err) {
-      console.log(err);
-      dispatch({ type: LOW_STOCK, payload: err.response.data.fail });
+    if (authenticated) {
+      try {
+        await axios.post("/increase-qty", productData);
+        dispatch(getCart(authenticated));
+      } catch (err) {
+        console.log(err);
+        dispatch({ type: LOW_STOCK, payload: err.response.data.fail });
+      }
+    } else {
+      const response = await axios.post("/get-stock-qty", productData);
+      const qtyInStock = response.data;
+      // increase qty of product in cart if cartQty is less than stockQty
+      const currentQty = getCurrentQtyLocalStorage(product);
+      if (currentQty < qtyInStock) {
+        increaseQtyLocalStorage(product);
+        dispatch(getCart(authenticated));
+      } else {
+        dispatch({
+          type: LOW_STOCK,
+          payload:
+            "Sorry, there is not enough stock to increase quantity further",
+        });
+      }
     }
   };
 };
 
-export const decreaseQty = (product) => {
+export const decreaseQty = (product, authenticated) => {
   const productData = {
     product,
   };
   return async (dispatch) => {
-    try {
-      await axios.post("/decrease-qty", productData);
-      dispatch(getCart());
+    if (authenticated) {
+      try {
+        await axios.post("/decrease-qty", productData);
+        dispatch(getCart(authenticated));
+        dispatch({ type: CLEAR_LOW_STOCK });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      decreaseQtyLocalStorage(product);
+      dispatch(getCart(authenticated));
       dispatch({ type: CLEAR_LOW_STOCK });
-    } catch (err) {
-      console.log(err);
     }
   };
 };
 
-export const deleteFromCart = (product) => {
+export const deleteFromCart = (product, authenticated) => {
   const productData = {
     product,
   };
   return async (dispatch) => {
-    try {
-      await axios.post("/delete-from-cart", productData);
-      dispatch(getCart());
-    } catch (err) {
-      console.log(err);
+    if (authenticated) {
+      try {
+        await axios.post("/delete-from-cart", productData);
+        dispatch(getCart(authenticated));
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      deleteFromCartLocalStorage(product);
+      dispatch(getCart(authenticated));
     }
   };
 };

@@ -16,16 +16,10 @@ class Cart extends Component {
 
   // Get cart items
   componentDidMount = async () => {
-    if (this.props.authenticated) {
-      await this.props.getCart();
-      this.setState({
-        cart: this.props.cart,
-      });
-    } else {
-      this.setState({
-        cart: [{ name: "FAKE NEWS!" }],
-      });
-    }
+    await this.props.getCart(this.props.authenticated);
+    this.setState({
+      cart: this.props.cart,
+    });
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -75,7 +69,7 @@ class Cart extends Component {
                       : "cart__total cart__total--lg"
                   }
                 >
-                  <p>{totalQty && totalQty}</p>
+                  {/* <p>{totalQty && totalQty}</p> */}
                 </div>
               </div>
               <img className="cart__icon" src={shopping} alt="cart" />
@@ -90,8 +84,8 @@ class Cart extends Component {
           {cartLoading && <Loading />}
           {cart &&
             cart.length > 0 &&
-            cart.map((cartItem) => {
-              return <CartItem cartItem={cartItem} />;
+            cart.map((cartItem, i) => {
+              return <CartItem cartItem={cartItem} key={i} />;
             })}
           {cart && cart.length === 0 && (
             <React.Fragment>

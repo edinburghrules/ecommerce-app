@@ -1,13 +1,12 @@
 import React from "react";
 import "./favourite-card.scss";
 import { connect } from "react-redux";
-import { addToCartLocalStorage } from "../../../utils/local-storage/cart-handler";
 import {
   parseFavouritesFromLocalStorage,
   removeFavouriteFromLocalStorage,
 } from "../../../utils/local-storage/favourites-handler";
 import { removeFavouriteProduct } from "../../../redux/actions/favouriteActions";
-import { addToCart } from "../../../redux/actions/cartActions";
+import { addToCart, openCart } from "../../../redux/actions/cartActions";
 
 class FavouriteCard extends React.Component {
   state = {
@@ -32,14 +31,9 @@ class FavouriteCard extends React.Component {
       color: this.props.favourite.color,
       size: this.state.selectedSize,
       category: this.props.favourite.category,
+      qty: 1,
     };
-    if (this.props.authenticated) {
-      console.log("IF AUTHENTICATED SAVE TO FIRESTORE");
-      this.props.addToCart(productToAdd);
-    } else {
-      console.log("SAVE TO LOCAL STORAGE");
-      addToCartLocalStorage("cart", productToAdd);
-    }
+    this.props.addToCart(productToAdd, this.props.authenticated);
   };
 
   removeFromFavourites = () => {
@@ -100,6 +94,7 @@ const mapStateToProps = (state) => ({
 const mapActionsToProps = {
   addToCart,
   removeFavouriteProduct,
+  openCart,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(FavouriteCard);

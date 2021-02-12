@@ -15,7 +15,7 @@ const getCart = async (req, res) => {
   }
 };
 
-const getStockQty = async (product) => {
+const stockQty = async (product) => {
   const productRef = await db
     .collection(`${product.category}`)
     .doc(`${product.id}`)
@@ -38,7 +38,7 @@ const addToCart = async (req, res) => {
   const email = req.account.email;
   const product = req.body.product;
   try {
-    const stockQty = await getStockQty(product);
+    const qtyInStock = await stockQty(product);
 
     const cartItemRef = db
       .collection(`accounts/${email}/cart`)
@@ -48,7 +48,7 @@ const addToCart = async (req, res) => {
 
     if (doc.exists) {
       let newQty = doc.data().qty + 1;
-      if (newQty <= stockQty) {
+      if (newQty <= qtyInStock) {
         cartItemRef.update({
           qty: newQty,
         });
@@ -78,7 +78,7 @@ const increaseQty = async (req, res) => {
   const email = req.account.email;
   const product = req.body.product;
   try {
-    const stockQty = await getStockQty(product);
+    const qtyInStock = await stockQty(product);
     const doc = await db
       .collection(`accounts/${email}/cart`)
       .doc(`${product.id}_${product.color}_${product.size}`)
@@ -86,7 +86,7 @@ const increaseQty = async (req, res) => {
 
     const newQty = doc.data().qty + 1;
 
-    if (newQty <= stockQty) {
+    if (newQty <= qtyInStock) {
       await db
         .collection(`accounts/${email}/cart`)
         .doc(`${product.id}_${product.color}_${product.size}`)
@@ -152,10 +152,37 @@ const deleteFromCart = async (req, res) => {
   }
 };
 
+const getStockQty = async (req, res) => {
+  const product = req.body.product;
+  try {
+    const productRef = await db
+      .collection(`${product.category}`)
+      .doc(`${product.id}`)
+      .get();
+
+    const productVariants = productRef.data().variants;
+
+    const sizesInStock = productVariants.find(
+      (variant) => variant.color === product.color
+    );
+
+    const productSize = sizesInStock.sizes.find(
+      (item) => item.size == product.size
+    );
+
+    return res.status(200).json(productSize.stockQty);
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({ error: err.code });
+  }
+};
+
+
 module.exports = {
   getCart,
   addToCart,
   deleteFromCart,
   increaseQty,
   decreaseQty,
+  getStockQty,
 };
