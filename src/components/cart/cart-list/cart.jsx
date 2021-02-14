@@ -11,7 +11,10 @@ class Cart extends Component {
   state = {
     cart: [],
     totalPrice: 0,
-    shipping: 0,
+    shipping: 45,
+    freeDelivery: 45,
+    toFreeDelivery: 0,
+    toFreeDeliveryProgress: 0,
   };
 
   // Get cart items
@@ -37,17 +40,24 @@ class Cart extends Component {
       return total;
     }, 0);
 
+    console.log(this.state.freeDelivery - (totalPrice % 1));
+
     if (prevState.cart !== this.props.cart) {
       this.setState({
         cart: this.props.cart,
         totalQty,
         totalPrice,
+        toFreeDeliveryProgress: (totalPrice / this.state.freeDelivery) * 100,
+        toFreeDelivery:
+          this.state.freeDelivery - totalPrice > 0
+            ? this.state.freeDelivery - totalPrice
+            : 0,
       });
     }
   };
 
   render() {
-    const { cart, totalQty, totalPrice, shipping } = this.state;
+    const { cart, totalQty, totalPrice, shipping, toFreeDelivery } = this.state;
     const { handleClose, cartLoading } = this.props;
     return (
       <div className="cart">
@@ -75,9 +85,19 @@ class Cart extends Component {
               <img className="cart__icon" src={shopping} alt="cart" />
             </div>
             <p className="cart__free-delivery">
-              You're £50 away from free delivery
+              {toFreeDelivery > 0 &&
+                `You're £${toFreeDelivery} away from free delivery`}
+              {toFreeDelivery === 0 &&
+                `Congratulations you get free delivery 🎉`}
             </p>
-            <div className="cart__progress-bar"></div>
+            <div className="cart__progress-bar">
+              <div
+                style={{
+                  width: `${this.state.toFreeDeliveryProgress}%`,
+                }}
+                className="cart__progress-bar-progress"
+              ></div>
+            </div>
           </div>
         </div>
         <div className="cart__content">
@@ -105,7 +125,7 @@ class Cart extends Component {
           </div>
           <div className="cart__shipping-cost">
             <span>SHIPPING:</span>
-            <span>£{shipping} </span>
+            <span>£{toFreeDelivery === 0 ? "FREE" : shipping} </span>
           </div>
           <button className="cart__checkout-btn">Checkout</button>
         </div>

@@ -78,16 +78,25 @@
 .cart__free-delivery {
   display: block;
   font-size: $xxsmall;
-  font-weight: $bold;
+  font-weight: $semiBold;
 }
 
 .cart__progress-bar {
-  height: 5px;
-  width: 100%;
+  height: 7px;
+  width: 80%;
   background: #eee;
   border-radius: 4px;
   position: relative;
-  margin-top: 1rem;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+.cart__progress-bar-progress {
+  position: absolute;
+  height: 7px;
+  border-radius: 4px;
+  background: #00a86b;
+  transition: all 0.2s;
 }
 
 .cart__product-categories {
