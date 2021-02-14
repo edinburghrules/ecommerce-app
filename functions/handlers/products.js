@@ -1,4 +1,4 @@
-const { db } = require('../util/admin');
+const { db } = require("../util/admin");
 
 const getAllShoes = async (req, res) => {
   const collection = req.query.collection;
@@ -23,9 +23,11 @@ const getShoesByCategory = async (req, res) => {
   const productsRef = db.collection(collection);
   const products = [];
 
+  console.log(category);
+
   try {
     const querySnapshot = await productsRef
-      .where('category', '==', category)
+      .where("category", "==", category)
       .get();
     querySnapshot.forEach((doc) => {
       products.push({ id: doc.id, ...doc.data() });
@@ -43,26 +45,26 @@ const getShoesByFilter = async (req, res) => {
   let colors = req.query.colors ? req.query.colors : false;
   let bestFor = req.query.bestfor ? req.query.bestfor : false;
 
-  colors = colors && colors.split(',');
-  bestFor = bestFor && bestFor.split(',');
+  colors = colors && colors.split(",");
+  bestFor = bestFor && bestFor.split(",");
 
   const productsRef = db.collection(collection);
   let products = [];
 
   // Queries
   const categoryWithColors = productsRef
-    .where('category', '==', category)
-    .where('colors', 'array-contains-any', colors);
+    .where("category", "==", category)
+    .where("colors", "array-contains-any", colors);
 
   const categoryWithBestFor = productsRef
-    .where('category', '==', category)
-    .where('bestfor', 'array-contains-any', bestFor);
+    .where("category", "==", category)
+    .where("bestfor", "array-contains-any", bestFor);
 
-  const withColors = productsRef.where('colors', 'array-contains-any', colors);
+  const withColors = productsRef.where("colors", "array-contains-any", colors);
 
   const withBestFor = productsRef.where(
-    'bestfor',
-    'array-contains-any',
+    "bestfor",
+    "array-contains-any",
     bestFor
   );
 

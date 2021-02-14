@@ -17,7 +17,7 @@ const getCart = async (req, res) => {
 
 const stockQty = async (product) => {
   const productRef = await db
-    .collection(`${product.category}`)
+    .collection(`${product.collection}`)
     .doc(`${product.id}`)
     .get();
 
@@ -156,7 +156,7 @@ const getStockQty = async (req, res) => {
   const product = req.body.product;
   try {
     const productRef = await db
-      .collection(`${product.category}`)
+      .collection(`${product.collection}`)
       .doc(`${product.id}`)
       .get();
 
@@ -176,7 +176,6 @@ const getStockQty = async (req, res) => {
     return res.status(400).json({ error: err.code });
   }
 };
-
 
 module.exports = {
   getCart,

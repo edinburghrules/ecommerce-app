@@ -31,6 +31,7 @@ class FavouriteCard extends React.Component {
       color: this.props.favourite.color,
       size: this.state.selectedSize,
       category: this.props.favourite.category,
+      collection: this.props.favourite.collection,
       qty: 1,
     };
     this.props.addToCart(productToAdd, this.props.authenticated);

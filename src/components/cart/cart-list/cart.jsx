@@ -69,7 +69,7 @@ class Cart extends Component {
                       : "cart__total cart__total--lg"
                   }
                 >
-                  {/* <p>{totalQty && totalQty}</p> */}
+                  <p>{totalQty && totalQty}</p>
                 </div>
               </div>
               <img className="cart__icon" src={shopping} alt="cart" />

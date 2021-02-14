@@ -70,26 +70,31 @@
   border: 2px solid #ccc;
 }
 
-.cart-item__qty-container button {
+.cart-item__qty-btn {
   all: unset;
   font-size: 3.4rem;
   line-height: 3rem;
   color: #ccc;
 }
 
-.cart-item__qty-container button:hover {
+.cart-item__qty-btn:hover {
   color: #333;
 }
 
-.cart-item__qty-container button:focus {
+.cart-item__qty-btn--disabled,
+.cart-item__qty-btn--disabled:hover {
+  color: #eee;
+}
+
+.cart-item__qty-btn:focus {
   outline: none;
 }
 
-.cart-item__qty-container button:first-of-type {
+.cart-item__qty-btn:first-of-type {
   font-size: 2.6rem;
 }
 
-.cart-item__qty-container button:last-of-type {
+.cart-item__qty-btn:last-of-type {
   transform: translateY(-0.2rem);
 }
 

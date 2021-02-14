@@ -15,6 +15,7 @@ class CartItem extends React.Component {
       id: this.props.cartItem.id,
       color: this.props.cartItem.color,
       size: this.props.cartItem.size,
+      collection: this.props.cartItem.collection,
     };
     this.props.deleteFromCart(product, this.props.authenticated);
   };
@@ -24,7 +25,7 @@ class CartItem extends React.Component {
       id: this.props.cartItem.id,
       color: this.props.cartItem.color,
       size: this.props.cartItem.size,
-      category: this.props.cartItem.category,
+      collection: this.props.cartItem.collection,
     };
     if (e.currentTarget.id === "increase") {
       this.props.increaseQty(product, this.props.authenticated);
@@ -37,6 +38,7 @@ class CartItem extends React.Component {
     const {
       cartItem: { name, color, size, image, price, qty },
       lowStockMsg,
+      lowStock,
     } = this.props;
     return (
       <div className="cart-item">
@@ -64,11 +66,24 @@ class CartItem extends React.Component {
           <p className="cart-item__size">{`Size: UK ${size}`}</p>
           <div className="cart-item__qty-container">
             <div className="cart-item__qty">
-              <button id="increase" onClick={this.handleQtyChange}>
+              <button
+                disabled={lowStock}
+                className={
+                  lowStock
+                    ? "cart-item__qty-btn cart-item__qty-btn--disabled"
+                    : "cart-item__qty-btn"
+                }
+                id="increase"
+                onClick={this.handleQtyChange}
+              >
                 +
               </button>
               <span>{qty}</span>
-              <button id="decrease" onClick={this.handleQtyChange}>
+              <button
+                className="cart-item__qty-btn"
+                id="decrease"
+                onClick={this.handleQtyChange}
+              >
                 -
               </button>
             </div>
@@ -85,6 +100,7 @@ class CartItem extends React.Component {
 
 const mapStateToProps = (state) => ({
   lowStockMsg: state.cart.lowStockMsg,
+  lowStock: state.cart.lowStock,
   authenticated: state.account.authenticated,
 });
 

@@ -10,6 +10,7 @@ const initState = {
   cartList: [],
   cartOpen: false,
   lowStockMsg: null,
+  lowStock: false,
 };
 
 const cartReducer = (state = initState, action) => {
@@ -34,11 +35,13 @@ const cartReducer = (state = initState, action) => {
       return {
         ...state,
         lowStockMsg: action.payload,
+        lowStock: true,
       };
     case CLEAR_LOW_STOCK:
       return {
         ...state,
         lowStockMsg: null,
+        lowStock: false,
       };
     default:
       return state;

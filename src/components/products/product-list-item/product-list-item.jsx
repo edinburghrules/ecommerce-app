@@ -39,7 +39,7 @@ class ProductListItem extends React.Component {
   render() {
     const { variantIndex, colorIndex, colors } = this.state;
     const {
-      product: { name, price, variants, id, category },
+      product: { name, price, variants, id, category, collection },
     } = this.props;
 
     const renderVariants = (variant, index) => {
@@ -93,7 +93,7 @@ class ProductListItem extends React.Component {
                   return (
                     <React.Fragment key={index}>
                       <Favourite
-                        product={{ id, name, price }}
+                        product={{ id, name, price, category, collection }}
                         variant={variant}
                         isSelected={colorIndex === index}
                       />
@@ -114,7 +114,7 @@ class ProductListItem extends React.Component {
                   return (
                     <React.Fragment key={index}>
                       <Favourite
-                        product={{ id, name, price, category }}
+                        product={{ id, name, price, category, collection }}
                         variant={variant}
                         isSelected={variantIndex === index}
                       />

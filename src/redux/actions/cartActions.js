@@ -59,8 +59,20 @@ export const addToCart = (product, authenticated) => {
         dispatch(openCart());
       }
     } else {
-      addToCartLocalStorage(product);
-      dispatch(openCart());
+      const currentQty = getCurrentQtyLocalStorage(product);
+      const response = await axios.post("/get-stock-qty", productData);
+      const qtyInStock = response.data;
+      if (currentQty < qtyInStock) {
+        addToCartLocalStorage(product);
+        dispatch(openCart());
+      } else {
+        dispatch({
+          type: LOW_STOCK,
+          payload:
+            "Sorry, there is not enough stock to increase quantity further",
+        });
+        dispatch(openCart());
+      }
     }
   };
 };
