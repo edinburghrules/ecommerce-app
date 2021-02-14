@@ -37,6 +37,7 @@ const stockQty = async (product) => {
 const addToCart = async (req, res) => {
   const email = req.account.email;
   const product = req.body.product;
+
   try {
     const qtyInStock = await stockQty(product);
 

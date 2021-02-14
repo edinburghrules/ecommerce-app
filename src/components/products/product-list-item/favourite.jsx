@@ -97,7 +97,6 @@ class Favourite extends React.Component {
           }
         } else {
           if (authenticated) {
-            console.log("remove favourite from firestore");
             removeFavouriteFromLocalStorage(
               "favourites",
               this.props.product.id,
@@ -105,7 +104,6 @@ class Favourite extends React.Component {
             );
             removeFavouriteProduct(favouritedProduct);
           } else {
-            console.log("Remove from local storage");
             removeFavouriteFromLocalStorage(
               "favourites",
               this.props.product.id,

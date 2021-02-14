@@ -14,7 +14,7 @@ class FavouriteCard extends React.Component {
   };
 
   handleChange = (e) => {
-    const size = e.currentTarget.value;
+    const size = Number(e.currentTarget.value);
     if (size) {
       this.setState({
         selectedSize: size,

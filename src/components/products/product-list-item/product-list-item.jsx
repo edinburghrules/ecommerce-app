@@ -1,6 +1,8 @@
 import React from "react";
 import "./product-list-item.scss";
 import Favourite from "./favourite";
+import { connect } from "react-redux";
+import { addToCart } from "../../../redux/actions/cartActions";
 
 class ProductListItem extends React.Component {
   state = {
@@ -36,6 +38,21 @@ class ProductListItem extends React.Component {
     }
   };
 
+  quickAdd = (variant, size) => {
+    const product = {
+      name: this.props.product.name,
+      category: this.props.product.category,
+      collection: this.props.product.collection,
+      color: variant.color,
+      id: this.props.product.id,
+      image: variant.image,
+      price: this.props.product.price,
+      qty: 1,
+      size: size,
+    };
+    this.props.addToCart(product, this.props.authenticated);
+  };
+
   render() {
     const { variantIndex, colorIndex, colors } = this.state;
     const {
@@ -54,6 +71,7 @@ class ProductListItem extends React.Component {
                   if (stockQty > 0) {
                     return (
                       <div
+                        onClick={() => this.quickAdd(variant, size)}
                         key={index}
                         className="product-list-item__variant-size"
                       >
@@ -142,4 +160,12 @@ class ProductListItem extends React.Component {
   }
 }
 
-export default ProductListItem;
+const mapStateToProps = (state) => ({
+  authenticated: state.account.authenticated,
+});
+
+const mapActionsToProps = {
+  addToCart,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(ProductListItem);

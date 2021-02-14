@@ -21,8 +21,6 @@ export const addToCartLocalStorage = (product) => {
       );
     });
 
-    // TODO: Check qty in stock and if product qty is greater than stock qty dispatch low stock
-
     if (index > -1) {
       parsedCart[index].qty += 1;
       localStorage.setItem("cart", JSON.stringify(parsedCart));
@@ -121,7 +119,10 @@ export const getCurrentQtyLocalStorage = (product) => {
     );
   });
 
-  const currentQty = productToUpdate.qty;
-
-  return currentQty;
+  if (productToUpdate) {
+    const currentQty = productToUpdate.qty;
+    return currentQty;
+  } else {
+    return 0;
+  }
 };
