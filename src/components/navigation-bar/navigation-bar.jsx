@@ -10,7 +10,7 @@ import MobileNav from "../mobile-nav/mobile-nav";
 import logo from "../../assets/logo2.png";
 import user from "../../assets/001-user.png";
 import favourites from "../../assets/heart-outline.png";
-import shopping from "../../assets/002-shopping-bag.png";
+import shopping from "../../assets/shopping-bag.png";
 import mobile from "../../assets/menu.png";
 
 class NavigationBar extends React.Component {
@@ -26,12 +26,21 @@ class NavigationBar extends React.Component {
     mobileMenuWidth: 0,
     cartOpen: false,
     cartClosing: false,
+    cartTotalQty: 0,
     x: 0,
   };
 
   componentDidMount = () => {
     this.updateWindowSize();
     window.addEventListener("resize", this.updateWindowSize);
+    if (this.props.cartList.length > 0) {
+      let cartTotalQty = this.props.cartList.reduce((total, currentItem) => {
+        return (total += currentItem.qty);
+      }, 0);
+      this.setState({
+        cartTotalQty,
+      });
+    }
   };
 
   updateWindowSize = () => {
@@ -45,6 +54,20 @@ class NavigationBar extends React.Component {
       this.setState({
         cartOpen: true,
       });
+    }
+    if (prevProps.cartList !== this.props.cartList) {
+      if (this.props.cartList.length > 0) {
+        let cartTotalQty = this.props.cartList.reduce((total, currentItem) => {
+          return (total += currentItem.qty);
+        }, 0);
+        this.setState({
+          cartTotalQty,
+        });
+      } else {
+        this.setState({
+          cartTotalQty: 0,
+        });
+      }
     }
   };
 
@@ -177,6 +200,7 @@ class NavigationBar extends React.Component {
       collectionsDropdown,
       cartClosing,
       cartOpen,
+      cartTotalQty,
       mobileMenuWidth,
       x,
     } = this.state;
@@ -275,7 +299,10 @@ class NavigationBar extends React.Component {
                 <img src={favourites} alt="favourites" />
               </Link>
             </div>
-            <div className="navigation__user-menu-item">
+            <div className="navigation__user-menu-item navigation__user-menu-item--cart">
+              {cartTotalQty > 0 && (
+                <div className="navigation__cart-total">{cartTotalQty}</div>
+              )}
               <img
                 onClick={this.handleOpen}
                 id="cart"
@@ -312,6 +339,7 @@ const mapStateToProps = (state) => {
     authenticated: state.account.authenticated,
     account: state.account.credentials,
     cartOpen: state.cart.cartOpen,
+    cartList: state.cart.cartList,
   };
 };
 

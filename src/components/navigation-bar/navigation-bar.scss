@@ -184,8 +184,28 @@
   position: relative;
 }
 
+.navigation__user-menu-item--cart {
+  position: relative;
+}
+
+.navigation__cart-total {
+  position: absolute;
+  top: -3px;
+  right: -6px;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $light-text;
+  font-weight: $bold;
+  font-size: 1rem;
+}
+
 .navigation__user-menu-item img {
-  height: 22px;
+  width: 23px;
 }
 
 .account__menu {

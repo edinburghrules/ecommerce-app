@@ -4,10 +4,18 @@
 
 .cart-item {
   display: flex;
+  height: auto;
   width: 100%;
   padding: 1rem 0;
   border-bottom: 1px solid #eee;
   margin-bottom: 1rem;
+}
+
+.cart-item__loading {
+  height: 11.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cart-item__img-container {

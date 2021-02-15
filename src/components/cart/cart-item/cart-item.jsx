@@ -1,5 +1,6 @@
 import React from "react";
 import "./cart-item.scss";
+import { Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
 import {
   deleteFromCart,
@@ -39,69 +40,107 @@ class CartItem extends React.Component {
       cartItem: { name, color, size, image, price, qty },
       lowStockMsg,
       lowStock,
+      loading,
     } = this.props;
-    return (
-      <div className="cart-item">
-        <div className="cart-item__img-container">
-          <img
-            className="cart-item__img"
-            src={image}
-            alt={`${name} in ${color}`}
-          />
-        </div>
-        <div className="cart-item__content">
-          <div className="cart-item__content-header">
-            <h4 className="cart-item__name">{name}</h4>
-            <button onClick={this.handleDelete}>
-              <img
-                className="cart-item__close-button"
-                src={closeButton}
-                alt="close cart"
-              />
-            </button>
+    if (loading) {
+      return (
+        <div className="cart-item">
+          <div className="cart-item__content">
+            <div className="cart-item__loading">
+              <Spinner animation="border" variant="primary" />
+            </div>
           </div>
-          <p className="cart-item__color">
-            {color && capitaliseFirstLetter(color)}
-          </p>
-          <p className="cart-item__size">{`Size: UK ${size}`}</p>
-          <div className="cart-item__qty-container">
-            <div className="cart-item__qty">
-              <button
-                disabled={lowStock}
-                className={
-                  lowStock
-                    ? "cart-item__qty-btn cart-item__qty-btn--disabled"
-                    : "cart-item__qty-btn"
-                }
-                id="increase"
-                onClick={this.handleQtyChange}
-              >
-                +
-              </button>
-              <span>{qty}</span>
-              <button
-                className="cart-item__qty-btn"
-                id="decrease"
-                onClick={this.handleQtyChange}
-              >
-                -
+        </div>
+      );
+    } else {
+      return (
+        <div className="cart-item">
+          <div className="cart-item__img-container">
+            <img
+              className="cart-item__img"
+              src={image}
+              alt={`${name} in ${color}`}
+            />
+          </div>
+          <div className="cart-item__content">
+            <div className="cart-item__content-header">
+              <h4 className="cart-item__name">{name}</h4>
+              <button onClick={this.handleDelete}>
+                <img
+                  className="cart-item__close-button"
+                  src={closeButton}
+                  alt="close cart"
+                />
               </button>
             </div>
-            <p className="cart-item__price">£{price}</p>
+            <p className="cart-item__color">
+              {color && capitaliseFirstLetter(color)}
+            </p>
+            <p className="cart-item__size">{`Size: UK ${size}`}</p>
+            <div className="cart-item__qty-container">
+              <div className="cart-item__qty">
+                <button
+                  disabled={lowStock}
+                  className={
+                    lowStock
+                      ? "cart-item__qty-btn cart-item__qty-btn--disabled"
+                      : "cart-item__qty-btn"
+                  }
+                  id="increase"
+                  onClick={this.handleQtyChange}
+                >
+                  +
+                </button>
+                <span>{qty}</span>
+                <button
+                  className="cart-item__qty-btn"
+                  id="decrease"
+                  onClick={this.handleQtyChange}
+                >
+                  -
+                </button>
+              </div>
+              <p className="cart-item__price">£{price}</p>
+            </div>
+            <span className="cart-item__low-stock-msg">
+              {lowStockMsg && lowStockMsg}
+            </span>
           </div>
-          <span className="cart-item__low-stock-msg">
-            {lowStockMsg && lowStockMsg}
-          </span>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
-const mapStateToProps = (state) => ({
-  lowStockMsg: state.cart.lowStockMsg,
+const lowStockSelector = (state, ownProps) => {
+  if (state.cart.lowStockMsg.msg !== "") {
+    if (
+      state.cart.lowStockMsg.cartItem.id === ownProps.cartItem.id &&
+      state.cart.lowStockMsg.cartItem.color === ownProps.cartItem.color &&
+      state.cart.lowStockMsg.cartItem.size === ownProps.cartItem.size
+    ) {
+      return state.cart.lowStockMsg.msg;
+    }
+  }
+};
+
+const loadingSelector = (state, ownProps) => {
+  if (state.async.loadingCart.loading) {
+    if (
+      state.async.loadingCart.cartItem.id === ownProps.cartItem.id &&
+      state.async.loadingCart.cartItem.color === ownProps.cartItem.color &&
+      state.async.loadingCart.cartItem.size === ownProps.cartItem.size
+    ) {
+      return state.async.loadingCart.loading;
+    }
+  }
+};
+
+const mapStateToProps = (state, ownProps) => ({
+  lowStockMsg: lowStockSelector(state, ownProps),
   lowStock: state.cart.lowStock,
   authenticated: state.account.authenticated,
+  loading: loadingSelector(state, ownProps),
 });
 
 const mapActionsToProps = {

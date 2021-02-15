@@ -7,28 +7,30 @@ import {
 
 const initState = {
   loadingProducts: false,
-  loadingCart: false,
+  loadingCart: { loading: false, cartItem: "" },
 };
 
 const asyncReducer = (state = initState, action) => {
   switch (action.type) {
     case START_LOADING_PRODUCTS:
       return {
+        ...state,
         loadingProducts: true,
       };
     case STOP_LOADING_PRODUCTS:
       return {
+        ...state,
         loadingProducts: false,
       };
     case START_LOADING_CART:
       return {
-        state,
-        loadingCart: true,
+        ...state,
+        loadingCart: { loading: true, cartItem: action.payload.cartItem },
       };
     case STOP_LOADING_CART:
       return {
-        state,
-        loadingCart: false,
+        ...state,
+        loadingCart: { loading: false, cartItem: "" },
       };
     default:
       return state;

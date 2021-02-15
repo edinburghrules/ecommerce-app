@@ -5,7 +5,7 @@ import { getCart } from "../../../redux/actions/cartActions";
 import Loading from "../../loading/loading";
 import CartItem from "../cart-item/cart-item";
 import closeArrow from "../../../assets/close-arrow.png";
-import shopping from "../../../assets/002-shopping-bag.png";
+import shopping from "../../../assets/shopping-bag.png";
 
 class Cart extends Component {
   state = {
@@ -39,8 +39,6 @@ class Cart extends Component {
       }
       return total;
     }, 0);
-
-    console.log(this.state.freeDelivery - (totalPrice % 1));
 
     if (prevState.cart !== this.props.cart) {
       this.setState({
@@ -101,22 +99,23 @@ class Cart extends Component {
           </div>
         </div>
         <div className="cart__content">
-          {cartLoading && <Loading />}
-          {cart &&
-            cart.length > 0 &&
-            cart.map((cartItem, i) => {
-              return <CartItem cartItem={cartItem} key={i} />;
-            })}
-          {cart && cart.length === 0 && (
-            <React.Fragment>
-              <h1>Your Cart is Empty</h1>
-              <div className="cart__product-categories">
-                <button className="cart__product-btn">Shop Mens</button>
-                <button className="cart__product-btn">Shop Women</button>
-                <button className="cart__product-btn">Shop Collections</button>
-              </div>
-            </React.Fragment>
-          )}
+          {cart && cart.length > 0
+            ? cart.map((cartItem, i) => {
+                return <CartItem cartItem={cartItem} key={i} />;
+              })
+            : cart &&
+              cart.length === 0 && (
+                <React.Fragment>
+                  <h1>Your Cart is Empty</h1>
+                  <div className="cart__product-categories">
+                    <button className="cart__product-btn">Shop Mens</button>
+                    <button className="cart__product-btn">Shop Women</button>
+                    <button className="cart__product-btn">
+                      Shop Collections
+                    </button>
+                  </div>
+                </React.Fragment>
+              )}
         </div>
         <div className="cart__bottom">
           <div className="cart__total-price">

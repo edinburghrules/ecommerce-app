@@ -21,6 +21,7 @@ import ResetPassword from "./pages/auth/reset-password/reset-password";
 import ProductListPage from "./pages/products/product-list/product-list-page";
 import FavouritesPage from "./pages/favourites/favourites-page";
 import { signOut, getAccountData } from "./redux/actions/accountActions";
+import { getCart } from "./redux/actions/cartActions";
 
 const token = localStorage.firebaseToken;
 
@@ -34,7 +35,7 @@ function load() {
       store.dispatch(getAccountData());
     }
   } else {
-    return null;
+    store.dispatch(getCart(false));
   }
 }
 

@@ -4,6 +4,7 @@ import {
   UNSET_FAVOURITES,
 } from "../types";
 import axios from "axios";
+import { getCart } from "./cartActions";
 
 export const register = (registerData, history) => {
   return async (dispatch) => {
@@ -32,6 +33,7 @@ export const getAccountData = () => {
         type: SET_AUTHENTICATED,
         payload: accountDataResponse.data,
       });
+      dispatch(getCart(true));
     } catch (err) {
       console.log(err.response.data);
     }
@@ -57,6 +59,7 @@ export const signOut = (history) => {
     delete axios.defaults.headers.common["Authorization"];
     dispatch({ type: SET_UNAUTHENTICATED });
     dispatch({ type: UNSET_FAVOURITES });
+    dispatch(getCart(false));
     history.push("/");
   };
 };
