@@ -1,5 +1,18 @@
 const { db } = require("../util/admin");
 
+const getProduct = async (req, res) => {
+  const productId = req.body.productId;
+  const collection = req.body.collection;
+
+  try {
+    const productsRef = db.collection(collection);
+    const product = await productsRef.doc(productId).get();
+    return res.status(200).json(product.data());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const getAllShoes = async (req, res) => {
   const collection = req.query.collection;
   const productsRef = db.collection(collection);
@@ -138,4 +151,9 @@ const getShoesByFilter = async (req, res) => {
   return res.json(products);
 };
 
-module.exports = { getAllShoes, getShoesByCategory, getShoesByFilter };
+module.exports = {
+  getAllShoes,
+  getShoesByCategory,
+  getShoesByFilter,
+  getProduct,
+};

@@ -2,10 +2,12 @@ import {
   GET_ALL_PRODUCTS,
   GET_FILTERED_PRODUCTS,
   GET_CATEGORY_PRODUCTS,
-} from '../types';
+  SET_PRODUCT,
+} from "../types";
 
 const initState = {
   productsList: [],
+  product: {},
 };
 
 const productsReducer = (state = initState, action) => {
@@ -21,6 +23,11 @@ const productsReducer = (state = initState, action) => {
     case GET_FILTERED_PRODUCTS:
       return {
         productsList: action.payload,
+      };
+    case SET_PRODUCT:
+      return {
+        ...state,
+        product: action.payload,
       };
     default:
       return state;

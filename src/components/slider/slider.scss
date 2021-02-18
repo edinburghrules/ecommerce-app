@@ -1,6 +1,6 @@
-@import '../../sass/colors';
-@import '../../sass/fonts';
-@import '../../sass/utils';
+@import "../../sass/colors";
+@import "../../sass/fonts";
+@import "../../sass/utils";
 
 .slider {
   width: 90%;
@@ -65,17 +65,17 @@
 
 .slider__img-title {
   font-family: $Montserrat;
-  font-size: $XXXL;
+  font-size: $xlarge;
   color: $light-text;
   font-weight: $bold;
   text-shadow: 0px 0px 40px $dark-bg;
 
   @media (max-width: 832px) {
-    font-size: $XXL;
+    font-size: $xlarge;
   }
 
   @media (max-width: 575px) {
-    font-size: $XL;
+    font-size: $xlarge;
   }
 
   @media (max-width: 530px) {

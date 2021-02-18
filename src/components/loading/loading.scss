@@ -1,9 +1,9 @@
-@import '../../sass/colors';
-@import '../../sass/fonts';
-@import '../../sass/utils';
+@import "../../sass/colors";
+@import "../../sass/fonts";
+@import "../../sass/utils";
 
 .loading {
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   transform: translateY(35%);

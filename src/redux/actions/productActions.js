@@ -1,13 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORY_PRODUCTS,
   GET_FILTERED_PRODUCTS,
-} from '../types';
+  SET_PRODUCT,
+} from "../types";
 import {
   startLoadingProducts,
   stopLoadingProducts,
-} from '../actions/asyncActions';
+} from "../actions/asyncActions";
 
 export const getAllProducts = (collection) => {
   return async (dispatch) => {
@@ -52,9 +53,9 @@ export const getFilteredProducts = (collection, colors, bestFor, category) => {
 
       const getFilteredProductsResponse = await axios.get(
         `/filtered-products/?collection=${collection}${
-          category ? `&category=${category}` : ''
-        }${colors ? `&colors=${colors}` : ''}${
-          bestFor ? `&bestfor=${bestFor}` : ''
+          category ? `&category=${category}` : ""
+        }${colors ? `&colors=${colors}` : ""}${
+          bestFor ? `&bestfor=${bestFor}` : ""
         }`
       );
 
@@ -62,6 +63,23 @@ export const getFilteredProducts = (collection, colors, bestFor, category) => {
         type: GET_FILTERED_PRODUCTS,
         payload: getFilteredProductsResponse.data,
       });
+      dispatch(stopLoadingProducts());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getProduct = (collection, productId) => {
+  const productData = {
+    collection,
+    productId,
+  };
+  return async (dispatch) => {
+    try {
+      dispatch(startLoadingProducts());
+      const getProductResponse = await axios.post("/get-product", productData);
+      dispatch({ type: SET_PRODUCT, payload: getProductResponse.data });
       dispatch(stopLoadingProducts());
     } catch (err) {
       console.log(err);

@@ -60,6 +60,8 @@ export const signOut = (history) => {
     dispatch({ type: SET_UNAUTHENTICATED });
     dispatch({ type: UNSET_FAVOURITES });
     dispatch(getCart(false));
-    history.push("/");
+    if (history) {
+      history.push("/");
+    }
   };
 };

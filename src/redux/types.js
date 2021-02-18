@@ -20,6 +20,7 @@ export const CLEAR_LOW_STOCK = "CLEAR_LOW_STOCK";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_CATEGORY_PRODUCTS = "GET_CATEGORY_PRODUCTS";
 export const GET_FILTERED_PRODUCTS = "GET_FILTERED_PRODUCTS";
+export const SET_PRODUCT = "GET_PRODUCT";
 
 // Async reducer product action types
 export const START_LOADING_PRODUCTS = "START_LOADING_PRODUCTS";

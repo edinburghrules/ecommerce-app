@@ -19,6 +19,7 @@ import Signin from "./pages/auth/signin/sign-in";
 import Register from "./pages/auth/register/register";
 import ResetPassword from "./pages/auth/reset-password/reset-password";
 import ProductListPage from "./pages/products/product-list/product-list-page";
+import ProductPage from "./pages/products/product/product-page";
 import FavouritesPage from "./pages/favourites/favourites-page";
 import { signOut, getAccountData } from "./redux/actions/accountActions";
 import { getCart } from "./redux/actions/cartActions";
@@ -28,7 +29,7 @@ const token = localStorage.firebaseToken;
 function load() {
   if (token) {
     const decodedToken = jwtDecode(token);
-    if (decodedToken.exp * 10000 < Date.now()) {
+    if (decodedToken.exp * 1000 < Date.now()) {
       store.dispatch(signOut());
     } else {
       axios.defaults.headers.common["Authorization"] = token;
@@ -59,6 +60,7 @@ const App = (props) => {
           <PrivateRoute path="/register" component={Register} />
           <PrivateRoute path="/reset-password" component={ResetPassword} />
           <Route path="/collection/:collection" component={ProductListPage} />
+          <Route path={"/:collection/product/:id"} component={ProductPage} />
           <Route path="/favourites/:accountId?" component={FavouritesPage} />
         </Switch>
       </div>

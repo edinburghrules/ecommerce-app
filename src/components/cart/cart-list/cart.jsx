@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./cart.scss";
 import { connect } from "react-redux";
 import { getCart } from "../../../redux/actions/cartActions";
-import Loading from "../../loading/loading";
 import CartItem from "../cart-item/cart-item";
 import closeArrow from "../../../assets/close-arrow.png";
 import shopping from "../../../assets/shopping-bag.png";
@@ -56,7 +55,7 @@ class Cart extends Component {
 
   render() {
     const { cart, totalQty, totalPrice, shipping, toFreeDelivery } = this.state;
-    const { handleClose, cartLoading } = this.props;
+    const { handleClose } = this.props;
     return (
       <div className="cart">
         <div className="cart__top">
@@ -84,7 +83,7 @@ class Cart extends Component {
             </div>
             <p className="cart__free-delivery">
               {toFreeDelivery > 0 &&
-                `You're £${toFreeDelivery} away from free delivery`}
+                `You're £${toFreeDelivery} away from free delivery !`}
               {toFreeDelivery === 0 &&
                 `Congratulations you get free delivery 🎉`}
             </p>

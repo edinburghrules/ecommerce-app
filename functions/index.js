@@ -51,10 +51,12 @@ const {
   getAllShoes,
   getShoesByCategory,
   getShoesByFilter,
+  getProduct,
 } = require("./handlers/products");
 
 app.get("/products", getAllShoes);
 app.get("/products-category", getShoesByCategory);
 app.get("/filtered-products", getShoesByFilter);
+app.post("/get-product", getProduct);
 
 exports.api = functions.https.onRequest(app);

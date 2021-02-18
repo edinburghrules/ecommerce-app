@@ -1,5 +1,6 @@
 import React from "react";
 import "./product-list-item.scss";
+import { Link } from "react-router-dom";
 import Favourite from "./favourite";
 import { connect } from "react-redux";
 import { addToCart } from "../../../redux/actions/cartActions";
@@ -45,7 +46,7 @@ class ProductListItem extends React.Component {
       collection: this.props.product.collection,
       color: variant.color,
       id: this.props.product.id,
-      image: variant.image,
+      image: variant.images[0],
       price: this.props.product.price,
       qty: 1,
       size: size,
@@ -90,15 +91,29 @@ class ProductListItem extends React.Component {
     return (
       <div className="product-list-item">
         <div className="product-list-item__content">
-          <img
-            className="product-list-item__main-img"
-            src={
-              colors ? variants[colorIndex].image : variants[variantIndex].image
-            }
-            alt="shoe"
-          />
+          <Link
+            to={{
+              pathname: `/${collection}/product/${id}`,
+              state: { variantIndex: variantIndex },
+            }}
+          >
+            <img
+              className="product-list-item__main-img"
+              src={
+                colors
+                  ? variants[colorIndex].images[0]
+                  : variants[variantIndex].images[0]
+              }
+              alt="shoe"
+            />
+          </Link>
           <div className="product-list-item__content-header">
-            <h1 className="product-list-item__title">{name}</h1>
+            <Link
+              to={`/${collection}/product/${id}`}
+              className="product-list-item__title"
+            >
+              {name}
+            </Link>
           </div>
           <p className="product-list-item__variant">
             {colors ? variants[colorIndex].color : variants[variantIndex].color}
@@ -122,7 +137,7 @@ class ProductListItem extends React.Component {
                             : "product-list-item__variant-img"
                         }
                         onClick={() => this.handleVariantSelect(index)}
-                        src={variant.image}
+                        src={variant.images[0]}
                         alt={`${variant.name}-${variant.color}`}
                       />
                       {renderVariants(variant, index)}
@@ -143,7 +158,7 @@ class ProductListItem extends React.Component {
                             : "product-list-item__variant-img"
                         }
                         onClick={() => this.handleVariantSelect(index)}
-                        src={variant.image}
+                        src={variant.images[0]}
                         alt={`${variant.name}-${variant.color}`}
                       />
                       {renderVariants(variant, index)}

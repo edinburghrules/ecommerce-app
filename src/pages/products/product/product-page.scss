@@ -1,0 +1,21 @@
+.product-page {
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  height: 100vh;
+}
+
+.product-page__left-column {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: min-content;
+  gap: 5px;
+}
+
+.product-page__right-column {
+  width: 100%;
+}
+
+.product-page__img {
+  width: 100%;
+}
