@@ -1,12 +1,64 @@
 import React from "react";
 import "./product-main.scss";
 import { capitaliseFirstLetter } from "../../../utils/text-formatting/text-formatting";
-import deliveryIcon from "../../../assets/package.svg";
-import downArrowIcon from "../../../assets/down-chevron.svg";
+import Accordion from "../../../components/accordion/accordion";
+import "../../../components/accordion/accordion.scss";
+
 class ProductMain extends React.Component {
   state = {
     index: 0,
     selectedSize: null,
+    productFeatures: [],
+  };
+
+  componentDidMount = () => {
+    this.setState({
+      productFeatures: this.props.product.features
+        ? [
+            {
+              title: "core features",
+              content: this.props.product.features,
+              open: false,
+            },
+            {
+              title: "description",
+              content: this.props.product.description,
+              open: false,
+            },
+            {
+              title: "delivery & returns",
+              content: this.props.product.delivery,
+              open: false,
+            },
+            { title: "care", content: this.props.product.care, open: false },
+          ]
+        : null,
+    });
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.productFeatures === null) {
+      this.setState({
+        productFeatures: [
+          {
+            title: "core features",
+            content: this.props.product.features,
+            open: false,
+          },
+          {
+            title: "description",
+            content: this.props.product.description,
+            open: false,
+          },
+          {
+            title: "delivery & returns",
+            content: this.props.product.delivery,
+            open: false,
+          },
+          { title: "care", content: this.props.product.care, open: false },
+        ],
+      });
+    }
   };
 
   handleVariantSelect = (index) => {
@@ -25,54 +77,27 @@ class ProductMain extends React.Component {
     }
   };
 
-  handleAccordion = (e) => {
-    if (e.currentTarget.className === "product-main__accordion-btn") {
-      const accordionBtn = e.currentTarget;
-      const accordionContent = accordionBtn.nextElementSibling;
-      const prevAccordionContent = accordionBtn.previousElementSibling;
-      const nextAccordionContent =
-        accordionContent.nextElementSibling.nextElementSibling;
-      const nextAccordionBtn =
-        nextAccordionContent !== null &&
-        nextAccordionContent.previousElementSibling;
-      const prevAccordionBtn =
-        accordionBtn.previousElementSibling !== null &&
-        accordionBtn.previousElementSibling.previousElementSibling;
-
-      // If accordion content is already open
-      if (accordionContent.style.maxHeight) {
-        accordionContent.style.paddingBottom = "0";
-        accordionContent.style.opacity = "0";
-        accordionContent.style.maxHeight = null;
-        accordionBtn.lastChild.style.transform = "rotate(0deg)";
-      } else {
-        // If accordion content is closed, close previous accordion content section
-        if (prevAccordionContent !== null && prevAccordionBtn !== null) {
-          prevAccordionContent.style.paddingBottom = "0";
-          prevAccordionContent.style.maxHeight = null;
-          prevAccordionBtn.lastChild.style.transform = "rotate(0deg)";
+  handleToggle = (index) => {
+    this.setState((prevState) => ({
+      productFeatures: prevState.productFeatures.map((feature, i) => {
+        if (index === i) {
+          return {
+            ...feature,
+            open: !feature.open,
+          };
+        } else {
+          return {
+            ...feature,
+            open: false,
+          };
         }
-        // If accordion content is close, close next accordion content section
-        if (
-          nextAccordionContent !== null &&
-          nextAccordionContent.style.maxHeight !== null
-        ) {
-          nextAccordionContent.style.paddingBottom = "0";
-          nextAccordionContent.style.maxHeight = null;
-          nextAccordionBtn.lastChild.style.transform = "rotate(0deg)";
-        }
-        // If accordion content is close, open it
-        accordionBtn.lastChild.style.transform = "rotate(180deg)";
-        accordionContent.style.paddingBottom = "6rem";
-        accordionContent.style.opacity = "1";
-        accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
-      }
-    }
+      }),
+    }));
   };
 
   render() {
     const { product, variantIndex } = this.props;
-    const { selectedSize } = this.state;
+    const { selectedSize, productFeatures } = this.state;
     if (product.colors === undefined || product.variants === undefined) {
       return <h1>LOADING</h1>;
     } else {
@@ -104,20 +129,21 @@ class ProductMain extends React.Component {
           <div className="product-main__variant-sizes-container">
             <span>SELECT SIZE:</span>
             <div className="product-main__variant-sizes">
-              {product.variants[variantIndex].sizes.map((size, index) => (
-                <div
-                  key={index}
-                  onClick={() => this.handleSizeSelect(size.size)}
-                  className={
-                    selectedSize === size.size
-                      ? "product-main__variant-size active"
-                      : "product-main__variant-size"
-                  }
-                >
-                  <p>UK</p>
-                  {size.size}
-                </div>
-              ))}
+              {product.variants[variantIndex].sizes &&
+                product.variants[variantIndex].sizes.map((size, index) => (
+                  <div
+                    key={index}
+                    onClick={() => this.handleSizeSelect(size.size)}
+                    className={
+                      selectedSize === size.size
+                        ? "product-main__variant-size active"
+                        : "product-main__variant-size"
+                    }
+                  >
+                    <p>UK</p>
+                    {size.size}
+                  </div>
+                ))}
             </div>
           </div>
           <div className="product-main__cart-container">
@@ -132,60 +158,34 @@ class ProductMain extends React.Component {
               {selectedSize ? "ADD TO CART" : "SELECT SIZE"}
             </button>
             <div className="product-main__cart">
-              <img src={deliveryIcon} alt="delivery" />
               <p className="">Free delivery and 30 day returns!</p>
             </div>
           </div>
-
-          <div className="product-main__accordion-container">
-            <div className="product-main__accordion">
-              <button
-                onClick={(e) => this.handleAccordion(e)}
-                className="product-main__accordion-btn"
-              >
-                CORE FEATURES
-                <img src={downArrowIcon} />
-              </button>
-              <div className="product-main__accordion-content">
-                {product.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
+          <div className="product-main__highlights-container">
+            {product.highlights && (
+              <h5>{product.name.toUpperCase()} HIGHLIGHTS</h5>
+            )}
+            <div className="product-main__highlights">
+              {product.highlights &&
+                product.highlights.map((highlight, index) => (
+                  <div key={index} className="product-main__hightlight">
+                    <img src={highlight.img} />
+                    <p>{highlight.text}</p>
+                  </div>
                 ))}
-              </div>
-
-              <button
-                onClick={(e) => this.handleAccordion(e)}
-                className="product-main__accordion-btn"
-              >
-                DESCRIPTION
-                <img src={downArrowIcon} />
-              </button>
-              <div className="product-main__accordion-content">
-                <p>{product.description}</p>
-              </div>
-
-              <button
-                onClick={(e) => this.handleAccordion(e)}
-                className="product-main__accordion-btn"
-              >
-                DELIVERY & RETURNS
-                <img src={downArrowIcon} />
-              </button>
-              <div className="product-main__accordion-content">
-                {<p>{product.delivery}</p>}
-              </div>
-
-              <button
-                onClick={(e) => this.handleAccordion(e)}
-                className="product-main__accordion-btn"
-              >
-                CARE GUIDE
-                <img src={downArrowIcon} />
-              </button>
-              <div className="product-main__accordion-content">
-                {<p>{product.care}</p>}
-              </div>
-              <button className="product-main__accordion-btn"></button>
             </div>
+          </div>
+          <div className="product-main__accordion-container">
+            {productFeatures &&
+              productFeatures.map((feature, index) => (
+                <Accordion
+                  key={index}
+                  index={index}
+                  feature={feature}
+                  handleToggle={this.handleToggle}
+                />
+              ))}
+            <button className="accordion__btn"></button>
           </div>
         </div>
       );

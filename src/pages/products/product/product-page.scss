@@ -1,8 +1,20 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/utils";
+
 .product-page {
   padding: 3rem;
   display: grid;
   grid-template-columns: 60% 40%;
-  height: 100vh;
+}
+
+.product-page__navigation {
+  color: $dark-text;
+  font-size: $xxsmall;
+  margin-bottom: 1rem;
+  font-weight: $semiBold;
+  margin-right: 5px;
+  font-family: $Montserrat;
 }
 
 .product-page__left-column {
@@ -12,10 +24,44 @@
   gap: 5px;
 }
 
-.product-page__right-column {
+.product-page__img-container {
   width: 100%;
+  position: relative;
+}
+
+.product-page__img-container:hover {
+  cursor: pointer;
+}
+
+.product-page__img-container button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 1.5rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  display: none;
+}
+
+.product-page__img-container button:focus {
+  outline: none;
+}
+
+.product-page__img-container:hover button {
+  display: block;
+}
+
+.product-page__img-container button img {
+  height: 2rem;
 }
 
 .product-page__img {
   width: 100%;
+}
+
+.product-page__right-column {
+  width: 90%;
+  margin-left: 2rem;
 }

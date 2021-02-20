@@ -2,14 +2,12 @@
 @import "../../../sass/fonts";
 @import "../../../sass/utils";
 
-.product-main {
-  margin-left: 3rem;
-}
-
 .product-main__title {
   font-size: 3rem;
   font-weight: $bold;
   font-family: $Montserrat;
+  color: #333;
+  // letter-spacing: 1px;
 }
 
 .product-main__price {
@@ -22,13 +20,13 @@
 
 .product-main__variants-container span:first-of-type,
 .product-main__variant-sizes-container span {
-  font-size: $xsmall;
-  font-weight: $bold;
+  font-size: $xxsmall;
+  font-weight: $semiBold;
   font-family: $Montserrat;
 }
 
 .product-main__variants-container span:last-of-type {
-  font-size: $xsmall;
+  font-size: $xxsmall;
   font-weight: $semiNormal;
 }
 
@@ -41,17 +39,17 @@
   display: flex;
   flex-direction: column;
   margin-right: 1rem;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: 50%;
 }
 
 .product-main__variant.active {
-  border: 2px solid #ccc;
+  border: 1px solid #bbb;
 }
 
 .product-main__variant-color {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   cursor: pointer;
   border: 2px solid transparent;
   border-radius: 50%;
@@ -80,7 +78,7 @@
 }
 
 .product-main__variant-size {
-  height: 4rem;
+  height: 6rem;
   border: 1px solid #333;
   display: flex;
   flex-direction: column;
@@ -119,8 +117,8 @@
 }
 
 .product-main__cart img {
-  height: 2.8rem;
-  margin-right: 1rem;
+  height: 3rem;
+  margin-right: 0.5rem;
 }
 
 .product-main__add-to-cart-btn {
@@ -130,14 +128,16 @@
   background: #333;
   color: $light-text;
   padding: 1rem;
-  font-size: 1.8rem;
+  letter-spacing: 1px;
+  font-size: 1.4rem;
   font-weight: $semiBold;
   border: 2px solid #333;
   margin: 2rem 0 1rem 0;
 }
 
 .product-main__cart-container p {
-  font-size: $xsmall;
+  font-size: $xxsmall;
+  font-weight: $normal;
   font-family: $Montserrat;
 }
 
@@ -157,54 +157,41 @@
   color: $light-text;
 }
 
-.product-main__accordion-container {
+.product-main__highlights-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 4rem;
 }
 
-.product-main__accordion-btn {
+.product-main__highlights-container h5 {
+  font-weight: $bold;
+}
+
+.product-main__highlights {
   display: flex;
-  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.product-main__hightlight {
+  width: 33.3%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  background: $light-bg;
-  font-family: $Montserrat;
-  font-weight: $semiBold;
-  letter-spacing: 1px;
-  cursor: pointer;
-  padding: 1.8rem 1.8rem 1.8rem 0;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 12px;
-  border-top: 1px solid #ddd;
+  justify-content: center;
 }
 
-.product-main__accordion-btn img {
-  height: 1rem;
+.product-main__hightlight img {
+  height: 5rem;
+  margin-bottom: 0.5rem;
 }
 
-.product-main__accordion-btn:focus {
-  outline: none;
+.product-main__hightlight p {
+  text-align: center;
+  width: 80%;
+  font-size: $xxsmall;
 }
 
-.product-main__accordion-content {
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: all 0.2s ease-out;
-}
-
-.product-main__accordion-content li {
-  padding: 0.5rem;
-  font-size: $xsmall;
-}
-
-.product-main__accordion-content li:last-of-type {
-  padding-bottom: 2rem;
-}
-
-.product-main__accordion-content p {
-  font-size: $xsmall;
-  padding-bottom: 2rem;
+.product-main__accordion-container {
+  margin-top: 5rem;
 }

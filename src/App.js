@@ -59,8 +59,15 @@ const App = (props) => {
           <PrivateRoute path="/signIn" component={Signin} />
           <PrivateRoute path="/register" component={Register} />
           <PrivateRoute path="/reset-password" component={ResetPassword} />
-          <Route path="/collection/:collection" component={ProductListPage} />
-          <Route path={"/:collection/product/:id"} component={ProductPage} />
+          <Route
+            exact
+            path="/collection/:collection/:category?"
+            component={ProductListPage}
+          />
+          <Route
+            path={"/collection/:collection/:category?/product/:id"}
+            component={ProductPage}
+          />
           <Route path="/favourites/:accountId?" component={FavouritesPage} />
         </Switch>
       </div>

@@ -1,11 +1,8 @@
-import React from 'react';
-import './slider.scss';
-import { SliderImage } from './slider-image';
-import img1 from '../../assets/hero1.jpg';
-import img5 from '../../assets/hero5.jpg';
-import img3 from '../../assets/hero3.jpg';
-import leftArrow from '../../assets/001-arrow.png';
-import rightArrow from '../../assets/002-right-1.png';
+import React from "react";
+import "./slider.scss";
+import { SliderImage } from "./slider-image";
+import leftArrow from "../../assets/001-arrow.png";
+import rightArrow from "../../assets/002-right-1.png";
 
 class Slider extends React.Component {
   constructor() {
@@ -14,22 +11,19 @@ class Slider extends React.Component {
     this.state = {
       x: 0,
     };
-
-    this.sliderCategories = [
-      {
-        id: 'Autumn Collection',
-        src: img1,
-      },
-      {
-        id: "Women's Knitwear",
-        src: img5,
-      },
-      {
-        id: "Men's Minimal Essentials",
-        src: img3,
-      },
-    ];
   }
+
+  componentDidMount = () => {
+    if (this.props.imageIndex) {
+      this.setState({
+        x: this.props.imageIndex * 100 * -1,
+      });
+    } else {
+      this.setState({
+        index: 0,
+      });
+    }
+  };
 
   previous = () => {
     if (this.state.x === 0) {
@@ -44,48 +38,43 @@ class Slider extends React.Component {
   };
 
   next = () => {
-    if (this.state.x === -100 * (this.sliderCategories.length - 1)) {
-      this.setState({
-        x: -200,
-      });
-    } else {
-      this.setState((prevState) => ({
-        x: prevState.x - 100,
-      }));
-    }
+    this.setState((prevState) => ({
+      x: (prevState.x -= 100),
+    }));
   };
 
   render() {
     const { x } = this.state;
-
     return (
-      <div className='slider'>
-        {this.sliderCategories.map((slide, i) => (
+      <div className="slider">
+        {this.props.slideItems.map((slide, i) => (
           <div
-            className='slider__page'
+            className="slider__page"
             key={i}
             style={{ transform: `translateX(${x}%)` }}
           >
-            <SliderImage details={slide} />
+            <SliderImage slide={slide} />
           </div>
         ))}
-        <div className='slider__btns'>
+        <div className="slider__btns">
           <button
             onClick={this.previous}
-            className='slider__btn slider__btn--prev'
+            className="slider__btn slider__btn--prev"
             disabled={this.state.x === 0}
           >
-            <img className='slider__btn-img' src={leftArrow} alt='left arrow' />
+            <img className="slider__btn-img" src={leftArrow} alt="left arrow" />
           </button>
           <button
             onClick={this.next}
-            className='slider__btn slider__btn--next'
-            disabled={this.state.x === -200}
+            className="slider__btn slider__btn--next"
+            disabled={
+              this.state.x === (this.props.slideItems.length - 1) * 100 * -1
+            }
           >
             <img
-              className='slider__btn-img'
+              className="slider__btn-img"
               src={rightArrow}
-              alt='right arrow'
+              alt="right arrow"
             />
           </button>
         </div>

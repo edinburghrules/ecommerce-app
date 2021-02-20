@@ -1,0 +1,40 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__content {
+  height: 98vh;
+  width: 98vw;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.modal__top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem 4rem;
+}
+
+.modal__top button {
+  background: #fff;
+  border: none;
+  transition: all 0.2s;
+}
+
+.modal__top button:hover {
+  transform: rotate(-90deg);
+}
+
+.modal__top button img {
+  height: 4.5rem;
+}

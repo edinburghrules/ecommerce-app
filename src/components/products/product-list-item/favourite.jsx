@@ -84,7 +84,7 @@ class Favourite extends React.Component {
           name: product.name,
           price: product.price,
           color: variant.color,
-          img: variant.image,
+          img: variant.images[0].src,
           sizes: variant.sizes,
           category: product.category,
           collection: product.collection,

@@ -1,0 +1,64 @@
+@import "../../sass/colors.scss";
+@import "../../sass/fonts";
+@import "../../sass/utils.scss";
+
+.accordion__btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $light-bg;
+  font-family: $Montserrat;
+  font-weight: $semiBold;
+  cursor: pointer;
+  letter-spacing: 1px;
+  padding: 1.8rem 1.8rem 1.8rem 0;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 12px;
+  border-top: 1px solid #ddd;
+}
+
+.accordion__btn img {
+  height: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.accordion__btn.active img {
+  transform: rotate(180deg);
+}
+
+.accordion__btn:focus {
+  outline: none;
+}
+
+.accordion__content {
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.accordion__content.active {
+  padding-bottom: 1rem;
+  max-height: min-content;
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.accordion__content li {
+  padding: 0.5rem;
+  font-size: $xsmall;
+}
+
+.accordion__content li:last-of-type {
+  padding-bottom: 2rem;
+}
+
+.accordion__content p {
+  font-size: $xsmall;
+  padding-bottom: 2rem;
+}

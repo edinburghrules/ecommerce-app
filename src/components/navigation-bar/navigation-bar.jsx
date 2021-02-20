@@ -260,10 +260,9 @@ class NavigationBar extends React.Component {
             </ul>
           </div>
           <div onClick={() => history.push("/")} className="navigation__logo">
-            <img src={logo} alt="logo" />
+            {/* <img src={logo1} alt="logo" /> */}
             <div className="navigation__logo-text">
-              <p>Faith</p>
-              <p>Apparel</p>
+              <p>Kroll.</p>
             </div>
           </div>
           <div className="navigation__user-menu">
