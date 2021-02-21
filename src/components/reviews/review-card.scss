@@ -1,0 +1,47 @@
+@import "../../sass/colors";
+@import "../../sass/fonts";
+@import "../../sass/utils";
+
+.review-card {
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #ccc;
+}
+
+.review-card__name {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+
+.review-card__name span {
+  font-weight: $semiNormal;
+  font-size: $xsmall;
+}
+
+.review-card__name span:first-of-type {
+  font-weight: $black;
+  font-size: $xsmall;
+}
+
+.review-card__review h4 {
+  font-size: $xsmall;
+  font-weight: $black;
+}
+
+.star {
+  height: 2rem;
+  margin-right: 5px;
+}
+
+.review-card__stars {
+  width: 33%;
+}
+
+.review-card__review {
+  width: 33%;
+}

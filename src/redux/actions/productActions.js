@@ -9,6 +9,7 @@ import {
   startLoadingProducts,
   stopLoadingProducts,
 } from "../actions/asyncActions";
+import { getProductReviews } from "./reviewActions";
 
 export const getAllProducts = (collection) => {
   return async (dispatch) => {
@@ -79,6 +80,7 @@ export const getProduct = (collection, productId) => {
     try {
       dispatch(startLoadingProducts());
       const getProductResponse = await axios.post("/get-product", productData);
+      dispatch(getProductReviews(productId));
       dispatch({ type: SET_PRODUCT, payload: getProductResponse.data });
       dispatch(stopLoadingProducts());
     } catch (err) {

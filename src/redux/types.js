@@ -22,6 +22,9 @@ export const GET_CATEGORY_PRODUCTS = "GET_CATEGORY_PRODUCTS";
 export const GET_FILTERED_PRODUCTS = "GET_FILTERED_PRODUCTS";
 export const SET_PRODUCT = "GET_PRODUCT";
 
+// Reviews reducer action types
+export const SET_PRODUCT_REVIEWS = "SET_PRODUCT_REVIEWS";
+
 // Async reducer product action types
 export const START_LOADING_PRODUCTS = "START_LOADING_PRODUCTS";
 export const STOP_LOADING_PRODUCTS = "STOP_LOADING_PRODUCTS";

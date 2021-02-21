@@ -1,10 +1,11 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import accountReducer from './reducers/accountReducer';
-import favouriteReducer from './reducers/favouriteReducer';
-import cartReducer from './reducers/cartReducer';
-import productReducer from './reducers/productReducer';
-import asyncReducer from './reducers/asyncReducer';
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import accountReducer from "./reducers/accountReducer";
+import favouriteReducer from "./reducers/favouriteReducer";
+import cartReducer from "./reducers/cartReducer";
+import productReducer from "./reducers/productReducer";
+import asyncReducer from "./reducers/asyncReducer";
+import reviewsReducer from "./reducers/reviewsReducer";
 
 const middleware = [thunk];
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   products: productReducer,
   async: asyncReducer,
+  reviews: reviewsReducer,
 });
 
 const store = createStore(

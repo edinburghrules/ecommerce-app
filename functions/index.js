@@ -59,4 +59,9 @@ app.get("/products-category", getShoesByCategory);
 app.get("/filtered-products", getShoesByFilter);
 app.post("/get-product", getProduct);
 
+// Reviews routes
+const { getProductReviews } = require("./handlers/reviews");
+
+app.post("/get-reviews", getProductReviews);
+
 exports.api = functions.https.onRequest(app);
