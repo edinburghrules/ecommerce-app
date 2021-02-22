@@ -7,7 +7,6 @@ import { closeCart } from "../../redux/actions/cartActions";
 import NavDropdown from "../nav-dropdown/nav-dropdown";
 import Cart from "../cart/cart-list/cart";
 import MobileNav from "../mobile-nav/mobile-nav";
-import logo from "../../assets/logo2.png";
 import user from "../../assets/001-user.png";
 import favourites from "../../assets/heart-outline.png";
 import shopping from "../../assets/shopping-bag.png";
@@ -260,7 +259,6 @@ class NavigationBar extends React.Component {
             </ul>
           </div>
           <div onClick={() => history.push("/")} className="navigation__logo">
-            {/* <img src={logo1} alt="logo" /> */}
             <div className="navigation__logo-text">
               <p>Kroll.</p>
             </div>

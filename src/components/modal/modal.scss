@@ -19,20 +19,21 @@
   justify-content: center;
 }
 
-.modal__content {
-  height: 98vh;
-  width: 98vw;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  animation: slidein 0.2s;
-}
-
 .modal__top {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 2rem 4rem;
+  padding: 1rem;
+}
+
+.modal__content {
+  height: 95vmin;
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding-bottom: 5.2rem;
+  animation: slidein 0.2s;
 }
 
 .modal__top button {
@@ -46,5 +47,5 @@
 }
 
 .modal__top button img {
-  height: 4.5rem;
+  height: 4.2rem;
 }
