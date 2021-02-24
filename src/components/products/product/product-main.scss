@@ -7,7 +7,21 @@
   font-weight: $bold;
   font-family: $Montserrat;
   color: #333;
-  // letter-spacing: 1px;
+}
+
+.product-main__rating {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+
+  & p {
+    font-size: $xsmall;
+  }
+}
+
+.product-main__star {
+  height: 1.6rem;
+  margin-right: 2px;
 }
 
 .product-main__price {
@@ -125,13 +139,13 @@
   font-family: $Montserrat;
   width: 100%;
   border: none;
-  background: #333;
+  background: $dark-bg;
   color: $light-text;
   padding: 1rem;
   letter-spacing: 1px;
   font-size: 1.4rem;
   font-weight: $semiBold;
-  border: 2px solid #333;
+  border: 2px solid $dark-bg;
   margin: 2rem 0 1rem 0;
 }
 

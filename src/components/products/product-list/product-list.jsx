@@ -23,10 +23,13 @@ class ProductList extends React.Component {
     bestFor: this.props.location.search
       ? queryString.parse(this.props.location.search).bestfor
       : "",
+    weather: this.props.location.search
+      ? queryString.parse(this.props.location.search).weather
+      : "",
   };
 
   componentDidMount = () => {
-    const { collection, category, colors, bestFor } = this.state;
+    const { collection, category, colors, bestFor, weather } = this.state;
     const { authenticated, getFavouriteProducts } = this.props;
     const {
       getAllProducts,
@@ -38,8 +41,8 @@ class ProductList extends React.Component {
       getFavouriteProducts();
     }
 
-    if (colors || bestFor) {
-      getFilteredProducts(collection, colors, bestFor, category);
+    if (colors || bestFor || weather) {
+      getFilteredProducts(collection, colors, bestFor, weather, category);
     } else {
       if (collection && category) {
         getCategoryProducts(collection, category);

@@ -157,44 +157,6 @@ const MobileNav = ({
                     );
                   }
                 })}
-              {linksToRender &&
-                linksToRender.collectionLinks.map((link, i) => {
-                  if (i === 0) {
-                    return (
-                      <div
-                        key={i}
-                        onClick={() => {
-                          handleProductDropdown(link);
-                        }}
-                        className="mobile-menu__dropdown-header"
-                      >
-                        <p className="mobile-menu__link">{link.category}</p>
-                        <img
-                          style={{
-                            transform: collectionsDropdown
-                              ? "rotate(90deg)"
-                              : "rotate(0deg)",
-                          }}
-                          src={rightArrow}
-                          alt="right arrow"
-                        />
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div
-                        key={i}
-                        className={
-                          collectionsDropdown
-                            ? "mobile-menu__dropdown-link"
-                            : "mobile-menu__dropdown-link hide"
-                        }
-                      >
-                        <p className="mobile-menu__link">{link.category}</p>
-                      </div>
-                    );
-                  }
-                })}
             </div>
             {/* DYNAMIC MENU CONTENT */}
           </div>

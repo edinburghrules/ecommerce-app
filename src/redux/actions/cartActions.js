@@ -53,6 +53,7 @@ export const getCart = (authenticated, product = "") => {
 };
 
 export const addToCart = (product, authenticated) => {
+  console.log(product);
   const productData = {
     product,
   };

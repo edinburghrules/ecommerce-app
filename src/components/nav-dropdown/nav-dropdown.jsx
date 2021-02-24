@@ -1,6 +1,6 @@
-import React from 'react';
-import './nav-dropdown.scss';
-import { withRouter, Link } from 'react-router-dom';
+import React from "react";
+import "./nav-dropdown.scss";
+import { withRouter, Link } from "react-router-dom";
 
 const NavDropdown = ({
   handleClose,
@@ -10,7 +10,7 @@ const NavDropdown = ({
   history,
 }) => {
   return (
-    <div id='close-dropdown' className='dropdown' onClick={handleClose}>
+    <div id="close-dropdown" className="dropdown" onClick={handleClose}>
       <div
         className={
           mensDesktopOpen || womensDesktopOpen
@@ -21,13 +21,13 @@ const NavDropdown = ({
         <div
           className={
             mensDesktopOpen
-              ? 'dropdown__menu-content open'
+              ? "dropdown__menu-content open"
               : womensDesktopOpen
-              ? 'dropdown__menu-content open'
-              : 'dropdown__menu-content'
+              ? "dropdown__menu-content open"
+              : "dropdown__menu-content"
           }
         >
-          <div className='dropdown__column'>
+          <div className="dropdown__column">
             {linksToRender &&
               linksToRender.apparelLinks.map(({ path, title }, i) => (
                 <Link to={path} key={i}>
@@ -35,7 +35,7 @@ const NavDropdown = ({
                 </Link>
               ))}
           </div>
-          <div className='dropdown__column'>
+          <div className="dropdown__column">
             {linksToRender &&
               linksToRender.shoeLinks.map(({ path, title }, i) => (
                 <Link to={path} key={i}>
@@ -43,8 +43,8 @@ const NavDropdown = ({
                 </Link>
               ))}
           </div>
-          <div className='categories'>
-            {linksToRender &&
+          <div className="categories">
+            {/* {linksToRender &&
               linksToRender.collectionLinks.map(
                 ({ path, title, img }, i) => (
                   <div onClick={() => history.push(path)} key={i}>
@@ -52,7 +52,7 @@ const NavDropdown = ({
                     <p>{title}</p>
                   </div>
                 )
-              )}
+              )} */}
           </div>
         </div>
       </div>

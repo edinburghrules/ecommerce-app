@@ -3,7 +3,9 @@
 @import "../../../sass/utils";
 
 .product-page {
-  height: 200rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .product-page__product-container {
@@ -77,14 +79,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // margin-top: 5rem;
+  background: $dark-bg;
+  color: #fff;
+  padding: 4rem;
 }
 
 .product-page__reviews-container h2 {
   font-size: 3rem;
   font-weight: 700;
   font-family: $Montserrat;
-  color: #333;
+  color: #fff;
 }
 
 .product-page__reviews-container h3 {
@@ -93,9 +97,13 @@
   font-size: 1.8rem;
 }
 
+.product-page__reviews-rating {
+  margin: 1rem 0;
+}
+
 .product-page__reviews-container p {
   font-weight: $normal;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
 .product-page__reviews-list {

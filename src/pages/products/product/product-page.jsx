@@ -12,6 +12,10 @@ import {
 } from "../../../redux/actions/productActions";
 import { capitaliseFirstLetterArr } from "../../../utils/text-formatting/text-formatting";
 import ReviewCard from "../../../components/reviews/review-card";
+import starOutline from "../../../assets/star0.svg";
+import starFilled from "../../../assets/star1.svg";
+import starOutlineDark from "../../../assets/star0dark.svg";
+import starFilledDark from "../../../assets/star1dark.svg";
 
 class ProductPage extends React.Component {
   state = {
@@ -58,8 +62,35 @@ class ProductPage extends React.Component {
     return Math.ceil(average);
   };
 
+  displayRatingStars = (starColor) => {
+    const starArr = [];
+    const averageRating = this.getAverageReviewStars();
+
+    for (let i = 0; i < 5; i++) {
+      if (i < averageRating) {
+        starArr.push(
+          <img
+            className="product-main__star"
+            src={starColor === "dark" ? starFilledDark : starFilled}
+            alt="filled star"
+          />
+        );
+      } else {
+        starArr.push(
+          <img
+            className="product-main__star"
+            src={starColor === "dark" ? starOutlineDark : starOutline}
+            alt="unfilled star"
+          />
+        );
+      }
+    }
+
+    return starArr;
+  };
+
   render() {
-    const { modalOpen, imageIndex } = this.state;
+    const { modalOpen, imageIndex, index } = this.state;
     const { product, reviews } = this.props;
 
     if (!reviews) return <h1>LOADING</h1>;
@@ -132,23 +163,31 @@ class ProductPage extends React.Component {
                   / {capitaliseFirstLetterArr(this.props.match.params.category)}
                 </Link>
                 <ProductMain
+                  totalReviews={reviews.length}
+                  displayRatingStars={this.displayRatingStars}
                   handleVariantSelect={this.handleVariantSelect}
-                  variantIndex={this.state.index}
-                  product={this.props.product}
+                  variantIndex={index}
+                  product={product}
                 />
               </div>
             </div>
-            <div className="product-page__reviews-container">
-              <h2>Feedback from Customers</h2>
-              <h3>{product.name && product.name}</h3>
-              <p>{reviews && this.getAverageReviewStars()} out of 5 stars</p>
-              <div className="product-page__reviews-list">
-                {reviews &&
-                  reviews.map((review, index) => (
-                    <ReviewCard review={review} />
-                  ))}
+
+            {reviews.length > 0 && (
+              <div className="product-page__reviews-container">
+                <h2>Feedback from Customers</h2>
+                <h3>{product.name && product.name}</h3>
+                <div className="product-page__reviews-rating">
+                  {this.displayRatingStars("dark")}
+                </div>
+                <p>{reviews && this.getAverageReviewStars()} out of 5 stars</p>
+                <div className="product-page__reviews-list">
+                  {reviews &&
+                    reviews.map((review, index) => (
+                      <ReviewCard review={review} />
+                    ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         )}
       </React.Fragment>

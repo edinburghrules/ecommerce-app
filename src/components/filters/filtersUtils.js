@@ -1,20 +1,20 @@
-import queryString from 'query-string';
+import queryString from "query-string";
 
 export const colorsUrlParamsHandler = (colorFilters, history, location) => {
   const colorParamsArr = [...colorFilters.colors];
   const bestForQueryString = location.search
     ? queryString.parse(location.search).bestfor
-    : '';
+    : "";
 
   // If the colorParamsArr includes the selected color, add the colorParamsArr as url query
   if (colorParamsArr.includes(colorFilters.selectedColor)) {
     history.push({
       pathname: location.pathname,
       search:
-        '?' +
+        "?" +
         new URLSearchParams({
           colors: colorParamsArr,
-          ...(bestForQueryString && { bestfor: bestForQueryString.split(',') }),
+          ...(bestForQueryString && { bestfor: bestForQueryString.split(",") }),
         }),
     });
   } else {
@@ -26,7 +26,7 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
     const filteredParamsArr =
       params &&
       params.colors
-        .split(',')
+        .split(",")
         .filter((param) => param !== colorFilters.selectedColor);
 
     // If there are filters applied
@@ -34,11 +34,11 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
       history.push({
         pathname: location.pathname,
         search:
-          '?' +
+          "?" +
           new URLSearchParams({
             colors: filteredParamsArr,
             ...(bestForQueryString && {
-              bestfor: bestForQueryString.split(','),
+              bestfor: bestForQueryString.split(","),
             }),
           }),
       });
@@ -46,13 +46,13 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
       history.push({
         pathname: location.pathname,
         search: bestForQueryString
-          ? '?' +
+          ? "?" +
             new URLSearchParams({
               ...(bestForQueryString && {
-                bestfor: bestForQueryString.split(','),
+                bestfor: bestForQueryString.split(","),
               }),
             })
-          : '',
+          : "",
       });
     }
   }
@@ -62,26 +62,68 @@ export const bestForUrlParamsHandler = (bestForFilters, history, location) => {
   const bestForParamsArr = [...bestForFilters];
   const colorQueryString = location.search
     ? queryString.parse(location.search).colors
-    : '';
+    : "";
+  const weatherQueryString = location.search
+    ? queryString.parse(location.search).weather
+    : "";
   if (bestForFilters.length > 0) {
     history.push({
       pathname: location.pathname,
       search:
-        '?' +
+        "?" +
         new URLSearchParams({
           bestfor: bestForParamsArr,
-          ...(colorQueryString && { colors: colorQueryString.split(',') }),
+          ...(colorQueryString && { colors: colorQueryString.split(",") }),
+          ...(weatherQueryString && { weather: weatherQueryString.split(",") }),
         }),
     });
   } else {
     history.push({
       pathname: location.pathname,
       search: colorQueryString
-        ? '?' +
+        ? "?" +
           new URLSearchParams({
-            ...(colorQueryString && { colors: colorQueryString.split(',') }),
+            ...(colorQueryString && { colors: colorQueryString.split(",") }),
+            ...(weatherQueryString && {
+              weather: weatherQueryString.split(","),
+            }),
           })
-        : '',
+        : "",
+    });
+  }
+};
+
+export const weatherParamsHandler = (weatherFilters, history, location) => {
+  const weatherParamsArr = [...weatherFilters];
+  const colorQueryString = location.search
+    ? queryString.parse(location.search).colors
+    : "";
+  const bestForQueryString = location.search
+    ? queryString.parse(location.search).bestfor
+    : "";
+  if (weatherFilters.length > 0) {
+    history.push({
+      pathname: location.pathname,
+      search:
+        "?" +
+        new URLSearchParams({
+          weather: weatherParamsArr,
+          ...(colorQueryString && { colors: colorQueryString.split(",") }),
+          ...(bestForQueryString && { bestfor: bestForQueryString.split(",") }),
+        }),
+    });
+  } else {
+    history.push({
+      pathname: location.pathname,
+      search: colorQueryString
+        ? "?" +
+          new URLSearchParams({
+            ...(colorQueryString && { colors: colorQueryString.split(",") }),
+            ...(bestForQueryString && {
+              bestfor: bestForQueryString.split(","),
+            }),
+          })
+        : "",
     });
   }
 };

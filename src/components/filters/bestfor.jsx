@@ -1,9 +1,11 @@
-import React from 'react';
-import { captialiseFirstLetter } from './filtersUtils';
-import hovercheck from '../../assets/hovercheck.png';
-import checked from '../../assets/checked.png';
+import React from "react";
+import { captialiseFirstLetter } from "./filtersUtils";
+import hovercheck from "../../assets/hovercheck.png";
+import checked from "../../assets/checked.png";
 
-const BEST_FOR_OPTIONS = ['running', 'casual', 'work'];
+// Get category and apply filters e.g. if category is hi-tops only show wet weather
+
+const BEST_FOR_OPTIONS = ["running", "casual"];
 
 const BestForFilters = (props) => {
   const { selectedBestFor, handleCheck } = props;
@@ -11,14 +13,14 @@ const BestForFilters = (props) => {
     <React.Fragment>
       {BEST_FOR_OPTIONS.map((bestForOption, index) => (
         <label
-          className={selectedBestFor.includes(bestForOption) ? 'active' : ''}
+          className={selectedBestFor.includes(bestForOption) ? "active" : ""}
           onChange={handleCheck}
           key={index}
         >
-          <input id={bestForOption} type='checkbox' />
+          <input id={bestForOption} type="checkbox" />
           <span>
-            <img className='hover-checked' src={hovercheck} alt='hover check' />
-            <img className='checked' src={checked} alt='check' />
+            <img className="hover-checked" src={hovercheck} alt="hover check" />
+            <img className="checked" src={checked} alt="check" />
           </span>
           {captialiseFirstLetter(bestForOption)}
         </label>

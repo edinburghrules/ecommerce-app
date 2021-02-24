@@ -11,6 +11,7 @@ import user from "../../assets/001-user.png";
 import favourites from "../../assets/heart-outline.png";
 import shopping from "../../assets/shopping-bag.png";
 import mobile from "../../assets/menu.png";
+import logo from "../../assets/allbirds-logo.svg";
 
 class NavigationBar extends React.Component {
   state = {
@@ -255,12 +256,19 @@ class NavigationBar extends React.Component {
               >
                 Women
               </li>
-              <li className="navigation__menu-list-item">Collections</li>
             </ul>
           </div>
           <div onClick={() => history.push("/")} className="navigation__logo">
-            <div className="navigation__logo-text">
-              <p>Kroll.</p>
+            <div className="navigation__logo">
+              <h1
+                style={{
+                  fontFamily: `helvetica`,
+                  fontWeight: "900",
+                  fontSize: "2.4rem",
+                }}
+              >
+                apparel.
+              </h1>
             </div>
           </div>
           <div className="navigation__user-menu">

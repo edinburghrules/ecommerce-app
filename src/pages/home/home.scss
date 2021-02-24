@@ -1,0 +1,86 @@
+@import "../../sass/colors";
+@import "../../sass/fonts";
+
+.homepage {
+  &__hero {
+    &-container {
+      position: relative;
+    }
+
+    &-image {
+      height: auto;
+      width: 100%;
+    }
+
+    &-content {
+      position: absolute;
+      bottom: 5%;
+      left: 5%;
+      color: $light-text;
+    }
+
+    &-title {
+      font-size: $large;
+      font-weight: $xblack;
+    }
+
+    &-sub {
+      font-size: $small;
+      font-weight: $semiBold;
+    }
+
+    &-links {
+      margin-top: 3rem;
+    }
+
+    &-link {
+      background: $light-bg;
+      color: $dark-text;
+      padding: 1rem 3rem;
+      font-size: $xsmall;
+      font-weight: $bold;
+
+      &:hover {
+        text-decoration: none;
+        color: $dark-text;
+      }
+
+      &:first-of-type {
+        margin-right: 2rem;
+      }
+    }
+  }
+
+  &__materials {
+    &-image {
+      height: auto;
+      width: 100%;
+    }
+
+    &-information {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      padding: 4rem;
+    }
+
+    &-content {
+      width: 70%;
+      margin-left: 10rem;
+      & h3 {
+        width: 100%;
+        font-weight: $black;
+        font-size: 3rem;
+        font-family: $Montserrat;
+        margin-bottom: 2rem;
+        letter-spacing: 1px;
+        line-height: 4rem;
+      }
+      & p {
+        font-size: $small;
+        font-family: $Montserrat;
+      }
+    }
+  }
+}

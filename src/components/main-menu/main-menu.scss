@@ -1,12 +1,12 @@
-@import '../../sass/colors';
-@import '../../sass/fonts';
+@import "../../sass/colors";
+@import "../../sass/fonts";
 
 .main-menu {
   width: 90%;
-  margin: 6rem auto 0 auto;
+  margin: 6rem auto 8rem auto;
 
   @media (max-width: 530px) {
-    margin: 4rem auto;
+    margin: 4rem auto 8rem auto;
   }
 }
 
@@ -25,7 +25,6 @@
   margin: 4rem auto 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   column-gap: 4rem;
   row-gap: 2rem;
 

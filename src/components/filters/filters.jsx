@@ -1,54 +1,83 @@
-import React from 'react';
-import './filters.scss';
-import { withRouter } from 'react-router-dom';
+import React from "react";
+import "./filters.scss";
+import { withRouter } from "react-router-dom";
 import {
   colorsUrlParamsHandler,
   bestForUrlParamsHandler,
-} from './filtersUtils';
-import FilterCategories from '../fiter-categories/filter-categories';
-import ColorFilters from './colors';
-import BestForFilters from './bestfor';
+  weatherParamsHandler,
+} from "./filtersUtils";
+import FilterCategories from "../fiter-categories/filter-categories";
+import ColorFilters from "./colors";
+import BestForFilters from "./bestfor";
+import WeatherFilters from "./weather";
 
 class Filters extends React.Component {
-  state = { colors: [], bestFors: [] };
+  state = { colors: [], bestFors: [], weather: [] };
 
   clearFilters = () => {
     this.setState({
       colors: [],
       bestFors: [],
+      weather: [],
     });
   };
 
   handleCheck = (e) => {
     const { history, location } = this.props;
-    const selectedBestFor = e.target.id;
+    const selected = e.target.id;
     const checked = e.target.checked;
     if (checked) {
-      this.setState(
-        (prevState) => ({
-          ...prevState,
-          bestFors: [selectedBestFor, ...prevState.bestFors],
-        }),
-        () => {
-          // ADD FILTERS TO URL
-          bestForUrlParamsHandler(this.state.bestFors, history, location);
-        }
-      );
+      if (selected === "wet" || selected === "dry") {
+        this.setState(
+          (prevState) => ({
+            ...prevState,
+            weather: [selected, ...prevState.weather],
+          }),
+          () => {
+            // ADD FILTERS TO URL
+            weatherParamsHandler(this.state.weather, history, location);
+          }
+        );
+      } else {
+        this.setState(
+          (prevState) => ({
+            ...prevState,
+            bestFors: [selected, ...prevState.bestFors],
+          }),
+          () => {
+            // ADD FILTERS TO URL
+            bestForUrlParamsHandler(this.state.bestFors, history, location);
+          }
+        );
+      }
     } else {
-      this.setState(
-        (prevState) => ({
-          prevState,
-          bestFors: [
-            ...prevState.bestFors.filter(
-              (bestFor) => bestFor !== selectedBestFor
-            ),
-          ],
-        }),
-        () => {
-          // ADD FILTERS TO URL
-          bestForUrlParamsHandler(this.state.bestFors, history, location);
-        }
-      );
+      if (selected === "wet" || selected === "dry") {
+        this.setState(
+          (prevState) => ({
+            prevState,
+            weather: [
+              ...prevState.weather.filter((weather) => weather !== selected),
+            ],
+          }),
+          () => {
+            // ADD FILTERS TO URL
+            weatherParamsHandler(this.state.weather, history, location);
+          }
+        );
+      } else {
+        this.setState(
+          (prevState) => ({
+            prevState,
+            bestFors: [
+              ...prevState.bestFors.filter((bestFor) => bestFor !== selected),
+            ],
+          }),
+          () => {
+            // ADD FILTERS TO URL
+            bestForUrlParamsHandler(this.state.bestFors, history, location);
+          }
+        );
+      }
     }
   };
 
@@ -95,23 +124,33 @@ class Filters extends React.Component {
           options={this.props.options}
           clearFilters={this.clearFilters}
         />
-        <div className='filters'>
+        <div className="filters">
           <h4>Filter By:</h4>
-          <div className='filters__colors'>
+          <div className="filters__colors">
             <hr />
             <p>COLOURS</p>
-            <div className='filters__color-options'>
+            <div className="filters__color-options">
               <ColorFilters
                 handleSelect={this.handleSelect}
                 selectedColors={this.state.colors}
               />
             </div>
           </div>
-          <div className='filters__bestfor'>
+          <div className="filters__bestfor">
             <hr />
             <p>BEST FOR</p>
-            <div className='filters__best-for-options'>
+            <div className="filters__best-for-options">
               <BestForFilters
+                selectedBestFor={this.state.bestFors}
+                handleCheck={this.handleCheck}
+              />
+            </div>
+          </div>
+          <div className="filters__bestfor">
+            <hr />
+            <p>WEATHER CONDITIONS</p>
+            <div className="filters__best-for-options">
+              <WeatherFilters
                 selectedBestFor={this.state.bestFors}
                 handleCheck={this.handleCheck}
               />

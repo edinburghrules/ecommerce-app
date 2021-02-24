@@ -1,21 +1,22 @@
 import React from "react";
 import "./review-card.scss";
-import starOutline from "../../assets/star0.svg";
-import starFilled from "../../assets/star1.svg";
+import starOutline from "../../assets/star0dark.svg";
+import starFilled from "../../assets/star1dark.svg";
 
 const ReviewCard = ({ review }) => {
   const displayRatingStars = () => {
     const starArr = [];
-    for (let i = 0; i < review.rating; i++) {
-      starArr.push(<img className="star" src={starFilled} alt="filled star" />);
-    }
 
-    const emptyStars = 5 - review.rating;
-
-    for (let i = 0; i < emptyStars; i++) {
-      starArr.push(
-        <img className="star" src={starOutline} alt="unfilled star" />
-      );
+    for (let i = 0; i < 5; i++) {
+      if (i < review.rating) {
+        starArr.push(
+          <img className="star" src={starFilled} alt="filled star" />
+        );
+      } else {
+        starArr.push(
+          <img className="star" src={starOutline} alt="unfilled star" />
+        );
+      }
     }
 
     return starArr;

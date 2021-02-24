@@ -47,7 +47,13 @@ export const getCategoryProducts = (collection, category) => {
   };
 };
 
-export const getFilteredProducts = (collection, colors, bestFor, category) => {
+export const getFilteredProducts = (
+  collection,
+  colors,
+  bestFor,
+  weather,
+  category
+) => {
   return async (dispatch) => {
     try {
       dispatch(startLoadingProducts());
@@ -57,7 +63,7 @@ export const getFilteredProducts = (collection, colors, bestFor, category) => {
           category ? `&category=${category}` : ""
         }${colors ? `&colors=${colors}` : ""}${
           bestFor ? `&bestfor=${bestFor}` : ""
-        }`
+        }${weather ? `&weather=${weather}` : ""}`
       );
 
       dispatch({

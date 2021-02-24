@@ -1,8 +1,11 @@
 import React from "react";
 import "./product-main.scss";
+import { withRouter } from "react-router-dom";
 import { capitaliseFirstLetter } from "../../../utils/text-formatting/text-formatting";
 import Accordion from "../../../components/accordion/accordion";
 import "../../../components/accordion/accordion.scss";
+import { connect } from "react-redux";
+import { addToCart } from "../../../redux/actions/cartActions";
 
 class ProductMain extends React.Component {
   state = {
@@ -30,7 +33,11 @@ class ProductMain extends React.Component {
               content: this.props.product.delivery,
               open: false,
             },
-            { title: "care", content: this.props.product.care, open: false },
+            {
+              title: "care guide",
+              content: this.props.product.care,
+              open: false,
+            },
           ]
         : null,
     });
@@ -55,7 +62,11 @@ class ProductMain extends React.Component {
             content: this.props.product.delivery,
             open: false,
           },
-          { title: "care", content: this.props.product.care, open: false },
+          {
+            title: "care guide",
+            content: this.props.product.care,
+            open: false,
+          },
         ],
       });
     }
@@ -95,8 +106,23 @@ class ProductMain extends React.Component {
     }));
   };
 
+  handleAddToCart = () => {
+    const product = {
+      name: this.props.product.name,
+      category: this.props.product.category,
+      collection: this.props.product.collection,
+      color: this.props.product.colors[this.props.variantIndex],
+      id: this.props.match.params.id,
+      image: this.props.product.variants[this.props.variantIndex].images[0].src,
+      price: this.props.product.price,
+      qty: 1,
+      size: this.state.selectedSize,
+    };
+    this.props.addToCart(product, this.props.authenticated);
+  };
+
   render() {
-    const { product, variantIndex } = this.props;
+    const { product, variantIndex, totalReviews } = this.props;
     const { selectedSize, productFeatures } = this.state;
     if (product.colors === undefined || product.variants === undefined) {
       return <h1>LOADING</h1>;
@@ -104,6 +130,10 @@ class ProductMain extends React.Component {
       return (
         <div className="product-main">
           <h1 className="product-main__title">{product.name}</h1>
+          <div className="product-main__rating">
+            {this.props.displayRatingStars("light")}
+            {<p>({totalReviews})</p>}
+          </div>
           <p className="product-main__price">£{product.price}</p>
           <div className="product-main__variants-container">
             <span>STANDARD EDITION:</span> {""}
@@ -148,6 +178,7 @@ class ProductMain extends React.Component {
           </div>
           <div className="product-main__cart-container">
             <button
+              onClick={this.handleAddToCart}
               disabled={selectedSize == null}
               className={
                 selectedSize
@@ -193,4 +224,15 @@ class ProductMain extends React.Component {
   }
 }
 
-export default ProductMain;
+const mapActionsToProps = {
+  addToCart,
+};
+
+const mapStateToProps = (state) => ({
+  authenticated: state.account.authenticated,
+});
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withRouter(ProductMain));

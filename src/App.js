@@ -8,10 +8,8 @@ import jwtDecode from "jwt-decode";
 import {
   mensApparelLinks,
   mensShoeLinks,
-  mensCollectionLinks,
   womensApparelLinks,
   womensShoeLinks,
-  womensCollectionLinks,
 } from "./navigation-links/navigation-links";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
 import Home from "./pages/home/home-page";
@@ -49,10 +47,8 @@ const App = (props) => {
         <NavigationBar
           mensApparelLinks={mensApparelLinks}
           mensShoeLinks={mensShoeLinks}
-          mensCollectionLinks={mensCollectionLinks}
           womensApparelLinks={womensApparelLinks}
           womensShoeLinks={womensShoeLinks}
-          womensCollectionLinks={womensCollectionLinks}
         />
         <Switch>
           <Route exact path="/" component={Home} />
