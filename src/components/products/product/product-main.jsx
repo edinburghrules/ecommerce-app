@@ -132,7 +132,19 @@ class ProductMain extends React.Component {
           <h1 className="product-main__title">{product.name}</h1>
           <div className="product-main__rating">
             {this.props.displayRatingStars("light")}
-            {<p>({totalReviews})</p>}
+            {
+              <a
+                onClick={() => {
+                  window.scrollTo({
+                    left: 0,
+                    top: document.body.scrollHeight,
+                    behavior: "smooth",
+                  });
+                }}
+              >
+                ({totalReviews})
+              </a>
+            }
           </div>
           <p className="product-main__price">£{product.price}</p>
           <div className="product-main__variants-container">

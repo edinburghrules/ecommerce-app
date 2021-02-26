@@ -23,7 +23,8 @@
 }
 
 .filters__color-options label,
-.filters__bestfor label {
+.filters__bestfor label,
+.filters__weather label {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -34,7 +35,8 @@
 }
 
 .filters__color-options label.active,
-.filters__bestfor label.active {
+.filters__bestfor label.active,
+.filters__weather label.active {
   font-weight: $black;
 }
 
@@ -54,12 +56,28 @@
     background: #ccc;
   }
 
-  &--navy {
+  &--blue {
     background: #1e3799;
   }
 
+  &--teal {
+    background: #008080;
+  }
+
+  &--brown {
+    background: #964b00;
+  }
+
+  &--pink {
+    background: #ffc0cb;
+  }
+
+  &--red {
+    background: #ff0000;
+  }
+
   &--white {
-    background: #eee;
+    background: #f0f0f0;
   }
 }
 
@@ -69,45 +87,51 @@
   height: 3.3rem;
   width: 3.3rem;
   position: absolute;
-  border: 2px solid #ccc;
+  border: 1px solid transparent;
   top: -4px;
   left: -4px;
   border-radius: 50%;
 }
 
 .filters__color-btn.active::after {
-  border: 2px solid darken($color: #ccc, $amount: 12);
+  border: 1px solid darken($color: #ccc, $amount: 12);
 }
 
 .filters__color-btn:focus {
   outline: none;
 }
 
-.filters__bestfor hr {
+.filters__bestfor hr,
+.filters__weather hr {
   margin-top: 4rem;
 }
 
-.filters__best-for-options {
+.filters__best-for-options,
+.filters__weather-options {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.filters__bestfor input[type="checkbox"] {
+.filters__bestfor input[type="checkbox"],
+.filters__weather input[type="checkbox"] {
   cursor: pointer;
   opacity: 0;
   position: absolute;
 }
 
-.filters__bestfor input[type="checkbox"]:checked + span .checked {
+.filters__bestfor input[type="checkbox"]:checked + span .checked,
+.filters__weather input[type="checkbox"]:checked + span .checked {
   opacity: 1;
 }
 
-.filters__bestfor span {
+.filters__bestfor span,
+.filters__weather span {
   display: flex;
 }
 
-.filters__bestfor span::after {
+.filters__bestfor span::after,
+.filters__weather span::after {
   content: "";
   width: 1.8rem;
   height: 1.8rem;
@@ -116,14 +140,17 @@
 }
 
 .filters__bestfor .hover-checked,
-.filters__bestfor .checked {
+.filters__bestfor .checked,
+.filters__weather .hover-checked,
+.filters__weather .checked {
   position: absolute;
   height: 2rem;
   width: 2rem;
   opacity: 0;
 }
 
-.filters__bestfor label:hover {
+.filters__bestfor label:hover,
+.filter__weather label:hover {
   & .hover-checked {
     opacity: 1;
   }

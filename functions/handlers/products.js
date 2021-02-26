@@ -1,4 +1,3 @@
-const { queryByTestId } = require("@testing-library/react");
 const { db } = require("../util/admin");
 
 const getProduct = async (req, res) => {
@@ -238,6 +237,8 @@ const getShoesByFilter = async (req, res) => {
   querySnapshot.forEach((doc) => {
     products.push({ id: doc.id, ...doc.data() });
   });
+
+  console.log(products.length);
 
   return res.json(products);
 };

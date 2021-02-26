@@ -1,6 +1,15 @@
-import { captialiseFirstLetter } from './filtersUtils';
+import { captialiseFirstLetter } from "./filtersUtils";
 
-const COLOR_FILTER_OPTIONS = ['black', 'grey', 'navy', 'white'];
+const COLOR_FILTER_OPTIONS = [
+  "black",
+  "grey",
+  "blue",
+  "teal",
+  "brown",
+  "pink",
+  "red",
+  "white",
+];
 
 const ColorFilters = (props) => {
   const { handleSelect, selectedColors } = props;
@@ -10,7 +19,7 @@ const ColorFilters = (props) => {
         <li key={index}>
           <label
             className={
-              selectedColors.includes(colorFilterOption) ? 'active' : ''
+              selectedColors.includes(colorFilterOption) ? "active" : ""
             }
           >
             <button

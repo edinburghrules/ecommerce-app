@@ -1,12 +1,12 @@
-import React from 'react';
-import './product-list-page.scss';
-import { Route, Switch } from 'react-router-dom';
-import Filters from '../../../components/filters/filters.jsx';
-import ProductList from '../../../components/products/product-list/product-list';
+import React from "react";
+import "./product-list-page.scss";
+import { Route, Switch } from "react-router-dom";
+import Filters from "../../../components/filters/filters.jsx";
+import ProductList from "../../../components/products/product-list/product-list";
 import {
   mensShoeLinks,
   womensShoeLinks,
-} from '../../../navigation-links/navigation-links';
+} from "../../../navigation-links/navigation-links";
 
 class ProductListPage extends React.Component {
   render() {
@@ -15,15 +15,15 @@ class ProductListPage extends React.Component {
       location,
     } = this.props;
     let options;
-    if (params.collection === 'mens-shoes') {
+    if (params.collection === "mens-shoes") {
       options = mensShoeLinks;
-    } else if (params.collection === 'womens-shoes') {
+    } else if (params.collection === "womens-shoes") {
       options = womensShoeLinks;
     }
     return (
-      <div className='product-list-page'>
-        <div className='product-list-page__filters'>
-          <Filters options={options} />
+      <div className="product-list-page">
+        <div className="product-list-page__filters">
+          <Filters category={params.category} options={options} />
         </div>
         <Switch>
           <Route

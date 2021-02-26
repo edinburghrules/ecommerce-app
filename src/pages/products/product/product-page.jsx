@@ -173,7 +173,7 @@ class ProductPage extends React.Component {
             </div>
 
             {reviews.length > 0 && (
-              <div className="product-page__reviews-container">
+              <div id="#" className="product-page__reviews-container">
                 <h2>Feedback from Customers</h2>
                 <h3>{product.name && product.name}</h3>
                 <div className="product-page__reviews-rating">
@@ -183,7 +183,7 @@ class ProductPage extends React.Component {
                 <div className="product-page__reviews-list">
                   {reviews &&
                     reviews.map((review, index) => (
-                      <ReviewCard review={review} />
+                      <ReviewCard key={index} review={review} />
                     ))}
                 </div>
               </div>

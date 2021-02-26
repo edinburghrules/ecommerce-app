@@ -7,18 +7,23 @@ class FilterCategories extends React.Component {
     currentCategory: null,
   };
   componentDidMount = () => {
-    if (this.props.location.state) {
-      this.props.options.forEach((option) => {
-        this.setState({
-          currentCategory: this.props.location.state.heading,
-        });
+    window.scrollTo(0, 0);
+    if (this.props.match.params.category) {
+      this.setState({
+        currentCategory: this.props.match.params.category
+          .replace("-", " ")
+          .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase()),
       });
     } else {
       this.setState({
-        currentCategory: this.props.options[0].title,
+        currentCategory: this.props.match.params.collection
+          .replace("ns", "n's")
+          .replace("-", " ")
+          .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase()),
       });
     }
   };
+
   setPathHeader = (currentCategory) => {
     this.props.clearFilters();
     this.setState({ currentCategory });

@@ -63,7 +63,10 @@ export const addToCart = (product, authenticated) => {
         await axios.post("/add-to-cart", productData);
         dispatch(openCart());
       } catch (err) {
-        dispatch({ type: LOW_STOCK, payload: err.response.data.fail });
+        dispatch({
+          type: LOW_STOCK,
+          payload: { msg: err.response.data.fail, cartItem: product },
+        });
         dispatch(openCart());
       }
     } else {
@@ -76,8 +79,11 @@ export const addToCart = (product, authenticated) => {
       } else {
         dispatch({
           type: LOW_STOCK,
-          payload:
-            "Sorry, there is not enough stock to increase quantity further",
+          payload: {
+            msg:
+              "Sorry, there is not enough stock to increase quantity further",
+            cartItem: product,
+          },
         });
         dispatch(openCart());
       }

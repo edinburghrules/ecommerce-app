@@ -8,16 +8,22 @@ import checked from "../../assets/checked.png";
 const WEATHER_OPTIONS = ["wet", "dry"];
 
 const WeatherFilters = (props) => {
-  const { selectedBestFor, handleCheck } = props;
+  const { selectedWeather, handleCheck } = props;
+  console.log();
   return (
     <React.Fragment>
       {WEATHER_OPTIONS.map((weatherOption, index) => (
         <label
-          className={selectedBestFor.includes(weatherOption) ? "active" : ""}
+          className={selectedWeather.includes(weatherOption) ? "active" : ""}
           onChange={handleCheck}
           key={index}
         >
-          <input id={weatherOption} type="checkbox" />
+          <input
+            // onChange={() => {}}
+            // checked={selectedWeather.includes(weatherOption)}
+            id={weatherOption}
+            type="checkbox"
+          />
           <span>
             <img className="hover-checked" src={hovercheck} alt="hover check" />
             <img className="checked" src={checked} alt="check" />

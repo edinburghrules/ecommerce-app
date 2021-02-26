@@ -17,7 +17,12 @@ const BestForFilters = (props) => {
           onChange={handleCheck}
           key={index}
         >
-          <input id={bestForOption} type="checkbox" />
+          <input
+            // onChange={() => {}}
+            // checked={selectedBestFor.includes(bestForOption)}
+            id={bestForOption}
+            type="checkbox"
+          />
           <span>
             <img className="hover-checked" src={hovercheck} alt="hover check" />
             <img className="checked" src={checked} alt="check" />

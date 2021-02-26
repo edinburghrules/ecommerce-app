@@ -70,6 +70,7 @@ export const getFilteredProducts = (
         type: GET_FILTERED_PRODUCTS,
         payload: getFilteredProductsResponse.data,
       });
+
       dispatch(stopLoadingProducts());
     } catch (err) {
       console.log(err);

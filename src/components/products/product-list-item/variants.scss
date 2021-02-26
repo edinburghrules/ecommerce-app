@@ -1,0 +1,50 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+
+.variant-sizes {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+h5 {
+  margin-bottom: 1rem;
+}
+
+.variant-sizes__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.variant-sizes__size {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  width: 5rem;
+  border: 1px solid $dark-text;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.variant-sizes__size--active:hover {
+  background: #222;
+  color: $light-text;
+  cursor: pointer;
+}
+
+.variant-sizes__size:active {
+  background: $dark-bg;
+  color: $light-text;
+  cursor: pointer;
+}
+
+.variant-sizes__size--disabled {
+  text-decoration: line-through;
+  // background: lightcoral;
+}

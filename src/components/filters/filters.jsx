@@ -10,9 +10,30 @@ import FilterCategories from "../fiter-categories/filter-categories";
 import ColorFilters from "./colors";
 import BestForFilters from "./bestfor";
 import WeatherFilters from "./weather";
+import queryString from "query-string";
 
 class Filters extends React.Component {
   state = { colors: [], bestFors: [], weather: [] };
+
+  componentDidMount = () => {
+    let colorsFromURL =
+      queryString.parse(this.props.location.search).colors &&
+      queryString.parse(this.props.location.search).colors.split(",");
+
+    let bestforFromURL =
+      queryString.parse(this.props.location.search).bestfor &&
+      queryString.parse(this.props.location.search).bestfor.split(",");
+
+    let weatherFromURL =
+      queryString.parse(this.props.location.search).weather &&
+      queryString.parse(this.props.location.search).weather.split(",");
+
+    this.setState({
+      colors: colorsFromURL ? colorsFromURL : [],
+      bestFors: bestforFromURL ? bestforFromURL : [],
+      weather: weatherFromURL ? weatherFromURL : [],
+    });
+  };
 
   clearFilters = () => {
     this.setState({
@@ -136,22 +157,24 @@ class Filters extends React.Component {
               />
             </div>
           </div>
-          <div className="filters__bestfor">
-            <hr />
-            <p>BEST FOR</p>
-            <div className="filters__best-for-options">
-              <BestForFilters
-                selectedBestFor={this.state.bestFors}
-                handleCheck={this.handleCheck}
-              />
+          {!this.props.category && (
+            <div className="filters__bestfor">
+              <hr />
+              <p>BEST FOR</p>
+              <div className="filters__best-for-options">
+                <BestForFilters
+                  selectedBestFor={this.state.bestFors}
+                  handleCheck={this.handleCheck}
+                />
+              </div>
             </div>
-          </div>
-          <div className="filters__bestfor">
+          )}
+          <div className="filters__weather">
             <hr />
             <p>WEATHER CONDITIONS</p>
-            <div className="filters__best-for-options">
+            <div className="filters__weather-options">
               <WeatherFilters
-                selectedBestFor={this.state.bestFors}
+                selectedWeather={this.state.weather}
                 handleCheck={this.handleCheck}
               />
             </div>

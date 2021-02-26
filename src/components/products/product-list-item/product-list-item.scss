@@ -3,15 +3,11 @@
 @import "../../../sass/utils";
 
 .product-list-item {
-  height: 68rem;
   font-family: $Montserrat;
   border: 2px solid $light-text;
   padding: 1rem;
   &:hover {
     box-shadow: $boxShadow;
-  }
-  &:hover .product-list-item__variant-sizes {
-    visibility: visible;
   }
 }
 
@@ -62,17 +58,6 @@
   margin-top: 1rem;
 }
 
-.product-list-item__variant-size:hover {
-  background: #f5f5f5;
-  cursor: pointer;
-}
-
-.product-list-item__variant-size:active {
-  background: $dark-bg;
-  color: $light-text;
-  cursor: pointer;
-}
-
 .product-list-item__price {
   font-size: $xsmall;
   display: block;
@@ -103,37 +88,4 @@
   height: auto;
   margin-right: 1rem;
   border: 1px solid #ccc;
-}
-
-.product-list-item__variant-sizes {
-  position: absolute;
-  height: 10rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  bottom: -13rem;
-  left: -1rem;
-  visibility: hidden;
-  padding-left: 1rem;
-}
-
-h5 {
-  margin-bottom: 1rem;
-}
-
-.product-list-item__variant-size-list {
-  display: flex;
-}
-
-.product-list-item__variant-size {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 5rem;
-  width: 5rem;
-  border: 1px solid $dark-text;
-  margin-right: 1rem;
 }

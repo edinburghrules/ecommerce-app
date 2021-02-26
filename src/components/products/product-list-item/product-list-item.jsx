@@ -1,6 +1,7 @@
 import React from "react";
 import "./product-list-item.scss";
 import { Link, withRouter } from "react-router-dom";
+import Variants from "./variants";
 import Favourite from "./favourite";
 import { connect } from "react-redux";
 import { addToCart } from "../../../redux/actions/cartActions";
@@ -8,27 +9,56 @@ import { addToCart } from "../../../redux/actions/cartActions";
 class ProductListItem extends React.Component {
   state = {
     variantIndex: 0,
-    colors: this.props.colorOptions ? this.props.colorOptions : false,
+    colors: false,
     colorIndex: 0,
   };
 
+  // loop through this.state.colors ->
+
   componentDidMount = () => {
-    if (this.state.colors.length > 0) {
-      // Create color index to show selected color image and details
-      const colorIndex = this.props.product.variants.findIndex((variant) => {
-        return (
-          variant.color === this.state.colors[this.state.colors.length - 1]
-        );
-      });
-      this.setState({
-        colorIndex,
-      });
-    }
+    this.setState(
+      {
+        colors: this.props.colorOptions,
+      },
+      () => {
+        if (this.state.colors) {
+          const firstMatchIndex = this.props.product.variants.findIndex(
+            (variant) =>
+              variant.color === this.state.colors[this.state.colors.length - 1]
+          );
+          if (firstMatchIndex > -1) {
+            this.setState((prevState) => {
+              return {
+                colorIndex: firstMatchIndex,
+              };
+            });
+          } else {
+            const matchIndex = this.props.product.variants.findIndex(
+              (variant) => {
+                return (
+                  variant.color ===
+                  this.props.colorOptions[this.props.colorOptions.length - 2]
+                );
+              }
+            );
+
+            this.setState({
+              colorIndex:
+                matchIndex > -1
+                  ? matchIndex
+                  : this.props.product.variants.findIndex((variant) =>
+                      this.props.colorOptions.includes(variant.color)
+                    ),
+            });
+          }
+        }
+      }
+    );
   };
 
   // Select variant if color filter applied or not
   handleVariantSelect = (index) => {
-    if (this.state.colors.length > 0) {
+    if (this.state.colors) {
       this.setState({
         colorIndex: index,
       });
@@ -60,34 +90,11 @@ class ProductListItem extends React.Component {
       product: { name, price, variants, id, category, collection },
     } = this.props;
 
-    const renderVariants = (variant, index) => {
-      const renderBy = colors.length > 0 ? colorIndex : variantIndex;
-      if (renderBy === index) {
-        return (
-          <div className="product-list-item__variant-sizes">
-            <h5>Quick Add</h5>
-            <div className="product-list-item__variant-size-list">
-              {variant.sizes &&
-                variant.sizes.map(({ size, stockQty }, index) => {
-                  if (stockQty > 0) {
-                    return (
-                      <div
-                        onClick={() => this.quickAdd(variant, size)}
-                        key={index}
-                        className="product-list-item__variant-size"
-                      >
-                        <p>UK</p>
-                        <p>{size}</p>
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
-            </div>
-          </div>
-        );
-      }
-    };
+    const renderBy = colors ? colorIndex : variantIndex;
+
+    if (variants.length === 0 || this.state.variantIndex === undefined)
+      return <h1>Loading</h1>;
+
     return (
       <div className="product-list-item">
         <div className="product-list-item__content">
@@ -95,7 +102,7 @@ class ProductListItem extends React.Component {
             to={{
               pathname: `/collection/${collection}/${category}/product/${id}`,
               state: {
-                variantIndex: variantIndex,
+                variantIndex: this.state.colors ? colorIndex : variantIndex,
                 prevPath: this.props.location.pathname,
               },
             }}
@@ -143,34 +150,48 @@ class ProductListItem extends React.Component {
                         src={variant.images[0].src}
                         alt={`${variant.name}-${variant.color}`}
                       />
-                      {renderVariants(variant, index)}
+                      {/* <Variants
+                        key={index}
+                        renderBy={renderBy}
+                        variant={variant}
+                        index={index}
+                      /> */}
                     </React.Fragment>
                   );
                 } else if (!colors) {
                   return (
-                    <React.Fragment key={index}>
-                      <Favourite
-                        product={{ id, name, price, category, collection }}
-                        variant={variant}
-                        isSelected={variantIndex === index}
-                      />
-                      <img
-                        className={
-                          variantIndex === index
-                            ? "product-list-item__variant-img--active"
-                            : "product-list-item__variant-img"
-                        }
-                        onClick={() => this.handleVariantSelect(index)}
-                        src={variant.images[0].src}
-                        alt={`${variant.name}-${variant.color}`}
-                      />
-                      {renderVariants(variant, index)}
-                    </React.Fragment>
+                    <div>
+                      <div key={index}>
+                        <Favourite
+                          product={{ id, name, price, category, collection }}
+                          variant={variant}
+                          isSelected={variantIndex === index}
+                        />
+                        <img
+                          className={
+                            variantIndex === index
+                              ? "product-list-item__variant-img--active"
+                              : "product-list-item__variant-img"
+                          }
+                          onClick={() => this.handleVariantSelect(index)}
+                          src={variant.images[0].src}
+                          alt={`${variant.name}-${variant.color}`}
+                        />
+                      </div>
+                    </div>
                   );
                 } else {
                   return null;
                 }
               })}
+          </div>
+          <div>
+            <Variants
+              product={this.props.product}
+              renderBy={renderBy}
+              variant={this.state.variantIndex}
+              variants={variants}
+            />
           </div>
         </div>
       </div>

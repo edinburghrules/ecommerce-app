@@ -4,8 +4,10 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
   const colorParamsArr = [...colorFilters.colors];
   const bestForQueryString = location.search
     ? queryString.parse(location.search).bestfor
-    : "";
-
+    : false;
+  const weatherQueryString = location.search
+    ? queryString.parse(location.search).weather
+    : false;
   // If the colorParamsArr includes the selected color, add the colorParamsArr as url query
   if (colorParamsArr.includes(colorFilters.selectedColor)) {
     history.push({
@@ -15,6 +17,7 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
         new URLSearchParams({
           colors: colorParamsArr,
           ...(bestForQueryString && { bestfor: bestForQueryString.split(",") }),
+          ...(weatherQueryString && { weather: weatherQueryString.split(",") }),
         }),
     });
   } else {
@@ -45,14 +48,18 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
     } else {
       history.push({
         pathname: location.pathname,
-        search: bestForQueryString
-          ? "?" +
-            new URLSearchParams({
-              ...(bestForQueryString && {
-                bestfor: bestForQueryString.split(","),
-              }),
-            })
-          : "",
+        search:
+          bestForQueryString || weatherQueryString
+            ? "?" +
+              new URLSearchParams({
+                ...(bestForQueryString && {
+                  bestfor: bestForQueryString.split(","),
+                }),
+                ...(weatherQueryString && {
+                  weather: weatherQueryString.split(","),
+                }),
+              })
+            : "",
       });
     }
   }
@@ -62,10 +69,10 @@ export const bestForUrlParamsHandler = (bestForFilters, history, location) => {
   const bestForParamsArr = [...bestForFilters];
   const colorQueryString = location.search
     ? queryString.parse(location.search).colors
-    : "";
+    : false;
   const weatherQueryString = location.search
     ? queryString.parse(location.search).weather
-    : "";
+    : false;
   if (bestForFilters.length > 0) {
     history.push({
       pathname: location.pathname,
@@ -80,27 +87,29 @@ export const bestForUrlParamsHandler = (bestForFilters, history, location) => {
   } else {
     history.push({
       pathname: location.pathname,
-      search: colorQueryString
-        ? "?" +
-          new URLSearchParams({
-            ...(colorQueryString && { colors: colorQueryString.split(",") }),
-            ...(weatherQueryString && {
-              weather: weatherQueryString.split(","),
-            }),
-          })
-        : "",
+      search:
+        colorQueryString || weatherQueryString
+          ? "?" +
+            new URLSearchParams({
+              ...(colorQueryString && { colors: colorQueryString.split(",") }),
+              ...(weatherQueryString && {
+                weather: weatherQueryString.split(","),
+              }),
+            })
+          : "",
     });
   }
 };
 
 export const weatherParamsHandler = (weatherFilters, history, location) => {
   const weatherParamsArr = [...weatherFilters];
+  console.log(location.search);
   const colorQueryString = location.search
     ? queryString.parse(location.search).colors
-    : "";
+    : false;
   const bestForQueryString = location.search
     ? queryString.parse(location.search).bestfor
-    : "";
+    : false;
   if (weatherFilters.length > 0) {
     history.push({
       pathname: location.pathname,
@@ -115,15 +124,16 @@ export const weatherParamsHandler = (weatherFilters, history, location) => {
   } else {
     history.push({
       pathname: location.pathname,
-      search: colorQueryString
-        ? "?" +
-          new URLSearchParams({
-            ...(colorQueryString && { colors: colorQueryString.split(",") }),
-            ...(bestForQueryString && {
-              bestfor: bestForQueryString.split(","),
-            }),
-          })
-        : "",
+      search:
+        colorQueryString || bestForQueryString
+          ? "?" +
+            new URLSearchParams({
+              ...(colorQueryString && { colors: colorQueryString.split(",") }),
+              ...(bestForQueryString && {
+                bestfor: bestForQueryString.split(","),
+              }),
+            })
+          : "",
     });
   }
 };

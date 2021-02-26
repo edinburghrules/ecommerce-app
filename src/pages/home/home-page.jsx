@@ -17,10 +17,16 @@ const Home = () => {
             Performance running shoes designed for running in the rain.
           </p>
           <div className="homepage__hero-links">
-            <Link className="homepage__hero-link" to={`/`}>
+            <Link
+              className="homepage__hero-link"
+              to={`/collection/mens-shoes?weather=wet&bestfor=running`}
+            >
               MENS
             </Link>
-            <Link className="homepage__hero-link" to={`/`}>
+            <Link
+              className="homepage__hero-link"
+              to={`/collection/womens-shoes?weather=wet&bestfor=running`}
+            >
               WOMENS
             </Link>
           </div>
