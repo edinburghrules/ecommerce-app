@@ -10,7 +10,7 @@ class Cart extends Component {
   state = {
     cart: [],
     totalPrice: 0,
-    shipping: 45,
+    shipping: 5.99,
     freeDelivery: 45,
     toFreeDelivery: 0,
     toFreeDeliveryProgress: 0,

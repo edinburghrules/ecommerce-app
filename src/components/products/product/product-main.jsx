@@ -172,20 +172,23 @@ class ProductMain extends React.Component {
             <span>SELECT SIZE:</span>
             <div className="product-main__variant-sizes">
               {product.variants[variantIndex].sizes &&
-                product.variants[variantIndex].sizes.map((size, index) => (
-                  <div
-                    key={index}
-                    onClick={() => this.handleSizeSelect(size.size)}
-                    className={
-                      selectedSize === size.size
-                        ? "product-main__variant-size active"
-                        : "product-main__variant-size"
-                    }
-                  >
-                    <p>UK</p>
-                    {size.size}
-                  </div>
-                ))}
+                product.variants[variantIndex].sizes.map(
+                  ({ size, stockQty }, index) => (
+                    <button
+                      disabled={stockQty === 0}
+                      key={index}
+                      onClick={() => this.handleSizeSelect(size)}
+                      className={
+                        stockQty > 0
+                          ? "product-main__variant-size product-main__variant-size--active"
+                          : "product-main__variant-size product-main__variant-size--disabled"
+                      }
+                    >
+                      <p>UK</p>
+                      {size}
+                    </button>
+                  )
+                )}
             </div>
           </div>
           <div className="product-main__cart-container">

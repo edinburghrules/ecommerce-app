@@ -41,6 +41,7 @@ function load() {
 load();
 
 const App = (props) => {
+
   return (
     <Provider store={store}>
       <div className="App">

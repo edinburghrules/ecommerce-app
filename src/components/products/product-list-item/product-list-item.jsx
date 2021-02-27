@@ -1,8 +1,8 @@
 import React from "react";
 import "./product-list-item.scss";
 import { Link, withRouter } from "react-router-dom";
-import Variants from "./variants";
-import Favourite from "./favourite";
+import Sizes from "./sizes/sizes";
+import Favourite from "./favourite/favourite";
 import { connect } from "react-redux";
 import { addToCart } from "../../../redux/actions/cartActions";
 
@@ -12,8 +12,6 @@ class ProductListItem extends React.Component {
     colors: false,
     colorIndex: 0,
   };
-
-  // loop through this.state.colors ->
 
   componentDidMount = () => {
     this.setState(
@@ -89,8 +87,6 @@ class ProductListItem extends React.Component {
     const {
       product: { name, price, variants, id, category, collection },
     } = this.props;
-
-    const renderBy = colors ? colorIndex : variantIndex;
 
     if (variants.length === 0 || this.state.variantIndex === undefined)
       return <h1>Loading</h1>;
@@ -186,9 +182,9 @@ class ProductListItem extends React.Component {
               })}
           </div>
           <div>
-            <Variants
+            <Sizes
               product={this.props.product}
-              renderBy={renderBy}
+              variantIndex={colors ? colorIndex : variantIndex}
               variant={this.state.variantIndex}
               variants={variants}
             />

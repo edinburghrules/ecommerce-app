@@ -37,6 +37,12 @@ class ProductList extends React.Component {
       getFilteredProducts,
     } = this.props;
 
+    window.scrollTo({
+      left: 0,
+      top: 0,
+      behavior: "smooth",
+    });
+
     if (authenticated) {
       getFavouriteProducts();
     }

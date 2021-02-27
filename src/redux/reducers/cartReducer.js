@@ -9,7 +9,7 @@ import {
 const initState = {
   cartList: [],
   cartOpen: false,
-  lowStockMsg: { msg: "", cartItem: "" },
+  lowStockMsg: [],
   lowStock: false,
 };
 
@@ -19,7 +19,7 @@ const cartReducer = (state = initState, action) => {
       return {
         cartList: [...state.cartList],
         cartOpen: false,
-        lowStockMsg: { msg: "", cartItem: "" },
+        lowStockMsg: [],
       };
     case SET_CART:
       return {
@@ -34,16 +34,26 @@ const cartReducer = (state = initState, action) => {
     case LOW_STOCK:
       return {
         ...state,
-        lowStockMsg: {
-          msg: action.payload.msg,
-          cartItem: action.payload.cartItem,
-        },
+        lowStockMsg: [
+          ...state.lowStockMsg,
+          {
+            msg: action.payload.msg,
+            cartItem: action.payload.cartItem,
+          },
+        ],
         lowStock: true,
       };
     case CLEAR_LOW_STOCK:
       return {
         ...state,
-        lowStockMsg: { msg: "", cartItem: "" },
+        lowStockMsg: state.lowStockMsg.filter((item) => {
+          if (
+            item.cartItem.id === action.payload.id &&
+            item.cartItem.id === action.payload.id
+          ) {
+            return item.cartItem.size !== action.payload.size;
+          } else return item.cartItem.id !== action.payload.id;
+        }),
         lowStock: false,
       };
     default:

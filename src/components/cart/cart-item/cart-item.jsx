@@ -39,9 +39,9 @@ class CartItem extends React.Component {
     const {
       cartItem: { name, color, size, image, price, qty },
       lowStockMsg,
-      lowStock,
       loading,
     } = this.props;
+
     if (loading) {
       return (
         <div className="cart-item">
@@ -80,9 +80,9 @@ class CartItem extends React.Component {
             <div className="cart-item__qty-container">
               <div className="cart-item__qty">
                 <button
-                  disabled={lowStock}
+                  disabled={lowStockMsg && lowStockMsg}
                   className={
-                    lowStock
+                    lowStockMsg && lowStockMsg
                       ? "cart-item__qty-btn cart-item__qty-btn--disabled"
                       : "cart-item__qty-btn"
                   }
@@ -103,7 +103,7 @@ class CartItem extends React.Component {
               <p className="cart-item__price">£{price}</p>
             </div>
             <span className="cart-item__low-stock-msg">
-              {lowStockMsg && lowStockMsg}
+              {lowStockMsg && lowStockMsg.msg}
             </span>
           </div>
         </div>
@@ -112,15 +112,16 @@ class CartItem extends React.Component {
   }
 }
 
+// Get the cartItem in cart
 const lowStockSelector = (state, ownProps) => {
-  if (state.cart.lowStockMsg.msg !== "") {
-    if (
-      state.cart.lowStockMsg.cartItem.id === ownProps.cartItem.id &&
-      state.cart.lowStockMsg.cartItem.color === ownProps.cartItem.color &&
-      state.cart.lowStockMsg.cartItem.size === ownProps.cartItem.size
-    ) {
-      return state.cart.lowStockMsg.msg;
-    }
+  if (state.cart.lowStockMsg.length > 0) {
+    return state.cart.lowStockMsg.find((item) => {
+      return (
+        item.cartItem.id === ownProps.cartItem.id &&
+        item.cartItem.color === ownProps.cartItem.color &&
+        item.cartItem.size === ownProps.cartItem.size
+      );
+    });
   }
 };
 
@@ -138,7 +139,6 @@ const loadingSelector = (state, ownProps) => {
 
 const mapStateToProps = (state, ownProps) => ({
   lowStockMsg: lowStockSelector(state, ownProps),
-  lowStock: state.cart.lowStock,
   authenticated: state.account.authenticated,
   loading: loadingSelector(state, ownProps),
 });

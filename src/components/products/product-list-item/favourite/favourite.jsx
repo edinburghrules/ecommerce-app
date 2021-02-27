@@ -1,17 +1,17 @@
 import React from "react";
 import "./favourite.scss";
-import heartOutline from "../../../assets/heart-outline.png";
-import heartFilled from "../../../assets/heart-filled.png";
+import heartOutline from "../../../../assets/heart-outline.png";
+import heartFilled from "../../../../assets/heart-filled.png";
 import { connect } from "react-redux";
 import {
   getFavouritesFromLocalStorage,
   addFavouriteToLocalStorage,
   removeFavouriteFromLocalStorage,
-} from "../../../utils/local-storage/favourites-handler";
+} from "../../../../utils/local-storage/favourites-handler";
 import {
   addFavouriteProduct,
   removeFavouriteProduct,
-} from "../../../redux/actions/favouriteActions";
+} from "../../../../redux/actions/favouriteActions";
 
 class Favourite extends React.Component {
   state = {

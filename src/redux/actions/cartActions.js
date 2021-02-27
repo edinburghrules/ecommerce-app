@@ -53,7 +53,6 @@ export const getCart = (authenticated, product = "") => {
 };
 
 export const addToCart = (product, authenticated) => {
-  console.log(product);
   const productData = {
     product,
   };
@@ -145,7 +144,7 @@ export const decreaseQty = (product, authenticated) => {
     } else {
       decreaseQtyLocalStorage(product);
       dispatch(getCart(authenticated, product));
-      dispatch({ type: CLEAR_LOW_STOCK });
+      dispatch({ type: CLEAR_LOW_STOCK, payload: product });
     }
   };
 };
@@ -165,6 +164,7 @@ export const deleteFromCart = (product, authenticated) => {
     } else {
       deleteFromCartLocalStorage(product);
       dispatch(getCart(authenticated, product));
+      dispatch({ type: CLEAR_LOW_STOCK, payload: product });
     }
   };
 };
