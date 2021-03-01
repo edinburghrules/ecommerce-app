@@ -11,7 +11,6 @@ import user from "../../assets/001-user.png";
 import favourites from "../../assets/heart-outline.png";
 import shopping from "../../assets/shopping-bag.png";
 import mobile from "../../assets/menu.png";
-import logo from "../../assets/allbirds-logo.svg";
 
 class NavigationBar extends React.Component {
   state = {
@@ -25,7 +24,6 @@ class NavigationBar extends React.Component {
     collectionsDropddown: false,
     mobileMenuWidth: 0,
     cartOpen: false,
-    cartClosing: false,
     cartTotalQty: 0,
     x: 0,
   };
@@ -198,7 +196,6 @@ class NavigationBar extends React.Component {
       apparelDropdown,
       shoesDropdown,
       collectionsDropdown,
-      cartClosing,
       cartOpen,
       cartTotalQty,
       mobileMenuWidth,
@@ -206,6 +203,7 @@ class NavigationBar extends React.Component {
     } = this.state;
     const linksToRender = this.renderLinks();
     const { authenticated, account, signOut, history } = this.props;
+
     return (
       <React.Fragment>
         <MobileNav
@@ -225,13 +223,8 @@ class NavigationBar extends React.Component {
           x={x}
         />
         <nav className="navigation">
-          {cartOpen && (
-            <div
-              className={cartClosing === false ? "cart__open" : "cart__closed"}
-            >
-              <Cart handleClose={this.handleClose} />
-            </div>
-          )}
+          <Cart cartOpen={cartOpen} handleClose={this.handleClose} />
+
           <div className="navigation__menu">
             <ul className="navigation__menu-list">
               <li

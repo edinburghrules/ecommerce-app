@@ -5,6 +5,7 @@ import homeHero from "../../assets/rain-collection-hero.webp";
 import materialImage from "../../assets/materials-img.png";
 import woolmanImage from "../../assets/woolman.webp";
 import { Link } from "react-router-dom";
+import { Transition } from "react-transition-group";
 
 const Home = () => {
   return (

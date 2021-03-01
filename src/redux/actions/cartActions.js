@@ -74,6 +74,7 @@ export const addToCart = (product, authenticated) => {
       const qtyInStock = response.data;
       if (currentQty < qtyInStock) {
         addToCartLocalStorage(product);
+        dispatch(getCart(authenticated, product));
         dispatch(openCart());
       } else {
         dispatch({
