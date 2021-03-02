@@ -324,9 +324,6 @@ class NavigationBar extends React.Component {
           handleClose={this.handleClose}
           linksToRender={linksToRender}
         />
-        <div
-          className={mensDesktopOpen || womensDesktopOpen ? "overlay open" : ""}
-        ></div>
       </React.Fragment>
     );
   }

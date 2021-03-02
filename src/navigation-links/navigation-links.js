@@ -57,10 +57,13 @@ export const mensShoeLinks = [
 ];
 
 export const mensCollectionLinks = [
-  { title: "Featured Collections", path: "/collections/mens/collections" },
+  {
+    title: "Collections",
+    path: "/collection/mens-shoes?weather=wet&bestfor=running",
+  },
   {
     title: "Run In Rain",
-    path: "/collection/mens/rain-collection",
+    path: "/collection/mens-shoes?weather=wet&bestfor=running",
     img: rainCollection,
   },
 ];
@@ -118,5 +121,17 @@ export const womensShoeLinks = [
     path: "/collection/womens-shoes/hi-tops",
     collection: "womens-shoes",
     category: "hi-tops",
+  },
+];
+
+export const womensCollectionLinks = [
+  {
+    title: "Collections",
+    path: "/collection/womens-shoes?weather=wet&bestfor=running",
+  },
+  {
+    title: "Run In Rain",
+    path: "/collection/womens-shoes?weather=wet&bestfor=running",
+    img: rainCollection,
   },
 ];

@@ -130,7 +130,7 @@ class ProductListItem extends React.Component {
               variants.map((variant, index) => {
                 if (colors && colors.includes(variant.color)) {
                   return (
-                    <React.Fragment key={index}>
+                    <div key={index}>
                       <Favourite
                         product={{ id, name, price, category, collection }}
                         variant={variant}
@@ -146,34 +146,26 @@ class ProductListItem extends React.Component {
                         src={variant.images[0].src}
                         alt={`${variant.name}-${variant.color}`}
                       />
-                      {/* <Variants
-                        key={index}
-                        renderBy={renderBy}
-                        variant={variant}
-                        index={index}
-                      /> */}
-                    </React.Fragment>
+                    </div>
                   );
                 } else if (!colors) {
                   return (
-                    <div>
-                      <div key={index}>
-                        <Favourite
-                          product={{ id, name, price, category, collection }}
-                          variant={variant}
-                          isSelected={variantIndex === index}
-                        />
-                        <img
-                          className={
-                            variantIndex === index
-                              ? "product-list-item__variant-img--active"
-                              : "product-list-item__variant-img"
-                          }
-                          onClick={() => this.handleVariantSelect(index)}
-                          src={variant.images[0].src}
-                          alt={`${variant.name}-${variant.color}`}
-                        />
-                      </div>
+                    <div key={index}>
+                      <Favourite
+                        product={{ id, name, price, category, collection }}
+                        variant={variant}
+                        isSelected={variantIndex === index}
+                      />
+                      <img
+                        className={
+                          variantIndex === index
+                            ? "product-list-item__variant-img--active"
+                            : "product-list-item__variant-img"
+                        }
+                        onClick={() => this.handleVariantSelect(index)}
+                        src={variant.images[0].src}
+                        alt={`${variant.name}-${variant.color}`}
+                      />
                     </div>
                   );
                 } else {

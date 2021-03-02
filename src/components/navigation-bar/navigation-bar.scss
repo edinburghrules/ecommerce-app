@@ -2,63 +2,20 @@
 @import "../../sass/fonts";
 @import "../../sass/utils";
 
-// CART
-.cart__open {
-  display: block;
-  visibility: visible;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  right: 0;
-  background: $light-bg;
-  height: 100vh;
-  width: 35vw;
-  z-index: 4;
-  animation: slideInAnimation 0.2s;
-}
-
-@keyframes slideInAnimation {
-  from {
-    transform: translateX(100rem);
-  }
-  to {
-    transform: translateX(0rem);
-  }
-}
-
-.cart__closed {
-  display: block;
-  visibility: visible;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  right: 0;
-  background: $light-bg;
-  height: 100vh;
-  width: 35vw;
-  z-index: 4;
-  animation: slideOutAnimation 0.5s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-
-@keyframes slideOutAnimation {
-  0% {
-    transform: translateX(0rem);
-  }
-  100% {
-    transform: translateX(200rem);
-  }
-}
-
 .navigation {
   padding: 1rem 8rem 1rem 8rem !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: $primary;
-  position: relative;
+  position: fixed;
   font-family: $Montserrat;
+  top: 0;
+  left: 0;
+  height: 5rem;
+  width: 100%;
+  background: $light-bg;
+  z-index: 2;
 
   @media (max-width: 915px) {
     padding: 1rem 6rem 1rem 6rem;
@@ -70,7 +27,6 @@
 }
 
 .navigation__logo {
-  padding-right: 10rem;
   cursor: pointer;
 }
 
@@ -227,14 +183,3 @@
   }
 }
 
-.overlay.open {
-  height: 200vh;
-  position: absolute;
-  width: 100%;
-  top: 11rem;
-  left: 0;
-  background-color: rgba($color: $dark-bg, $alpha: 0.9);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  z-index: 1;
-}

@@ -64,7 +64,6 @@ class Cart extends Component {
       totalPrice,
       shipping,
       toFreeDelivery,
-      isOpen,
     } = this.state;
     const { handleClose } = this.props;
 
