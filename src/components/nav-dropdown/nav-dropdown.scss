@@ -2,6 +2,8 @@
 @import "../../sass/fonts";
 @import "../../sass/utils";
 
+/////// OVERLAY
+
 .dropdown__overlay {
   overflow: hidden;
   margin-top: 5rem;
@@ -30,7 +32,7 @@
   opacity: 0;
 }
 
-/////// DROPDOWN
+/////// DROPDOWN MENU
 
 .nav-dropdown {
   display: flex;
@@ -45,7 +47,75 @@
   top: 5rem;
   left: 0;
   z-index: 1;
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    color: $dark-text;
+    margin-top: 1rem !important;
+
+    & :first-child {
+      color: inherit;
+      font-size: $small;
+      font-weight: $bold;
+      margin-bottom: 3rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    & :not(:first-child) {
+      color: inherit;
+      font-size: $xsmall;
+      font-weight: $normal;
+      margin-bottom: 2rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
+  &__collections {
+    margin-top: 1rem;
+    color: #333 !important;
+
+    & div:not(:first-child) {
+      margin-bottom: 1rem;
+      position: relative;
+      cursor: pointer;
+    }
+
+    & img {
+      height: auto;
+      width: 30rem;
+      cursor: auto;
+    }
+
+    & a:not(:first-child) {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: $semiBold;
+      color: $light-text;
+      font-size: $small;
+      text-shadow: 0px 0px 20px black;
+    }
+  }
+
+  &__collections-link:first-of-type {
+    display: block;
+    font-size: $small;
+    font-weight: $bold;
+    margin-bottom: 3rem;
+    cursor: pointer;
+    color: $dark-text;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
+
+/////// Animations
 
 .drop-enter-active {
   transform: translateY(0rem);
@@ -63,73 +133,4 @@
 .drop-exit-active {
   transform: translateY(-100rem);
   transition: transform 1s;
-}
-
-.nav-dropdown__column {
-  display: flex;
-  flex-direction: column;
-  color: $dark-text;
-}
-
-.nav-dropdown__column {
-  margin-top: 1rem !important;
-}
-
-.nav-dropdown__column :first-child {
-  color: inherit;
-  font-size: $small;
-  font-weight: $bold;
-  margin-bottom: 3rem;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.nav-dropdown__column :not(:first-child) {
-  color: inherit;
-  font-size: $xsmall;
-  font-weight: $normal;
-  margin-bottom: 2rem;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.categories {
-  margin-top: 1rem;
-  color: #333 !important;
-}
-
-.category-link:first-of-type {
-  display: block;
-  font-size: $small;
-  font-weight: $bold;
-  margin-bottom: 3rem;
-  cursor: pointer;
-  color: $dark-text;
-
-  &:hover {
-    text-decoration: none;
-  }
-}
-
-.categories div:not(:first-child) {
-  margin-bottom: 1rem;
-  position: relative;
-  cursor: pointer;
-}
-
-.categories img {
-  height: auto;
-  width: 30rem;
-  cursor: auto;
-}
-
-.categories a:not(:first-child) {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-weight: $semiBold;
-  color: $light-text;
-  font-size: $small;
-  text-shadow: 0px 0px 20px black;
 }

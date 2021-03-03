@@ -17,35 +17,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.modal__top {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 1rem;
-}
+  &__top {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
 
-.modal__content {
-  height: 95vmin;
-  width: 95vw;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  padding-bottom: 5.2rem;
-  animation: slidein 0.2s;
-}
+    & button {
+      background: #fff;
+      border: none;
+      transition: all 0.2s;
 
-.modal__top button {
-  background: #fff;
-  border: none;
-  transition: all 0.2s;
-}
+      & img {
+        height: 4.2rem;
+      }
 
-.modal__top button:hover {
-  transform: rotate(-90deg);
-}
+      &:hover {
+        transform: rotate(-90deg);
+      }
+    }
+  }
 
-.modal__top button img {
-  height: 4.2rem;
+  &__content {
+    height: 95vmin;
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding-bottom: 5.2rem;
+    animation: slidein 0.2s;
+  }
 }

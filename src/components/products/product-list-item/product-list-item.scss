@@ -9,83 +9,83 @@
   &:hover {
     box-shadow: $boxShadow;
   }
-}
 
-.product-list-item__img-wrapper {
-  overflow: hidden;
-}
+  &__img-wrapper {
+    overflow: hidden;
 
-.product-list-item__img-wrapper img {
-  width: 40%;
-}
+    & img {
+      width: 40%;
+    }
+  }
 
-.product-list-item__content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem;
-}
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
 
-.product-list-item__main-img {
-  height: 100%;
-  width: 100%;
-  object-fit: fill;
-  cursor: pointer;
-}
-
-.product-list-item__content-header {
-  margin-top: 2rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.product-list-item__title,
-.product-list-item__title:hover {
-  font-weight: $bold;
-  font-size: $small;
-  margin-right: 1rem;
-  cursor: pointer;
-  color: $dark-text !important;
-  text-decoration: none;
-}
-
-.product-list-item__variant {
-  font-size: $xsmall;
-  text-transform: capitalize;
-  display: block;
-  margin-top: 1rem;
-}
-
-.product-list-item__price {
-  font-size: $xsmall;
-  display: block;
-  margin-top: 6rem;
-}
-
-.product-list-item__variants {
-  display: flex;
-  margin-top: 1rem;
-  width: 100%;
-  position: relative;
-}
-
-.product-list-item__variant-img {
-  width: 6rem;
-  height: auto;
-  margin-right: 1rem;
-  border: 1px solid transparent;
-
-  &:hover {
-    border: 1px solid #ccc;
+  &__main-img {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
     cursor: pointer;
   }
-}
 
-.product-list-item__variant-img--active {
-  width: 6rem;
-  height: auto;
-  margin-right: 1rem;
-  border: 1px solid #ccc;
+  &__content-header {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title,
+  &__title:hover {
+    font-weight: $bold;
+    font-size: $small;
+    margin-right: 1rem;
+    cursor: pointer;
+    color: $dark-text !important;
+    text-decoration: none;
+  }
+
+  &__variant {
+    font-size: $xsmall;
+    text-transform: capitalize;
+    display: block;
+    margin-top: 1rem;
+  }
+
+  &__price {
+    font-size: $xsmall;
+    display: block;
+    margin-top: 6rem;
+  }
+
+  &__variants {
+    display: flex;
+    margin-top: 1rem;
+    width: 100%;
+    position: relative;
+  }
+
+  &__variant-img {
+    width: 6rem;
+    height: auto;
+    margin-right: 1rem;
+    border: 1px solid transparent;
+
+    &:hover {
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    &--active {
+      width: 6rem;
+      height: auto;
+      margin-right: 1rem;
+      border: 1px solid #ccc;
+    }
+  }
 }

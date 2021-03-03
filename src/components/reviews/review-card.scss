@@ -10,38 +10,38 @@
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid #ccc;
-}
 
-.review-card__name {
-  display: flex;
-  flex-direction: column;
-  width: 33%;
-}
+  &__name {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
 
-.review-card__name span {
-  font-weight: $semiNormal;
-  font-size: $xsmall;
-}
+    & span {
+      font-weight: $semiNormal;
+      font-size: $xsmall;
 
-.review-card__name span:first-of-type {
-  font-weight: $black;
-  font-size: $xsmall;
-}
+      &:first-of-type {
+        font-weight: $black;
+        font-size: $xsmall;
+      }
+    }
+  }
 
-.review-card__review h4 {
-  font-size: $xsmall;
-  font-weight: $black;
-}
+  &__review {
+    width: 33%;
 
-.star {
-  height: 2rem;
-  margin-right: 5px;
-}
+    & h4 {
+      font-size: $xsmall;
+      font-weight: $black;
+    }
+  }
 
-.review-card__stars {
-  width: 33%;
-}
+  &__stars {
+    width: 33%;
+  }
 
-.review-card__review {
-  width: 33%;
+  &__star {
+    height: 2rem;
+    margin-right: 5px;
+  }
 }

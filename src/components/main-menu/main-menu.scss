@@ -8,33 +8,33 @@
   @media (max-width: 530px) {
     margin: 4rem auto 8rem auto;
   }
-}
 
-.main-menu__heading {
-  font-family: $Montserrat;
-  font-weight: $bold;
-  font-size: $medium;
-
-  @media (max-width: 530px) {
+  &__heading {
+    font-family: $Montserrat;
+    font-weight: $bold;
     font-size: $medium;
-  }
-}
 
-.main-menu__grid {
-  width: 100%;
-  margin: 4rem auto 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 4rem;
-  row-gap: 2rem;
-
-  @media (max-width: 1100px) {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    @media (max-width: 530px) {
+      font-size: $medium;
+    }
   }
 
-  @media (max-width: 700px) {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+  &__grid {
+    width: 100%;
+    margin: 4rem auto 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 4rem;
+    row-gap: 2rem;
+
+    @media (max-width: 1100px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
   }
 }

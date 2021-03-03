@@ -1,108 +1,108 @@
-@import '../../../sass/colors';
-@import '../../../sass/fonts';
-@import '../../../sass/utils';
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/utils";
 
 .register {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-}
 
-.register__container {
-  margin-top: 4rem;
-  margin-bottom: 2rem;
-  padding: 6rem 6rem;
-  width: 80vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  &__container {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    padding: 6rem 6rem;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 
-  @media (max-width: 416px) {
-    width: 100vw;
-    padding: 0 1rem;
+    @media (max-width: 416px) {
+      width: 100vw;
+      padding: 0 1rem;
+    }
+
+    @media (max-width: 1200px) {
+      width: 90vw;
+      padding: 0 1rem;
+    }
   }
 
-  @media (max-width: 1200px) {
-    width: 90vw;
-    padding: 0 1rem;
+  &__signin {
+    width: 100%;
+    margin-bottom: 4rem;
+
+    & h1 {
+      font-size: $large;
+      font-weight: $bold;
+      margin-bottom: 1rem;
+    }
+
+    & span {
+      margin-right: 5px;
+    }
   }
-}
 
-.register__signin {
-  width: 100%;
-  margin-bottom: 4rem;
-}
+  &__inputs {
+    width: 100%;
+  }
 
-.register__signin h1 {
-  font-size: $large;
-  font-weight: $bold;
-  margin-bottom: 1rem;
-}
+  &__input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
 
-.register__signin span {
-  margin-right: 5px;
-}
+    &:not(:first-of-type) {
+      margin-top: 3rem;
+    }
+  }
 
-.register__inputs {
-  width: 100%;
-}
+  &__label {
+    font-weight: $normal;
+    font-size: $xsmall;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+  }
 
-.register__input-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-}
+  &__input {
+    padding: 0 1rem;
+    font-size: $xsmall;
+    width: 100%;
+    height: 4rem;
+    border: 2px solid #eee;
+  }
 
-.register__input-container:not(:first-of-type) {
-  margin-top: 3rem;
-}
+  &__feedback {
+    position: absolute;
+    bottom: -2rem;
+  }
 
-.register__label {
-  font-weight: $normal;
-  font-size: $xsmall;
-  align-self: flex-start;
-  margin-bottom: 1rem;
-}
+  &__submit-btn {
+    all: unset;
+    box-sizing: border-box;
+    align-self: flex-start;
+    margin-top: 3rem;
+    width: 100%;
+    background: $dark-bg;
+    color: $light-text;
+    text-align: center;
+    padding: 1.4rem;
+    font-weight: $semiBold;
+    font-size: $xsmall;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
 
-.register__input {
-  padding: 0 1rem;
-  font-size: $xsmall;
-  width: 100%;
-  height: 4rem;
-  border: 2px solid #eee;
-}
+  &__forgot-password {
+    margin-top: 1rem;
+  }
 
-.register__feedback {
-  position: absolute;
-  bottom: -2rem;
-}
-
-.register__submit-btn {
-  all: unset;
-  box-sizing: border-box;
-  align-self: flex-start;
-  margin-top: 3rem;
-  width: 100%;
-  background: $dark-bg;
-  color: $light-text;
-  text-align: center;
-  padding: 1.4rem;
-  font-weight: $semiBold;
-  font-size: $xsmall;
-  letter-spacing: 1px;
-  cursor: pointer;
-}
-
-.register__forgot-password {
-  margin-top: 1rem;
-}
-
-.register__divider {
-  height: 2px;
-  width: 100%;
-  border: none;
-  background: #ddd;
-  margin: 4rem 0;
+  &__divider {
+    height: 2px;
+    width: 100%;
+    border: none;
+    background: #ddd;
+    margin: 4rem 0;
+  }
 }

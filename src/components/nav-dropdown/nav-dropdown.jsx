@@ -48,12 +48,14 @@ const NavDropdown = ({
                 </Link>
               ))}
           </div>
-          <div className="categories">
+          <div className="nav-dropdown__collections">
             {linksToRender &&
               linksToRender.collectionLinks.map(({ path, title, img }, i) => (
                 <div key={i}>
                   {img && <img src={img} />}
-                  <Link className='category-link' to={path}>{title}</Link>
+                  <Link className="nav-dropdown__collections-link" to={path}>
+                    {title}
+                  </Link>
                 </div>
               ))}
           </div>

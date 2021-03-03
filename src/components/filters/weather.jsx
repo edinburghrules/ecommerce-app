@@ -9,7 +9,6 @@ const WEATHER_OPTIONS = ["wet", "dry"];
 
 const WeatherFilters = (props) => {
   const { selectedWeather, handleCheck } = props;
-  console.log();
   return (
     <React.Fragment>
       {WEATHER_OPTIONS.map((weatherOption, index) => (
@@ -19,8 +18,8 @@ const WeatherFilters = (props) => {
           key={index}
         >
           <input
-            // onChange={() => {}}
-            // checked={selectedWeather.includes(weatherOption)}
+            onChange={handleCheck}
+            checked={selectedWeather.includes(weatherOption)}
             id={weatherOption}
             type="checkbox"
           />

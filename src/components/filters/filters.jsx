@@ -161,7 +161,7 @@ class Filters extends React.Component {
             <div className="filters__bestfor">
               <hr />
               <p>BEST FOR</p>
-              <div className="filters__best-for-options">
+              <div className="filters__bestfor-options">
                 <BestForFilters
                   selectedBestFor={this.state.bestFors}
                   handleCheck={this.handleCheck}

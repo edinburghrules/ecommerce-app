@@ -18,8 +18,8 @@ const BestForFilters = (props) => {
           key={index}
         >
           <input
-            // onChange={() => {}}
-            // checked={selectedBestFor.includes(bestForOption)}
+            onChange={handleCheck}
+            checked={selectedBestFor.includes(bestForOption)}
             id={bestForOption}
             type="checkbox"
           />

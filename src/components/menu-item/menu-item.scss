@@ -1,6 +1,6 @@
-@import '../../sass/colors';
-@import '../../sass/fonts';
-@import '../../sass/utils';
+@import "../../sass/colors";
+@import "../../sass/fonts";
+@import "../../sass/utils";
 
 .menu-item {
   font-family: $Montserrat;
@@ -8,36 +8,36 @@
   box-shadow: $boxShadow;
   cursor: pointer;
   color: $dark-text;
-}
 
-.menu-item:hover {
-  text-decoration: none;
-  color: $dark-text;
-}
-
-.menu-item__img-wrapper {
-  overflow: hidden;
-}
-
-.menu-item__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-}
-
-.menu-item img {
-  height: 100%;
-  width: 100%;
-  object-fit: fill;
-  transition: all 0.2s;
   &:hover {
-    transform: scale(1.05);
+    text-decoration: none;
+    color: $dark-text;
   }
-}
 
-.menu-item__title {
-  margin-top: 1.5rem;
-  font-weight: $bold;
-  font-size: $medium;
+  &__img-wrapper {
+    overflow: hidden;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &__title {
+    margin-top: 1.5rem;
+    font-weight: $bold;
+    font-size: $normal;
+  }
 }

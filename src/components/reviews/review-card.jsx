@@ -10,11 +10,19 @@ const ReviewCard = ({ review }) => {
     for (let i = 0; i < 5; i++) {
       if (i < review.rating) {
         starArr.push(
-          <img className="star" src={starFilled} alt="filled star" />
+          <img
+            className="review-card__star"
+            src={starFilled}
+            alt="filled star"
+          />
         );
       } else {
         starArr.push(
-          <img className="star" src={starOutline} alt="unfilled star" />
+          <img
+            className="review-card__star"
+            src={starOutline}
+            alt="unfilled star"
+          />
         );
       }
     }

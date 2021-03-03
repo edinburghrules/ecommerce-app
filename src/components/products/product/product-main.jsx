@@ -119,6 +119,9 @@ class ProductMain extends React.Component {
       size: this.state.selectedSize,
     };
     this.props.addToCart(product, this.props.authenticated);
+    this.setState({
+      selectedSize: null,
+    });
   };
 
   render() {
