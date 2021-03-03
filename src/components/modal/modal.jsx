@@ -3,29 +3,32 @@ import ReactDOM from "react-dom";
 import "./modal.scss";
 import Slider from "../slider/slider";
 import closeBtn from "../../assets/cancel.svg";
+import { CSSTransition } from "react-transition-group";
 
-class Modal extends React.Component {
-  render() {
-    if (!this.props.modalOpen) return null;
-    return ReactDOM.createPortal(
-      <React.Fragment>
+const Modal = (props) => {
+  return ReactDOM.createPortal(
+    <React.Fragment>
+      <CSSTransition
+        in={props.modalOpen}
+        timeout={400}
+        mountOnEnter
+        unmountOnExit
+        classNames="modal-animation"
+      >
         <div className="modal">
           <div className="modal__content">
             <div className="modal__top">
-              <button onClick={() => this.props.onClose()}>
+              <button onClick={() => props.onClose()}>
                 <img src={closeBtn} />
               </button>
             </div>
-            <Slider
-              imageIndex={this.props.imageIndex}
-              slideItems={this.props.content}
-            />
+            <Slider imageIndex={props.imageIndex} slideItems={props.content} />
           </div>
         </div>
-      </React.Fragment>,
-      document.getElementById("root")
-    );
-  }
-}
+      </CSSTransition>
+    </React.Fragment>,
+    document.getElementById("root")
+  );
+};
 
 export default Modal;
