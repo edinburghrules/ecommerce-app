@@ -1,18 +1,31 @@
-@import '../../sass/colors';
-@import '../../sass/fonts';
-@import '../../sass/utils';
+@import "../../sass/colors";
+@import "../../sass/fonts";
+@import "../../sass/utils";
 
 .mobile-menu {
   display: block;
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   top: 0;
   right: 0;
-  height: 200vh;
-  visibility: visible;
+  height: 100%;
+  width: 100%;
   z-index: 4;
   background-color: $light-bg;
-  transition: width 0.1s ease-in-out;
+  transition: transform .4s ease-in-out;
+
+  & img {
+    height: 2rem;
+    cursor: pointer;
+
+    @media (max-width: 460px) {
+      height: 1.6rem;
+    }
+  }
+}
+
+img.mobile-menu__close-btn {
+  height: 1.6rem;
 }
 
 .mobile-menu__top-buttons {
@@ -22,25 +35,17 @@
   z-index: 4;
   display: flex;
   align-items: center;
-  padding: 3rem 4rem 1rem 4rem;
+  padding: 1rem 4rem 1rem 4rem;
   justify-content: space-between;
 }
 
-.mobile-menu img {
-  height: 2.8rem;
-  cursor: pointer;
-
-  @media (max-width: 768px) {
-    height: 2.4rem;
+.mobile-menu__logo {
+  & h1 {
+    font-weight: $bold;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 2rem;
+    margin: 0;
   }
-
-  @media (max-width: 460px) {
-    height: 2rem;
-  }
-}
-
-.mobile-menu__nav-logo img {
-  height: 4rem;
 }
 
 .mobile-menu__user-btns img:last-of-type {
@@ -62,7 +67,7 @@
 }
 
 .mobile-menu__links {
-  font-size: $medium;
+  font-size: $small;
   font-weight: $semiBold;
   letter-spacing: 1px;
   list-style: none;
@@ -70,11 +75,7 @@
   transition: ease-in-out 0.1s;
 
   @media (max-width: 414px) {
-    font-size: $small;
-  }
-
-  @media (max-width: 375px) {
-    font-size: $small;
+    font-size: $xsmall;
   }
 }
 
@@ -83,13 +84,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 3rem 3rem 4rem;
+  padding: 2rem 4rem 2rem 4rem;
   border-top: 1px solid #ccc;
   cursor: pointer;
 }
 
 .mobile-menu__links img {
-  height: 1.6rem;
+  height: 1.2rem;
 }
 
 .mobile-menu__dropdown-link.hide {

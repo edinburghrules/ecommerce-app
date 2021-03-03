@@ -31,11 +31,12 @@ class FilterCategories extends React.Component {
   render() {
     const { currentCategory } = this.state;
     const { options } = this.props;
+
     return (
       <div className="filter-categories">
         {options &&
           options.map((option, index) => {
-            if (index === 0)
+            if (index === 0) {
               return (
                 <div className="filter-categories__path" key={index}>
                   <Link to="/">Home</Link>
@@ -51,7 +52,7 @@ class FilterCategories extends React.Component {
                   <h3>{currentCategory}</h3>
                 </div>
               );
-            else {
+            } else if (index < options.length - 1) {
               return (
                 <NavLink
                   className="filter-categories__link"
@@ -62,6 +63,9 @@ class FilterCategories extends React.Component {
                   {option.title}
                 </NavLink>
               );
+            } else {
+              console.log(options.length);
+              return null;
             }
           })}
       </div>

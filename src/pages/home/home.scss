@@ -4,7 +4,17 @@
 .homepage {
   &__hero {
     &-container {
+      margin-top: 4rem;
       position: relative;
+      width: 100%;
+
+      @media (max-width: 768px) {
+        margin-top: 4rem;
+      }
+
+      @media (max-width: 414px) {
+        text-align: center;
+      }
     }
 
     &-image {
@@ -14,19 +24,37 @@
 
     &-content {
       position: absolute;
-      bottom: 5%;
-      left: 5%;
+      height: 100%;
+      width: 100%;
+      bottom: 0;
+      left: 0;
       color: $light-text;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 2rem 2rem;
+
+      @media (max-width: 414px) {
+        padding: 0 4rem 5px 4rem;
+      }
     }
 
     &-title {
       font-size: $large;
       font-weight: $xblack;
+
+      @media (max-width: 414px) {
+        font-size: $medium;
+      }
     }
 
     &-sub {
       font-size: $small;
       font-weight: $semiBold;
+
+      @media (max-width: 414px) {
+        font-size: $xsmall;
+      }
     }
 
     &-links {

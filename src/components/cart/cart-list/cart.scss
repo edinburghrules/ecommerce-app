@@ -46,6 +46,14 @@
   z-index: 1000;
   width: 35%;
 
+  @media (max-width: 1024px) {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
   &__top {
     position: relative;
     display: flex;

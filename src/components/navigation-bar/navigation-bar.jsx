@@ -25,6 +25,7 @@ class NavigationBar extends React.Component {
     mobileMenuWidth: 0,
     cartOpen: false,
     cartTotalQty: 0,
+    mobileOpen: false,
     x: 0,
   };
 
@@ -74,6 +75,8 @@ class NavigationBar extends React.Component {
       this.setState({
         womensDesktopOpen: true,
         mensDesktopOpen: false,
+        cartOpen: false,
+        mobileOpen: false,
       });
     }
 
@@ -81,18 +84,24 @@ class NavigationBar extends React.Component {
       this.setState({
         mensDesktopOpen: true,
         womensDesktopOpen: false,
+        cartOpen: false,
+        mobileOpen: false,
       });
     }
 
     if (e.target.id === "mobile") {
       this.setState({
-        mobileMenuWidth: 100,
+        mobileMenuWidth: 0,
+        mobileOpen: true,
       });
     }
 
     if (e.target.id === "cart") {
       this.setState((prevState) => ({
+        womensDesktopOpen: false,
+        mensDesktopOpen: false,
         cartOpen: true,
+        mobileOpen: false,
       }));
     }
   };
@@ -115,13 +124,14 @@ class NavigationBar extends React.Component {
 
     if (e.currentTarget.id === "close-mobile") {
       this.setState({
-        mobileMenuWidth: 0,
+        mobileMenuWidth: "100rem",
         x: 0,
         mensMobileOpen: false,
         womensMobileOpen: false,
         apparelDropdown: false,
         shoesDropdown: false,
         collectionsDropdown: false,
+        mobileOpen: false,
       });
     }
 
@@ -175,11 +185,11 @@ class NavigationBar extends React.Component {
 
   handleProductDropdown = (link) => {
     let productType;
-    if (link.category.includes("Apparel")) {
+    if (link.title.includes("Apparel")) {
       productType = "apparelDropdown";
-    } else if (link.category.includes("Shoes")) {
+    } else if (link.title.includes("Shoes")) {
       productType = "shoesDropdown";
-    } else if (link.category.includes("Collection")) {
+    } else if (link.title.includes("Collection")) {
       productType = "collectionsDropdown";
     }
     this.setState((prevState) => ({
@@ -224,7 +234,6 @@ class NavigationBar extends React.Component {
         />
         <nav className="navigation">
           <Cart cartOpen={cartOpen} handleClose={this.handleClose} />
-
           <div className="navigation__menu">
             <ul className="navigation__menu-list">
               <li

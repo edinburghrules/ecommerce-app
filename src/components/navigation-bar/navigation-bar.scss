@@ -3,7 +3,7 @@
 @import "../../sass/utils";
 
 .navigation {
-  padding: 1rem 8rem 1rem 8rem !important;
+  padding: 1rem 4rem 1rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,11 +18,7 @@
   z-index: 2;
 
   @media (max-width: 915px) {
-    padding: 1rem 6rem 1rem 6rem;
-  }
-
-  @media (max-width: 615px) {
-    padding: 2rem 4rem 2rem 4rem;
+    padding: 1rem 2rem 1rem 2rem;
   }
 
   &__logo {
@@ -38,7 +34,7 @@
   }
 
   &__menu {
-    @media (max-width: 915px) {
+    @media (max-width: 768px) {
       display: none;
     }
   }
@@ -60,12 +56,12 @@
       border-bottom: 2px solid #333;
     }
     &:not(:first-of-type) {
-      margin-left: 4rem;
+      margin-left: 2rem;
     }
   }
 
   &__user-menu {
-    @media (max-width: 915px) {
+    @media (max-width: 768px) {
       display: none;
     }
 
@@ -85,6 +81,7 @@
 
     &--cart {
       position: relative;
+      margin-right: 0;
     }
 
     & img {
@@ -114,7 +111,7 @@
   position: absolute;
   width: 22rem;
   top: 2.2rem;
-  // right: -3rem;
+  right: -14rem;
   background-color: $light-bg;
   display: flex;
   flex-direction: column;
@@ -159,25 +156,18 @@
 .navigation__mobile-menu {
   display: none;
 
-  @media (max-width: 915px) {
+  @media (max-width: 768px) {
     display: inline-block;
     cursor: pointer;
 
-    img {
-      height: 3.5rem;
-    }
-  }
-
-  @media (max-width: 615px) {
     img {
       height: 3rem;
     }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 615px) {
     img {
-      transform: translateY(4px);
-      height: 2.75rem;
+      height: 2.8rem;
     }
   }
 }

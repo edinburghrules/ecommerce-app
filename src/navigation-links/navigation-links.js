@@ -54,6 +54,12 @@ export const mensShoeLinks = [
     collection: "mens-shoes",
     category: "hi-tops",
   },
+  {
+    title: "Shop All Shoes",
+    path: "/collection/mens-shoes",
+    collection: "mens-shoes",
+    category: "all-shoes",
+  },
 ];
 
 export const mensCollectionLinks = [

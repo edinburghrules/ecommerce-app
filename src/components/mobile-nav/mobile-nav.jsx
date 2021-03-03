@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import "./mobile-nav.scss";
 import { withRouter } from "react-router-dom";
 import user from "../../assets/001-user.png";
@@ -22,18 +23,21 @@ const MobileNav = ({
   shoesDropdown,
   collectionsDropdown,
   x,
-  history,
 }) => {
-  return (
-    <div style={{ width: `${mobileMenuWidth}vw` }} className="mobile-menu">
+  return ReactDOM.createPortal(
+    <div style={{ transform: `translateX(${mobileMenuWidth})` }} className="mobile-menu">
       <div className="mobile-menu__content-container">
         <div className="mobile-menu__top-buttons">
           <img
             id="close-mobile"
+            className="mobile-menu__close-btn"
             src={closebutton}
             onClick={handleClose}
             alt="close button"
           />
+          <div className="mobile-menu__logo">
+            <h1>apparel.</h1>
+          </div>
           <div className="mobile-menu__user-btns">
             <img src={user} alt="user login" />
             <img
@@ -58,17 +62,16 @@ const MobileNav = ({
                 <p className="mobile-menu__link">Womens</p>
                 <img src={rightArrow} alt="left arrow" />
               </div>
-              <div>
-                <p className="mobile-menu__link">Collections</p>
-                <img src={rightArrow} alt="left arrow" />
-              </div>
             </div>
             {/* DYNAMIC MENU CONTENT */}
             <div
               className="mobile-menu__links"
               style={{ transform: `translateX(-${x}%)` }}
             >
-              <div onClick={goBack} style={{ justifyContent: "flex-start" }}>
+              <div
+                onClick={goBack}
+                style={{ justifyContent: "flex-start", background: "#f5f5f5" }}
+              >
                 <img
                   style={{ marginRight: "2rem" }}
                   src={leftArrow}
@@ -90,9 +93,10 @@ const MobileNav = ({
                         }}
                         className="mobile-menu__dropdown-header"
                       >
-                        <p className="mobile-menu__link">{link.category}</p>
+                        <p className="mobile-menu__link">{link.title}</p>
                         <img
                           style={{
+                            transition: "transform .1s",
                             transform: apparelDropdown
                               ? "rotate(90deg)"
                               : "rotate(0deg)",
@@ -112,9 +116,7 @@ const MobileNav = ({
                             : "mobile-menu__dropdown-link hide"
                         }
                       >
-                        <p className="mobile-menu__link hide">
-                          {link.category}
-                        </p>
+                        <p className="mobile-menu__link hide">{link.title}</p>
                       </div>
                     );
                   }
@@ -130,9 +132,10 @@ const MobileNav = ({
                         }}
                         className="mobile-menu__dropdown-header"
                       >
-                        <p className="mobile-menu__link">{link.category}</p>
+                        <p className="mobile-menu__link">{link.title}</p>
                         <img
                           style={{
+                            transition: "transform .1s",
                             transform: shoesDropdown
                               ? "rotate(90deg)"
                               : "rotate(0deg)",
@@ -152,7 +155,46 @@ const MobileNav = ({
                             : "mobile-menu__dropdown-link hide"
                         }
                       >
-                        <p className="mobile-menu__link">{link.category}</p>
+                        <p className="mobile-menu__link">{link.title}</p>
+                      </div>
+                    );
+                  }
+                })}
+              {linksToRender &&
+                linksToRender.collectionLinks.map((link, i) => {
+                  if (i === 0) {
+                    return (
+                      <div
+                        key={i}
+                        onClick={() => {
+                          handleProductDropdown(link);
+                        }}
+                        className="mobile-menu__dropdown-header"
+                      >
+                        <p className="mobile-menu__link">{link.title}</p>
+                        <img
+                          style={{
+                            transition: "transform .1s",
+                            transform: collectionsDropdown
+                              ? "rotate(90deg)"
+                              : "rotate(0deg)",
+                          }}
+                          src={rightArrow}
+                          alt="right arrow"
+                        />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        key={i}
+                        className={
+                          collectionsDropdown
+                            ? "mobile-menu__dropdown-link"
+                            : "mobile-menu__dropdown-link hide"
+                        }
+                      >
+                        <p className="mobile-menu__link">{link.title}</p>
                       </div>
                     );
                   }
@@ -162,7 +204,8 @@ const MobileNav = ({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.getElementById("root")
   );
 };
 

@@ -36,33 +36,6 @@ const Home = () => {
       <div>
         <MainMenu />
       </div>
-      <div className="homepage__materials">
-        <img
-          className="homepage__materials-image"
-          src={materialImage}
-          alt="wool"
-        />
-        <div className="homepage__materials-information">
-          <img
-            className="homepage__woolman-img"
-            src={woolmanImage}
-            alt="woolman"
-          />
-          <div className="homepage__materials-content">
-            <h3>
-              Mother Nature is our muse. Building on her handiwork, we’re
-              finding new uses for materials that exist right in front of us.
-              Like wool from merino sheep, who have the best hair in nature.
-            </h3>
-            <p>
-              But even great locks need a trim from time to time. With fibers
-              that are 20% the diameter of human hair, our superfine merino wool
-              is breathable, temperature-regulating, and moisture-wicking, all
-              without that irritating scratchiness.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
