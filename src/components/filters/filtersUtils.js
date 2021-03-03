@@ -103,7 +103,6 @@ export const bestForUrlParamsHandler = (bestForFilters, history, location) => {
 
 export const weatherParamsHandler = (weatherFilters, history, location) => {
   const weatherParamsArr = [...weatherFilters];
-  console.log(location.search);
   const colorQueryString = location.search
     ? queryString.parse(location.search).colors
     : false;

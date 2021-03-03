@@ -52,7 +52,12 @@ class Filters extends React.Component {
         this.setState(
           (prevState) => ({
             ...prevState,
-            weather: [selected, ...prevState.weather],
+            weather: [
+              selected,
+              ...prevState.weather.filter(
+                (weatherItem) => weatherItem !== selected
+              ),
+            ],
           }),
           () => {
             // ADD FILTERS TO URL
@@ -63,7 +68,12 @@ class Filters extends React.Component {
         this.setState(
           (prevState) => ({
             ...prevState,
-            bestFors: [selected, ...prevState.bestFors],
+            bestFors: [
+              selected,
+              ...prevState.bestFors.filter(
+                (bestForItem) => bestForItem !== selected
+              ),
+            ],
           }),
           () => {
             // ADD FILTERS TO URL
