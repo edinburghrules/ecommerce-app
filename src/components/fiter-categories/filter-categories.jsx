@@ -64,7 +64,6 @@ class FilterCategories extends React.Component {
                 </NavLink>
               );
             } else {
-              console.log(options.length);
               return null;
             }
           })}

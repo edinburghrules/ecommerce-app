@@ -4,18 +4,18 @@ import { withRouter, Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
 const NavDropdown = ({
-  handleClose,
-  mensDesktopOpen,
-  womensDesktopOpen,
+  handleMensDropdownOpen,
+  mensDropdownOpen,
+  womensDropdownOpen,
+  handleWomensDropdownOpen,
   linksToRender,
-  history,
 }) => {
   return (
     <React.Fragment>
       <CSSTransition
         unmountOnExit
         mountOnEnter
-        in={mensDesktopOpen || womensDesktopOpen}
+        in={mensDropdownOpen || womensDropdownOpen}
         classNames="fade"
         timeout={400}
       >
@@ -24,18 +24,26 @@ const NavDropdown = ({
       <CSSTransition
         unmountOnExit
         mountOnEnter
-        in={mensDesktopOpen || womensDesktopOpen}
+        in={mensDropdownOpen || womensDropdownOpen}
         classNames="drop"
         timeout={{
           enter: 200,
           exit: 1000,
         }}
       >
-        <div id="close-dropdown" className="nav-dropdown" onClick={handleClose}>
+        <div id="close-dropdown" className="nav-dropdown">
           <div className="nav-dropdown__column">
             {linksToRender &&
               linksToRender.apparelLinks.map(({ path, title }, i) => (
-                <Link to={path} key={i}>
+                <Link
+                  onClick={
+                    mensDropdownOpen
+                      ? handleMensDropdownOpen
+                      : handleWomensDropdownOpen
+                  }
+                  to={path}
+                  key={i}
+                >
                   {title}
                 </Link>
               ))}
@@ -43,7 +51,15 @@ const NavDropdown = ({
           <div className="nav-dropdown__column">
             {linksToRender &&
               linksToRender.shoeLinks.map(({ path, title }, i) => (
-                <Link to={path} key={i}>
+                <Link
+                  onClick={
+                    mensDropdownOpen
+                      ? handleMensDropdownOpen
+                      : handleWomensDropdownOpen
+                  }
+                  to={path}
+                  key={i}
+                >
                   {title}
                 </Link>
               ))}
@@ -53,7 +69,15 @@ const NavDropdown = ({
               linksToRender.collectionLinks.map(({ path, title, img }, i) => (
                 <div key={i}>
                   {img && <img src={img} />}
-                  <Link className="nav-dropdown__collections-link" to={path}>
+                  <Link
+                    className="nav-dropdown__collections-link"
+                    onClick={
+                      mensDropdownOpen
+                        ? handleMensDropdownOpen
+                        : handleWomensDropdownOpen
+                    }
+                    to={path}
+                  >
                     {title}
                   </Link>
                 </div>

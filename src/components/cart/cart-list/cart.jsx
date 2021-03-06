@@ -58,14 +58,8 @@ class Cart extends Component {
   };
 
   render() {
-    const {
-      cart,
-      totalQty,
-      totalPrice,
-      shipping,
-      toFreeDelivery,
-    } = this.state;
-    const { handleClose } = this.props;
+    const { cart, totalQty, totalPrice, shipping, toFreeDelivery } = this.state;
+    const { handleCartOpen } = this.props;
 
     return ReactDOM.createPortal(
       <React.Fragment>
@@ -92,7 +86,7 @@ class Cart extends Component {
             <div className="cart__top">
               <img
                 id="close-cart"
-                onClick={handleClose}
+                onClick={handleCartOpen}
                 className="cart__close-btn"
                 src={closeArrow}
                 alt="close"

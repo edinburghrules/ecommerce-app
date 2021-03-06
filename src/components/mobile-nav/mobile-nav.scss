@@ -12,7 +12,8 @@
   width: 100%;
   z-index: 4;
   background-color: $light-bg;
-  transition: transform .4s ease-in-out;
+  transform: translateX(100vw);
+  transition: transform 200ms;
 
   & img {
     height: 2rem;
@@ -102,5 +103,26 @@ div.mobile-menu__dropdown-link {
 
   @media (max-width: 768px) {
     padding-left: 7rem;
+    & a {
+      color: #3d3d3d;
+    }
   }
+}
+
+// CSSTransition Animations
+
+.mobile-slideout-enter-active {
+  transform: translateX(0rem);
+}
+
+.mobile-slideout-enter-done {
+  transform: translateX(0);
+}
+
+.mobile-slideout-exit {
+  transform: translateX(0);
+}
+
+.mobile-slideout-exit-active {
+  transform: translateX(100vw);
 }
