@@ -1,7 +1,7 @@
 .product-list {
   max-width: 96rem;
   display: grid;
-  grid-template-columns: repeat(2, 45%);
+  justify-items: center;
+  grid-template-columns: repeat(2, 50%);
   row-gap: 10px;
-  grid-auto-rows: min-content;
 }

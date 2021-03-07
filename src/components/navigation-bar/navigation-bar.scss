@@ -76,7 +76,7 @@
     position: relative;
 
     &:first-of-type:hover .account__menu {
-      opacity: 1;
+      visibility: visible;
     }
 
     &--cart {
@@ -119,7 +119,7 @@
   align-items: flex-start;
   z-index: 3;
   padding: 2rem 2rem 1rem 2rem;
-  opacity: 0;
+  visibility: hidden;
 
   &__menu-welcome {
     font-weight: $normal;

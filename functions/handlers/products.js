@@ -15,7 +15,11 @@ const getProduct = async (req, res) => {
 
 const getAllShoes = async (req, res) => {
   const collection = req.query.collection;
-  const productsRef = db.collection(collection);
+  const sort = req.query.sort ? req.query.sort : false;
+  let productsRef = sort
+    ? db.collection(collection).orderBy("price", sort)
+    : db.collection(collection);
+
   const products = [];
 
   try {
@@ -33,10 +37,11 @@ const getAllShoes = async (req, res) => {
 const getShoesByCategory = async (req, res) => {
   const collection = req.query.collection;
   const category = req.query.category;
-  const productsRef = db.collection(collection);
+  const sort = req.query.sort ? req.query.sort : false;
+  let productsRef = sort
+    ? db.collection(collection).orderBy("price", sort)
+    : db.collection(collection);
   const products = [];
-
-  console.log(category);
 
   try {
     const querySnapshot = await productsRef
@@ -54,6 +59,7 @@ const getShoesByCategory = async (req, res) => {
 
 const getShoesByFilter = async (req, res) => {
   const collection = req.query.collection;
+  const sort = req.query.sort ? req.query.sort : false;
   let category = req.query.category ? req.query.category : false;
   let colors = req.query.colors ? req.query.colors : false;
   let bestFor = req.query.bestfor ? req.query.bestfor : false;
@@ -63,7 +69,9 @@ const getShoesByFilter = async (req, res) => {
   bestFor = bestFor && bestFor.split(",");
   weather = weather && weather.split(",");
 
-  const productsRef = db.collection(collection);
+  let productsRef = sort
+    ? db.collection(collection).orderBy("price", sort)
+    : db.collection(collection);
 
   // Queries
   const categoryWithColors = productsRef
@@ -235,6 +243,7 @@ const getShoesByFilter = async (req, res) => {
   }
 
   querySnapshot.forEach((doc) => {
+    console.log("is this running");
     products.push({ id: doc.id, ...doc.data() });
   });
 

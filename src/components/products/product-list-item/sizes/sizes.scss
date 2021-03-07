@@ -10,13 +10,12 @@
   width: 100%;
 
   & h5 {
-    margin-bottom: 1rem;
+    margin: 1rem 0;
   }
 
   &__list {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto;
   }
 
   &__size {

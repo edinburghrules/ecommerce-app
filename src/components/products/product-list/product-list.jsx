@@ -13,53 +13,66 @@ import { getFavouriteProducts } from "../../../redux/actions/favouriteActions";
 
 class ProductList extends React.Component {
   state = {
-    collection: this.props.match.params.collection,
-    category: this.props.match.params.category
-      ? this.props.match.params.category
-      : false,
-    colors: this.props.location.search
-      ? queryString.parse(this.props.location.search).colors
-      : "",
-    bestFor: this.props.location.search
-      ? queryString.parse(this.props.location.search).bestfor
-      : "",
-    weather: this.props.location.search
-      ? queryString.parse(this.props.location.search).weather
-      : "",
+    collection: null,
+    category: null,
+    colors: null,
+    bestFor: null,
+    weather: null,
+    sort: null,
   };
 
   componentDidMount = () => {
-    const { collection, category, colors, bestFor, weather } = this.state;
-    const { authenticated, getFavouriteProducts } = this.props;
-    const {
-      getAllProducts,
-      getCategoryProducts,
-      getFilteredProducts,
-    } = this.props;
+    this.setState(
+      {
+        collection: this.props.match.params.collection,
+        category: this.props.match.params.category || null,
+        colors: queryString.parse(this.props.location.search).colors || null,
+        bestFor: queryString.parse(this.props.location.search).bestfor || null,
+        weather: queryString.parse(this.props.location.search).weather || null,
+        sort: queryString.parse(this.props.location.search).sort || null,
+      },
+      () => {
+        const {
+          collection,
+          category,
+          colors,
+          bestFor,
+          weather,
+          sort,
+        } = this.state;
+        const { authenticated, getFavouriteProducts } = this.props;
 
-    window.scrollTo({
-      left: 0,
-      top: 0,
-      behavior: "smooth",
-    });
+        const {
+          getAllProducts,
+          getCategoryProducts,
+          getFilteredProducts,
+        } = this.props;
 
-    if (authenticated) {
-      getFavouriteProducts();
-    }
+        window.scrollTo({
+          left: 0,
+          top: 0,
+          behavior: "smooth",
+        });
 
-    if (colors || bestFor || weather) {
-      getFilteredProducts(collection, colors, bestFor, weather, category);
-    } else {
-      if (collection && category) {
-        getCategoryProducts(collection, category);
-      } else {
-        getAllProducts(collection);
+        if (authenticated) {
+          getFavouriteProducts();
+        }
+
+        if (colors || bestFor || weather) {
+          getFilteredProducts(collection, colors, bestFor, weather, category, sort);
+        } else {
+          if (collection && category) {
+            getCategoryProducts(collection, category, sort);
+          } else {
+            getAllProducts(collection, sort);
+          }
+        }
       }
-    }
+    );
   };
 
   // Only run when authenticated is still false after page refresh
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = (prevProps, prevState) => {
     const { authenticated, getFavouriteProducts } = this.props;
     if (!prevProps.authenticated && authenticated) {
       getFavouriteProducts();
@@ -73,16 +86,18 @@ class ProductList extends React.Component {
     if (loading) return <Loading />;
 
     return (
-      <div className="product-list">
-        {products &&
-          products.map((product, index) => (
-            <ProductListItem
-              colorOptions={colors && colors.split(",")}
-              key={index}
-              product={product}
-            />
-          ))}
-      </div>
+      <React.Fragment>
+        <div className="product-list">
+          {products &&
+            products.map((product, index) => (
+              <ProductListItem
+                colorOptions={colors && colors.split(",")}
+                key={index}
+                product={product}
+              />
+            ))}
+        </div>
+      </React.Fragment>
     );
   }
 }

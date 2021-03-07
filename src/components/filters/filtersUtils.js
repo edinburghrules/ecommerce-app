@@ -2,6 +2,9 @@ import queryString from "query-string";
 
 export const colorsUrlParamsHandler = (colorFilters, history, location) => {
   const colorParamsArr = [...colorFilters.colors];
+  const sortQueryString = location.search
+    ? queryString.parse(location.search).sort
+    : false;
   const bestForQueryString = location.search
     ? queryString.parse(location.search).bestfor
     : false;
@@ -10,12 +13,14 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
     : false;
   // If the colorParamsArr includes the selected color, add the colorParamsArr as url query
   if (colorParamsArr.includes(colorFilters.selectedColor)) {
+    console.log(sortQueryString);
     history.push({
       pathname: location.pathname,
       search:
         "?" +
         new URLSearchParams({
           colors: colorParamsArr,
+          ...(sortQueryString && { sort: sortQueryString }),
           ...(bestForQueryString && { bestfor: bestForQueryString.split(",") }),
           ...(weatherQueryString && { weather: weatherQueryString.split(",") }),
         }),
@@ -40,8 +45,12 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
           "?" +
           new URLSearchParams({
             colors: filteredParamsArr,
+            ...(sortQueryString && { sort: sortQueryString }),
             ...(bestForQueryString && {
               bestfor: bestForQueryString.split(","),
+            }),
+            ...(weatherQueryString && {
+              weather: weatherQueryString.split(","),
             }),
           }),
       });
@@ -49,9 +58,10 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
       history.push({
         pathname: location.pathname,
         search:
-          bestForQueryString || weatherQueryString
+          bestForQueryString || weatherQueryString || sortQueryString
             ? "?" +
               new URLSearchParams({
+                ...(sortQueryString && { sort: sortQueryString }),
                 ...(bestForQueryString && {
                   bestfor: bestForQueryString.split(","),
                 }),
@@ -67,6 +77,9 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
 
 export const bestForUrlParamsHandler = (bestForFilters, history, location) => {
   const bestForParamsArr = [...bestForFilters];
+  const sortQueryString = location.search
+    ? queryString.parse(location.search).sort
+    : false;
   const colorQueryString = location.search
     ? queryString.parse(location.search).colors
     : false;
@@ -80,6 +93,7 @@ export const bestForUrlParamsHandler = (bestForFilters, history, location) => {
         "?" +
         new URLSearchParams({
           bestfor: bestForParamsArr,
+          ...(sortQueryString && { sort: sortQueryString }),
           ...(colorQueryString && { colors: colorQueryString.split(",") }),
           ...(weatherQueryString && { weather: weatherQueryString.split(",") }),
         }),
@@ -88,9 +102,10 @@ export const bestForUrlParamsHandler = (bestForFilters, history, location) => {
     history.push({
       pathname: location.pathname,
       search:
-        colorQueryString || weatherQueryString
+        colorQueryString || weatherQueryString || sortQueryString
           ? "?" +
             new URLSearchParams({
+              ...(sortQueryString && { sort: sortQueryString }),
               ...(colorQueryString && { colors: colorQueryString.split(",") }),
               ...(weatherQueryString && {
                 weather: weatherQueryString.split(","),
@@ -103,6 +118,9 @@ export const bestForUrlParamsHandler = (bestForFilters, history, location) => {
 
 export const weatherParamsHandler = (weatherFilters, history, location) => {
   const weatherParamsArr = [...weatherFilters];
+  const sortQueryString = location.search
+    ? queryString.parse(location.search).sort
+    : false;
   const colorQueryString = location.search
     ? queryString.parse(location.search).colors
     : false;
@@ -116,6 +134,7 @@ export const weatherParamsHandler = (weatherFilters, history, location) => {
         "?" +
         new URLSearchParams({
           weather: weatherParamsArr,
+          ...(sortQueryString && { sort: sortQueryString }),
           ...(colorQueryString && { colors: colorQueryString.split(",") }),
           ...(bestForQueryString && { bestfor: bestForQueryString.split(",") }),
         }),
@@ -124,9 +143,10 @@ export const weatherParamsHandler = (weatherFilters, history, location) => {
     history.push({
       pathname: location.pathname,
       search:
-        colorQueryString || bestForQueryString
+        colorQueryString || bestForQueryString || sortQueryString
           ? "?" +
             new URLSearchParams({
+              ...(sortQueryString && { sort: sortQueryString }),
               ...(colorQueryString && { colors: colorQueryString.split(",") }),
               ...(bestForQueryString && {
                 bestfor: bestForQueryString.split(","),
