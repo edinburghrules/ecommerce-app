@@ -6,12 +6,11 @@
 
 .dropdown__overlay {
   overflow: hidden;
-  margin-top: 5rem;
   height: 100%;
   position: fixed;
   width: 100%;
   left: 0;
-  background-color: rgba($color: $dark-bg, $alpha: 0.7);
+  background-color: rgba(0,0,0, 0.7);
   z-index: 1;
   transition: opacity 400ms;
 }
@@ -44,7 +43,7 @@
   transform: translateY(-100rem);
   font-family: $Montserrat;
   position: fixed;
-  top: 5rem;
+  top: 0;
   left: 0;
   z-index: 1;
 
@@ -118,7 +117,7 @@
 /////// Animations
 
 .drop-enter-active {
-  transform: translateY(0rem);
+  transform: translateY(0);
   transition: transform 200ms;
 }
 
@@ -132,5 +131,5 @@
 
 .drop-exit-active {
   transform: translateY(-100rem);
-  transition: transform 1s;
+  transition: transform 200ms;
 }

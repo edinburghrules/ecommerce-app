@@ -5,7 +5,7 @@ import checked from "../../assets/checked.png";
 
 // Get category and apply filters e.g. if category is hi-tops only show wet weather
 
-const WEATHER_OPTIONS = ["wet", "dry"];
+const WEATHER_OPTIONS = ["wet", "dry", "cool", "warm"];
 
 const WeatherFilters = (props) => {
   const { selectedWeather, handleCheck } = props;

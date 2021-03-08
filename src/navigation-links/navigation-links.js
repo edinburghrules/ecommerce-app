@@ -5,27 +5,39 @@ import rainCollection from "../assets/rain-collection-tile.webp";
 export const mensApparelLinks = [
   {
     title: "Men's Apparel",
-    path: "/collection/mens/apparel",
+    path: "/collection/mens-apparel/",
     collection: "mens-apparel",
     category: "null",
   },
   {
     title: "T-Shirts",
-    path: "/collection/mens/apparel/t-shirts",
+    path: "/collection/mens-apparel/t-shirts",
     collection: "mens-apparel",
     category: "t-shirts",
   },
   {
     title: "Sweaters",
-    path: "/collections/mens/apparel/sweaters",
+    path: "/collection/mens-apparel/sweaters",
     collection: "mens-apparel",
     category: "sweaters",
   },
   {
-    title: "Coats & Jackets",
-    path: "/collections/mens/apparel/coats&jackets",
+    title: "Jackets",
+    path: "/collection/mens-apparel/jackets",
     collection: "mens-apparel",
-    category: "coats&jackets",
+    category: "jackets",
+  },
+  {
+    title: "Socks",
+    path: "/collection/mens-apparel/socks",
+    collection: "mens-apparel",
+    category: "socks",
+  },
+  {
+    title: "Shop All Men's Apparel",
+    path: "/collection/mens-apparel",
+    collection: "mens-apparel",
+    category: "all-apparel",
   },
 ];
 
@@ -55,7 +67,7 @@ export const mensShoeLinks = [
     category: "hi-tops",
   },
   {
-    title: "Shop All Shoes",
+    title: "Shop All Men's Shoes",
     path: "/collection/mens-shoes",
     collection: "mens-shoes",
     category: "all-shoes",
@@ -79,27 +91,39 @@ export const mensCollectionLinks = [
 export const womensApparelLinks = [
   {
     title: "Women's Apparel",
-    path: "/collection/womens/apparel",
+    path: "/collection/womens-apparel",
     collection: "womens-apparel",
     category: null,
   },
   {
     title: "T-Shirts",
-    path: "/collection/womens/apparel/t-shirts",
+    path: "/collection/womens-apparel/t-shirts",
     collection: "womens-apparel",
     category: "t-shirts",
   },
   {
     title: "Sweaters",
-    path: "/collection/womens/apparel/sweaters",
+    path: "/collection/womens-apparel/sweaters",
     collection: "womens-apparel",
     category: "sweaters",
   },
   {
     title: "Coats & Jackets",
-    path: "/collection/womens/apparel/coats&jackets",
+    path: "/collection/womens-apparel/jackets",
     collection: "womens-apparel",
-    category: "coats&jackets",
+    category: "jackets",
+  },
+  {
+    title: "Socks",
+    path: "/collection/womens-apparel/socks",
+    collection: "womens-apparel",
+    category: "socks",
+  },
+  {
+    title: "Shop All Women's Apparel",
+    path: "/collection/womens-apparel",
+    collection: "womens-apparel",
+    category: "all-apparel",
   },
 ];
 

@@ -48,15 +48,15 @@ app.post("/remove-favourite", firebaseAuth, removeFavourite);
 
 // Products routes
 const {
-  getAllShoes,
-  getShoesByCategory,
-  getShoesByFilter,
+  getAllProducts,
+  getProductsByCategory,
+  getProductsByFilter,
   getProduct,
 } = require("./handlers/products");
 
-app.get("/products", getAllShoes);
-app.get("/products-category", getShoesByCategory);
-app.get("/filtered-products", getShoesByFilter);
+app.get("/products", getAllProducts);
+app.get("/products-category", getProductsByCategory);
+app.get("/filtered-products", getProductsByFilter);
 app.post("/get-product", getProduct);
 
 // Reviews routes

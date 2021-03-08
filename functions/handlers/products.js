@@ -13,7 +13,7 @@ const getProduct = async (req, res) => {
   }
 };
 
-const getAllShoes = async (req, res) => {
+const getAllProducts = async (req, res) => {
   const collection = req.query.collection;
   const sort = req.query.sort ? req.query.sort : false;
   let productsRef = sort
@@ -34,7 +34,7 @@ const getAllShoes = async (req, res) => {
   }
 };
 
-const getShoesByCategory = async (req, res) => {
+const getProductsByCategory = async (req, res) => {
   const collection = req.query.collection;
   const category = req.query.category;
   const sort = req.query.sort ? req.query.sort : false;
@@ -57,7 +57,7 @@ const getShoesByCategory = async (req, res) => {
   }
 };
 
-const getShoesByFilter = async (req, res) => {
+const getProductsByFilter = async (req, res) => {
   const collection = req.query.collection;
   const sort = req.query.sort ? req.query.sort : false;
   let category = req.query.category ? req.query.category : false;
@@ -253,9 +253,9 @@ const getShoesByFilter = async (req, res) => {
 };
 
 module.exports = {
-  getAllShoes,
-  getShoesByCategory,
-  getShoesByFilter,
+  getAllProducts,
+  getProductsByCategory,
+  getProductsByFilter,
   getProduct,
 };
 

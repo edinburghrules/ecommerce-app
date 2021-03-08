@@ -6,6 +6,8 @@ import ProductList from "../../../components/products/product-list/product-list"
 import {
   mensShoeLinks,
   womensShoeLinks,
+  mensApparelLinks,
+  womensApparelLinks,
 } from "../../../navigation-links/navigation-links";
 import Sort from "../../../components/sort/sort";
 
@@ -20,8 +22,13 @@ class ProductListPage extends React.Component {
       options = mensShoeLinks;
     } else if (params.collection === "womens-shoes") {
       options = womensShoeLinks;
+    } else if (params.collection === "mens-apparel") {
+      options = mensApparelLinks;
+    } else if (params.collection === "womens-apparel") {
+      options = womensApparelLinks;
     }
 
+    console.log(params);
     return (
       <React.Fragment>
         <div className="sort">
