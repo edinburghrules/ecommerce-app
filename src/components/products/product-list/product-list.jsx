@@ -59,7 +59,14 @@ class ProductList extends React.Component {
         }
 
         if (colors || bestFor || weather) {
-          getFilteredProducts(collection, colors, bestFor, weather, category, sort);
+          getFilteredProducts(
+            collection,
+            colors,
+            bestFor,
+            weather,
+            category,
+            sort
+          );
         } else {
           if (collection && category) {
             getCategoryProducts(collection, category, sort);

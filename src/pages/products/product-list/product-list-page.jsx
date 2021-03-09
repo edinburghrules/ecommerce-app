@@ -31,27 +31,29 @@ class ProductListPage extends React.Component {
     console.log(params);
     return (
       <React.Fragment>
-        <div className="sort">
-          <Sort />
-        </div>
         <div className="product-list-page">
           <div className="product-list-page__filters">
             <Filters category={params.category} options={options} />
           </div>
-          <Switch>
-            {/* Give routes keys to cause re-render */}
-            <Route
-              key={location.key}
-              exact
-              path={`${path}`}
-              render={(routeProps) => <ProductList {...routeProps} />}
-            />
-            <Route
-              key={location.key}
-              path={`${path}/:category`}
-              render={(routeProps) => <ProductList {...routeProps} />}
-            />
-          </Switch>
+          <div>
+            <div className='product-list-page__sort-filter'>
+              <Sort />
+            </div>
+            <Switch>
+              {/* Give routes keys to cause re-render */}
+              <Route
+                key={location.key}
+                exact
+                path={`${path}`}
+                render={(routeProps) => <ProductList {...routeProps} />}
+              />
+              <Route
+                key={location.key}
+                path={`${path}/:category`}
+                render={(routeProps) => <ProductList {...routeProps} />}
+              />
+            </Switch>
+          </div>
         </div>
       </React.Fragment>
     );

@@ -1,12 +1,13 @@
-.sort {
-  margin-top: 10rem;
+.product-list-page__sort-filter {
   display: flex;
-  align-items: center;
   justify-content: flex-end;
-  padding-right: 8.2rem;
+  padding-right: 2.2rem;
 }
 
 .product-list-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 10rem;
   display: grid;
   grid-template-columns: 25% 75%;
   gap: 1rem;
