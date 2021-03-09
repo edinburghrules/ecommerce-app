@@ -6,7 +6,9 @@ const COLOR_FILTER_OPTIONS = [
   "blue",
   "teal",
   "brown",
+  "green",
   "pink",
+  "purple",
   "red",
   "white",
 ];
@@ -14,7 +16,7 @@ const COLOR_FILTER_OPTIONS = [
 const ColorFilters = (props) => {
   const { handleSelect, selectedColors } = props;
   return (
-    <ul>
+    <ul style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
       {COLOR_FILTER_OPTIONS.map((colorFilterOption, index) => (
         <li key={index}>
           <label

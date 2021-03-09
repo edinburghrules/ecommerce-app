@@ -47,8 +47,14 @@ class Filters extends React.Component {
     const { history, location } = this.props;
     const selected = e.target.id;
     const checked = e.target.checked;
+
     if (checked) {
-      if (selected === "wet" || selected === "dry") {
+      if (
+        selected === "wet" ||
+        selected === "dry" ||
+        selected === "cool" ||
+        selected === "warm"
+      ) {
         this.setState(
           (prevState) => ({
             ...prevState,
@@ -82,7 +88,12 @@ class Filters extends React.Component {
         );
       }
     } else {
-      if (selected === "wet" || selected === "dry") {
+      if (
+        selected === "wet" ||
+        selected === "dry" ||
+        selected === "cool" ||
+        selected === "warm"
+      ) {
         this.setState(
           (prevState) => ({
             prevState,
