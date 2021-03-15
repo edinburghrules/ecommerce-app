@@ -1,13 +1,13 @@
-const { db } = require('../util/admin');
-const config = require('../util/config');
-const firebase = require('firebase');
+const { db } = require("../util/admin");
+const config = require("../util/config");
+const firebase = require("firebase");
 firebase.initializeApp(config);
 
 const {
   validateRegisterData,
   validateSignInData,
   validateResetEmail,
-} = require('../util/validators');
+} = require("../util/validators");
 
 const register = async (req, res) => {
   const newAccount = {
@@ -38,7 +38,7 @@ const register = async (req, res) => {
     };
 
     await db
-      .collection('accounts')
+      .collection("accounts")
       .doc(newAccount.email)
       .set({
         ...accountCredentials,
@@ -48,10 +48,10 @@ const register = async (req, res) => {
   } catch (err) {
     console.error(err);
 
-    if (err.code === 'auth/email-already-in-use') {
+    if (err.code === "auth/email-already-in-use") {
       return res
         .status(400)
-        .json({ email: 'Email already registered to an account' });
+        .json({ email: "Email already registered to an account" });
     } else {
       return res.status(500).json({ error: err.code });
     }
@@ -77,10 +77,10 @@ const signIn = async (req, res) => {
 
     return res.status(201).json(token);
   } catch (err) {
-    if (err.code === 'auth/wrong-password') {
-      return res.status(400).json({ password: 'Incorrect password' });
-    } else if (err.code === 'auth/user-not-found') {
-      return res.status(400).json({ email: 'Email not recognized' });
+    if (err.code === "auth/wrong-password") {
+      return res.status(400).json({ password: "Incorrect password" });
+    } else if (err.code === "auth/user-not-found") {
+      return res.status(400).json({ email: "Email not recognized" });
     } else {
       return res.status(500).json({ error: err.code });
     }
@@ -91,7 +91,7 @@ const getAuthenticatedAccount = async (req, res) => {
   try {
     let accountData = {};
     const accountDataFromDb = await db
-      .collection('accounts')
+      .collection("accounts")
       .doc(req.account.email)
       .get();
     if (accountDataFromDb.exists) {
@@ -114,11 +114,11 @@ const resetPassword = async (req, res) => {
     await firebase.auth().sendPasswordResetEmail(email);
     return res
       .status(201)
-      .json({ success: 'A reset email link has been sent' });
+      .json({ success: "A reset email link has been sent" });
   } catch (err) {
     console.log(err);
-    if (err.code === 'auth/user-not-found') {
-      return res.status(400).json({ email: 'This email is not recognized' });
+    if (err.code === "auth/user-not-found") {
+      return res.status(400).json({ email: "This email is not recognized" });
     } else {
       return res.status(500).json({ error: err.code });
     }

@@ -68,7 +68,7 @@ const NavDropdown = ({
             {linksToRender &&
               linksToRender.collectionLinks.map(({ path, title, img }, i) => (
                 <div key={i}>
-                  {img && <img src={img} />}
+                  {img && <img src={img} alt='collection' />}
                   <Link
                     className="nav-dropdown__collections-link"
                     onClick={

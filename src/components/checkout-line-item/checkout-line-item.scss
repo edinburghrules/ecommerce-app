@@ -1,0 +1,43 @@
+@import "../../sass/colors.scss";
+@import "../../sass/fonts";
+
+.checkout-line-item {
+  display: flex;
+  padding: 2rem;
+  border-bottom: 1px solid #ddd;
+  font-size: $xxsmall;
+  color: #555;
+
+  & h4 {
+    font-weight: $normal;
+    color: #333;
+  }
+
+  &__image-container {
+    position: relative;
+    margin-right: 1.5rem;
+
+    & img {
+      height: auto;
+      width: 10rem;
+      border: 1px solid #ddd;
+    }
+
+    & span {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 2rem;
+      width: 2rem;
+      top: -5px;
+      left: -5px;
+      font-size: 1.5rem;
+      font-weight: $semiBold;
+      color: $light-text;
+      background: $dark-bg;
+      padding: 5px;
+      border-radius: 50%;
+    }
+  }
+}

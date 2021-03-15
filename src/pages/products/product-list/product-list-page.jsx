@@ -27,8 +27,6 @@ class ProductListPage extends React.Component {
     } else if (params.collection === "womens-apparel") {
       options = womensApparelLinks;
     }
-
-    console.log(params);
     return (
       <React.Fragment>
         <div className="product-list-page">
@@ -36,7 +34,7 @@ class ProductListPage extends React.Component {
             <Filters category={params.category} options={options} />
           </div>
           <div>
-            <div className='product-list-page__sort-filter'>
+            <div className="product-list-page__sort-filter">
               <Sort />
             </div>
             <Switch>

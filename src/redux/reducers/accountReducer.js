@@ -2,7 +2,7 @@ import { SET_AUTHENTICATED, SET_UNAUTHENTICATED } from "../types";
 
 const initState = {
   authenticated: false,
-  credentials: {},
+  credentials: null,
 };
 
 const accountReducer = (state = initState, action) => {
@@ -15,7 +15,7 @@ const accountReducer = (state = initState, action) => {
     case SET_UNAUTHENTICATED:
       return {
         authenticated: false,
-        credentials: {},
+        credentials: null,
       };
     default:
       return state;

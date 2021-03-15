@@ -1,10 +1,10 @@
+import React from "react";
 import "./App.scss";
-import { Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./redux/store";
-import axios from "axios";
+import { Route, Switch, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import PrivateRoute from "./utils/private-route/PrivateRoute";
-import jwtDecode from "jwt-decode";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import {
   mensApparelLinks,
   mensShoeLinks,
@@ -21,58 +21,64 @@ import ResetPassword from "./pages/auth/reset-password/reset-password";
 import ProductListPage from "./pages/products/product-list/product-list-page";
 import ProductPage from "./pages/products/product/product-page";
 import FavouritesPage from "./pages/favourites/favourites-page";
-import { signOut, getAccountData } from "./redux/actions/accountActions";
-import { getCart } from "./redux/actions/cartActions";
+import CheckoutPage from "./pages/checkout/checkout-page";
+import Loading from "./components/loading/loading";
 
-const token = localStorage.firebaseToken;
-
-function load() {
-  if (token) {
-    const decodedToken = jwtDecode(token);
-    if (decodedToken.exp * 1000 < Date.now()) {
-      store.dispatch(signOut());
-    } else {
-      axios.defaults.headers.common["Authorization"] = token;
-      store.dispatch(getAccountData());
-    }
-  } else {
-    store.dispatch(getCart(false));
-  }
-}
-
-load();
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 const App = (props) => {
+  const { location, appLoaded, loadingSignin } = props;
   return (
-    <Provider store={store}>
+    <Elements stripe={stripePromise}>
       <div className="App">
-        <NavigationBar
-          mensApparelLinks={mensApparelLinks}
-          mensShoeLinks={mensShoeLinks}
-          mensCollectionLinks={mensCollectionLinks}
-          womensApparelLinks={womensApparelLinks}
-          womensShoeLinks={womensShoeLinks}
-          womensCollectionLinks={womensCollectionLinks}
-        />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <PrivateRoute path="/signIn" component={Signin} />
-          <PrivateRoute path="/register" component={Register} />
-          <PrivateRoute path="/reset-password" component={ResetPassword} />
-          <Route
-            exact
-            path="/collection/:collection/:category?"
-            component={ProductListPage}
+        {location.pathname !== "/checkout" && (
+          <NavigationBar
+            mensApparelLinks={mensApparelLinks}
+            mensShoeLinks={mensShoeLinks}
+            mensCollectionLinks={mensCollectionLinks}
+            womensApparelLinks={womensApparelLinks}
+            womensShoeLinks={womensShoeLinks}
+            womensCollectionLinks={womensCollectionLinks}
           />
-          <Route
-            path={"/collection/:collection/:category?/product/:id"}
-            component={ProductPage}
+        )}
+        {!appLoaded || loadingSignin ? (
+          <Loading
+            style={{
+              height: "100%",
+              width: "100%",
+              transform: "translateY(50rem)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           />
-          <Route path="/favourites/:accountId?" component={FavouritesPage} />
-        </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <PrivateRoute path="/signIn" component={Signin} />
+            <PrivateRoute path="/register" component={Register} />
+            <PrivateRoute path="/reset-password" component={ResetPassword} />
+            <Route
+              exact
+              path="/collection/:collection/:category?"
+              component={ProductListPage}
+            />
+            <Route
+              path={"/collection/:collection/:category?/product/:id"}
+              component={ProductPage}
+            />
+            <Route path="/favourites/:accountId?" component={FavouritesPage} />
+            <Route path="/checkout" component={CheckoutPage} />
+          </Switch>
+        )}
       </div>
-    </Provider>
+    </Elements>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  appLoaded: state.async.appLoaded,
+  loadingSignin: state.async.loadingSignin,
+});
+
+export default connect(mapStateToProps)(withRouter(App));

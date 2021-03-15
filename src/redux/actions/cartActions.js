@@ -34,9 +34,11 @@ export const getCart = (authenticated, product = "") => {
           payload: { loading: true, cartItem: product },
         });
         const getCartResponse = await axios.get("/get-cart");
-        dispatch({ type: SET_CART, payload: getCartResponse.data });
+        dispatch({
+          type: SET_CART,
+          payload: getCartResponse.data,
+        });
         dispatch(stopLoadingCart());
-        return;
       } catch (err) {
         console.log(err);
       }
@@ -52,6 +54,28 @@ export const getCart = (authenticated, product = "") => {
   };
 };
 
+export const addToCartFromLocalStorage = (products) => {
+  const productsData = {
+    products,
+  };
+  return async (dispatch) => {
+    try {
+      await axios.post("add-to-cart-from-local-storage", productsData);
+      return;
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: LOW_STOCK,
+        payload: {
+          msg: err.response.data.fail,
+          cartItem: err.response.data.product,
+        },
+      });
+      dispatch(openCart());
+    }
+  };
+};
+
 export const addToCart = (product, authenticated) => {
   const productData = {
     product,
@@ -60,6 +84,7 @@ export const addToCart = (product, authenticated) => {
     if (authenticated) {
       try {
         await axios.post("/add-to-cart", productData);
+        dispatch(getCart(authenticated, product));
         dispatch(openCart());
       } catch (err) {
         dispatch({
@@ -138,7 +163,7 @@ export const decreaseQty = (product, authenticated) => {
       try {
         await axios.post("/decrease-qty", productData);
         dispatch(getCart(authenticated, product));
-        dispatch({ type: CLEAR_LOW_STOCK });
+        dispatch({ type: CLEAR_LOW_STOCK, payload: product });
       } catch (err) {
         console.log(err);
       }

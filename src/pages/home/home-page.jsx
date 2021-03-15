@@ -2,16 +2,13 @@ import React from "react";
 import "./home.scss";
 import MainMenu from "../../components/main-menu/main-menu";
 import homeHero from "../../assets/rain-collection-hero.webp";
-import materialImage from "../../assets/materials-img.png";
-import woolmanImage from "../../assets/woolman.webp";
 import { Link } from "react-router-dom";
-import { Transition } from "react-transition-group";
 
 const Home = () => {
   return (
     <div className="homepage">
       <div className="homepage__hero-container">
-        <img className="homepage__hero-image" src={homeHero} />
+        <img className="homepage__hero-image" src={homeHero} alt="hero" />
         <div className="homepage__hero-content">
           <h1 className="homepage__hero-title">Run in the Rain.</h1>
           <p className="homepage__hero-sub">

@@ -5,6 +5,10 @@ export const SET_ACCOUNT = "SET_ACCOUNT";
 export const LOADING_ACCOUNT = "LOADING_ACCOUNT";
 export const ACCOUNT_LOADED = "ACCOUNT_LOADED";
 
+// Account reducer action types
+export const START_LOADING_SIGN_IN = "START_LOADING_SIGN_IN";
+export const STOP_LOADING_SIGN_IN = "STOP_LOADING_SIGN_IN";
+
 // Favourites reducer action types
 export const SET_FAVOURITES = "SET_FAVOURITES";
 export const UNSET_FAVOURITES = "UNSET_FAVOURITES";
@@ -26,6 +30,7 @@ export const SET_PRODUCT = "GET_PRODUCT";
 export const SET_PRODUCT_REVIEWS = "SET_PRODUCT_REVIEWS";
 
 // Async reducer product action types
+export const APP_LOADED = "APP_LOADED";
 export const START_LOADING_PRODUCTS = "START_LOADING_PRODUCTS";
 export const STOP_LOADING_PRODUCTS = "STOP_LOADING_PRODUCTS";
 

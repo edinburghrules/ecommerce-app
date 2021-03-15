@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./cart.scss";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { getCart } from "../../../redux/actions/cartActions";
+import { getCart, closeCart } from "../../../redux/actions/cartActions";
 import CartItem from "../cart-item/cart-item";
 import closeArrow from "../../../assets/close-arrow.png";
 import shopping from "../../../assets/shopping-bag.png";
@@ -20,13 +21,13 @@ class Cart extends Component {
   };
 
   // Get cart items
-  componentDidMount = async () => {
-    await this.props.getCart(this.props.authenticated);
-    this.setState({
-      isOpen: this.props.cartOpen,
-      cart: this.props.cart,
-    });
-  };
+  // componentDidMount = async () => {
+  //   await this.props.getCart(this.props.authenticated);
+  //   this.setState({
+  //     isOpen: this.props.cartOpen,
+  //     cart: this.props.cart,
+  //   });
+  // };
 
   componentDidUpdate = (prevProps, prevState) => {
     const totalQty = this.props.cart.reduce(function (total, currentValue) {
@@ -55,6 +56,11 @@ class Cart extends Component {
             : 0,
       });
     }
+  };
+
+  handleClick = () => {
+    this.props.history.push("/checkout");
+    this.props.closeCart();
   };
 
   render() {
@@ -152,7 +158,13 @@ class Cart extends Component {
                 <span>SHIPPING:</span>
                 <span>£{toFreeDelivery === 0 ? "FREE" : shipping} </span>
               </div>
-              <button className="cart__checkout-btn">Checkout</button>
+              <button
+                disabled={cart.length === 0}
+                onClick={this.handleClick}
+                className="cart__checkout-btn"
+              >
+                Checkout
+              </button>
             </div>
           </div>
         </CSSTransition>
@@ -170,6 +182,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionsToProps = {
   getCart,
+  closeCart,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(Cart);
+export default connect(mapStateToProps, mapActionsToProps)(withRouter(Cart));

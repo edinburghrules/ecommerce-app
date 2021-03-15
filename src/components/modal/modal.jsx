@@ -19,7 +19,7 @@ const Modal = (props) => {
           <div className="modal__content">
             <div className="modal__top">
               <button onClick={() => props.onClose()}>
-                <img src={closeBtn} />
+                <img src={closeBtn} alt="close" />
               </button>
             </div>
             <Slider imageIndex={props.imageIndex} slideItems={props.content} />

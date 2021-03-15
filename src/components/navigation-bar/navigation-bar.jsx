@@ -3,7 +3,7 @@ import "./navigation-bar.scss";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/accountActions";
-import { closeCart } from "../../redux/actions/cartActions";
+import { openCart, closeCart } from "../../redux/actions/cartActions";
 import NavDropdown from "../nav-dropdown/nav-dropdown";
 import Cart from "../cart/cart-list/cart";
 import MobileNav from "../mobile-nav/mobile-nav";
@@ -29,8 +29,6 @@ class NavigationBar extends React.Component {
   };
 
   componentDidMount = () => {
-    this.updateWindowSize();
-    window.addEventListener("resize", this.updateWindowSize);
     if (this.props.cartList.length > 0) {
       let cartTotalQty = this.props.cartList.reduce((total, currentItem) => {
         return (total += currentItem.qty);
@@ -41,17 +39,15 @@ class NavigationBar extends React.Component {
     }
   };
 
-  updateWindowSize = () => {
-    this.setState({
-      windowWidth: window.innerWidth,
-    });
-  };
-
   componentDidUpdate = (prevProps, prevState) => {
-    if (!prevState.cartOpen && this.props.cartOpen) {
-      this.setState({
-        cartOpen: true,
-      });
+    if (this.props.location.state && this.props.location.state.fromCheckout) {
+      return;
+    } else {
+      if (!prevState.cartOpen && this.props.cartOpen) {
+        this.setState({
+          cartOpen: true,
+        });
+      }
     }
     if (prevProps.cartList !== this.props.cartList) {
       if (this.props.cartList.length > 0) {
@@ -70,14 +66,21 @@ class NavigationBar extends React.Component {
   };
 
   handleCartOpen = () => {
-    console.log("cart opens");
-    this.props.closeCart();
-    this.setState((prevState) => ({
-      ...prevState,
-      cartOpen: !prevState.cartOpen,
-      mensDropdownOpen: false,
-      womensDropdownOpen: false,
-    }));
+    this.setState(
+      (prevState) => ({
+        ...prevState,
+        cartOpen: !prevState.cartOpen,
+        mensDropdownOpen: false,
+        womensDropdownOpen: false,
+      }),
+      () => {
+        if (this.state.cartOpen) {
+          this.props.openCart();
+        } else {
+          this.props.closeCart();
+        }
+      }
+    );
   };
 
   handleMobileOpen = () => {
@@ -311,6 +314,7 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = {
   signOut,
   closeCart,
+  openCart,
 };
 
 export default withRouter(

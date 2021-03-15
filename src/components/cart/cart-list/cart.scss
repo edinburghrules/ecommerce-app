@@ -205,6 +205,10 @@
     border: none;
     margin-top: 4rem;
 
+    &:disabled {
+      background: #888;
+    }
+
     &:focus {
       outline: none !important;
     }

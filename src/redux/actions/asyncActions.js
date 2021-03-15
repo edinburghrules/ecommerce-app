@@ -2,7 +2,19 @@ import {
   START_LOADING_PRODUCTS,
   STOP_LOADING_PRODUCTS,
   STOP_LOADING_CART,
+  START_LOADING_SIGN_IN,
+  STOP_LOADING_SIGN_IN,
+  APP_LOADED,
 } from "../types";
+
+// APP ASYNC
+export const appLoaded = () => {
+  return async (dispatch) => {
+    dispatch({ type: APP_LOADED });
+  };
+};
+export const startLoadingSignin = () => ({ type: START_LOADING_SIGN_IN });
+export const stopLoadingSignin = () => ({ type: STOP_LOADING_SIGN_IN });
 
 // PRODUCT ASYNC
 export const startLoadingProducts = () => ({ type: START_LOADING_PRODUCTS });

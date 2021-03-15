@@ -5,6 +5,8 @@ app.use(cors());
 
 const firebaseAuth = require("./util/firebaseAuth");
 
+
+
 // Accounts routes
 const {
   register,
@@ -20,6 +22,7 @@ app.get("/account", firebaseAuth, getAuthenticatedAccount);
 
 // Cart routes
 const {
+  addToCartFromLocalStorage,
   addToCart,
   getCart,
   deleteFromCart,
@@ -29,11 +32,20 @@ const {
 } = require("./handlers/cart");
 
 app.post("/add-to-cart", firebaseAuth, addToCart);
+app.post(
+  "/add-to-cart-from-local-storage",
+  firebaseAuth,
+  addToCartFromLocalStorage
+);
 app.get("/get-cart", firebaseAuth, getCart);
 app.post("/delete-from-cart", firebaseAuth, deleteFromCart);
 app.post("/increase-qty", firebaseAuth, increaseQty);
 app.post("/decrease-qty", firebaseAuth, decreaseQty);
 app.post("/get-stock-qty", getStockQty);
+
+// Payment routes
+const { getPaymentIntent } = require("./handlers/payment-intents");
+app.post("/payment-intents", getPaymentIntent);
 
 // Favourite routes
 const {
@@ -63,5 +75,10 @@ app.post("/get-product", getProduct);
 const { getProductReviews } = require("./handlers/reviews");
 
 app.post("/get-reviews", getProductReviews);
+
+// Orders routes
+// const { submitOrder } = require("./handlers/orders");
+
+// app.post("/submit-order", submitOrder);
 
 exports.api = functions.https.onRequest(app);
