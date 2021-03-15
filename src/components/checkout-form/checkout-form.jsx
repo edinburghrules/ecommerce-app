@@ -1,11 +1,13 @@
 import React from "react";
 import "./checkout-form.scss";
 import { withFormik } from "formik";
+import { connect } from "react-redux";
 import axios from "axios";
 import * as Yup from "yup";
 import { CardElement } from "@stripe/react-stripe-js";
 import { Link } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
+import { submitOrder } from "../../redux/actions/checkoutoutActions";
 
 class CheckoutForm extends React.Component {
   render() {
@@ -222,7 +224,20 @@ const CheckoutFormFormik = withFormik({
     postcode: Yup.string().required("Required"),
     phone: Yup.number(),
   }),
-  handleSubmit: async (values, { props: { elements, stripe, totalPrice } }) => {
+  handleSubmit: async (
+    values,
+    {
+      props: {
+        elements,
+        stripe,
+        totalPrice,
+        submitOrder,
+        credentials,
+        authenticated,
+        lineItems,
+      },
+    }
+  ) => {
     const amount = totalPrice * 100;
     const {
       data: { clientSecret },
@@ -252,15 +267,27 @@ const CheckoutFormFormik = withFormik({
     });
 
     if (!error) {
-      const { paymentIntent, error } = await stripe.confirmCardPayment(
-        clientSecret,
-        {
-          payment_method: paymentMethod.id,
-        }
-      );
+      const { error } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id,
+      });
 
       if (!error) {
-        console.log(paymentIntent);
+        submitOrder({
+          created: Date.now(),
+          name: authenticated
+            ? credentials.firstName + " " + credentials.lastName
+            : values.name,
+          email: authenticated ? credentials.email : values.email,
+          shippingAddress: authenticated
+            ? credentials.address
+            : billing_details,
+          lineItems,
+          totalPrice,
+          cardUsed: {
+            brand: paymentMethod.card.brand,
+            last4: paymentMethod.card.last4,
+          },
+        });
         // Create action that saves order to orders collection
         // and then returns the order document to put in to redux store
         // redirect to order confirmation screen
@@ -274,4 +301,8 @@ const CheckoutFormFormik = withFormik({
   },
 })(CheckoutForm);
 
-export default CheckoutFormFormik;
+const mapActionsToProps = {
+  submitOrder,
+};
+
+export default connect(null, mapActionsToProps)(CheckoutFormFormik);

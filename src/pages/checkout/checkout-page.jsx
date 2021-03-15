@@ -41,6 +41,7 @@ const CheckoutPage = (props) => {
                 elements={elements}
                 totalPrice={totalPrice}
                 credentials={credentials}
+                lineItems={cartList}
               />
             )}
           </ElementsConsumer>

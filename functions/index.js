@@ -77,8 +77,8 @@ const { getProductReviews } = require("./handlers/reviews");
 app.post("/get-reviews", getProductReviews);
 
 // Orders routes
-// const { submitOrder } = require("./handlers/orders");
+const { submitOrder } = require("./handlers/orders");
 
-// app.post("/submit-order", submitOrder);
+app.post("/submit-order", submitOrder);
 
 exports.api = functions.https.onRequest(app);
