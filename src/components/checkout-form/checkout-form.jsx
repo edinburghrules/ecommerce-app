@@ -26,7 +26,11 @@ class CheckoutForm extends React.Component {
     return (
       <div className="checkout-form">
         <div className="checkout-form__container">
-          <form className="checkout-form__form" onSubmit={handleSubmit}>
+          <form
+            disabled={submittingPayment}
+            className="checkout-form__form"
+            onSubmit={handleSubmit}
+          >
             <div className="checkout-form__title">
               <h3>Contact Information</h3>
             </div>
@@ -287,7 +291,7 @@ const CheckoutFormFormik = withFormik({
             brand: paymentMethod.card.brand,
             last4: paymentMethod.card.last4,
           },
-        });
+        }, authenticated);
         resetForm();
         history.push(`/order-confirmation/${orderId.data}`);
       } else {

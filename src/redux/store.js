@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import accountReducer from "./reducers/accountReducer";
 import favouriteReducer from "./reducers/favouriteReducer";
 import cartReducer from "./reducers/cartReducer";
+import orderReducer from "./reducers/orderReducer";
 import productReducer from "./reducers/productReducer";
 import asyncReducer from "./reducers/asyncReducer";
 import reviewsReducer from "./reducers/reviewsReducer";
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   products: productReducer,
   async: asyncReducer,
   reviews: reviewsReducer,
+  orders: orderReducer,
 });
 
 const store = createStore(

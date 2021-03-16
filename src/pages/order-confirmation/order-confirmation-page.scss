@@ -1,0 +1,74 @@
+@import "../../sass/colors";
+@import "../../sass/fonts";
+
+.order-confirmation-page {
+  height: 100%;
+  max-width: 960px;
+  margin: 10rem auto;
+
+  &__heading {
+    & h1 {
+      font-family: $Montserrat;
+      font-weight: $bold;
+      font-size: $large;
+      color: $dark-text;
+      margin-bottom: 4rem;
+    }
+
+    & h2 {
+      font-family: $Montserrat;
+      font-weight: $semiBold;
+      font-size: 2.6rem;
+      color: $dark-text;
+      margin-bottom: 1rem;
+    }
+
+    & p {
+      font-weight: $normal;
+      font-size: 2.2rem;
+      color: #444;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+
+  &__order-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 4rem 2rem;
+    border-bottom: 1px solid #ddd;
+    font-size: 1.6rem;
+  }
+
+  &__order-details-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    &-header {
+      font-weight: $semiBold;
+    }
+
+    &--card {
+      display: flex;
+      align-items: center;
+
+      & img {
+        margin-left: 6px;
+        width: 3.8rem;
+      }
+    }
+  }
+
+  &__line-items {
+    margin-top: 2rem;
+  }
+
+  &__line-item-image {
+    & img {
+      height: auto;
+      width: 35rem;
+    }
+  }
+}

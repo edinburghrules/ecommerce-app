@@ -39,3 +39,6 @@ export const STOP_SUBMITTING_PAYMENT = "STOP_SUBMITTING_PAYMENT";
 // Async reducer cart action types
 export const START_LOADING_CART = "START_LOADING_CART";
 export const STOP_LOADING_CART = "STOP_LOADING_CART";
+
+// Orders reducer action types
+export const GET_ORDER = "GET_ORDER";

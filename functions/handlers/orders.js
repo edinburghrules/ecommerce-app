@@ -55,6 +55,27 @@ const submitOrder = async (req, res) => {
   }
 };
 
+const getOrder = async (req, res) => {
+  const orderId = req.body.orderId;
+  // use order id to get order from firestore
+  try {
+    const docRef = db.collection("orders").doc(orderId);
+
+    const doc = await docRef.get();
+
+    if (doc.exists) {
+      console.log(doc.data());
+      return res.status(200).json(doc.data());
+    } else {
+      return res.status(400).json({ error: "No such order, please try again" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(400).json(err);
+  }
+};
+
 module.exports = {
   submitOrder,
+  getOrder,
 };

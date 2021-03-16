@@ -71,7 +71,7 @@ const App = (props) => {
             <Route path="/favourites/:accountId?" component={FavouritesPage} />
             <Route path="/checkout" component={CheckoutPage} />
             <Route
-              path="/order-confirmation"
+              path="/order-confirmation/:orderId"
               component={OrderConfirmationPage}
             />
           </Switch>
