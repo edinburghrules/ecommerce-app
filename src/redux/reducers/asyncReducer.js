@@ -6,6 +6,8 @@ import {
   STOP_LOADING_PRODUCTS,
   START_LOADING_SIGN_IN,
   STOP_LOADING_SIGN_IN,
+  START_SUBMITTING_PAYMENT,
+  STOP_SUBMITTING_PAYMENT,
 } from "../types";
 
 const initState = {
@@ -13,6 +15,7 @@ const initState = {
   loadingProducts: false,
   loadingCart: { loading: false, cartItem: "" },
   loadingSignin: false,
+  submittingPayment: false,
 };
 
 const asyncReducer = (state = initState, action) => {
@@ -51,6 +54,16 @@ const asyncReducer = (state = initState, action) => {
       return {
         ...state,
         loadingCart: { loading: false, cartItem: "" },
+      };
+    case START_SUBMITTING_PAYMENT:
+      return {
+        ...state,
+        submittingPayment: true,
+      };
+    case STOP_SUBMITTING_PAYMENT:
+      return {
+        ...state,
+        submittingPayment: false,
       };
     default:
       return state;

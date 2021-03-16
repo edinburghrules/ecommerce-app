@@ -1,4 +1,6 @@
 import {
+  START_SUBMITTING_PAYMENT,
+  STOP_SUBMITTING_PAYMENT,
   START_LOADING_PRODUCTS,
   STOP_LOADING_PRODUCTS,
   STOP_LOADING_CART,
@@ -22,3 +24,7 @@ export const stopLoadingProducts = () => ({ type: STOP_LOADING_PRODUCTS });
 
 // CART ASYNC
 export const stopLoadingCart = () => ({ type: STOP_LOADING_CART });
+
+// ORDER ASYNC
+export const startSubmittingPayment = () => ({type: START_SUBMITTING_PAYMENT});
+export const stopSubmittingPayment = () => ({type: STOP_SUBMITTING_PAYMENT});

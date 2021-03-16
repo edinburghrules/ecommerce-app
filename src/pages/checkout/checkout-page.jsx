@@ -8,7 +8,7 @@ import CheckoutForm from "../../components/checkout-form/checkout-form";
 import CheckoutLineItem from "../../components/checkout-line-item/checkout-line-item";
 
 const CheckoutPage = (props) => {
-  const { cartList, authenticated, credentials } = props;
+  const { cartList, authenticated, credentials, history } = props;
 
   const totalPrice = cartList.reduce(function (total, currentValue) {
     if (currentValue.qty > 1) {
@@ -42,6 +42,7 @@ const CheckoutPage = (props) => {
                 totalPrice={totalPrice}
                 credentials={credentials}
                 lineItems={cartList}
+                history={history}
               />
             )}
           </ElementsConsumer>

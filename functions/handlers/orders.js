@@ -21,14 +21,14 @@ const submitOrder = async (req, res) => {
     let info = await transporter.sendMail({
       from: '"Fred Foo 👻" <foo@example.com>',
       to: "bar@example.com, baz@example.com",
-      subject: "Your Apparel Order",
-      text: `Order number: ${docRef.id}`,
+      subject: `Your Apparel Order: ${docRef.id}`,
+      text: `Thank you for your order`,
       html: `
-      <div>
-        <h1> Thank you for your order ${order.name}</h1>
+      <div style="width: 100%; color: #333;">
+        <h1> Thank you for your order, ${order.name}</h1>
         <div>
+            <img style="width: 50%; height: auto;" src=${order.lineItems[0].image} />
             <h2>Order Details:</h2>
-            <img src=${order.lineItems[0].image} />
             <h3>${order.lineItems[0].name}</h3>
             <p>£${order.lineItems[0].price}</p>
             <p>Size: ${order.lineItems[0].size}</p>
@@ -36,7 +36,7 @@ const submitOrder = async (req, res) => {
         </div>
         <div>
             <h2>Shipping Address:</h2>
-            <p>${order.shippingAddress.street}, ${order.shippingAddress.city},  ${order.shippingAddress.postal_code}</p>
+            <p>${order.shippingAddress.line1}, ${order.shippingAddress.city},  ${order.shippingAddress.postal_code}</p>
         </div>
         <div>
             <h2>Payment details:</h2>
@@ -48,8 +48,10 @@ const submitOrder = async (req, res) => {
     console.log(nodemailer.getTestMessageUrl(info));
 
     // Return
+    return res.status(200).json(docRef.id);
   } catch (err) {
     console.error(err);
+    return res.status(400).json({ err });
   }
 };
 

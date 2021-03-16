@@ -22,6 +22,7 @@ import ProductListPage from "./pages/products/product-list/product-list-page";
 import ProductPage from "./pages/products/product/product-page";
 import FavouritesPage from "./pages/favourites/favourites-page";
 import CheckoutPage from "./pages/checkout/checkout-page";
+import OrderConfirmationPage from "./pages/order-confirmation/order-confirmation-page";
 import Loading from "./components/loading/loading";
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
@@ -69,6 +70,10 @@ const App = (props) => {
             />
             <Route path="/favourites/:accountId?" component={FavouritesPage} />
             <Route path="/checkout" component={CheckoutPage} />
+            <Route
+              path="/order-confirmation"
+              component={OrderConfirmationPage}
+            />
           </Switch>
         )}
       </div>

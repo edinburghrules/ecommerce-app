@@ -20,6 +20,7 @@ class CheckoutForm extends React.Component {
       touched,
       isSubmitting,
       authenticated,
+      submittingPayment,
     } = this.props;
 
     return (
@@ -83,22 +84,20 @@ class CheckoutForm extends React.Component {
                 )}
               </div>
               <div className="checkout-form__input-container">
-                <label className="checkout-form__label" htmlFor="address">
-                  Address
+                <label className="checkout-form__label" htmlFor="street">
+                  street
                 </label>
                 <input
                   className="checkout-form__input"
-                  id="address"
+                  id="street"
                   type="text"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.address}
-                  name="address"
+                  name="street"
                 />
-                {errors.address && touched.address && (
-                  <div className="checkout-form__feedback">
-                    {errors.address}
-                  </div>
+                {errors.street && touched.street && (
+                  <div className="checkout-form__feedback">{errors.street}</div>
                 )}
               </div>
               <div className="checkout-form__input-container">
@@ -180,11 +179,11 @@ class CheckoutForm extends React.Component {
                 <label className="checkout-form__label" htmlFor="card">
                   Credit or debit card
                 </label>
-                <CardElement />
+                <CardElement name="card" />
               </div>
             </div>
             <button
-              disabled={isSubmitting}
+              disabled={isSubmitting || submittingPayment}
               className="checkout-form__submit-btn"
               type="submit"
             >
@@ -207,18 +206,19 @@ const CheckoutFormFormik = withFormik({
     return {
       email: (props.credentials && props.credentials.email) || "",
       name: (props.credentials && props.credentials.firstName) || "",
-      address: (props.credentials && props.credentials.address.street) || "",
+      street: (props.credentials && props.credentials.address.street) || "",
       city: (props.credentials && props.credentials.address.city) || "",
       country: "GB",
       postcode:
         (props.credentials && props.credentials.address.postal_code) || "",
       phone: (props.credentials && props.credentials.address.phone) || "",
+      card: "",
     };
   },
   validationSchema: Yup.object().shape({
     email: Yup.string().email().required(),
     name: Yup.string().required("Required"),
-    address: Yup.string().required("Required"),
+    street: Yup.string().required("Required"),
     city: Yup.string().required("Required"),
     country: Yup.string().required("Required"),
     postcode: Yup.string().required("Required"),
@@ -227,6 +227,7 @@ const CheckoutFormFormik = withFormik({
   handleSubmit: async (
     values,
     {
+      resetForm,
       props: {
         elements,
         stripe,
@@ -235,6 +236,7 @@ const CheckoutFormFormik = withFormik({
         credentials,
         authenticated,
         lineItems,
+        history,
       },
     }
   ) => {
@@ -251,10 +253,8 @@ const CheckoutFormFormik = withFormik({
       address: {
         city: values.city,
         country: values.country,
-        line1: values.address,
-        line2: null,
+        line1: values.street,
         postal_code: values.postcode,
-        state: null,
       },
       email: values.email,
       name: values.name,
@@ -272,7 +272,7 @@ const CheckoutFormFormik = withFormik({
       });
 
       if (!error) {
-        submitOrder({
+        const orderId = await submitOrder({
           created: Date.now(),
           name: authenticated
             ? credentials.firstName + " " + credentials.lastName
@@ -280,7 +280,7 @@ const CheckoutFormFormik = withFormik({
           email: authenticated ? credentials.email : values.email,
           shippingAddress: authenticated
             ? credentials.address
-            : billing_details,
+            : billing_details.address,
           lineItems,
           totalPrice,
           cardUsed: {
@@ -288,10 +288,8 @@ const CheckoutFormFormik = withFormik({
             last4: paymentMethod.card.last4,
           },
         });
-        // Create action that saves order to orders collection
-        // and then returns the order document to put in to redux store
-        // redirect to order confirmation screen
-        // order_doc: customer name, delivery address, billing address, line-items
+        resetForm();
+        history.push(`/order-confirmation/${orderId.data}`);
       } else {
         console.log(error);
       }
@@ -301,8 +299,12 @@ const CheckoutFormFormik = withFormik({
   },
 })(CheckoutForm);
 
+const mapStateToProps = (state) => ({
+  submittingPayment: state.async.submittingPayment,
+});
+
 const mapActionsToProps = {
   submitOrder,
 };
 
-export default connect(null, mapActionsToProps)(CheckoutFormFormik);
+export default connect(mapStateToProps, mapActionsToProps)(CheckoutFormFormik);
