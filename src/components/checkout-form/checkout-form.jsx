@@ -276,24 +276,30 @@ const CheckoutFormFormik = withFormik({
       });
 
       if (!error) {
-        const orderId = await submitOrder({
-          created: Date.now(),
-          name: authenticated
-            ? credentials.firstName + " " + credentials.lastName
-            : values.name,
-          email: authenticated ? credentials.email : values.email,
-          shippingAddress: authenticated
-            ? credentials.address
-            : billing_details.address,
-          lineItems,
-          totalPrice,
-          cardUsed: {
-            brand: paymentMethod.card.brand,
-            last4: paymentMethod.card.last4,
+        const orderId = await submitOrder(
+          {
+            created: Date.now(),
+            name: authenticated
+              ? credentials.firstName + " " + credentials.lastName
+              : values.name,
+            email: authenticated ? credentials.email : values.email,
+            shippingAddress: authenticated
+              ? credentials.address
+              : billing_details.address,
+            lineItems,
+            totalPrice,
+            cardUsed: {
+              brand: paymentMethod.card.brand,
+              last4: paymentMethod.card.last4,
+            },
           },
-        }, authenticated);
-        resetForm();
-        history.push(`/order-confirmation/${orderId.data}`);
+          authenticated
+        );
+
+        history.push({
+          pathname: `/order-confirmation/${orderId.data}`,
+          state: { fromCheckout: true },
+        });
       } else {
         console.log(error);
       }

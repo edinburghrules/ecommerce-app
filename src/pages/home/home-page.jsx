@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./home.scss";
 import MainMenu from "../../components/main-menu/main-menu";
 import homeHero from "../../assets/rain-collection-hero.webp";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = (props) => {
+  useEffect(() => {
+    return () => {
+      if (
+        (props.location.state && props.location.state.fromCheckout) ||
+        (props.location.state && props.location.state.fromOrderConfirmation)
+      ) {
+        props.history.goForward();
+      }
+    };
+  });
+
   return (
     <div className="homepage">
       <div className="homepage__hero-container">

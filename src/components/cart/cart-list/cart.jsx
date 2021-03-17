@@ -19,16 +19,6 @@ class Cart extends Component {
     toFreeDeliveryProgress: 0,
     isOpen: false,
   };
-
-  // Get cart items
-  // componentDidMount = async () => {
-  //   await this.props.getCart(this.props.authenticated);
-  //   this.setState({
-  //     isOpen: this.props.cartOpen,
-  //     cart: this.props.cart,
-  //   });
-  // };
-
   componentDidUpdate = (prevProps, prevState) => {
     const totalQty = this.props.cart.reduce(function (total, currentValue) {
       total += currentValue.qty;
@@ -59,7 +49,10 @@ class Cart extends Component {
   };
 
   handleClick = () => {
-    this.props.history.push("/checkout");
+    this.props.history.push({
+      pathname: "/checkout",
+      state: { fromCart: true },
+    });
     this.props.closeCart();
   };
 

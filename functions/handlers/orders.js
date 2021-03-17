@@ -1,5 +1,10 @@
 const { db } = require("../util/admin");
-const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
+const functions = require("firebase-functions");
+
+const API_KEY = functions.config().sendgrid.key;
+
+sgMail.setApiKey(API_KEY);
 
 const submitOrder = async (req, res) => {
   const order = req.body.orderDetails;
@@ -7,22 +12,11 @@ const submitOrder = async (req, res) => {
     // Add order to database
     const docRef = await db.collection("orders").add(order);
 
-    // Send an order confirmation email to customer
-    let transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: "quinton.hackett@ethereal.email", // generated ethereal user
-        pass: "VNQW4MashVbVaZ1hnh", // generated ethereal password
-      },
-    });
-
-    let info = await transporter.sendMail({
-      from: '"Fred Foo 👻" <foo@example.com>',
-      to: "bar@example.com, baz@example.com",
+    // Send email
+    const msg = {
+      to: "seanadamson84@gmail.com",
+      from: "seanjadamson@gmail.com",
       subject: `Your Apparel Order: ${docRef.id}`,
-      text: `Thank you for your order`,
       html: `
       <div style="width: 100%; color: #333;">
         <h1> Thank you for your order, ${order.name}</h1>
@@ -43,15 +37,19 @@ const submitOrder = async (req, res) => {
             <p>Paid with card ending in ****${order.cardUsed.last4}</p>
         </div>
       </div>`,
-    });
-
-    console.log(nodemailer.getTestMessageUrl(info));
-
-    // Return
-    return res.status(200).json(docRef.id);
+    };
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log("email sent");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return res.status(200).send(docRef.id);
   } catch (err) {
-    console.error(err);
-    return res.status(400).json({ err });
+    console.log(err);
+    return res.status(400).send(err);
   }
 };
 

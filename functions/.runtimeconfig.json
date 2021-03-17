@@ -1,5 +1,8 @@
 {
   "stripe": {
     "secretkey": "sk_test_51ITBVZLEDt0tSm0ZhcJaRGaqXOYQa5bNw4I3Rsgblev98Y37ksDoob7QV9mbgjWqHpeJow8TMrvPsScJVOC3jFK300s9jIoQzL"
+  },
+  "sendgrid": {
+    "key": "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"
   }
 }

@@ -21,6 +21,7 @@ export const submitOrder = (orderDetails, authenticated) => {
       return orderId;
     } catch (err) {
       console.log(err);
+      dispatch(stopSubmittingPayment());
     }
   };
 };

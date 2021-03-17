@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./checkout-page.scss";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { ElementsConsumer } from "@stripe/react-stripe-js";
 import ExpressCheckout from "../../components/express-checkout/express-checkout";
 import CheckoutForm from "../../components/checkout-form/checkout-form";
@@ -19,48 +19,56 @@ const CheckoutPage = (props) => {
     return total;
   }, 0);
 
-  return (
-    <div className="checkout-page">
-      <div className="checkout-page__left-col">
-        <Link className="checkout-page__logo" to="/">
-          apparel.
-        </Link>
-        <h1>CHECKOUT</h1>
-        <ExpressCheckout />
-        <div className="checkout-page__divider">
-          <hr />
-          <span>OR CONTINUE BELOW TO PAY BY CARD</span>
+  if (!props.location.state) {
+    return <Redirect to="/" />;
+  }
+
+  if (props.location.state && props.location.state.fromCart)
+    return (
+      <div className="checkout-page">
+        <div className="checkout-page__left-col">
+          <Link
+            className="checkout-page__logo"
+            to={{ pathname: "/", state: { fromCheckout: true } }}
+          >
+            apparel.
+          </Link>
+          <h1>CHECKOUT</h1>
+          <ExpressCheckout />
+          <div className="checkout-page__divider">
+            <hr />
+            <span>OR CONTINUE BELOW TO PAY BY CARD</span>
+          </div>
+          <div className="checkout-page__email-form"></div>
+          <div className="checkout-page__delivery-address-form">
+            <ElementsConsumer>
+              {({ stripe, elements }) => (
+                <CheckoutForm
+                  authenticated={authenticated}
+                  stripe={stripe}
+                  elements={elements}
+                  totalPrice={totalPrice}
+                  credentials={credentials}
+                  lineItems={cartList}
+                  history={history}
+                />
+              )}
+            </ElementsConsumer>
+          </div>
         </div>
-        <div className="checkout-page__email-form"></div>
-        <div className="checkout-page__delivery-address-form">
-          <ElementsConsumer>
-            {({ stripe, elements }) => (
-              <CheckoutForm
-                authenticated={authenticated}
-                stripe={stripe}
-                elements={elements}
-                totalPrice={totalPrice}
-                credentials={credentials}
-                lineItems={cartList}
-                history={history}
-              />
-            )}
-          </ElementsConsumer>
+        <div className="checkout-page__right-col">
+          <div className="checkout-page__line-items">
+            {cartList &&
+              cartList.map((cartItem, index) => (
+                <CheckoutLineItem key={index} lineItem={cartItem} />
+              ))}
+          </div>
+          <div className="checkout-page__total-charges">
+            <h1>£{totalPrice}</h1>
+          </div>
         </div>
       </div>
-      <div className="checkout-page__right-col">
-        <div className="checkout-page__line-items">
-          {cartList &&
-            cartList.map((cartItem, index) => (
-              <CheckoutLineItem key={index} lineItem={cartItem} />
-            ))}
-        </div>
-        <div className="checkout-page__total-charges">
-          <h1>£{totalPrice}</h1>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 const mapStateToProps = (state) => ({

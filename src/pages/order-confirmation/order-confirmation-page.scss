@@ -3,8 +3,9 @@
 
 .order-confirmation-page {
   height: 100%;
-  max-width: 960px;
-  margin: 10rem auto;
+  max-width: 1200px;
+  margin: 12rem auto;
+  padding: 5rem;
 
   &__heading {
     & h1 {
@@ -25,7 +26,7 @@
 
     & p {
       font-weight: $normal;
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: #444;
       padding-bottom: 3rem;
       border-bottom: 1px solid #ddd;
@@ -35,7 +36,8 @@
   &__order-details {
     display: flex;
     justify-content: space-between;
-    padding: 4rem 2rem;
+    align-items: center;
+    padding: 4rem 0;
     border-bottom: 1px solid #ddd;
     font-size: 1.6rem;
   }
@@ -46,18 +48,17 @@
     align-items: flex-start;
     justify-content: center;
 
+    &--card {
+      transform: translateY(6px);
+    }
+
     &-header {
       font-weight: $semiBold;
     }
 
-    &--card {
-      display: flex;
-      align-items: center;
-
-      & img {
-        margin-left: 6px;
-        width: 3.8rem;
-      }
+    & img {
+      margin-left: 2px;
+      width: 3.8rem;
     }
   }
 
@@ -65,10 +66,102 @@
     margin-top: 2rem;
   }
 
+  &__line-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    padding: 2rem 1rem;
+  }
+
+  &__line-item-details {
+    margin-left: 6rem;
+    margin-right: auto;
+
+    & p:first-of-type {
+      font-size: $small;
+      font-weight: $semiBold;
+      margin-bottom: 1rem !important;
+    }
+
+    & p:not(:first-of-type) {
+      font-size: $xsmall;
+      color: #666;
+      margin-bottom: 5px !important;
+    }
+  }
+
+  &__line-item-price {
+    justify-self: flex-end;
+    font-weight: $bold;
+    font-size: $small;
+  }
+
   &__line-item-image {
     & img {
       height: auto;
-      width: 35rem;
+      width: 16rem;
+    }
+  }
+
+  &__cost-details {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__costs {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    font-size: $small;
+    color: #888;
+
+    & div {
+      margin-bottom: 1rem;
+    }
+
+    & div p:first-child {
+      font-weight: $semiBold;
+    }
+
+    & div p:last-child {
+      font-weight: $bold;
+      color: #333;
+    }
+  }
+
+  &__subtotal {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__shipping {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem !important;
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 1.2rem 0;
+  }
+
+  &__confirmation-message {
+    margin-top: 3rem;
+    color: #333;
+    & p {
+      font-size: $small;
+      font-weight: $semiBold;
+    }
+
+    & p:first-of-type {
+      margin-bottom: 1rem !important;
+      font-weight: $bold;
+      font-size: $medium;
     }
   }
 }

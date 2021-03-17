@@ -32,16 +32,17 @@ const App = (props) => {
   return (
     <Elements stripe={stripePromise}>
       <div className="App">
-        {location.pathname !== "/checkout" && (
-          <NavigationBar
-            mensApparelLinks={mensApparelLinks}
-            mensShoeLinks={mensShoeLinks}
-            mensCollectionLinks={mensCollectionLinks}
-            womensApparelLinks={womensApparelLinks}
-            womensShoeLinks={womensShoeLinks}
-            womensCollectionLinks={womensCollectionLinks}
-          />
-        )}
+        {location.pathname !== "/checkout" &&
+          (!location.pathname.includes("/order-confirmation/") && (
+            <NavigationBar
+              mensApparelLinks={mensApparelLinks}
+              mensShoeLinks={mensShoeLinks}
+              mensCollectionLinks={mensCollectionLinks}
+              womensApparelLinks={womensApparelLinks}
+              womensShoeLinks={womensShoeLinks}
+              womensCollectionLinks={womensCollectionLinks}
+            />
+          ))}
         {!appLoaded || loadingSignin ? (
           <Loading
             style={{
@@ -86,4 +87,4 @@ const mapStateToProps = (state) => ({
   loadingSignin: state.async.loadingSignin,
 });
 
-export default connect(mapStateToProps)(withRouter(App));
+export default withRouter(connect(mapStateToProps)(App));
