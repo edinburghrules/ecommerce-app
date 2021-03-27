@@ -3,13 +3,55 @@
 
 .checkout-page {
   max-width: 1200px;
-  margin: 6rem auto;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 60% 40%;
   height: 100vh;
+  color: #333;
+
+  &__logo {
+    color: #333;
+    font-weight: $bold;
+    font-size: 3rem;
+    display: inline-block;
+    margin-bottom: 2rem !important;
+
+    &:hover {
+      text-decoration: none;
+      color: #333;
+    }
+  }
+
+  & h1 {
+    font-size: $medium;
+    font-weight: $bold;
+    margin-bottom: 2rem;
+  }
+
+  &__cards {
+    display: inline-block;
+    font-weight: $semiBold;
+    font-size: 1.6rem;
+    margin-bottom: 1rem !important;
+  }
+
+  &__card-icons-container {
+    display: flex;
+    width: 100%;
+
+    & img {
+      height: auto;
+      width: 3rem;
+      margin-right: 1rem;
+    }
+  }
 
   &__left-col {
-    padding: 2rem;
+    padding: 10rem 4rem 2rem 4rem;
+  }
+
+  &__form {
+    padding-top: 2rem;
   }
 
   &__divider {
@@ -24,16 +66,46 @@
       transform: translateX(-50%);
       background: #fff;
       padding: 1rem;
+      text-align: center;
     }
   }
 
   &__right-col {
-    background: #f5f5f5;
+    padding: 4rem 2rem;
+    background: #f0f0f0;
   }
 
   &__line-items {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  &__total-charges {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border: 1px solid #d8d8d8;
+    margin-top: 2rem;
+    background: #fff;
+  }
+
+  &__charge {
+    font-size: 1.6rem;
+    color: #666;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+
+    &:not(:first-child) {
+      border-top: 1px solid #d8d8d8;
+    }
+
+    & p:last-child {
+      color: #333;
+      font-weight: $semiBold;
+    }
   }
 }

@@ -137,12 +137,15 @@ class ProductMain extends React.Component {
             {this.props.displayRatingStars("light")}
             {
               <a
+              style={{cursor: totalReviews > 0 ? 'pointer' : 'default'}}
                 onClick={() => {
-                  window.scrollTo({
-                    left: 0,
-                    top: document.body.scrollHeight,
-                    behavior: "smooth",
-                  });
+                  if (totalReviews > 0) {
+                    window.scrollTo({
+                      left: 0,
+                      top: document.body.scrollHeight,
+                      behavior: "smooth",
+                    });
+                  }
                 }}
               >
                 ({totalReviews})

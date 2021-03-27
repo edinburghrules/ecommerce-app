@@ -1,0 +1,156 @@
+@import "../../sass/colors";
+@import "../../sass/fonts";
+
+.account-page {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 12rem 2rem 0 2rem;
+
+  @media (max-width: 768px) {
+    padding: 8rem 2rem 0 2rem;
+  }
+
+  & h1 {
+    font-weight: $bold;
+    color: #333;
+    font-size: 3rem;
+  }
+
+  &__btn {
+    color: #fff;
+    background: $dark-bg;
+    border: none;
+    font-size: $xsmall;
+    margin-top: 1rem;
+    padding: 5px 1rem;
+
+    &--add-address {
+      margin-top: 2rem;
+    }
+
+    &--review {
+      margin-top: 0;
+
+      @media (max-width: 970px) {
+        margin-top: 2rem;
+      }
+    }
+  }
+
+  &__section {
+    margin-top: 4rem;
+    width: 100%;
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid #d8d8d8;
+  }
+
+  &__address {
+    font-size: $xsmall;
+    line-height: 24px;
+
+    @media (max-width: 970px) {
+      line-height: 24px;
+    }
+  }
+
+  &__no-address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__order {
+    border: 1px solid #d8d8d8;
+    margin-top: 2rem;
+    padding: 2rem;
+  }
+
+  &__msg {
+    display: inline-block;
+    font-size: $xsmall;
+    font-weight: $normal;
+    margin-top: 2rem !important;
+  }
+
+  &__order-details {
+    font-size: $xsmall;
+    font-weight: $semiNormal;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0 2rem 0;
+    border-bottom: 1px solid #d8d8d8;
+
+    @media (max-width: 970px) {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      padding-bottom: 2rem;
+      gap: 1rem;
+    }
+
+    @media (max-width: 666px) {
+      grid-template-columns: 100%;
+    }
+
+    @media (max-width: 492px) {
+      grid-template-columns: 100%;
+      padding: 0 0 2rem 0;
+    }
+  }
+
+  &__order-lineitem {
+    padding-top: 2rem;
+    font-size: $xsmall;
+    display: flex;
+    color: #666;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    & p {
+      @media (max-width: 970px) {
+        padding-bottom: 1rem;
+      }
+    }
+
+    @media (max-width: 970px) {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      padding-top: 2rem;
+    }
+
+    @media (max-width: 492px) {
+      grid-template-columns: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    & img {
+      height: auto;
+      width: 20rem;
+      margin-right: 2rem;
+
+      @media (max-width: 970px) {
+        width: 80%;
+      }
+
+      @media (max-width: 492px) {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  &__order-lineitem-details {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 970px) {
+      display: inline-block;
+    }
+  }
+
+  &__reviewed {
+    color: #333;
+  }
+}

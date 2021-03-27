@@ -18,6 +18,7 @@ const SignIn = (props) => {
     isSubmitting,
     loadingSignin,
   } = props;
+
   return (
     <div className="signin">
       <div className="signin__container">
@@ -72,7 +73,6 @@ const SignIn = (props) => {
             <Link to="/reset-password">Forgot password?</Link>
           </div>
         </form>
-        <hr className="signin__divider" />
       </div>
     </div>
   );
@@ -91,7 +91,7 @@ const SignInFormik = withFormik({
   }),
   handleSubmit: async (
     values,
-    { setErrors, setSubmitting, props: { signIn, history, location } }
+    { setErrors, props: { signIn, history, location } }
   ) => {
     const signInData = {
       email: values.email,
@@ -104,8 +104,6 @@ const SignInFormik = withFormik({
     if (error) {
       setErrors(error);
     }
-
-    // setSubmitting(false);
   },
 })(SignIn);
 

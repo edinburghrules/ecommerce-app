@@ -7,6 +7,8 @@ import {
   START_LOADING_SIGN_IN,
   STOP_LOADING_SIGN_IN,
   APP_LOADED,
+  START_PAGE_TRANSITION,
+  STOP_PAGE_TRANSITION,
 } from "../types";
 
 // APP ASYNC
@@ -17,6 +19,8 @@ export const appLoaded = () => {
 };
 export const startLoadingSignin = () => ({ type: START_LOADING_SIGN_IN });
 export const stopLoadingSignin = () => ({ type: STOP_LOADING_SIGN_IN });
+export const startPageTransition = () => ({ type: START_PAGE_TRANSITION });
+export const stopPageTransition = () => ({ type: STOP_PAGE_TRANSITION });
 
 // PRODUCT ASYNC
 export const startLoadingProducts = () => ({ type: START_LOADING_PRODUCTS });
@@ -26,5 +30,7 @@ export const stopLoadingProducts = () => ({ type: STOP_LOADING_PRODUCTS });
 export const stopLoadingCart = () => ({ type: STOP_LOADING_CART });
 
 // ORDER ASYNC
-export const startSubmittingPayment = () => ({type: START_SUBMITTING_PAYMENT});
-export const stopSubmittingPayment = () => ({type: STOP_SUBMITTING_PAYMENT});
+export const startSubmittingPayment = () => ({
+  type: START_SUBMITTING_PAYMENT,
+});
+export const stopSubmittingPayment = () => ({ type: STOP_SUBMITTING_PAYMENT });

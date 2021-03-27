@@ -1,0 +1,11 @@
+.review-form-stars {
+  display: flex;
+  width: 100%;
+  margin-bottom: 2rem;
+  & img {
+    height: auto;
+    width: 2.4rem;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+}

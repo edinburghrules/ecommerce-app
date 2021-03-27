@@ -15,6 +15,30 @@ const getCart = async (req, res) => {
   }
 };
 
+const removeCart = async (req, res) => {
+  const email = req.account.email;
+  try {
+    const ids = [];
+
+    const querySnapshot = await db.collection(`accounts/${email}/cart`).get();
+
+    querySnapshot.forEach((doc) => {
+      ids.push(doc.id);
+    });
+
+    console.log(ids);
+
+    ids.forEach(async (id) => {
+      await db.collection(`accounts/${email}/cart`).doc(id).delete();
+    });
+
+    return res.status(200).json({ success: "Cart deleted" });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({ err });
+  }
+};
+
 const stockQty = async (product) => {
   const productRef = await db
     .collection(`${product.collection}`)
@@ -228,6 +252,7 @@ const getStockQty = async (req, res) => {
 
 module.exports = {
   getCart,
+  removeCart,
   addToCartFromLocalStorage,
   addToCart,
   deleteFromCart,

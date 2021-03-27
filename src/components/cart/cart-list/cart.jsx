@@ -8,12 +8,13 @@ import CartItem from "../cart-item/cart-item";
 import closeArrow from "../../../assets/close-arrow.png";
 import shopping from "../../../assets/shopping-bag.png";
 import { CSSTransition } from "react-transition-group";
+import emptyCartIllustration from "../../../assets/emptycart.png";
 
 class Cart extends Component {
   state = {
     cart: [],
     totalPrice: 0,
-    shipping: 5.99,
+    shipping: 5.0,
     freeDelivery: 45,
     toFreeDelivery: 0,
     toFreeDeliveryProgress: 0,
@@ -130,26 +131,27 @@ class Cart extends Component {
                   cart.length === 0 && (
                     <React.Fragment>
                       <h1>Your Cart is Empty</h1>
-                      <div className="cart__product-categories">
-                        <button className="cart__product-btn">Shop Mens</button>
-                        <button className="cart__product-btn">
-                          Shop Women
-                        </button>
-                        <button className="cart__product-btn">
-                          Shop Collections
-                        </button>
+                      <div className="cart__empty">
+                        <iframe
+                          src="https://giphy.com/embed/1Zbeweu52ZaQE"
+                          width="600"
+                          height="auto"
+                          frameBorder="0"
+                          className="giphy-embed"
+                          allowFullScreen
+                        ></iframe>
                       </div>
                     </React.Fragment>
                   )}
             </div>
             <div className="cart__bottom">
               <div className="cart__total-price">
-                <span>SUBTOTAL:</span>
+                <span>Subtotal:</span>
                 <span>£{totalPrice}</span>
               </div>
               <div className="cart__shipping-cost">
-                <span>SHIPPING:</span>
-                <span>£{toFreeDelivery === 0 ? "FREE" : shipping} </span>
+                <span>Shipping:</span>
+                <span>{toFreeDelivery === 0 ? "Free" : `£${shipping}`} </span>
               </div>
               <button
                 disabled={cart.length === 0}

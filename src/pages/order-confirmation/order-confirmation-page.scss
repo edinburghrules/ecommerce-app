@@ -31,6 +31,12 @@
       padding-bottom: 3rem;
       border-bottom: 1px solid #ddd;
     }
+
+    & a {
+      color: #333;
+      font-size: 3rem;
+      font-weight: $bold;
+    }
   }
 
   &__order-details {
@@ -162,6 +168,12 @@
       margin-bottom: 1rem !important;
       font-weight: $bold;
       font-size: $medium;
+    }
+
+    & a {
+      display: inline-block;
+      font-size: $small;
+      margin-top: 2rem;
     }
   }
 }

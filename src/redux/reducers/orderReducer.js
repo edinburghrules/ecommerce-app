@@ -1,7 +1,8 @@
-import { GET_ORDER } from "../types";
+import { GET_ORDER, GET_PREVIOUS_ORDERS } from "../types";
 
 const initState = {
   order: null,
+  previousOrders: null,
 };
 
 const orderReducer = (state = initState, action) => {
@@ -10,6 +11,11 @@ const orderReducer = (state = initState, action) => {
       return {
         ...state,
         order: action.payload,
+      };
+    case GET_PREVIOUS_ORDERS:
+      return {
+        ...state,
+        previousOrders: action.payload,
       };
     default:
       return {

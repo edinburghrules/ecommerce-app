@@ -11,17 +11,20 @@ const {
   signIn,
   resetPassword,
   getAuthenticatedAccount,
+  addAddress,
 } = require("./handlers/accounts");
 
 app.post("/register", register);
 app.post("/signin", signIn);
 app.post("/reset-password", resetPassword);
 app.get("/account", firebaseAuth, getAuthenticatedAccount);
+app.post("/add-address", firebaseAuth, addAddress);
 
 // Cart routes
 const {
   addToCartFromLocalStorage,
   addToCart,
+  removeCart,
   getCart,
   deleteFromCart,
   increaseQty,
@@ -30,6 +33,7 @@ const {
 } = require("./handlers/cart");
 
 app.post("/add-to-cart", firebaseAuth, addToCart);
+app.post("/remove-cart", firebaseAuth, removeCart);
 app.post(
   "/add-to-cart-from-local-storage",
   firebaseAuth,
@@ -70,14 +74,16 @@ app.get("/filtered-products", getProductsByFilter);
 app.post("/get-product", getProduct);
 
 // Reviews routes
-const { getProductReviews } = require("./handlers/reviews");
+const { getProductReviews, addProductReview } = require("./handlers/reviews");
 
 app.post("/get-reviews", getProductReviews);
+app.post("/add-review", addProductReview);
 
 // Orders routes
-const { submitOrder, getOrder } = require("./handlers/orders");
+const { submitOrder, getOrder, getAllOrders } = require("./handlers/orders");
 
 app.post("/submit-order", submitOrder);
 app.post("/get-order", getOrder);
+app.get("/get-all-orders", firebaseAuth, getAllOrders);
 
 exports.api = functions.https.onRequest(app);

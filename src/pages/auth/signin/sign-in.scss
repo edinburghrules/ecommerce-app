@@ -3,9 +3,22 @@
 @import "../../../sass/utils";
 
 .signin {
+  padding: 8rem 0 0 0;
+  max-width: 120rem;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
+  @media (max-width: 768px) {
+    padding: 8rem 2rem 0 2rem;
+  }
+
+  & span,
+  a {
+    font-size: $xsmall;
+    margin-right: 1rem;
+  }
 
   &__container {
     margin-top: 4rem;
@@ -69,7 +82,7 @@
     font-size: $xsmall;
     width: 100%;
     height: 4rem;
-    border: 2px solid #eee;
+    border: 1px solid #eee;
   }
 
   &__feedback {
@@ -98,13 +111,5 @@
   }
   &__forgot-password {
     margin-top: 1rem;
-  }
-
-  &__divider {
-    height: 2px;
-    width: 100%;
-    border: none;
-    background: #ddd;
-    margin: 4rem 0;
   }
 }

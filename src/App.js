@@ -17,6 +17,9 @@ import NavigationBar from "./components/navigation-bar/navigation-bar";
 import Home from "./pages/home/home-page";
 import Signin from "./pages/auth/signin/sign-in";
 import Register from "./pages/auth/register/register";
+import AccountPage from "./pages/account/account-page";
+import ReviewForm from "./pages/review-form/review-form";
+import AddressForm from "./pages/address-form/address-form";
 import ResetPassword from "./pages/auth/reset-password/reset-password";
 import ProductListPage from "./pages/products/product-list/product-list-page";
 import ProductPage from "./pages/products/product/product-page";
@@ -25,15 +28,20 @@ import CheckoutPage from "./pages/checkout/checkout-page";
 import OrderConfirmationPage from "./pages/order-confirmation/order-confirmation-page";
 import Loading from "./components/loading/loading";
 
-const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
+// 404 Gif
+// <iframe src="https://giphy.com/embed/RjoLWhQBFEcHS" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/RjoLWhQBFEcHS">via GIPHY</a></p>
+
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY, {
+  locale: "en-",
+});
 
 const App = (props) => {
-  const { location, appLoaded, loadingSignin } = props;
+  const { location, appLoaded } = props;
   return (
     <Elements stripe={stripePromise}>
       <div className="App">
         {location.pathname !== "/checkout" &&
-          (!location.pathname.includes("/order-confirmation/") && (
+          !location.pathname.includes("/order-confirmation/") && (
             <NavigationBar
               mensApparelLinks={mensApparelLinks}
               mensShoeLinks={mensShoeLinks}
@@ -42,8 +50,8 @@ const App = (props) => {
               womensShoeLinks={womensShoeLinks}
               womensCollectionLinks={womensCollectionLinks}
             />
-          ))}
-        {!appLoaded || loadingSignin ? (
+          )}
+        {!appLoaded ? (
           <Loading
             style={{
               height: "100%",
@@ -60,6 +68,15 @@ const App = (props) => {
             <PrivateRoute path="/signIn" component={Signin} />
             <PrivateRoute path="/register" component={Register} />
             <PrivateRoute path="/reset-password" component={ResetPassword} />
+            <Route exact path="/account/:accountId" component={AccountPage} />
+            <Route
+              path="/account/:accountId/manage-address"
+              component={AddressForm}
+            />
+            <Route
+              path="/leave-review/:collection/:category/:orderId/:productId"
+              component={ReviewForm}
+            />
             <Route
               exact
               path="/collection/:collection/:category?"
@@ -84,7 +101,6 @@ const App = (props) => {
 
 const mapStateToProps = (state) => ({
   appLoaded: state.async.appLoaded,
-  loadingSignin: state.async.loadingSignin,
 });
 
 export default withRouter(connect(mapStateToProps)(App));

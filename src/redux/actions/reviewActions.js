@@ -21,3 +21,17 @@ export const getProductReviews = (productId) => {
     }
   };
 };
+
+export const addProductReview = (review, history) => {
+  const reviewData = {
+    review,
+  };
+  return async (dispatch) => {
+    try {
+      await axios.post("/add-review", reviewData);
+      history.push(`/account/${review.email}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

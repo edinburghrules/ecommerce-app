@@ -18,6 +18,8 @@ async function load() {
     const decodedToken = jwtDecode(token);
     if (decodedToken.exp * 1000 < Date.now()) {
       store.dispatch(signOut());
+      await store.dispatch(appLoaded());
+      render();
     } else {
       axios.defaults.headers.common["Authorization"] = token;
       await store.dispatch(getAccountData());

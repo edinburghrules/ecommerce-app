@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./checkout-page.scss";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { ElementsConsumer } from "@stripe/react-stripe-js";
-import ExpressCheckout from "../../components/express-checkout/express-checkout";
 import CheckoutForm from "../../components/checkout-form/checkout-form";
 import CheckoutLineItem from "../../components/checkout-line-item/checkout-line-item";
+import amexIcon from "../../assets/001-amex.svg";
+import mastercardIcon from "../../assets/002-mastercard.svg";
+import americanexpressIcon from "../../assets/003-american-express.svg";
+import visaIcon from "../../assets/004-visa.svg";
 
 const CheckoutPage = (props) => {
   const { cartList, authenticated, credentials, history } = props;
@@ -18,6 +21,8 @@ const CheckoutPage = (props) => {
     }
     return total;
   }, 0);
+
+  const shipping = totalPrice > 45 ? 0.0 : 5.0;
 
   if (!props.location.state) {
     return <Redirect to="/" />;
@@ -33,17 +38,19 @@ const CheckoutPage = (props) => {
           >
             apparel.
           </Link>
-          <h1>CHECKOUT</h1>
-          <ExpressCheckout />
-          <div className="checkout-page__divider">
-            <hr />
-            <span>OR CONTINUE BELOW TO PAY BY CARD</span>
+          <h1>Checkout</h1>
+          <p className='checkout-page__cards'>Credit or Debit Card</p>
+          <div className="checkout-page__card-icons-container">
+            <img src={amexIcon} />
+            <img src={americanexpressIcon} />
+            <img src={visaIcon} />
+            <img src={mastercardIcon} />
           </div>
-          <div className="checkout-page__email-form"></div>
-          <div className="checkout-page__delivery-address-form">
+          <div className="checkout-page__form">
             <ElementsConsumer>
               {({ stripe, elements }) => (
                 <CheckoutForm
+                  shipping={shipping}
                   authenticated={authenticated}
                   stripe={stripe}
                   elements={elements}
@@ -64,7 +71,18 @@ const CheckoutPage = (props) => {
               ))}
           </div>
           <div className="checkout-page__total-charges">
-            <h1>£{totalPrice}</h1>
+            <div className="checkout-page__charge">
+              <p>Subtotal: </p>
+              <p>£{totalPrice}</p>
+            </div>
+            <div className="checkout-page__charge">
+              <p>Shipping: </p>
+              <p>{shipping === 0.0 ? "Free" : `£${shipping}`}</p>
+            </div>
+            <div className="checkout-page__charge">
+              <p>Total: </p>
+              <p>£{totalPrice + shipping}</p>
+            </div>
           </div>
         </div>
       </div>

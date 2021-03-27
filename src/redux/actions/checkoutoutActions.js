@@ -13,11 +13,13 @@ export const submitOrder = (orderDetails, authenticated) => {
       dispatch(stopSubmittingPayment());
       if (authenticated) {
         // clear cart in firestore
+        console.log("clearing cart in fs");
+        await axios.post("remove-cart");
       } else {
         // clear cart in localStorage
         localStorage.removeItem("cart");
-        dispatch(getCart(authenticated));
       }
+      dispatch(getCart(authenticated));
       return orderId;
     } catch (err) {
       console.log(err);

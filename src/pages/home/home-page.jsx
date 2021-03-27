@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import "./home.scss";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import Loading from "../../components/loading/loading";
 import MainMenu from "../../components/main-menu/main-menu";
 import homeHero from "../../assets/rain-collection-hero.webp";
-import { Link } from "react-router-dom";
 
 const Home = (props) => {
   useEffect(() => {
@@ -16,6 +18,20 @@ const Home = (props) => {
     };
   });
 
+  if (props.loading) {
+    return (
+      <Loading
+        style={{
+          height: "100%",
+          width: "100%",
+          transform: "translateY(50rem)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      />
+    );
+  }
   return (
     <div className="homepage">
       <div className="homepage__hero-container">
@@ -48,4 +64,8 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  loading: state.async.loadingSignin,
+});
+
+export default connect(mapStateToProps)(Home);

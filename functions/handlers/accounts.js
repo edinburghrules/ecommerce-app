@@ -88,12 +88,10 @@ const signIn = async (req, res) => {
 };
 
 const getAuthenticatedAccount = async (req, res) => {
+  let email = req.account.email;
   try {
     let accountData = {};
-    const accountDataFromDb = await db
-      .collection("accounts")
-      .doc(req.account.email)
-      .get();
+    const accountDataFromDb = await db.collection("accounts").doc(email).get();
     if (accountDataFromDb.exists) {
       accountData.credentials = accountDataFromDb.data();
       return res.json(accountData);
@@ -105,7 +103,7 @@ const getAuthenticatedAccount = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  let email = req.body.email;
+  let email = req.account.email;
   const { valid, errors } = validateResetEmail(email);
 
   if (!valid) return res.status(400).json(errors);
@@ -125,9 +123,24 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const addAddress = async (req, res) => {
+  let email = req.account.email;
+  let address = req.body.address;
+  try {
+    await db.collection("accounts").doc(email).update({
+      address,
+    });
+    return res.status(200).json({ success: "Address updated" });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json(err);
+  }
+};
+
 module.exports = {
   register,
   signIn,
   resetPassword,
   getAuthenticatedAccount,
+  addAddress,
 };

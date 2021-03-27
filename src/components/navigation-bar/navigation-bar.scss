@@ -121,16 +121,16 @@
   padding: 2rem 2rem 1rem 2rem;
   visibility: hidden;
 
-  &__menu-welcome {
+  &-welcome {
     font-weight: $normal;
-    font-size: $xsmall;
-    margin-bottom: 1rem !important;
+    font-size: 1.4rem;
   }
 
   & a {
-    margin-bottom: 2rem;
+    font-size: $xsmall;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
   }
-
   & button {
     all: unset;
     display: block;

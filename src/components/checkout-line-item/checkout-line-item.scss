@@ -3,10 +3,13 @@
 
 .checkout-line-item {
   display: flex;
+  width: 100%;
   padding: 2rem;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #ddd;
   font-size: $xxsmall;
   color: #555;
+  background: #fff;
+  margin-bottom: 5px;
 
   & h4 {
     font-weight: $normal;

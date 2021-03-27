@@ -2,6 +2,8 @@ import React from "react";
 import "./review-card.scss";
 import starOutline from "../../assets/star0dark.svg";
 import starFilled from "../../assets/star1dark.svg";
+import { format } from "date-fns";
+import renderHTML from "react-render-html";
 
 const ReviewCard = ({ review }) => {
   const displayRatingStars = () => {
@@ -33,8 +35,8 @@ const ReviewCard = ({ review }) => {
   return (
     <div className="review-card">
       <div className="review-card__name">
+        <span>{format(new Date(review.date), "d/M/y")}</span>
         <span>{review.name}</span>
-        <span>{review.date}</span>
       </div>
       <div className="review-card__stars">
         {displayRatingStars().map((star, index) => {
@@ -43,7 +45,7 @@ const ReviewCard = ({ review }) => {
       </div>
       <div className="review-card__review">
         <h4>{review.title}</h4>
-        <p>{review.content}</p>
+        <p>{renderHTML(review.content)}</p>
       </div>
     </div>
   );

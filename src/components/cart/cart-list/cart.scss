@@ -44,10 +44,10 @@
   height: 100%;
   padding-bottom: 14rem;
   z-index: 1000;
-  width: 35%;
+  width: 30%;
 
-  @media (max-width: 1024px) {
-    width: 50%;
+  @media (max-width: 1200px) {
+    width: 30%;
   }
 
   @media (max-width: 768px) {
@@ -147,25 +147,11 @@
     }
   }
 
-  &__product-categories {
+  &__empty {
     font-family: $Montserrat;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 20rem;
-    width: 80%;
-    margin: 2rem auto;
-    text-transform: uppercase;
-  }
-
-  &__product-btn {
-    all: unset;
-    padding: 1rem;
-    font-size: $small;
-    font-weight: $semiBold;
-    border: 2px solid #ddd;
-    text-align: center;
-    cursor: pointer;
+    justify-content: center;
+    margin-top: 4rem;
   }
 
   &__bottom {
@@ -182,7 +168,7 @@
   &__total-price {
     display: flex;
     justify-content: space-between;
-    font-size: $xsmall;
+    font-size: $small;
     margin-bottom: 2rem;
     font-weight: $semiBold;
   }
@@ -190,7 +176,7 @@
   &__shipping-cost {
     display: flex;
     justify-content: space-between;
-    font-size: $xsmall;
+    font-size: $small;
     font-weight: $semiBold;
   }
 

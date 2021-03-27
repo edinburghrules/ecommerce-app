@@ -8,10 +8,40 @@ import { CardElement } from "@stripe/react-stripe-js";
 import { Link } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import { submitOrder } from "../../redux/actions/checkoutoutActions";
+import warningIcon from "../../assets/warning.svg";
+
+const cardElementOptions = {
+  style: {
+    base: {
+      fontSize: "16px",
+      fontWeight: "300",
+      color: "#888",
+      "::placeholder": {
+        color: "#8e8e8e",
+        fontWeight: "300",
+      },
+    },
+    invalid: {
+      color: "#e74c3c",
+      iconColor: "#e74c3c",
+    },
+  },
+  hidePostalCode: true,
+};
 
 class CheckoutForm extends React.Component {
+  state = {
+    cardComplete: false,
+  };
+
+  componentDidMount = () => {};
+
   render() {
+    const { cardComplete } = this.state;
+
     const {
+      dirty,
+      isValid,
       handleBlur,
       handleChange,
       handleSubmit,
@@ -23,6 +53,14 @@ class CheckoutForm extends React.Component {
       submittingPayment,
     } = this.props;
 
+    this.handleCardChange = (e) => {
+      if (e.complete) {
+        this.setState({
+          cardComplete: true,
+        });
+      }
+    };
+
     return (
       <div className="checkout-form">
         <div className="checkout-form__container">
@@ -31,174 +69,195 @@ class CheckoutForm extends React.Component {
             className="checkout-form__form"
             onSubmit={handleSubmit}
           >
-            <div className="checkout-form__title">
-              <h3>Contact Information</h3>
-            </div>
-            {!authenticated && (
-              <React.Fragment>
-                <span>Already have an account?</span>
-                <Link
-                  to={{
-                    pathname: "/signin",
-                    state: { fromCheckout: true },
-                  }}
-                >
-                  Sign in
-                </Link>
-              </React.Fragment>
-            )}
-            <div className="checkout-form__inputs">
-              <div className="checkout-form__input-container">
-                <label className="checkout-form__label" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  className="checkout-form__input"
-                  id="email"
-                  type="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  name="email"
-                />
-                {errors.email && touched.email && (
-                  <div className="checkout-form__feedback">{errors.email}</div>
-                )}
-              </div>
-            </div>
-            <div className="checkout-form__title">
-              <h3>Delivery address</h3>
-            </div>
-            <div className="checkout-form__inputs">
-              <div className="checkout-form__input-container">
-                <label className="checkout-form__label" htmlFor="name">
-                  Name
-                </label>
-                <input
-                  className="checkout-form__input"
-                  id="name"
-                  type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.name}
-                  name="name"
-                />
-                {errors.name && touched.name && (
-                  <div className="checkout-form__feedback">{errors.name}</div>
-                )}
-              </div>
-              <div className="checkout-form__input-container">
-                <label className="checkout-form__label" htmlFor="street">
-                  street
-                </label>
-                <input
-                  className="checkout-form__input"
-                  id="street"
-                  type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.address}
-                  name="street"
-                />
-                {errors.street && touched.street && (
-                  <div className="checkout-form__feedback">{errors.street}</div>
-                )}
-              </div>
-              <div className="checkout-form__input-container">
-                <label className="checkout-form__label" htmlFor="city">
-                  City
-                </label>
-                <input
-                  className="checkout-form__input"
-                  id="city"
-                  type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.city}
-                  name="city"
-                />
-                {touched.city && (
-                  <div className="checkout-form__feedback">
-                    <p>{errors.city}</p>
+            <div className="checkout-form__section">
+              <div className="checkout-form__contact-container">
+                <div className="checkout-form__title">
+                  <h3>Contact Information</h3>
+                </div>
+                {!authenticated && (
+                  <div>
+                    <span>Already have an account?</span>
+                    <Link
+                      to={{
+                        pathname: "/signin",
+                        state: { fromCheckout: true },
+                      }}
+                    >
+                      Sign in
+                    </Link>
                   </div>
                 )}
               </div>
-              <div className="checkout-form__input-container">
-                <label className="checkout-form__label" htmlFor="country">
-                  Country
-                </label>
-                <input
-                  disabled={true}
-                  className="checkout-form__input"
-                  id="country"
-                  type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.country}
-                  name="country"
-                />
-                {errors.country && touched.country && (
-                  <div className="checkout-form__feedback">
-                    {errors.country}
+
+              <div className="checkout-form__email-address">
+                <div className="checkout-form__inputs">
+                  <div className="checkout-form__input-container">
+                    <input
+                      placeholder="Email"
+                      className="checkout-form__input"
+                      id="email"
+                      type="email"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                      name="email"
+                    />
+                    {errors.email && touched.email && (
+                      <div className="checkout-form__feedback">
+                        <img src={warningIcon} alt="warning" />
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
-              <div className="checkout-form__input-container">
-                <label className="checkout-form__label" htmlFor="postcode">
-                  Postcode
-                </label>
-                <input
-                  className="checkout-form__input"
-                  id="postcode"
-                  type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.postcode}
-                  name="postcode"
-                />
-                {errors.postcode && touched.postcode && (
-                  <div className="checkout-form__feedback">
-                    {errors.postcode}
+            </div>
+            <div className="checkout-form__section">
+              <div className="checkout-form__title">
+                <h3>Delivery address</h3>
+              </div>
+              <div className="checkout-form__delivery-address">
+                <div className="checkout-form__inputs">
+                  <div className="checkout-form__input-container">
+                    <input
+                      placeholder="Name"
+                      className="checkout-form__input"
+                      id="name"
+                      type="text"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.name}
+                      name="name"
+                    />
+                    {errors.name && touched.name && (
+                      <div className="checkout-form__feedback">
+                        <img src={warningIcon} alt="warning" />
+                      </div>
+                    )}
                   </div>
-                )}
+                  <div className="checkout-form__input-container">
+                    <input
+                      placeholder="Address"
+                      className="checkout-form__input"
+                      id="address"
+                      type="text"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.address}
+                      name="address"
+                    />
+                    {errors.address && touched.address && (
+                      <div className="checkout-form__feedback">
+                        <img src={warningIcon} alt="warning" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="checkout-form__input-container">
+                    <input
+                      placeholder="Town or City"
+                      className="checkout-form__input"
+                      id="city"
+                      type="text"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.city}
+                      name="city"
+                    />
+                    {touched.city && errors.city && (
+                      <div className="checkout-form__feedback">
+                        <img src={warningIcon} alt="warning" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="checkout-form__input-container">
+                    <input
+                      disabled={true}
+                      className="checkout-form__input"
+                      id="country"
+                      type="text"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.country}
+                      name="country"
+                    />
+                    {errors.country && touched.country && (
+                      <div className="checkout-form__feedback">
+                        <img src={warningIcon} alt="warning" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="checkout-form__input-container">
+                    <input
+                      placeholder="Postcode"
+                      className="checkout-form__input"
+                      id="postcode"
+                      type="text"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.postcode}
+                      name="postcode"
+                    />
+                    {errors.postcode && touched.postcode && (
+                      <div className="checkout-form__feedback">
+                        <img src={warningIcon} alt="warning" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="checkout-form__input-container">
+                    <input
+                      placeholder="Phone (optional)"
+                      className="checkout-form__input"
+                      id="phone"
+                      type="text"
+                      onChange={handleChange}
+                      value={values.phone}
+                      name="phone"
+                    />
+                    {errors.phone && touched.phone && (
+                      <div className="checkout-form__feedback">
+                        <img src={warningIcon} alt="warning" />
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="checkout-form__input-container">
-                <label className="checkout-form__label" htmlFor="phone">
-                  Phone (optional)
-                </label>
-                <input
-                  className="checkout-form__input"
-                  id="phone"
-                  type="text"
-                  onChange={handleChange}
-                  value={values.phone}
-                  name="phone"
-                />
-                {errors.phone && touched.phone && (
-                  <div className="checkout-form__feedback">{errors.phone}</div>
-                )}
-              </div>
-              {/* ////CARD///// */}
-              <div className="checkout-form__input-container">
-                <label className="checkout-form__label" htmlFor="card">
-                  Credit or debit card
-                </label>
-                <CardElement name="card" />
+            </div>
+
+            {/* ////CARD///// */}
+            <div className="checkout-form__section">
+              <div className="checkout-form__card-container">
+                <div className="checkout-form__title">
+                  <h3>Payment</h3>
+                </div>
+                <div className="checkout-form__input-container checkout-form__input-container--card">
+                  <CardElement
+                    onChange={(e) => this.handleCardChange(e)}
+                    options={cardElementOptions}
+                  />
+                </div>
               </div>
             </div>
             <button
-              disabled={isSubmitting || submittingPayment}
+              disabled={
+                authenticated
+                  ? (dirty && !isValid) ||
+                    isSubmitting ||
+                    submittingPayment ||
+                    !cardComplete
+                  : !(dirty && isValid) ||
+                    isSubmitting ||
+                    submittingPayment ||
+                    !cardComplete
+              }
               className="checkout-form__submit-btn"
               type="submit"
             >
               {isSubmitting ? (
-                <Spinner animation="border" variant="light" />
+                <Spinner animation="border" variant="primary" />
               ) : (
-                "PAY"
+                "PAY NOW"
               )}
             </button>
           </form>
-          <hr className="checkout-form__divider" />
         </div>
       </div>
     );
@@ -207,26 +266,44 @@ class CheckoutForm extends React.Component {
 
 const CheckoutFormFormik = withFormik({
   mapPropsToValues: (props) => {
-    return {
-      email: (props.credentials && props.credentials.email) || "",
-      name: (props.credentials && props.credentials.firstName) || "",
-      street: (props.credentials && props.credentials.address.street) || "",
-      city: (props.credentials && props.credentials.address.city) || "",
-      country: "GB",
-      postcode:
-        (props.credentials && props.credentials.address.postal_code) || "",
-      phone: (props.credentials && props.credentials.address.phone) || "",
-      card: "",
-    };
+    if (props.credentials) {
+      return {
+        email: (props.credentials && props.credentials.email) || "",
+        name:
+          (props.credentials &&
+            props.credentials.firstName + " " + props.credentials.lastName) ||
+          "",
+        address: (props.credentials && props.credentials.address.line1) || "",
+        city: (props.credentials && props.credentials.address.city) || "",
+        country: "GB",
+        postcode:
+          (props.credentials && props.credentials.address.postcode) || "",
+        phone: (props.credentials && props.credentials.address.phone) || "",
+        card: "",
+      };
+    } else {
+      return {
+        email: "",
+        name: "",
+        address: "",
+        city: "",
+        country: "GB",
+        postcode: "",
+        phone: "",
+        card: "",
+      };
+    }
   },
   validationSchema: Yup.object().shape({
-    email: Yup.string().email().required(),
-    name: Yup.string().required("Required"),
-    street: Yup.string().required("Required"),
-    city: Yup.string().required("Required"),
-    country: Yup.string().required("Required"),
-    postcode: Yup.string().required("Required"),
-    phone: Yup.number(),
+    email: Yup.string().email().required("Please provide your email address"),
+    name: Yup.string().required("Please provide your name"),
+    address: Yup.string().required("Please provide your address"),
+    city: Yup.string().required("Please provide your town or city"),
+    postcode: Yup.string().required("Please provide your postcode"),
+    phone: Yup.string().matches(
+      new RegExp("[0-9]{7}"),
+      "Please provide a valid phone number"
+    ),
   }),
   handleSubmit: async (
     values,
@@ -235,6 +312,7 @@ const CheckoutFormFormik = withFormik({
       props: {
         elements,
         stripe,
+        shipping,
         totalPrice,
         submitOrder,
         credentials,
@@ -244,7 +322,8 @@ const CheckoutFormFormik = withFormik({
       },
     }
   ) => {
-    const amount = totalPrice * 100;
+    const amount = (totalPrice + shipping) * 100;
+
     const {
       data: { clientSecret },
     } = await axios.post("/payment-intents", {
@@ -257,11 +336,12 @@ const CheckoutFormFormik = withFormik({
       address: {
         city: values.city,
         country: values.country,
-        line1: values.street,
+        line1: values.address,
         postal_code: values.postcode,
       },
       email: values.email,
       name: values.name,
+      ...(values.phone.length > 0 && { phone: values.phone }),
     };
 
     const { paymentMethod, error } = await stripe.createPaymentMethod({
@@ -276,30 +356,37 @@ const CheckoutFormFormik = withFormik({
       });
 
       if (!error) {
-        const orderId = await submitOrder(
-          {
-            created: Date.now(),
-            name: authenticated
-              ? credentials.firstName + " " + credentials.lastName
-              : values.name,
-            email: authenticated ? credentials.email : values.email,
-            shippingAddress: authenticated
-              ? credentials.address
-              : billing_details.address,
-            lineItems,
-            totalPrice,
-            cardUsed: {
-              brand: paymentMethod.card.brand,
-              last4: paymentMethod.card.last4,
+        try {
+          const orderId = await submitOrder(
+            {
+              created: Date.now(),
+              name: authenticated
+                ? credentials.firstName + " " + credentials.lastName
+                : values.name,
+              email: authenticated ? credentials.email : values.email,
+              shippingAddress: authenticated
+                ? credentials.address
+                : billing_details.address,
+              lineItems,
+              totalPrice,
+              amount: amount / 100,
+              shipping,
+              cardUsed: {
+                brand: paymentMethod.card.brand,
+                last4: paymentMethod.card.last4,
+              },
             },
-          },
-          authenticated
-        );
+            authenticated
+          );
+  
+          history.push({
+            pathname: `/order-confirmation/${orderId.data}`,
+            state: { fromCheckout: true },
+          });
+        } catch (err) {
+          console.log(err);
+        }
 
-        history.push({
-          pathname: `/order-confirmation/${orderId.data}`,
-          state: { fromCheckout: true },
-        });
       } else {
         console.log(error);
       }

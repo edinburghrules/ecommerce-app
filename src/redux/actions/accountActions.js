@@ -51,7 +51,7 @@ export const getAccountData = () => {
   };
 };
 
-export const signIn = (signInData, history, location = null) => {
+export const signIn = (signInData, history, location) => {
   return async (dispatch) => {
     try {
       dispatch(startLoadingSignin());
@@ -59,7 +59,10 @@ export const signIn = (signInData, history, location = null) => {
       setAuthorizationHeader(signInResponse.data);
       await dispatch(getAccountData());
       if (location.state && location.state.fromCheckout) {
-        history.push("/checkout");
+        history.push({
+          pathname: "/checkout",
+          state: { fromCart: true },
+        });
         dispatch(stopLoadingSignin());
       } else {
         history.push("/");
@@ -67,6 +70,7 @@ export const signIn = (signInData, history, location = null) => {
       }
     } catch (err) {
       console.log(err);
+      dispatch(stopLoadingSignin());
       return err.response.data;
     }
   };
@@ -88,6 +92,22 @@ export const signOut = (history) => {
     } catch (err) {
       console.log(err);
       return err.response.data;
+    }
+  };
+};
+
+export const addAddress = (address, email, history) => {
+  const addressData = {
+    address,
+  };
+  return async (dispatch) => {
+    try {
+      console.log(address);
+      await axios.post("/add-address", addressData);
+      await dispatch(getAccountData());
+      history.push(`/account/${email}`);
+    } catch (err) {
+      console.log(err);
     }
   };
 };

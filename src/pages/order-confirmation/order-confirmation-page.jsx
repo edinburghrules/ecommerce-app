@@ -2,6 +2,7 @@ import React from "react";
 import "./order-confirmation-page.scss";
 import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Loading from "../../components/loading/loading";
 import { getOrder } from "../../redux/actions/orderActions";
 import { capitaliseFirstLetter } from "../../utils/text-formatting/text-formatting";
 import visa from "../../assets/visa.svg";
@@ -10,13 +11,11 @@ class OrderConfirmationPage extends React.Component {
   componentDidMount = () => {
     let order = localStorage.getItem(this.props.match.params.orderId);
     if (order) {
-      console.log(order);
       this.props.history.push({
         pathname: "/",
         state: { fromOrderConfirmation: true },
       });
     } else {
-      console.log(order);
       // call action to do get order request
       this.props.getOrder(this.props.match.params.orderId);
       localStorage.setItem(
@@ -34,7 +33,18 @@ class OrderConfirmationPage extends React.Component {
     }
 
     if (!order) {
-      return <h1>Loading....</h1>;
+      return (
+        <Loading
+          style={{
+            height: "100%",
+            width: "100%",
+            transform: "translateY(50rem)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        />
+      );
     }
 
     return (
@@ -50,7 +60,7 @@ class OrderConfirmationPage extends React.Component {
               apparel
             </Link>
             <h1>Your Order Confirmed!</h1>
-            <h2>Hello {"Sean"},</h2>
+            <h2>Hello {order.name},</h2>
             <p>
               Your order has been confirmed and will be shipping within two
               days.
@@ -113,19 +123,28 @@ class OrderConfirmationPage extends React.Component {
           <div className="order-confirmation-page__cost-details">
             <div className="order-confirmation-page__costs">
               <div className="order-confirmation-page__subtotal">
-                <p>Subtotal</p> <p>£ 100</p>
+                <p>Subtotal</p> <p>£ {order.totalPrice}</p>
               </div>
               <div className="order-confirmation-page__shipping">
-                <p>Shipping</p> <p>FREE</p>
+                <p>Shipping</p>{" "}
+                <p>{order.shipping === 0 ? "Free" : `£${order.shipping}`}</p>
               </div>
               <div className="order-confirmation-page__total">
-                <p>Total</p> <p>£ {order.totalPrice}</p>
+                <p>Total</p> <p>£ {order.amount}</p>
               </div>
             </div>
           </div>
           <div className="order-confirmation-page__confirmation-message">
             <p>Thank you for shopping with us!</p>
             <p>Apparel Team</p>
+            <Link
+              to={{
+                pathname: "/",
+                state: { fromOrderConfirmation: true },
+              }}
+            >
+              Back to home {">"}
+            </Link>
           </div>
         </div>
       </div>

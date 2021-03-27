@@ -40,15 +40,12 @@ class NavigationBar extends React.Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (this.props.location.state && this.props.location.state.fromCheckout) {
-      return;
-    } else {
-      if (!prevState.cartOpen && this.props.cartOpen) {
-        this.setState({
-          cartOpen: true,
-        });
-      }
+    if (!prevState.cartOpen && this.props.cartOpen) {
+      this.setState({
+        cartOpen: true,
+      });
     }
+
     if (prevProps.cartList !== this.props.cartList) {
       if (this.props.cartList.length > 0) {
         let cartTotalQty = this.props.cartList.reduce((total, currentItem) => {
@@ -245,7 +242,7 @@ class NavigationBar extends React.Component {
                     <p className="account__menu-welcome">
                       Welcome {account.firstName}!
                     </p>
-                    <Link to="/account">My Account</Link>
+                    <Link to={`/account/${account.email}`}>My Account</Link>
                     <button onClick={() => signOut(history)}>SIGN OUT</button>
                   </React.Fragment>
                 ) : (
