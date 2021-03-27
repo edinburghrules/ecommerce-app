@@ -17,7 +17,7 @@ export const getFavouritesFromLocalStorage = (
   /* Loop over the parsed favourites from ls 
   and find the favourite which has the same matching id and color 
   as passed in */
-  if (parsedFavourites !== null) {
+  if (parsedFavourites && parsedFavourites.length > 0) {
     const item = parsedFavourites.find((favourite) => {
       return (
         favourite.id === productId && favourite.color === productVariantColor
@@ -35,7 +35,7 @@ export const addFavouriteToLocalStorage = (favourites, favouritedProduct) => {
 
   let saveFavouritesToLocalStorage = [];
 
-  if (parsedFavourites !== null) {
+  if (parsedFavourites && parsedFavourites.length > 0) {
     saveFavouritesToLocalStorage = [...parsedFavourites, favouritedProduct];
     localStorage.setItem(
       favourites,
@@ -58,7 +58,9 @@ export const removeFavouriteFromLocalStorage = (
 ) => {
   const parsedFavourites = parseFavouritesFromLocalStorage(favourites);
 
-  if (parsedFavourites !== null) {
+  console.log(parsedFavourites);
+
+  if (parsedFavourites && parsedFavourites.length > 0) {
     const filteredFavourites = parsedFavourites.filter((favourite) => {
       if (productId === favourite.id) {
         return productVariantColor !== favourite.color;

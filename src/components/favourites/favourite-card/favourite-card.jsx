@@ -1,6 +1,7 @@
 import React from "react";
 import "./favourite-card.scss";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   parseFavouritesFromLocalStorage,
   removeFavouriteFromLocalStorage,
@@ -54,12 +55,30 @@ class FavouriteCard extends React.Component {
 
   render() {
     const { selectedSize } = this.state;
-    const { img, color, name, price, sizes } = this.props.favourite;
+    const {
+      img,
+      color,
+      name,
+      price,
+      sizes,
+      category,
+      collection,
+      id,
+      variantIndex,
+    } = this.props.favourite;
+    console.log(this.props);
 
     return (
       <React.Fragment>
         <div className="favourite-card">
-          <img src={img && img} alt="product" />
+          <Link
+            to={{
+              pathname: `/collection/${collection}/${category}/product/${id}`,
+              state: { variantIndex },
+            }}
+          >
+            <img src={img && img} alt="product" />
+          </Link>
           <h3>{name && name}</h3>
           <p>£{price && price}</p>
           <p>{color && color}</p>
@@ -78,10 +97,21 @@ class FavouriteCard extends React.Component {
                 } else return null;
               })}
           </select>
-          <button onClick={this.addToCart} disabled={!selectedSize}>
-            ADD
-          </button>
-          <button onClick={this.removeFromFavourites}>DELETE</button>
+          <div className="favourite-card__btns">
+            <button
+              className="favourite-card__btn"
+              onClick={this.addToCart}
+              disabled={!selectedSize}
+            >
+              ADD
+            </button>
+            <button
+              className="favourite-card__btn"
+              onClick={this.removeFromFavourites}
+            >
+              DELETE
+            </button>
+          </div>
         </div>
       </React.Fragment>
     );

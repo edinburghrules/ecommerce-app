@@ -12,7 +12,6 @@ class ProductListItem extends React.Component {
     colors: false,
     colorIndex: 0,
   };
-
   componentDidMount = () => {
     this.setState(
       {
@@ -115,7 +114,7 @@ class ProductListItem extends React.Component {
           </Link>
           <div className="product-list-item__content-header">
             <Link
-              to={`/${collection}/product/${id}`}
+              to={`/collection/${collection}/${category}/product/${id}`}
               className="product-list-item__title"
             >
               {name}
@@ -132,7 +131,14 @@ class ProductListItem extends React.Component {
                   return (
                     <div key={index}>
                       <Favourite
-                        product={{ id, name, price, category, collection }}
+                        product={{
+                          id,
+                          name,
+                          price,
+                          category,
+                          collection,
+                          variantIndex,
+                        }}
                         variant={variant}
                         isSelected={colorIndex === index}
                       />
@@ -152,7 +158,14 @@ class ProductListItem extends React.Component {
                   return (
                     <div key={index}>
                       <Favourite
-                        product={{ id, name, price, category, collection }}
+                        product={{
+                          id,
+                          name,
+                          price,
+                          category,
+                          collection,
+                          variantIndex,
+                        }}
                         variant={variant}
                         isSelected={variantIndex === index}
                       />

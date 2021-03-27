@@ -1,0 +1,14 @@
+.favourites-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(10rem, 1fr));
+  column-gap: 1rem;
+  row-gap: 6rem;
+
+  @media (max-width: 968px) {
+    grid-template-columns: repeat(2, minmax(10rem, 1fr));
+  }
+
+  @media (max-width: 636px) {
+    grid-template-columns: repeat(1, minmax(10rem, 1fr));
+  }
+}

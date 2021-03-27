@@ -1,0 +1,33 @@
+@import "../../sass/colors";
+@import "../../sass/fonts";
+
+.favourites-page {
+  padding: 12rem 2rem 0 2rem;
+  max-width: 120rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+
+  @media (max-width: 768px) {
+    padding: 8rem 2rem 0 2rem;
+  }
+
+  &__title {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 4rem;
+
+    & h1 {
+      font-family: $Montserrat;
+      font-weight: $bold;
+      font-size: $medium;
+
+      @media (max-width: 530px) {
+        font-size: $medium;
+      }
+    }
+  }
+}

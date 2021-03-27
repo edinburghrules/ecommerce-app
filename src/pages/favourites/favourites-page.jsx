@@ -56,7 +56,10 @@ class FavouritesPage extends React.Component {
     if (!this.props.favouritesLoading) {
       if (this.state.favourites.length > 0) {
         return (
-          <div className="favourites-list">
+          <div className="favourites-page">
+            <div className="favourites-page__title">
+              <h1>Favourites</h1>
+            </div>
             <FavouritesList
               favourites={this.state.favourites}
               authenticated={this.props.authenticated}

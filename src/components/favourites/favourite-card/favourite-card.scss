@@ -1,0 +1,58 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/utils";
+
+.favourite-card {
+  width: 100%;
+  padding: 1rem;
+
+  &:hover {
+    box-shadow: $boxShadow;
+    text-decoration: none;
+  }
+
+  & h3 {
+    font-weight: $bold;
+    font-size: $small;
+    margin-right: 1rem;
+    cursor: pointer;
+    color: $dark-text !important;
+    text-decoration: none;
+    margin-top: 2rem;
+  }
+
+  & p {
+    font-size: $xsmall;
+    text-transform: capitalize;
+    display: block;
+    margin-top: 1rem;
+    color: #333;
+
+    &:last-of-type {
+      display: block;
+      margin-bottom: 2rem !important;
+    }
+  }
+
+  & img {
+    height: auto;
+    width: 100%;
+  }
+
+  &__btn {
+    color: #fff;
+    background: $dark-bg;
+    border: none;
+    font-size: $xsmall;
+    margin-top: 2.4rem;
+    padding: 5px 1rem;
+
+    &:disabled {
+      background: #ccc;
+    }
+
+    &:first-of-type {
+      margin-right: 1rem;
+    }
+  }
+}
