@@ -161,7 +161,7 @@ class Filters extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="filters-container">
         <FilterCategories
           options={this.props.options}
           clearFilters={this.clearFilters}
@@ -201,7 +201,7 @@ class Filters extends React.Component {
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

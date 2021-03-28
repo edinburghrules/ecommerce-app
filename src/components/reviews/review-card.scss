@@ -11,10 +11,20 @@
   justify-content: space-between;
   border-top: 1px solid #ccc;
 
+  @media (max-width: 630px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
   &__name {
     display: flex;
     flex-direction: column;
     width: 33%;
+
+    @media (max-width: 630px) {
+      flex-direction: column-reverse;
+      justify-content: center;
+    }
 
     & span {
       font-weight: $semiNormal;
@@ -23,7 +33,11 @@
 
       &:first-of-type {
         font-weight: $black;
-        font-size: $xsmall;
+        font-size: $xxsmall;
+        @media (max-width: 630px) {
+          font-weight: $normal;
+          margin-top: 6px;
+        }
       }
     }
   }
@@ -44,5 +58,18 @@
   &__star {
     height: 2rem;
     margin-right: 5px;
+
+    @media (max-width: 630px) {
+      height: 1rem;
+    }
+  }
+
+  &__name,
+  &__review,
+  &__stars {
+    @media (max-width: 630px) {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
   }
 }

@@ -1,6 +1,12 @@
 @import "../../sass/colors";
 @import "../../sass/fonts";
 
+.filters-container {
+  @media (max-width: 990px) {
+    display: none;
+  }
+}
+
 .filters {
   font-family: $Montserrat;
   margin-top: 10rem;
