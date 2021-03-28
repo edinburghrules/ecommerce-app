@@ -49,12 +49,8 @@ img.mobile-menu__close-btn {
   }
 }
 
-.mobile-menu__user-btns img:last-of-type {
-  margin-left: 4rem;
-
-  @media (max-width: 460px) {
-    margin-left: 2rem;
-  }
+.mobile-menu__user-btns img:not(:last-of-type) {
+  margin-right: 2rem;
 }
 
 .mobile-menu__content {

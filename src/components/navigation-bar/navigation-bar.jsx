@@ -177,6 +177,8 @@ class NavigationBar extends React.Component {
     return (
       <React.Fragment>
         <MobileNav
+          account={account}
+          authenticated={authenticated}
           linksToRender={linksToRender}
           mensMobileOpen={mensMobileOpen}
           womensMobileOpen={womensMobileOpen}

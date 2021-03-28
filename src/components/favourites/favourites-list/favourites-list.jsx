@@ -5,7 +5,6 @@ import FavouriteCard from "../favourite-card/favourite-card";
 class FavouritesList extends React.Component {
   render() {
     const { favourites, handleDelete } = this.props;
-
     return (
       <div className="favourites-list">
         {favourites &&

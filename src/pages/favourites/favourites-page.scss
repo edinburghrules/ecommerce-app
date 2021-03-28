@@ -2,16 +2,48 @@
 @import "../../sass/fonts";
 
 .favourites-page {
+  position: relative;
   padding: 12rem 2rem 0 2rem;
   max-width: 120rem;
+  height: 100vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: auto;
 
   @media (max-width: 768px) {
     padding: 8rem 2rem 0 2rem;
+  }
+
+  &__no-favourites {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    & img {
+      margin-bottom: 2rem;
+      height: auto;
+      width: 4rem;
+    }
+
+    & a {
+      font-family: $Montserrat;
+      font-weight: $normal;
+      font-size: $xsmall;
+      color: #333;
+    }
+  }
+
+  &__no-favourites-msg {
+    font-family: $Montserrat;
+    font-weight: $bold;
+    font-size: $medium;
+    margin-bottom: 2rem;
   }
 
   &__title {

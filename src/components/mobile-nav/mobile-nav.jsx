@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./mobile-nav.scss";
 import { Link, withRouter } from "react-router-dom";
+import favourites from "../../assets/heart-outline.png";
 import user from "../../assets/001-user.png";
 import shopping from "../../assets/shopping-bag.png";
 import closebutton from "../../assets/close-button.png";
@@ -10,6 +11,9 @@ import leftArrow from "../../assets/001-arrow.png";
 import { CSSTransition } from "react-transition-group";
 
 const MobileNav = ({
+  account,
+  history,
+  authenticated,
   linksToRender,
   mensMobileOpen,
   womensMobileOpen,
@@ -25,6 +29,25 @@ const MobileNav = ({
   handleMobileOpen,
   x,
 }) => {
+  const handleAccount = () => {
+    if (authenticated) {
+      history.push(`/account/${account.email}`);
+      handleMobileOpen();
+    } else {
+      history.push("/signin");
+      handleMobileOpen();
+    }
+  };
+
+  const handleFavourites = () => {
+    if (authenticated) {
+      history.push(`/favourites/${account.email}`);
+      handleMobileOpen();
+    } else {
+      history.push("/favourites");
+      handleMobileOpen();
+    }
+  };
   return ReactDOM.createPortal(
     <CSSTransition
       in={mobileOpen}
@@ -46,7 +69,12 @@ const MobileNav = ({
               <h1>apparel.</h1>
             </div>
             <div className="mobile-menu__user-btns">
-              <img src={user} alt="user login" />
+              <img onClick={handleAccount} src={user} alt="user login" />
+              <img
+                onClick={handleFavourites}
+                src={favourites}
+                alt="favourites"
+              />
               <img onClick={handleCartOpen} src={shopping} alt="shopping bag" />
             </div>
           </div>

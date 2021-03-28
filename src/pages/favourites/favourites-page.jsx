@@ -1,10 +1,12 @@
 import React from "react";
 import "./favourites-page.scss";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import FavouritesList from "../../components/favourites/favourites-list/favourites-list";
 import { parseFavouritesFromLocalStorage } from "../../utils/local-storage/favourites-handler";
 import { getFavouritesList } from "../../redux/actions/favouriteActions";
 import Loading from "../../components/loading/loading";
+import brokenHeartIcon from "../../assets/broken-heart.svg";
 
 class FavouritesPage extends React.Component {
   /* set favourites depending on signed in or not */
@@ -53,6 +55,7 @@ class FavouritesPage extends React.Component {
   };
 
   render() {
+    console.log(this.state.favourites, this.props.favouritesLoading);
     if (!this.props.favouritesLoading) {
       if (this.state.favourites.length > 0) {
         return (
@@ -68,7 +71,17 @@ class FavouritesPage extends React.Component {
           </div>
         );
       } else {
-        return <h1>No Favourites</h1>;
+        return (
+          <div className="favourites-page">
+            <div className="favourites-page__no-favourites">
+              <img src={brokenHeartIcon} alt="broken heart" />
+              <h1 className="favourites-page__no-favourites-msg">
+                No Favourites here!
+              </h1>
+              <Link to="/">Home</Link>
+            </div>
+          </div>
+        );
       }
     } else {
       return <Loading />;
