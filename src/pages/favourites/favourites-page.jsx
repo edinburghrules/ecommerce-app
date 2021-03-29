@@ -55,7 +55,6 @@ class FavouritesPage extends React.Component {
   };
 
   render() {
-    console.log(this.state.favourites, this.props.favouritesLoading);
     if (!this.props.favouritesLoading) {
       if (this.state.favourites.length > 0) {
         return (

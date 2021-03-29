@@ -66,7 +66,6 @@ export const addFavouriteProduct = (product) => {
   const productData = {
     product,
   };
-  console.log(product);
   return async (dispatch) => {
     try {
       await axios.post("/add-favourite", productData);

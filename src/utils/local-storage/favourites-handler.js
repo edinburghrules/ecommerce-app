@@ -58,8 +58,6 @@ export const removeFavouriteFromLocalStorage = (
 ) => {
   const parsedFavourites = parseFavouritesFromLocalStorage(favourites);
 
-  console.log(parsedFavourites);
-
   if (parsedFavourites && parsedFavourites.length > 0) {
     const filteredFavourites = parsedFavourites.filter((favourite) => {
       if (productId === favourite.id) {

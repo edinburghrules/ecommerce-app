@@ -80,7 +80,6 @@ export const addToCart = (product, authenticated) => {
   const productData = {
     product,
   };
-  console.log(product);
   return async (dispatch) => {
     if (authenticated) {
       try {

@@ -66,7 +66,6 @@ class FavouriteCard extends React.Component {
       id,
       variantIndex,
     } = this.props.favourite;
-    console.log(this.props);
 
     return (
       <React.Fragment>

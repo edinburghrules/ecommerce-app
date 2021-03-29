@@ -13,7 +13,6 @@ export const colorsUrlParamsHandler = (colorFilters, history, location) => {
     : false;
   // If the colorParamsArr includes the selected color, add the colorParamsArr as url query
   if (colorParamsArr.includes(colorFilters.selectedColor)) {
-    console.log(sortQueryString);
     history.push({
       pathname: location.pathname,
       search:

@@ -136,8 +136,8 @@ class ProductMain extends React.Component {
           <div className="product-main__rating">
             {this.props.displayRatingStars("light")}
             {
-              <a
-              style={{cursor: totalReviews > 0 ? 'pointer' : 'default'}}
+              <button
+                style={{ cursor: totalReviews > 0 ? "pointer" : "default" }}
                 onClick={() => {
                   if (totalReviews > 0) {
                     window.scrollTo({
@@ -149,7 +149,7 @@ class ProductMain extends React.Component {
                 }}
               >
                 ({totalReviews})
-              </a>
+              </button>
             }
           </div>
           <p className="product-main__price">£{product.price}</p>
@@ -186,7 +186,9 @@ class ProductMain extends React.Component {
                       onClick={() => this.handleSizeSelect(size)}
                       className={
                         stockQty > 0
-                          ? "product-main__variant-size product-main__variant-size--active"
+                          ? this.state.selectedSize === size
+                            ? "product-main__variant-size product-main__variant-size--active"
+                            : "product-main__variant-size product-main__variant-size--inactive"
                           : "product-main__variant-size product-main__variant-size--disabled"
                       }
                     >
@@ -221,7 +223,7 @@ class ProductMain extends React.Component {
               {product.highlights &&
                 product.highlights.map((highlight, index) => (
                   <div key={index} className="product-main__hightlight">
-                    <img src={highlight.img} />
+                    <img src={highlight.img} alt="product highlight" />
                     <p>{highlight.text}</p>
                   </div>
                 ))}

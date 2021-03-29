@@ -15,7 +15,8 @@
     display: flex;
     align-items: center;
 
-    & a {
+    & button {
+      all: unset;
       font-size: $xsmall;
     }
   }
@@ -139,7 +140,7 @@
     margin-bottom: 5px;
     font-size: $xxsmall;
 
-    &--active:hover {
+    &--inactive:hover {
       background: #333;
       color: $light-text;
     }
@@ -148,7 +149,7 @@
       text-decoration: line-through;
     }
 
-    &--active:focus {
+    &--active {
       background: #333;
       color: $light-text;
     }
