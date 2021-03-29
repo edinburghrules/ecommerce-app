@@ -8,7 +8,6 @@ import CartItem from "../cart-item/cart-item";
 import closeArrow from "../../../assets/close-arrow.png";
 import shopping from "../../../assets/shopping-bag.png";
 import { CSSTransition } from "react-transition-group";
-import emptyCartIllustration from "../../../assets/emptycart.png";
 
 class Cart extends Component {
   state = {

@@ -12,3 +12,10 @@ export const capitaliseFirstLetterArr = (string) => {
 
   return capitalised;
 };
+
+export const formatUrl = (string) => {
+  return string
+    .replace("ns", "n's")
+    .replace("-", " ")
+    .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
+};

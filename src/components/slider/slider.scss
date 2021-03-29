@@ -66,6 +66,7 @@
     width: 100%;
     position: absolute;
     top: 50%;
+    left: 0;
     transform: translateY(-50%);
   }
 
@@ -106,7 +107,7 @@
       margin-left: 2rem;
 
       @media (max-width: 615px) {
-        margin-right: 0.5rem;
+        margin-left: 1.4rem;
       }
     }
     &--next {
@@ -114,7 +115,7 @@
       margin-right: 2rem;
 
       @media (max-width: 615px) {
-        margin-right: 0.5rem;
+        margin-right: 1.4rem;
       }
     }
   }

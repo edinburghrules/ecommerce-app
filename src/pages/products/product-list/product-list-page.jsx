@@ -1,8 +1,9 @@
 import React from "react";
 import "./product-list-page.scss";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 import Filters from "../../../components/filters/filters.jsx";
 import ProductList from "../../../components/products/product-list/product-list";
+import { formatUrl } from "../../../utils/text-formatting/text-formatting";
 import {
   mensShoeLinks,
   womensShoeLinks,
@@ -10,8 +11,21 @@ import {
   womensApparelLinks,
 } from "../../../navigation-links/navigation-links";
 import Sort from "../../../components/sort/sort";
+import mobileFiltersicon from "../../../assets/filters.svg";
 
 class ProductListPage extends React.Component {
+  state = { filtersOpen: false, windowWidth: window.innerWidth };
+
+  handleFiltersOpen = () => {
+    this.setState((prevState) => ({
+      filtersOpen: !prevState.filtersOpen,
+    }));
+  };
+
+  listener = window.addEventListener("resize", () => {
+    this.setState({ windowWidth: window.innerWidth });
+  });
+
   render() {
     const {
       match: { params, path },
@@ -31,10 +45,33 @@ class ProductListPage extends React.Component {
       <React.Fragment>
         <div className="product-list-page">
           <div className="product-list-page__filters">
-            <Filters category={params.category} options={options} />
+            <div className="product-list-page__mobile-header">
+              {this.state.windowWidth < 990 && (
+                <React.Fragment>
+                  {params.category ? (
+                    <Link to={`/collection/${params.collection}`}>
+                      {formatUrl(params.collection)}
+                    </Link>
+                  ) : (
+                    <h1>{formatUrl(params.collection)}</h1>
+                  )}
+                  {params.category && <h1>{formatUrl(params.category)}</h1>}
+                </React.Fragment>
+              )}
+            </div>
+            <Filters
+              windowWidth={this.state.windowWidth}
+              handleFiltersOpen={this.handleFiltersOpen}
+              filtersOpen={this.state.filtersOpen}
+              category={params.category}
+              options={options}
+            />
           </div>
           <div>
             <div className="product-list-page__sort-filter">
+              {this.state.windowWidth < 990 && (
+                <img onClick={this.handleFiltersOpen} src={mobileFiltersicon} />
+              )}
               <Sort />
             </div>
             <Switch>

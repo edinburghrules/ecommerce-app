@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import "./filters.scss";
 import { withRouter } from "react-router-dom";
 import {
@@ -11,6 +12,8 @@ import ColorFilters from "./colors";
 import BestForFilters from "./bestfor";
 import WeatherFilters from "./weather";
 import queryString from "query-string";
+import { CSSTransition } from "react-transition-group";
+import closeArrowIcon from "../../assets/close-arrow.png";
 
 class Filters extends React.Component {
   state = { colors: [], bestFors: [], weather: [] };
@@ -160,49 +163,133 @@ class Filters extends React.Component {
   };
 
   render() {
-    return (
-      <div className="filters-container">
-        <FilterCategories
-          options={this.props.options}
-          clearFilters={this.clearFilters}
-        />
-        <div className="filters">
-          <h4>Filter By:</h4>
-          <div className="filters__colors">
-            <hr />
-            <p>COLOURS</p>
-            <div className="filters__color-options">
-              <ColorFilters
-                handleSelect={this.handleSelect}
-                selectedColors={this.state.colors}
-              />
-            </div>
-          </div>
-          {!this.props.category && (
-            <div className="filters__bestfor">
+    if (this.props.windowWidth > 990) {
+      return (
+        <div className="filters-container">
+          <FilterCategories
+            options={this.props.options}
+            clearFilters={this.clearFilters}
+          />
+          <div className="filters">
+            <h4>Filter By:</h4>
+            <div className="filters__colors">
               <hr />
-              <p>BEST FOR</p>
-              <div className="filters__bestfor-options">
-                <BestForFilters
-                  selectedBestFor={this.state.bestFors}
+              <p>COLOURS</p>
+              <div className="filters__color-options">
+                <ColorFilters
+                  handleSelect={this.handleSelect}
+                  selectedColors={this.state.colors}
+                />
+              </div>
+            </div>
+            {!this.props.category && (
+              <div className="filters__bestfor">
+                <hr />
+                <p>BEST FOR</p>
+                <div className="filters__bestfor-options">
+                  <BestForFilters
+                    selectedBestFor={this.state.bestFors}
+                    handleCheck={this.handleCheck}
+                  />
+                </div>
+              </div>
+            )}
+            <div className="filters__weather">
+              <hr />
+              <p>WEATHER CONDITIONS</p>
+              <div className="filters__weather-options">
+                <WeatherFilters
+                  selectedWeather={this.state.weather}
                   handleCheck={this.handleCheck}
                 />
               </div>
             </div>
-          )}
-          <div className="filters__weather">
-            <hr />
-            <p>WEATHER CONDITIONS</p>
-            <div className="filters__weather-options">
-              <WeatherFilters
-                selectedWeather={this.state.weather}
-                handleCheck={this.handleCheck}
-              />
-            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return ReactDOM.createPortal(
+        <React.Fragment>
+          <CSSTransition
+            unmountOnExit
+            mountOnEnter
+            in={this.props.filtersOpen}
+            classNames="filters-fade"
+            timeout={400}
+          >
+            <div className="filters__overlay"></div>
+          </CSSTransition>
+          <CSSTransition
+            unmountOnExit
+            mountOnEnter
+            in={this.props.filtersOpen}
+            classNames="filters-slide"
+            timeout={{
+              enter: 200,
+              exit: 1000,
+            }}
+          >
+            <div className="filters-container">
+              <div className="filters-container__top">
+                <img
+                  onClick={this.props.handleFiltersOpen}
+                  className="filters-container__close"
+                  src={closeArrowIcon}
+                  alt="close arrow"
+                />
+              </div>
+
+              <FilterCategories
+                options={this.props.options}
+                clearFilters={this.clearFilters}
+              />
+              <div className="filters">
+                <h4>Filter By:</h4>
+                <div className="filters__colors">
+                  <hr />
+                  <p>COLOURS</p>
+                  <div className="filters__color-options">
+                    <ColorFilters
+                      handleSelect={this.handleSelect}
+                      selectedColors={this.state.colors}
+                    />
+                  </div>
+                </div>
+                {!this.props.category && (
+                  <div className="filters__bestfor">
+                    <hr />
+                    <p>BEST FOR</p>
+                    <div className="filters__bestfor-options">
+                      <BestForFilters
+                        selectedBestFor={this.state.bestFors}
+                        handleCheck={this.handleCheck}
+                      />
+                    </div>
+                  </div>
+                )}
+                <div className="filters__weather">
+                  <hr />
+                  <p>WEATHER CONDITIONS</p>
+                  <div className="filters__weather-options">
+                    <WeatherFilters
+                      selectedWeather={this.state.weather}
+                      handleCheck={this.handleCheck}
+                    />
+                  </div>
+                </div>
+                <button
+                  onClick={this.props.handleFiltersOpen}
+                  className="filters__btn filters__btn--done"
+                >
+                  DONE
+                </button>
+              </div>
+            </div>
+          </CSSTransition>
+        </React.Fragment>,
+        document.getElementById("root")
+      );
+    }
   }
 }
 

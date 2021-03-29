@@ -1,7 +1,37 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+
+.product-list-page__mobile-header {
+  padding-left: 2.2rem;
+
+  & a {
+    color: $dark-text;
+    font-weight: $bold;
+    size: $xxsmall;
+  }
+
+  & h1 {
+    font-family: $Montserrat;
+    font-size: $medium;
+    font-weight: $bold;
+  }
+}
+
 .product-list-page__sort-filter {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  padding-right: 2.2rem;
+  padding: 0 2.2rem;
+  background: #fff;
+  width: 100%;
+
+  @media (max-width: 990px) {
+    justify-content: space-between;
+  }
+
+  & img {
+    height: 3rem;
+  }
 }
 
 .product-list-page {
@@ -11,10 +41,12 @@
   display: grid;
   grid-template-columns: 25% 75%;
   gap: 1rem;
-  padding: 0 6rem 6rem 5rem;
+  padding: 0 1rem 1rem 1rem;
+  overflow: hidden;
 
   @media (max-width: 990px) {
     grid-template-columns: 100%;
+    margin-top: 6rem;
   }
 
   @media (max-width: 720px) {

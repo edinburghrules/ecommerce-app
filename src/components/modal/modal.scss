@@ -9,12 +9,12 @@
   align-items: center;
   justify-content: center;
   transition: opacity 400ms;
+  padding: 2rem;
 
   &__top {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 1rem;
 
     & button {
       background: #fff;
@@ -22,7 +22,15 @@
       transition: all 0.2s;
 
       & img {
-        height: 4.2rem;
+        height: 3.8rem;
+
+        @media (max-width: 768px) {
+          height: 3.2rem;
+        }
+
+        @media (max-width: 414px) {
+          height: 2.2rem;
+        }
       }
 
       &:hover {
@@ -32,6 +40,7 @@
   }
 
   &__content {
+    padding: 2rem;
     height: 95vmin;
     width: 95vw;
     display: flex;
