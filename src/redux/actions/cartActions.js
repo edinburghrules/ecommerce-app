@@ -60,7 +60,7 @@ export const addToCartFromLocalStorage = (products) => {
   };
   return async (dispatch) => {
     try {
-      await axios.post("add-to-cart-from-local-storage", productsData);
+      await axios.post("/add-to-cart-from-local-storage", productsData);
       return;
     } catch (err) {
       console.log(err);

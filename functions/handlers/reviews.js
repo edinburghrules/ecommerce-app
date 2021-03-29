@@ -55,15 +55,9 @@ const addProductReview = async (req, res) => {
 
     const mergedLineItems = [...nonMatchingLineItems, ...markAsReviewed];
 
-    await db
-      .collection("orders")
-      .doc(review.orderReference)
-      .update({
-        lineItems: mergedLineItems,
-      })
-      .then(() => {
-        console.log("yup");
-      });
+    await db.collection("orders").doc(review.orderReference).update({
+      lineItems: mergedLineItems,
+    });
 
     return res.status(200).json("Review added");
   } catch (err) {

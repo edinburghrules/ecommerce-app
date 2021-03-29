@@ -9,7 +9,7 @@ export const submitOrder = (orderDetails, authenticated) => {
   return async (dispatch) => {
     try {
       dispatch(startSubmittingPayment());
-      const orderId = await axios.post("submit-order", orderDetailsData);
+      const orderId = await axios.post("/submit-order", orderDetailsData);
       dispatch(stopSubmittingPayment());
       if (authenticated) {
         // clear cart in firestore

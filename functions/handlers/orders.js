@@ -53,14 +53,8 @@ const submitOrder = async (req, res) => {
       </div>`,
     };
 
-    sgMail
-      .send(msg)
-      .then(() => {
-        console.log("email sent");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    await sgMail.send(msg);
+
     return res.status(200).send(docRef.id);
   } catch (err) {
     console.log(err);
@@ -95,7 +89,7 @@ const getAllOrders = async (req, res) => {
     const querySnapshot = await db
       .collection("orders")
       .where("email", "==", email)
-      .orderBy("created", 'desc')
+      .orderBy("created", "desc")
       .get();
 
     querySnapshot.forEach((doc) => {

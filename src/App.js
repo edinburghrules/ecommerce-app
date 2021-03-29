@@ -28,9 +28,6 @@ import CheckoutPage from "./pages/checkout/checkout-page";
 import OrderConfirmationPage from "./pages/order-confirmation/order-confirmation-page";
 import Loading from "./components/loading/loading";
 
-// 404 Gif
-// <iframe src="https://giphy.com/embed/RjoLWhQBFEcHS" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/RjoLWhQBFEcHS">via GIPHY</a></p>
-
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY, {
   locale: "en-",
 });

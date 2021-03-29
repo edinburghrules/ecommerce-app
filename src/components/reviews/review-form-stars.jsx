@@ -46,7 +46,7 @@ class ReviewFormStars extends React.Component {
     for (let i = 1; i <= this.state.maxRating; i++) {
       if (this.state.selectedRating === null) {
         if (
-          i == this.state.currentHoverIndex ||
+          i === this.state.currentHoverIndex ||
           i < this.state.currentHoverIndex
         ) {
           stars.push(
@@ -55,6 +55,7 @@ class ReviewFormStars extends React.Component {
               onMouseOver={() => this.handleHover(i)}
               key={i}
               src={reviewFormStarFilled}
+              alt="review star filled"
             />
           );
         } else {
@@ -63,6 +64,7 @@ class ReviewFormStars extends React.Component {
               onMouseOver={() => this.handleHover(i)}
               key={i}
               src={reviewFormStar}
+              alt="review star unfilled"
             />
           );
         }
@@ -74,6 +76,7 @@ class ReviewFormStars extends React.Component {
               onMouseOver={() => this.handleHover(i)}
               key={i}
               src={reviewFormStarFilled}
+              alt="review star filled"
             />
           );
         } else {
@@ -82,6 +85,7 @@ class ReviewFormStars extends React.Component {
               onMouseOver={() => this.handleHover(i)}
               key={i}
               src={reviewFormStar}
+              alt="review star unfilled"
             />
           );
         }

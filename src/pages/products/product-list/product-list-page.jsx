@@ -70,7 +70,11 @@ class ProductListPage extends React.Component {
           <div>
             <div className="product-list-page__sort-filter">
               {this.state.windowWidth < 990 && (
-                <img onClick={this.handleFiltersOpen} src={mobileFiltersicon} />
+                <img
+                  onClick={this.handleFiltersOpen}
+                  src={mobileFiltersicon}
+                  alt="filter icon"
+                />
               )}
               <Sort />
             </div>

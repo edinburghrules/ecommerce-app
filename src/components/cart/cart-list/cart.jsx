@@ -132,6 +132,7 @@ class Cart extends Component {
                       <h1>Your Cart is Empty</h1>
                       <div className="cart__empty">
                         <iframe
+                          title="empt cart gif"
                           src="https://giphy.com/embed/1Zbeweu52ZaQE"
                           width="600"
                           height="auto"

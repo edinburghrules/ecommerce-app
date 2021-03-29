@@ -11,6 +11,9 @@ import { getCart } from "./redux/actions/cartActions";
 import jwtDecode from "jwt-decode";
 import { appLoaded } from "./redux/actions/asyncActions";
 
+axios.defaults.baseURL =
+  "https://us-central1-e-commerce-app-9b649.cloudfunctions.net/api";
+
 const token = localStorage.firebaseToken;
 
 async function load() {

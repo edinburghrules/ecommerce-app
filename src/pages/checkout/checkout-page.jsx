@@ -39,12 +39,12 @@ const CheckoutPage = (props) => {
             apparel.
           </Link>
           <h1>Checkout</h1>
-          <p className='checkout-page__cards'>Credit or Debit Card</p>
+          <p className="checkout-page__cards">Credit or Debit Card</p>
           <div className="checkout-page__card-icons-container">
-            <img src={amexIcon} />
-            <img src={americanexpressIcon} />
-            <img src={visaIcon} />
-            <img src={mastercardIcon} />
+            <img alt="amex icon" src={amexIcon} />
+            <img alt="american express icon" src={americanexpressIcon} />
+            <img alt=" visa icon" src={visaIcon} />
+            <img alt="mastercard icon" src={mastercardIcon} />
           </div>
           <div className="checkout-page__form">
             <ElementsConsumer>
