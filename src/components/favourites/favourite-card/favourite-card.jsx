@@ -15,7 +15,7 @@ class FavouriteCard extends React.Component {
   };
 
   handleChange = (e) => {
-    const size = Number(e.currentTarget.value);
+    const size = e.currentTarget.value;
     if (size) {
       this.setState({
         selectedSize: size,
@@ -30,7 +30,9 @@ class FavouriteCard extends React.Component {
       price: this.props.favourite.price,
       image: this.props.favourite.img,
       color: this.props.favourite.color,
-      size: this.state.selectedSize,
+      size: this.props.favourite.collection.includes("-shoes")
+        ? Number(this.state.selectedSize)
+        : this.state.selectedSize,
       category: this.props.favourite.category,
       collection: this.props.favourite.collection,
       qty: 1,

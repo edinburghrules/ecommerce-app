@@ -15,12 +15,17 @@
     justify-content: space-between;
     margin-top: 2rem;
 
+    @media (max-width: 520px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     & span,
     a {
       display: inline-block;
       font-size: $xsmall;
       margin-right: 1rem;
-      padding-bottom: 2rem;
+      padding-bottom: 2.5rem;
     }
   }
 
@@ -30,6 +35,12 @@
 
   &__title {
     padding-bottom: 2rem;
+
+    &--contact {
+      @media (max-width: 520px) {
+        padding-bottom: 5px;
+      }
+    }
 
     & h3 {
       font-weight: $bold;

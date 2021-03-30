@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./modal.scss";
 import Slider from "../slider/slider";
@@ -6,6 +6,10 @@ import closeBtn from "../../assets/cancel.svg";
 import { CSSTransition } from "react-transition-group";
 
 const Modal = (props) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "unset");
+  }, []);
   return ReactDOM.createPortal(
     <React.Fragment>
       <CSSTransition

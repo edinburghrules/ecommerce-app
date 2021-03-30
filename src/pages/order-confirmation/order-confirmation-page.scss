@@ -4,8 +4,13 @@
 .order-confirmation-page {
   height: 100%;
   max-width: 1200px;
-  margin: 12rem auto;
-  padding: 5rem;
+  margin: 8rem auto 0rem auto;
+  padding: 5rem 5rem 0rem 5rem;
+
+  @media (max-width: 414px) {
+    margin: 2rem auto;
+    padding: 0 3rem;
+  }
 
   &__heading {
     & h1 {
@@ -40,12 +45,21 @@
   }
 
   &__order-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 4rem 0;
     border-bottom: 1px solid #ddd;
     font-size: 1.6rem;
+
+    @media (max-width: 990px) {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 2rem;
+    }
+
+    @media (max-width: 414px) {
+      grid-template-columns: 1fr;
+      row-gap: 2rem;
+    }
   }
 
   &__order-details-section {
@@ -78,11 +92,30 @@
     width: 100%;
     border-bottom: 1px solid #ddd;
     padding: 2rem 1rem;
+
+    // @media (max-width: 620px) {
+    //   justify-content: space-around;
+    //   padding: 2rem 0rem;
+    // }
+  }
+
+  &__line-item-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: 620px) {
+      flex-direction: column;
+    }
   }
 
   &__line-item-details {
     margin-left: 6rem;
     margin-right: auto;
+
+    @media (max-width: 620px) {
+      margin-left: 0rem;
+    }
 
     & p:first-of-type {
       font-size: $small;
@@ -107,6 +140,7 @@
     & img {
       height: auto;
       width: 16rem;
+      margin-right: 1rem;
     }
   }
 
@@ -119,7 +153,7 @@
   &__costs {
     display: flex;
     flex-direction: column;
-    width: 25%;
+    width: auto;
     font-size: $small;
     color: #888;
 
@@ -128,7 +162,9 @@
     }
 
     & div p:first-child {
+      display: inline-block;
       font-weight: $semiBold;
+      margin-right: 12rem !important;
     }
 
     & div p:last-child {

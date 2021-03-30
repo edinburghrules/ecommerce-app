@@ -19,6 +19,10 @@ class Filters extends React.Component {
   state = { colors: [], bestFors: [], weather: [] };
 
   componentDidMount = () => {
+    if (this.props.filtersOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
     let colorsFromURL =
       queryString.parse(this.props.location.search).colors &&
       queryString.parse(this.props.location.search).colors.split(",");
@@ -36,6 +40,14 @@ class Filters extends React.Component {
       bestFors: bestforFromURL ? bestforFromURL : [],
       weather: weatherFromURL ? weatherFromURL : [],
     });
+  };
+
+  componentDidUpdate = () => {
+    if (this.props.filtersOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
   };
 
   clearFilters = () => {

@@ -71,7 +71,7 @@ class CheckoutForm extends React.Component {
           >
             <div className="checkout-form__section">
               <div className="checkout-form__contact-container">
-                <div className="checkout-form__title">
+                <div className="checkout-form__title checkout-form__title--contact">
                   <h3>Contact Information</h3>
                 </div>
                 {!authenticated && (
@@ -378,7 +378,7 @@ const CheckoutFormFormik = withFormik({
             },
             authenticated
           );
-  
+
           history.push({
             pathname: `/order-confirmation/${orderId.data}`,
             state: { fromCheckout: true },
@@ -386,7 +386,6 @@ const CheckoutFormFormik = withFormik({
         } catch (err) {
           console.log(err);
         }
-
       } else {
         console.log(error);
       }

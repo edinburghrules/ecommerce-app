@@ -80,6 +80,14 @@ class CartItem extends React.Component {
             <div className="cart-item__qty-container">
               <div className="cart-item__qty">
                 <button
+                  className="cart-item__qty-btn"
+                  id="decrease"
+                  onClick={this.handleQtyChange}
+                >
+                  -
+                </button>
+                <span>{qty}</span>
+                <button
                   disabled={lowStockMsg && lowStockMsg}
                   className={
                     lowStockMsg && lowStockMsg
@@ -90,14 +98,6 @@ class CartItem extends React.Component {
                   onClick={this.handleQtyChange}
                 >
                   +
-                </button>
-                <span>{qty}</span>
-                <button
-                  className="cart-item__qty-btn"
-                  id="decrease"
-                  onClick={this.handleQtyChange}
-                >
-                  -
                 </button>
               </div>
               <p className="cart-item__price">£{price}</p>

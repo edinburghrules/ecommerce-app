@@ -108,14 +108,16 @@ class OrderConfirmationPage extends React.Component {
                 <div className="order-confirmation-page__line-item-image">
                   <img src={lineItem.image} alt="line item" />
                 </div>
-                <div className="order-confirmation-page__line-item-details">
-                  <p>{lineItem.name}</p>
-                  <p>Size : UK {lineItem.size}</p>
-                  <p>Color : {capitaliseFirstLetter(lineItem.color)}</p>
-                  <p>Quantity : {lineItem.qty}</p>
-                </div>
-                <div className="order-confirmation-page__line-item-price">
-                  <p>£ {lineItem.price}</p>
+                <div className="order-confirmation-page__line-item-content">
+                  <div className="order-confirmation-page__line-item-details">
+                    <p>{lineItem.name}</p>
+                    <p>Size : UK {lineItem.size}</p>
+                    <p>Color : {capitaliseFirstLetter(lineItem.color)}</p>
+                    <p>Quantity : {lineItem.qty}</p>
+                  </div>
+                  <div className="order-confirmation-page__line-item-price">
+                    <p>£ {lineItem.price}</p>
+                  </div>
                 </div>
               </div>
             ))}

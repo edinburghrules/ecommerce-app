@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import "./navigation-bar.scss";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -27,6 +27,9 @@ class NavigationBar extends React.Component {
     mobileOpen: false,
     x: 0,
   };
+
+  womensNavLink = createRef();
+  mensNavLink = createRef();
 
   componentDidMount = () => {
     if (this.props.cartList.length > 0) {
@@ -199,6 +202,7 @@ class NavigationBar extends React.Component {
           <div className="navigation__menu">
             <ul className="navigation__menu-list">
               <li
+                ref={this.mensNavLink}
                 id="mens"
                 onClick={this.handleMensDropdownOpen}
                 className={
@@ -210,6 +214,7 @@ class NavigationBar extends React.Component {
                 Men
               </li>
               <li
+                ref={this.womensNavLink}
                 id="womens"
                 onClick={this.handleWomensDropdownOpen}
                 className={
@@ -295,6 +300,8 @@ class NavigationBar extends React.Component {
           handleMensDropdownOpen={this.handleMensDropdownOpen}
           handleWomensDropdownOpen={this.handleWomensDropdownOpen}
           linksToRender={linksToRender}
+          mensNavLink={this.mensNavLink}
+          womensNavLink={this.womensNavLink}
         />
       </React.Fragment>
     );

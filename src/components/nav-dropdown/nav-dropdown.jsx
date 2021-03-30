@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./nav-dropdown.scss";
 import { withRouter, Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
@@ -9,7 +9,53 @@ const NavDropdown = ({
   womensDropdownOpen,
   handleWomensDropdownOpen,
   linksToRender,
+  mensNavLink,
+  womensNavLink,
 }) => {
+  const node = useRef();
+
+  const handleClickOutside = (e) => {
+    if (node.current.contains(e.target)) {
+      // inside click
+      return;
+    }
+    // outside click
+    console.log("outside click");
+    if (mensNavLink.current.contains(e.target)) {
+      return;
+    } else {
+      if (mensDropdownOpen) {
+        handleMensDropdownOpen();
+      }
+    }
+
+    if (womensNavLink.current.contains(e.target)) {
+      return;
+    } else {
+      if (womensDropdownOpen) {
+        handleWomensDropdownOpen();
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (mensDropdownOpen || womensDropdownOpen) {
+      document.addEventListener("mouseup", handleClickOutside);
+    } else {
+      document.removeEventListener("mouseup", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mouseup", handleClickOutside);
+    };
+  });
+
+  useEffect(() => {
+    if (mensDropdownOpen || womensDropdownOpen) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => (document.body.style.overflow = "unset");
+  }, [mensDropdownOpen, womensDropdownOpen]);
+
   return (
     <React.Fragment>
       <CSSTransition
@@ -31,7 +77,7 @@ const NavDropdown = ({
           exit: 1000,
         }}
       >
-        <div id="close-dropdown" className="nav-dropdown">
+        <div id="close-dropdown" className="nav-dropdown" ref={node}>
           <div className="nav-dropdown__column">
             {linksToRender &&
               linksToRender.apparelLinks.map(({ path, title }, i) => (
@@ -68,7 +114,7 @@ const NavDropdown = ({
             {linksToRender &&
               linksToRender.collectionLinks.map(({ path, title, img }, i) => (
                 <div key={i}>
-                  {img && <img src={img} alt='collection' />}
+                  {img && <img src={img} alt="collection" />}
                   <Link
                     className="nav-dropdown__collections-link"
                     onClick={

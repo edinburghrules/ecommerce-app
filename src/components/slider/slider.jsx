@@ -28,7 +28,7 @@ class Slider extends React.Component {
   previous = () => {
     if (this.state.x === 0) {
       this.setState({
-        x: 0,
+        x: (this.props.slideItems.length - 1) * 100 * -1,
       });
     } else {
       this.setState((prevState) => ({
@@ -38,9 +38,15 @@ class Slider extends React.Component {
   };
 
   next = () => {
-    this.setState((prevState) => ({
-      x: (prevState.x -= 100),
-    }));
+    if (this.state.x === (this.props.slideItems.length - 1) * 100 * -1) {
+      this.setState((prevState) => ({
+        x: 0,
+      }));
+    } else {
+      this.setState((prevState) => ({
+        x: (prevState.x -= 100),
+      }));
+    }
   };
 
   render() {

@@ -19,7 +19,14 @@ class Cart extends Component {
     toFreeDeliveryProgress: 0,
     isOpen: false,
   };
+
   componentDidUpdate = (prevProps, prevState) => {
+    if (this.props.cartOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
     const totalQty = this.props.cart.reduce(function (total, currentValue) {
       total += currentValue.qty;
       return total;

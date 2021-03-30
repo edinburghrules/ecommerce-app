@@ -23,6 +23,7 @@ class AccountPage extends React.Component {
     if (!authenticated) {
       return <Redirect to={"/"} />;
     }
+
     return (
       <div className="account-page">
         <h1>Account</h1>
@@ -35,7 +36,8 @@ class AccountPage extends React.Component {
         <div className="account-page__section  account-page__section--address">
           <h2>Address</h2>
           <div className="account-page__address">
-            {Object.keys(credentials.address).length > 0 ? (
+            {credentials.address &&
+            Object.keys(credentials.address).length > 0 ? (
               <React.Fragment>
                 <p>
                   {credentials.firstName} {credentials.lastName}
