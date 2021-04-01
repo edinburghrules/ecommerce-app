@@ -25,6 +25,12 @@ class ProductPage extends React.Component {
   };
 
   componentDidMount = () => {
+    if (this.props.modalOpen) {
+      console.log(this.props.modalOpen);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
     this.props.getProduct(
       this.props.match.params.collection,
       this.props.match.params.id

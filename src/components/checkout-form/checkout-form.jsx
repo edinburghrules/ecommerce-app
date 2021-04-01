@@ -273,12 +273,23 @@ const CheckoutFormFormik = withFormik({
           (props.credentials &&
             props.credentials.firstName + " " + props.credentials.lastName) ||
           "",
-        address: (props.credentials && props.credentials.address.line1) || "",
-        city: (props.credentials && props.credentials.address.city) || "",
+        address:
+          (props.credentials.hasOwnProperty("address") &&
+            props.credentials.address.line1) ||
+          "",
+        city:
+          (props.credentials.hasOwnProperty("address") &&
+            props.credentials.address.city) ||
+          "",
         country: "GB",
         postcode:
-          (props.credentials && props.credentials.address.postcode) || "",
-        phone: (props.credentials && props.credentials.address.phone) || "",
+          (props.credentials.hasOwnProperty("address") &&
+            props.credentials.address.postcode) ||
+          "",
+        phone:
+          (props.credentials.hasOwnProperty("address") &&
+            props.credentials.address.phone) ||
+          "",
         card: "",
       };
     } else {

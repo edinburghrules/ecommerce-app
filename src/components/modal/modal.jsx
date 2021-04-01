@@ -7,9 +7,13 @@ import { CSSTransition } from "react-transition-group";
 
 const Modal = (props) => {
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    if (props.modalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
     return () => (document.body.style.overflow = "unset");
-  }, []);
+  }, [props.modalOpen]);
   return ReactDOM.createPortal(
     <React.Fragment>
       <CSSTransition

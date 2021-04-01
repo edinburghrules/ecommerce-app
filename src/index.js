@@ -10,6 +10,7 @@ import { signOut, getAccountData } from "./redux/actions/accountActions";
 import { getCart } from "./redux/actions/cartActions";
 import jwtDecode from "jwt-decode";
 import { appLoaded } from "./redux/actions/asyncActions";
+import ScrollToTop from "./utils/scroll-to-top";
 
 axios.defaults.baseURL =
   "https://us-central1-e-commerce-app-9b649.cloudfunctions.net/api";
@@ -39,6 +40,7 @@ function render() {
   ReactDOM.render(
     <Router>
       <Provider store={store}>
+        <ScrollToTop />
         <App />
       </Provider>
     </Router>,
