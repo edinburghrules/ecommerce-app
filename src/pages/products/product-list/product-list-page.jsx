@@ -41,6 +41,7 @@ class ProductListPage extends React.Component {
     } else if (params.collection === "womens-apparel") {
       options = womensApparelLinks;
     }
+
     return (
       <React.Fragment>
         <div className="product-list-page">
@@ -79,16 +80,11 @@ class ProductListPage extends React.Component {
               <Sort />
             </div>
             <Switch>
-              {/* Give routes keys to cause re-render */}
+              {/* Give route keys to cause re-render of product list */}
               <Route
                 key={location.key}
                 exact
                 path={`${path}`}
-                render={(routeProps) => <ProductList {...routeProps} />}
-              />
-              <Route
-                key={location.key}
-                path={`${path}/:category`}
                 render={(routeProps) => <ProductList {...routeProps} />}
               />
             </Switch>

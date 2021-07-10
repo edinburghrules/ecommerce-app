@@ -1,5 +1,5 @@
 // Parse local storage favourites
-export const parseFavouritesFromLocalStorage = (favourites) => {
+export const parseFavouritesFromLocalStorage = favourites => {
   let favouritesFromLocalStorage = localStorage.getItem(favourites);
   favouritesFromLocalStorage = JSON.parse(favouritesFromLocalStorage);
 
@@ -18,7 +18,7 @@ export const getFavouritesFromLocalStorage = (
   and find the favourite which has the same matching id and color 
   as passed in */
   if (parsedFavourites && parsedFavourites.length > 0) {
-    const item = parsedFavourites.find((favourite) => {
+    const item = parsedFavourites.find(favourite => {
       return (
         favourite.id === productId && favourite.color === productVariantColor
       );
@@ -56,24 +56,24 @@ export const removeFavouriteFromLocalStorage = (
   productId,
   productVariantColor
 ) => {
+  console.log(favourites, productId, productVariantColor);
   const parsedFavourites = parseFavouritesFromLocalStorage(favourites);
 
   if (parsedFavourites && parsedFavourites.length > 0) {
-    const filteredFavourites = parsedFavourites.filter((favourite) => {
-      if (productId === favourite.id) {
-        return productVariantColor !== favourite.color;
-      } else {
-        return null;
-      }
-    });
+    const index = parsedFavourites.findIndex(
+      favourite =>
+        favourite.id === productId && favourite.color === productVariantColor
+    );
 
-    localStorage.setItem(favourites, JSON.stringify(filteredFavourites));
+    parsedFavourites.splice(index, 1);
+
+    localStorage.setItem(favourites, JSON.stringify(parsedFavourites));
 
     getFavouritesFromLocalStorage(favourites, productId, productVariantColor);
   }
 };
 
 // Remove all favourites from local storage
-export const removeAllFavouritesFromLocalStorage = (favourites) => {
+export const removeAllFavouritesFromLocalStorage = favourites => {
   localStorage.removeItem(favourites);
 };

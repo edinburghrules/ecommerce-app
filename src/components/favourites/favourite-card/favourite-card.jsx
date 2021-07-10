@@ -4,21 +4,21 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   parseFavouritesFromLocalStorage,
-  removeFavouriteFromLocalStorage,
+  removeFavouriteFromLocalStorage
 } from "../../../utils/local-storage/favourites-handler";
 import { removeFavouriteProduct } from "../../../redux/actions/favouriteActions";
 import { addToCart, openCart } from "../../../redux/actions/cartActions";
 
 class FavouriteCard extends React.Component {
   state = {
-    selectedSize: false,
+    selectedSize: false
   };
 
-  handleChange = (e) => {
+  handleChange = e => {
     const size = e.currentTarget.value;
     if (size) {
       this.setState({
-        selectedSize: size,
+        selectedSize: size
       });
     }
   };
@@ -35,12 +35,13 @@ class FavouriteCard extends React.Component {
         : this.state.selectedSize,
       category: this.props.favourite.category,
       collection: this.props.favourite.collection,
-      qty: 1,
+      qty: 1
     };
     this.props.addToCart(productToAdd, this.props.authenticated);
   };
 
   removeFromFavourites = () => {
+    console.log("runs");
     if (this.props.authenticated) {
       console.log("IF AUTHENTICATED REMOVE FROM FIRESTORE");
       this.props.removeFavouriteProduct(this.props.favourite);
@@ -66,7 +67,7 @@ class FavouriteCard extends React.Component {
       category,
       collection,
       id,
-      variantIndex,
+      variantIndex
     } = this.props.favourite;
 
     return (
@@ -75,7 +76,7 @@ class FavouriteCard extends React.Component {
           <Link
             to={{
               pathname: `/collection/${collection}/${category}/product/${id}`,
-              state: { variantIndex },
+              state: { variantIndex }
             }}
           >
             <img src={img && img} alt="product" />
@@ -88,7 +89,7 @@ class FavouriteCard extends React.Component {
               Select size
             </option>
             {sizes &&
-              sizes.map((size) => {
+              sizes.map(size => {
                 if (size.stockQty > 0) {
                   return (
                     <option key={size.size} value={size.size}>
@@ -119,14 +120,14 @@ class FavouriteCard extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  authenticated: state.account.authenticated,
+const mapStateToProps = state => ({
+  authenticated: state.account.authenticated
 });
 
 const mapActionsToProps = {
   addToCart,
   removeFavouriteProduct,
-  openCart,
+  openCart
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(FavouriteCard);

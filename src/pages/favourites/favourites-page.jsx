@@ -12,7 +12,7 @@ class FavouritesPage extends React.Component {
   /* set favourites depending on signed in or not */
   //
   state = {
-    favourites: [],
+    favourites: []
   };
 
   /* When authenticated get favourites from firestore */
@@ -20,12 +20,13 @@ class FavouritesPage extends React.Component {
     if (this.props.authenticated && this.props.match.params.accountId) {
       await this.props.getFavouritesList();
       this.setState({
-        favourites: this.props.favourites,
+        favourites: this.props.favourites
       });
     }
     if (!this.props.authenticated && !this.props.match.params.accountId) {
+      console.log(this.props.authenticated);
       this.setState({
-        favourites: parseFavouritesFromLocalStorage("favourites"),
+        favourites: parseFavouritesFromLocalStorage("favourites")
       });
     }
   };
@@ -35,7 +36,7 @@ class FavouritesPage extends React.Component {
     in state with new favourites from props */
     if (this.props.favourites !== prevProps.favourites) {
       this.setState({
-        favourites: this.props.favourites,
+        favourites: this.props.favourites
       });
     }
     /* When refresh browser and signed in, authenticated is false momentarily, wait for it
@@ -43,14 +44,14 @@ class FavouritesPage extends React.Component {
     if (this.props.authenticated && !prevProps.authenticated) {
       await this.props.getFavouritesList();
       this.setState({
-        favourites: this.props.favourites,
+        favourites: this.props.favourites
       });
     }
   };
 
-  handleDelete = (favourites) => {
+  handleDelete = favourites => {
     this.setState({
-      favourites,
+      favourites
     });
   };
 
@@ -88,14 +89,14 @@ class FavouritesPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   authenticated: state.account.authenticated,
   favourites: state.favourites.favouritesList,
-  favouritesLoading: state.async.loadingProducts,
+  favouritesLoading: state.async.loadingProducts
 });
 
 const mapActionsToProps = {
-  getFavouritesList,
+  getFavouritesList
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(FavouritesPage);
